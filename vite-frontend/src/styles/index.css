@@ -1,0 +1,78 @@
+@import "theme.css";
+@import "general.css";
+@import "components/index.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Merriweather";
+    src: url("/fonts/Merriweather/Merriweather-Light.ttf");
+  }
+  
+  @font-face {
+    font-family: "Open Sans";
+    src: url("/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
+  }
+  
+  .h1 {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 47.6px;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .reg {
+    font-size: 18px;
+    line-height: 34px;
+    @apply text-CopernicusText font-merr
+  }
+  
+  .dd {
+    font-size: 16px;
+    line-height: 34px;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .top {
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 35px;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .h2 {
+    font-size: 28px;
+    line-height: 120%;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 120%; 
+    @apply text-CopernicusText font-sans
+  }
+  
+  .buttonText {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 15px;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .ddHeading {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    @apply text-CopernicusText font-sans
+  }
+  
+  .caption {
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 100%;
+    @apply text-CopernicusText font-sans
+  }
