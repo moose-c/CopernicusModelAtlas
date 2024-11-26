@@ -5,7 +5,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { NavBarTab } from "./desktop/nav-bar-tab";
 
 export const NavBar = () => {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+  const isAdmin = user?.["https://namespace.com/roles"]?.includes("admin");
+
   return (
     <>
       <div className="bg-copernicusYellow w-full h-[76px] px-[42px] py-[18px]">
@@ -41,7 +43,7 @@ export const NavBar = () => {
               <NavBarTab path="/public" label="Public" />
               <NavBarTab path="/profile" label="Profile" />
               <NavBarTab path="/protected" label="Private" />
-              <NavBarTab path="/admin" label="Admin" />
+              {isAdmin && <NavBarTab path="/admin" label="Admin" />}
               <Button text="Log out" log="out" />
             </>
           )}
