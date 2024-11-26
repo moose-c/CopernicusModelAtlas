@@ -1,4 +1,3 @@
-
 import gunicorn.http.wsgi
 from functools import wraps
 from dotenv import load_dotenv

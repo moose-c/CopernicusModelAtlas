@@ -17,6 +17,7 @@ export const AdminPage = () => {
       const accessToken = await getAccessTokenSilently();
       const { data, error } = await getAdminResource(accessToken);
 
+      console.log(accessToken);
       if (!isMounted) {
         return;
       }
@@ -39,13 +40,13 @@ export const AdminPage = () => {
 
   return (
     <PageLayout>
-      {isAdmin && (
+      {!isAdmin && (
         <p className="text-2xl">
           Current user does not have Admin rights, if you believe this is
           incorrect, please contact: INSERT CONTACT EMAIL
         </p>
       )}
-      {!isAdmin && (
+      {isAdmin && (
         <div className="content-layout">
           <h1 id="page-title" className="content__title">
             Admin Page

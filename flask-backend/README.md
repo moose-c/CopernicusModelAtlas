@@ -1,7 +1,8 @@
 # Hello World API: Flask Auth0 Sample
-This backend was setup by following https://developer.auth0.com/resources/code-samples/api/flask/basic-authorization
 
 This Python code sample demonstrates how to implement authorization in a Flask API server using Auth0.
+https://github.com/auth0-developer-hub/api_flask_python_hello-world.git, checkout basic-role-based-access-control
+https://developer.auth0.com/resources/code-samples/api/flask/basic-role-based-access-control
 
 ## Run the Project
 
@@ -94,8 +95,6 @@ Status: 200 OK
 ```
 
 ### 🔐 Get admin message
-
-> You need to protect this endpoint using Auth0 and Role-Based Access Control (RBAC).
 
 ```bash
 GET /api/messages/admin
