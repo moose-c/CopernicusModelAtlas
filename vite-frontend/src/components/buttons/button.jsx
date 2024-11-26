@@ -11,7 +11,7 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
     if (log.toLocaleLowerCase() === "in") {
       loginWithRedirect({
         appState: {
-          returnTo: "/admin",
+          returnTo: "/profile",
         },
       });
     } else if (log.toLocaleLowerCase() === "out") {

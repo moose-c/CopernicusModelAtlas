@@ -1,4 +1,5 @@
 # Hello World API: Flask Auth0 Sample
+This backend was setup by following https://developer.auth0.com/resources/code-samples/api/flask/basic-authorization
 
 This Python code sample demonstrates how to implement authorization in a Flask API server using Auth0.
 
