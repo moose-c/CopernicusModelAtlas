@@ -8,3 +8,4 @@ RBAC for pages was configured following this: https://www.youtube.com/watch?v=yu
 
 # Building
 npm run build
+
