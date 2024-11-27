@@ -5,3 +5,6 @@ This was setup by following https://developer.auth0.com/resources/code-samples/s
 Later, this application was migrated to use vite for a smoother development process.
 
 RBAC for pages was configured following this: https://www.youtube.com/watch?v=yuOFwTKDMek 
+
+# Building
+npm run build
