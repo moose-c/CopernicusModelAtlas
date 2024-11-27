@@ -1,14 +1,16 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-    // depending on your application, base can also be "/"
+    // Base URL for your app (can be empty or "/")
     base: '',
-    plugins: [react()],
+    // Conditionally load the plugin based on the environment
+    plugins: [
+        process.env.NODE_ENV === 'development' && require('@vitejs/plugin-react').default()
+    ].filter(Boolean),  // This removes any undefined values, in case the plugin is not added in production
     server: {
-        // this ensures that the browser opens upon server start
+        // Open the browser when the dev server starts
         open: true,
-        // this sets a default port to 3000  
+        // Default port for dev server
         port: 4040,
     },
 })
