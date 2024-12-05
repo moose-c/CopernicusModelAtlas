@@ -1,4 +1,3 @@
-import React from "react";
 import { NavBar } from "./navigation/nav-bar";
 import { PageFooter } from "./page-footer";
 

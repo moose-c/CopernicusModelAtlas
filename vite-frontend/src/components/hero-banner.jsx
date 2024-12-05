@@ -1,5 +1,3 @@
-import React from "react";
-
 export const HeroBanner = () => {
   const logo = "https://cdn.auth0.com/blog/developer-hub/react-logo.svg";
 
