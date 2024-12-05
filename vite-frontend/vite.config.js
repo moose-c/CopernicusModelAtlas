@@ -9,9 +9,4 @@ export default defineConfig({
         // Default port for dev server
         port: 8080,
     },
-
-    preview: {
-        host: '0.0.0.0',  // Allow external access for preview as well
-        port: 8080,        // Preview server on port 8080
-    },
 })
