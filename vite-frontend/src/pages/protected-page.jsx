@@ -14,6 +14,7 @@ export const ProtectedPage = () => {
 
     const getMessage = async () => {
       const accessToken = await getAccessTokenSilently();
+      console.log(accessToken);
       const { data, error } = await getProtectedResource(accessToken);
 
       if (!isMounted) {
