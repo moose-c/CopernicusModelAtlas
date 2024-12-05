@@ -8,6 +8,7 @@ export default defineConfig({
         process.env.NODE_ENV === 'development' && require('@vitejs/plugin-react').default()
     ].filter(Boolean),  // This removes any undefined values, in case the plugin is not added in production
     server: {
+        host: '0.0.0.0',
         // Open the browser when the dev server starts
         open: true,
         // Default port for dev server
