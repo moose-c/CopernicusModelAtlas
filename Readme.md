@@ -10,3 +10,5 @@ Windows:
 ssh steppingstone 
 oc set env pod/frontend-3-build --list | grep ^VITE
 oc set env pod/frontend-6cd85b55c-wj65s --list | grep ^VITE
+
+oc new-app python:3.11~git@github.com:moose-c/CopernicusModelAtlas.git --source-secret github-connection --name backend --context-dir flask-backend --strategy docker
