@@ -1,5 +1,6 @@
 export const HeroBanner = () => {
   const logo = "https://cdn.auth0.com/blog/developer-hub/react-logo.svg";
+  const env = import.meta.env.VITE_APP_TRIAL_ENV;
 
   return (
     <div className="hero-banner hero-banner--pink-yellow">
@@ -7,7 +8,7 @@ export const HeroBanner = () => {
         <img className="hero-banner__image" src={logo} alt="React logo" />
       </div>
       <p className="font-sans text-[70px] font-thin leading-[340px] text-yellow-500">
-        Hello, React World!
+        Hello, {env} !
       </p>
       <p className="hero-banner__description">
         This is a sample application that demonstrates the authentication flow
