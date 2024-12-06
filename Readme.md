@@ -8,6 +8,5 @@ sshuttle -r steppingstone 0/0
 Windows:
 
 ssh steppingstone 
-
-oc set env pod/vite-frontend-4-build --list
-oc set env pod/vite-frontend-5f45bb69fd-fkqb6 --list
+oc set env pod/frontend-3-build --list | grep ^VITE
+oc set env pod/frontend-6cd85b55c-wj65s --list | grep ^VITE
