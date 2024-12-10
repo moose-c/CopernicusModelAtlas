@@ -10,10 +10,7 @@ export const HeroBanner = () => {
       <p className="font-sans text-[70px] font-thin leading-[340px] text-yellow-500">
         Hello, {env} !
       </p>
-      <p className="hero-banner__description">
-        This is a sample application that demonstrates the authentication flow
-        for React apps using <strong>Auth0</strong>.
-      </p>
+      <p className="hero-banner__description">are you renewed?</p>
       <a
         id="code-sample-link"
         target="_blank"
