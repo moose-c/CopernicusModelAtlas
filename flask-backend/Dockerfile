@@ -12,7 +12,7 @@ FROM gcr.io/distroless/python3@sha256:eb773dd9d39f0becdab47e2ef5f1b10e2988c93a40
 COPY --from=build /home/developer/app /app
 COPY --from=build /home/developer/packages /packages
 USER 1000
-EXPOSE 6060
+EXPOSE 8080/tcp
 ENV PYTHONPATH="/packages"
 WORKDIR /app
 CMD ["/packages/gunicorn/app/wsgiapp.py","api.wsgi:app"]
