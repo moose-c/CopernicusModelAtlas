@@ -8,12 +8,12 @@
 
 @font-face {
     font-family: "Merriweather";
-    src: url("/fonts/Merriweather/Merriweather-Light.ttf");
+    src: url("/assets/fonts/Merriweather/Merriweather-Light.ttf");
   }
   
   @font-face {
     font-family: "Open Sans";
-    src: url("/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
+    src: url("/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
   }
   
   .h1 {

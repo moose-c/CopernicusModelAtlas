@@ -29,12 +29,12 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
       <span className="buttonText uppercase">{text}</span>
       <div className="w-[42px] h-[34px] flex justify-center items-center group-hover:bg-black">
         <img
-          src="src/assets/buttonArrowBlack.svg"
+          src="/assets/images/buttonArrowBlack.svg"
           alt="a"
           className="group-hover:opacity-0"
         />
         <img
-          src="src/assets/buttonArrowYellow.svg"
+          src="/assets/images/buttonArrowYellow.svg"
           alt="aaa"
           className="absolute opacity-0 group-hover:opacity-100 "
         />
