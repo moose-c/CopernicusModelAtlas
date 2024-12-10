@@ -15,4 +15,5 @@ USER 1000
 EXPOSE 8080/tcp
 ENV PYTHONPATH="/packages"
 WORKDIR /app
-CMD ["/packages/gunicorn/app/wsgiapp.py","api.wsgi:app"]
+CMD ["gunicorn", "-c", "/app/gunicorn.conf.py", "api.wsgi:app"]
+
