@@ -1,6 +1,13 @@
 import { callExternalApi } from "./external-api.service";
+import axios from "axios";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
+
+export const postModel = async (modellerInfo) => {
+  const url = `${apiServerUrl}/api/models/post`
+  console.log(modellerInfo)
+  axios.post(url, modellerInfo)
+}
 
 export const getModels = async () => {
   const config = {

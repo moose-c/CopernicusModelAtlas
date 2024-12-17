@@ -33,6 +33,7 @@ export const NavBar = () => {
         <div className="flex flex-row gap-4 text-white">
           {!isAuthenticated && (
             <>
+              <NavBarTab path="/add-model" label="Add Model" />
               <NavBarTab path="/public" label="Public" />
               <Button text="Log in" log="in" />
             </>
