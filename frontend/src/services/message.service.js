@@ -2,6 +2,23 @@ import { callExternalApi } from "./external-api.service";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
+export const getModels = async () => {
+  const config = {
+    url: `${apiServerUrl}/api/messages/models`,
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  };
+
+  const { data, error } = await callExternalApi({ config });
+
+  return {
+    data: data || null,
+    error,
+  };
+};
+
 export const getPublicResource = async () => {
   const config = {
     url: `${apiServerUrl}/api/messages/public`,

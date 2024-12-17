@@ -12,6 +12,7 @@ from api.security.auth0_service import auth0_service
 
 from common.utils import safe_get_env_var
 
+
 def create_app():
     ##########################################
     # Environment Variables
@@ -30,31 +31,30 @@ def create_app():
     # HTTP Security Headers
     ##########################################
 
-    csp = {
-        'default-src': ['\'self\''],
-        'frame-ancestors': ['\'none\'']
-    }
+    csp = {"default-src": ["'self'"], "frame-ancestors": ["'none'"]}
 
     Talisman(
         app,
         force_https=False,
-        frame_options='DENY',
+        frame_options="DENY",
         content_security_policy=csp,
-        referrer_policy='no-referrer',
+        referrer_policy="no-referrer",
         x_xss_protection=False,
-        x_content_type_options=True
+        x_content_type_options=True,
     )
 
     auth0_service.initialize(auth0_domain, auth0_audience)
 
     @app.after_request
     def add_headers(response):
-        response.headers['X-XSS-Protection'] = '0'
-        response.headers['Cache-Control'] = 'no-store, max-age=0, must-revalidate'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['Expires'] = '0'
-        response.headers['Content-Type'] = 'application/json; charset=utf-8'
-        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+        response.headers["X-XSS-Protection"] = "0"
+        response.headers["Cache-Control"] = "no-store, max-age=0, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        response.headers["Content-Type"] = "application/json; charset=utf-8"
+        response.headers["Strict-Transport-Security"] = (
+            "max-age=31536000; includeSubDomains"
+        )
         return response
 
     ##########################################
@@ -66,11 +66,11 @@ def create_app():
         resources={r"/api/*": {"origins": client_origin_url}},
         allow_headers=["Authorization", "Content-Type"],
         methods=["GET"],
-        max_age=86400
+        max_age=86400,
     )
 
     ##########################################
-    # Blueprint Registration
+    # ADD COMPONENTS
     ##########################################
 
     app.register_blueprint(messages_views.bp)

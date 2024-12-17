@@ -1,16 +1,14 @@
 import os
 import gunicorn.http.wsgi
 from functools import wraps
-from dotenv import load_dotenv
+from common.utils import safe_get_env_var
 
-# Load environment variables from .env (useful for local development)
-load_dotenv()
 
 # WSGI application
 wsgi_app = "api.wsgi:app"
 
 # Server binding
-PORT = os.getenv("PORT", "8080")  # Default to 8080 if PORT is not set
+PORT = safe_get_env_var("PORT")  # Default to 8080 if PORT is not set
 bind = f"0.0.0.0:{PORT}"
 
 

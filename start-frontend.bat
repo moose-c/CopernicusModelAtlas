@@ -1,4 +1,3 @@
 @echo off
-TITLE vite-frontend
-cd vite-frontend
+cd frontend
 npm start
