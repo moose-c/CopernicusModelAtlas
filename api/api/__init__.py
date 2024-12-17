@@ -70,7 +70,7 @@ def create_app():
     )
 
     ##########################################
-    # ADD COMPONENTS
+    # Blueprint Registration
     ##########################################
 
     app.register_blueprint(messages_views.bp)
