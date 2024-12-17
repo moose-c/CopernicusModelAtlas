@@ -4,7 +4,7 @@ const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
 export const getModels = async () => {
   const config = {
-    url: `${apiServerUrl}/api/messages/models`,
+    url: `${apiServerUrl}/api/models/get`,
     method: "GET",
     headers: {
       "content-type": "application/json",

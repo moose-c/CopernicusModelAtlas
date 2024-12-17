@@ -1,12 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 
 from api.messages.messages_service import (
     get_public_message,
     get_protected_message,
     get_admin_message,
 )
-
-from api.messages.get_models_service import get_models
 
 from api.security.guards import (
     authorization_guard,
@@ -17,11 +15,6 @@ from api.security.guards import (
 bp_name = "api-messages"
 bp_url_prefix = "/api/messages"
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
-
-
-@bp.route("/models")
-def models():
-    return jsonify(get_models())
 
 
 @bp.route("/public")

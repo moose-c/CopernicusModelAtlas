@@ -38,9 +38,7 @@ export const HomePage = () => {
         <p className="font-sans text-[70px] font-thin leading-[340px] text-yellow-500">
           Hello, {env}!
         </p>
-        <p className="h1">Models</p>
-        <p>Here the retrieved models will be displayed. fetch or something</p>
-        <CodeSnippet code={models} />
+        <CodeSnippet title="Models" code={models} />
       </div>
     </PageLayout>
   );
