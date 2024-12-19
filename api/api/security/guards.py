@@ -7,19 +7,15 @@ from flask import request, g
 from api.security.auth0_service import auth0_service
 from api.utils import json_abort
 
-unauthorized_error = {
-    "message": "Requires authentication"
-}
+unauthorized_error = {"message": "Requires authentication"}
 
 invalid_request_error = {
     "error": "invalid_request",
     "error_description": "Authorization header value must follow this format: Bearer access-token",
-    "message": "Requires authentication"
+    "message": "Requires authentication",
 }
 
-admin_messages_permissions = SimpleNamespace(
-    read="read:admin-messages"
-)
+admin_messages_permissions = SimpleNamespace(read="read:admin-messages")
 
 
 def get_bearer_token_from_request():
@@ -53,8 +49,16 @@ def authorization_guard(function):
     @wraps(function)
     def decorator(*args, **kwargs):
         token = get_bearer_token_from_request()
-        validated_token = auth0_service.validate_jwt(token)
+        try:
+            validated_token = auth0_service.validate_jwt(token)
+            print(f"Token validated successfully: {validated_token}")
+        except Exception as e:
+            print(
+                f"Token validation failed. Exception: {type(e).__name__}, Details: {e}"
+            )
+            raise
 
+        # print(validated_token)
         g.access_token = validated_token
 
         return function(*args, **kwargs)
@@ -76,24 +80,18 @@ def permissions_guard(required_permissions=None):
                 return function()
 
             if not isinstance(required_permissions, list):
-                json_abort(500, {
-                    "message": "Internal Server Error"
-                })
+                json_abort(500, {"message": "Internal Server Error"})
 
             token_permissions = access_token.get("permissions")
 
             if not token_permissions:
-                json_abort(403, {
-                    "message": "Permission denied"
-                })
+                json_abort(403, {"message": "Permission denied"})
 
             required_permissions_set = set(required_permissions)
             token_permissions_set = set(token_permissions)
 
             if not required_permissions_set.issubset(token_permissions_set):
-                json_abort(403, {
-                    "message": "Permission denied"
-                })
+                json_abort(403, {"message": "Permission denied"})
 
             return function()
 
