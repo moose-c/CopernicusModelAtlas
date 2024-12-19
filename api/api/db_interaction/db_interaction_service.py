@@ -13,6 +13,17 @@ def db_connection():
     return conn
 
 
+# # This is how this would go If database cluster is ready
+# conn = psycopg2.connect(
+#     dbname=dbname,
+#     user=user,
+#     password=password,
+#     host=host,
+#     port="5432",  # Default PostgreSQL port
+#     sslmode="require",  # Enforcing SSL encryption
+# )
+
+
 def get_models():
     conn = db_connection()
     cur = conn.cursor()
