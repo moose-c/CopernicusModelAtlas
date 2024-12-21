@@ -2,17 +2,19 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
+host = os.getenv("DB_HOST")
+database = os.getenv("DB_NAME")
 user = os.getenv("DB_USERNAME")
 password = os.getenv("DB_PASSWORD")
-print(user, password)
 
 conn = psycopg2.connect(
-    host="localhost",
-    database="flask_db",
+    host=host,
+    database=database,
     user=user,
-    password=os.getenv("DB_PASSWORD"),
+    password=password,
 )
 
 # Open a cursor to perform database operations
