@@ -7,6 +7,3 @@ WORKDIR /scripts
 # Copy the SQL and shell script into the container
 COPY run_init.sh /scripts/
 COPY init_script.sql /scripts/
-
-# Ensure the shell script is executable
-RUN chmod +x /scripts/run_init.sh
