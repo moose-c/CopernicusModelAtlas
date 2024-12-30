@@ -8,3 +8,5 @@ oc delete all --selector app=db-init
 
 oc get pods
 oc rsh <pod-name>
+
+oc new-app postgresql:15~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name db-init --context-dir=database --strategy=docker

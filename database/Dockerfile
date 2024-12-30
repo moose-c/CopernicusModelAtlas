@@ -1,5 +1,5 @@
 # Use the official PostgreSQL image as the base image
-FROM postgres:latest
+FROM postgresql:15
 
 # Set the working directory inside the container
 WORKDIR /scripts
