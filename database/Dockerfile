@@ -1,5 +1,5 @@
 # Use the official PostgreSQL image as the base image
-FROM postgresql:15
+FROM registry.redhat.io/rhscl/postgresql-95-rhel7
 
 # Set the working directory inside the container
 WORKDIR /scripts
