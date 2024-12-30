@@ -8,8 +8,5 @@ WORKDIR /scripts
 COPY run_init.sh /scripts/
 COPY init_script.sql /scripts/
 
-# Copy the .env file into the container
-COPY .env /scripts/.env
-
 # Ensure the shell script is executable
 RUN chmod +x /scripts/run_init.sh
