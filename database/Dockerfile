@@ -12,7 +12,7 @@ COPY init_script.sql /scripts/
 # RUN chmod +x /scripts/run_init.sh
 
 # Default environment variables for PostgreSQL (change as needed)
-ENV POSTGRESQL_ADMIN_PASSWORD=postgres
+ENV POSTGRESQL_PASSWORD=postgres
 
 # # Optional: Automatically execute the run_init.sh script on container startup
 # CMD ["/scripts/run_init.sh"]
