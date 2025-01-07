@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
+import { Button } from "../components/buttons/button";
 
 export const ProfilePage = () => {
   const { user } = useAuth0();
@@ -13,38 +14,19 @@ export const ProfilePage = () => {
   return (
     <PageLayout>
       <div className="content-layout">
-        <h1 id="page-title" className="content__title">
-          Profile Page
-        </h1>
-        <div className="content__body">
-          <p id="page-description">
-            <span>
-              You can use the <strong>ID Token</strong> to get the profile
-              information of an authenticated user.
-            </span>
-            <span>
-              <strong>Only authenticated users can access this page.</strong>
-            </span>
-          </p>
-          <div className="profile-grid">
-            <div className="profile__header">
-              <img
-                src={user.picture}
-                alt="Profile"
-                className="profile__avatar"
-              />
-              <div className="profile__headline">
-                <h2 className="profile__title">{user.name}</h2>
-                <span className="profile__description">{user.email}</span>
-              </div>
-            </div>
-            <div className="profile__details">
-              <CodeSnippet
-                title="Decoded ID Token"
-                code={JSON.stringify(user, null, 2)}
-              />
-            </div>
+        <div>
+          <div className="flex justify-between items-center">
+            <p className="h1">Your Models</p>
+            <Button text="Add Model" to="/add-model" />
           </div>
+          <p className="h2">Here should go the models of this user</p>
+        </div>
+        <div>
+          <p className="h1">User Information</p>
+          <CodeSnippet
+            title="Decoded ID Token"
+            code={JSON.stringify(user, null, 2)}
+          />
         </div>
       </div>
     </PageLayout>

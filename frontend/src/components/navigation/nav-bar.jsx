@@ -9,8 +9,8 @@ export const NavBar = () => {
 
   return (
     <>
-      <div className="bg-copernicusYellow w-full h-[76px] px-[42px] py-[18px]">
-        <p className="font-sans text-[40px] font-thin leading-[34px]">
+      <div className="bg-copernicusYellow w-full px-[42px] py-[18px]">
+        <p className="font-sans text-[40px] font-thin leading-[34px] text-black">
           Copernicus Institute of Sustainable Development
         </p>
       </div>
@@ -33,13 +33,13 @@ export const NavBar = () => {
         <div className="flex flex-row gap-4 text-white">
           {!isAuthenticated && (
             <>
-              <NavBarTab path="/add-model" label="Add Model" />
               <NavBarTab path="/public" label="Public" />
               <Button text="Log in" log="in" />
             </>
           )}
           {isAuthenticated && (
             <>
+              <NavBarTab path="/add-model" label="Add Model" />
               <NavBarTab path="/public" label="Public" />
               <NavBarTab path="/profile" label="Profile" />
               <NavBarTab path="/protected" label="Private" />

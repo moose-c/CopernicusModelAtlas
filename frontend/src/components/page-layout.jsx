@@ -3,9 +3,9 @@ import { PageFooter } from "./page-footer";
 
 export const PageLayout = ({ children }) => {
   return (
-    <div className="page-layout">
+    <div>
       <NavBar />
-      <div className="page-layout__content">{children}</div>
+      <div>{children}</div>
       <PageFooter />
     </div>
   );

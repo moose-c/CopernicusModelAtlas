@@ -5,23 +5,14 @@ from flask import request, jsonify
 
 def db_connection():
     conn = psycopg2.connect(
-        host=safe_get_env_var("DB_HOST"),
-        database="flask_db",
-        user=safe_get_env_var("DB_USERNAME"),
-        password=safe_get_env_var("DB_PASSWORD"),
+        dbname=safe_get_env_var("PGDATABASE"),
+        user=safe_get_env_var("PGUSER"),
+        password=safe_get_env_var("PGPASSWORD"),
+        host=safe_get_env_var("PGHOST"),
+        port=safe_get_env_var("PGPORT"),
+        sslmode=safe_get_env_var("PGUSER"),
     )
     return conn
-
-
-# # This is how this would go If database cluster is ready
-# conn = psycopg2.connect(
-#     dbname=dbname,
-#     user=user,
-#     password=password,
-#     host=host,
-#     port="5432",  # Default PostgreSQL port
-#     sslmode="require",  # Enforcing SSL encryption
-# )
 
 
 def get_models():
