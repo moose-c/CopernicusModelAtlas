@@ -4,12 +4,11 @@ import { CodeSnippet } from "../components/code-snippet";
 import { getModels } from "../services/message.service";
 import Multiselect from "multiselect-react-dropdown";
 import { Searchbar } from "../components/searchbar";
+import { keywords } from "../util/globalVars";
 
 export const HomePage = () => {
   const [models, setModels] = useState("");
   const env = import.meta.env.VITE_APP_TRIAL_ENV;
-
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
 
   useEffect(() => {
     let isMounted = true;
@@ -39,7 +38,7 @@ export const HomePage = () => {
   return (
     <PageLayout>
       <div className="content-layout">
-        <p className="h1">Model atlas</p>
+        <h1>Model atlas</h1>
         <Searchbar />
         <Multiselect
           isObject={false}
@@ -47,7 +46,7 @@ export const HomePage = () => {
           onRemove={function noRefCheck() {}}
           onSearch={function noRefCheck() {}}
           onSelect={function noRefCheck() {}}
-          options={options}
+          options={keywords}
           placeholder="Select Keywords"
           className="dd w-fit"
         />

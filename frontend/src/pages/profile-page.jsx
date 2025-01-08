@@ -16,13 +16,13 @@ export const ProfilePage = () => {
       <div className="content-layout">
         <div>
           <div className="flex justify-between items-center">
-            <p className="h1">Your Models</p>
+            <h1>Your Models</h1>
             <Button text="Add Model" to="/add-model" />
           </div>
-          <p className="h2">Here should go the models of this user</p>
+          <h2>Here should go the models of this user</h2>
         </div>
         <div>
-          <p className="h1">User Information</p>
+          <h1>User Information</h1>
           <CodeSnippet
             title="Decoded ID Token"
             code={JSON.stringify(user, null, 2)}

@@ -16,7 +16,7 @@
     src: url("/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
   }
   
-  .h1 {
+  h1, .h1 {
     font-size: 34px;
     font-weight: 400;
     line-height: 47.6px;
@@ -24,7 +24,7 @@
     @apply font-sans
   }
   
-  .reg {
+  p, reg {
     font-size: 18px;
     line-height: 34px;
     @apply text-CopernicusText font-merr
@@ -43,13 +43,13 @@
     @apply text-CopernicusText font-sans
   }
   
-  .h2 {
+  h2 {
     font-size: 28px;
     line-height: 120%;
     @apply text-CopernicusText font-sans
   }
   
-  .h3 {
+  h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 120%; 
