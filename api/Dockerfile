@@ -36,4 +36,4 @@ ENV PYTHONPATH="/packages"
 WORKDIR /app
 
 # Run the database initialization script and then start the application
-CMD ["bash", "-c", "python /app/db_init.py && /packages/gunicorn/app/wsgiapp.py api.wsgi:app"]
+CMD ["sh", "-c", "python /app/db_init.py && /packages/gunicorn/app/wsgiapp.py api.wsgi:app"]
