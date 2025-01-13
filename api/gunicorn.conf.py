@@ -8,7 +8,7 @@ from common.utils import safe_get_env_var
 wsgi_app = "api.wsgi:app"
 
 # Server binding
-PORT = safe_get_env_var("PORT")  # Default to 8080 if PORT is not set
+PORT = safe_get_env_var("PORT")
 bind = f"0.0.0.0:{PORT}"
 
 
