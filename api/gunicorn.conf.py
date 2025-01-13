@@ -1,7 +1,6 @@
 import os
 import gunicorn.http.wsgi
 from functools import wraps
-from common.utils import safe_get_env_var
 
 
 # WSGI application

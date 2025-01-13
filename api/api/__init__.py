@@ -64,9 +64,7 @@ def create_app():
 
     CORS(
         app,
-        resources={
-            r"/api/*": {"origins": [client_origin_url, "http://127.0.0.1:8080"]}
-        },
+        resources={r"/api/*": {"origins": "*"}},
         allow_headers=["Authorization", "Content-Type"],
         methods=["GET", "POST"],
         max_age=86400,
