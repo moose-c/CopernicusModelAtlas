@@ -24,21 +24,17 @@ COPY ./gunicorn.conf.py ./app
 # Use a minimal distroless image to run the application securely
 FROM gcr.io/distroless/python3@sha256:eb773dd9d39f0becdab47e2ef5f1b10e2988c93a40ac8d32ca593096b409d351
 
-# Copy the application and its packages from the build stage
 COPY --from=build /home/developer/app /app
 COPY --from=build /home/developer/packages /packages
 
-# Set a non-root user to run the application securely
+# Set necessary permissions for OpenShift compatibility
+RUN chmod -R 755 /app /packages
+
+# Use a compatible user for OpenShift
 USER 1000
 
-# Expose port 8080 for the web service
 EXPOSE 8080/tcp
-
-# Set Python's search path for imports
 ENV PYTHONPATH="/packages"
-
-# Set the working directory for the application
 WORKDIR /app
 
-# Start the application using Gunicorn
-CMD ["/packages/gunicorn/app/wsgiapp.py","api.wsgi:app"]
+CMD ["python", "/packages/gunicorn/app/wsgiapp.py", "api.wsgi:app"]
