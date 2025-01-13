@@ -24,7 +24,7 @@
     @apply font-sans
   }
   
-  p, reg {
+  p, .reg {
     font-size: 18px;
     line-height: 34px;
     @apply text-CopernicusText font-merr

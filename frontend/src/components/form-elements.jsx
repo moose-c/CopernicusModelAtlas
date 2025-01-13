@@ -1,13 +1,9 @@
 import React from "react";
 
-export const ExamplePopup = ({ nb, topPos, togglePopup }) => {
-  console.log(topPos);
+export const ExamplePopup = ({ nb, togglePopup }) => {
   return (
     <div
-      className={`overflow-hidden absolute right-4 h-fill w-[580px] p-4 bg-white border border-gray-300 rounded-lg shadow-md`}
-      style={{
-        top: topPos,
-      }}
+      className={`overflow-hidden absolute top-16 right-0 z-10 w-[580px] p-4 bg-white border border-gray-300 rounded-lg shadow-md`}
     >
       <button
         className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
