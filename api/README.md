@@ -9,6 +9,5 @@ docker build -t api .
 docker run --env-file=.env --name api_container api
 
 curl 127.0.0.1:8080/api/messages/public
-curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
+curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/protected
 curl -I https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
-
