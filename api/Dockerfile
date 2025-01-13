@@ -33,7 +33,7 @@ RUN chmod -R 755 /app /packages
 # Use a compatible user for OpenShift
 USER 1000
 
-EXPOSE 8000/tcp
+EXPOSE 8080/tcp
 ENV PYTHONPATH="/packages"
 WORKDIR /app
 

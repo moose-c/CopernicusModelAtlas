@@ -8,4 +8,5 @@ start with `flask run`
 docker build -t api .
 docker run --env-file=.env --name api_container api
 
-curl http://0.0.0.0:4000/api/messages/public
+curl 127.0.0.1:8000/api/messages/public
+curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
