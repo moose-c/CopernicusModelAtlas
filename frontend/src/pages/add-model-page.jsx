@@ -24,7 +24,6 @@ export const AddModelPage = () => {
     title: "",
     figTitle: "",
     fig: "",
-    descTitle: "",
     desc: "",
   };
 
@@ -86,6 +85,10 @@ export const AddModelPage = () => {
         "theoryFigDesc",
         "resText",
         "resFigDesc",
+        "methodsDesc",
+        "colofonCite",
+        "colofonLicence",
+        "colofonAddition",
       ].includes(q)
     ) {
       setFormData((prevState) => ({
@@ -97,14 +100,17 @@ export const AddModelPage = () => {
         ...prevState,
         keywords: e,
       }));
-    } else if (["modellers", "links"].includes(q)) {
+    } else if (["modellers", "links", "boxes"].includes(q)) {
+      const newValue = addVar2 === "fig" ? e.target.files[0] : e.target.value;
       setFormData((prevState) => ({
         ...prevState,
         [q]: prevState[q].map((entry, index) =>
-          index === addVar1 ? { ...entry, [addVar2]: e.target.value } : entry
+          index === addVar1 ? { ...entry, [addVar2]: newValue } : entry
         ),
       }));
-    } else if (["icon", "explanFig", "theoryFig", "resFig"].includes(q)) {
+    } else if (
+      ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q)
+    ) {
       const file = e.target.files[0];
       setFormData((prevState) => ({
         ...prevState,
@@ -149,6 +155,26 @@ export const AddModelPage = () => {
       setFormData((prevState) => ({
         ...prevState,
         links: prevState.links.filter((_, index) => index !== i),
+      }));
+    }
+  };
+
+  const handleChangeNbBoxes = (add = true, i = undefined) => {
+    if (add) {
+      if (nbBoxes < 5) {
+        setNbBoxes((prevState) => prevState + 1); // Increment the number of modellers
+        setFormData((prevState) => ({
+          ...prevState,
+          boxes: [...prevState.boxes, { ...blankBox }],
+        }));
+      } else {
+        alert("Only 4 boxes allowed!"); // Show a popup when trying to exceed the limit
+      }
+    } else {
+      setNbBoxes((prevState) => prevState - 1); // Increment the number of modellers
+      setFormData((prevState) => ({
+        ...prevState,
+        boxes: prevState.boxes.filter((_, index) => index !== i),
       }));
     }
   };
@@ -463,6 +489,92 @@ export const AddModelPage = () => {
             </div>
             <div className="flex flex-col gap-[25px]">
               <h3>Output boxes</h3>
+              <div>
+                <p>
+                  This section gathers information for the boxes showcasing
+                  model output. Output data can be shown in the following
+                  formats:<b>Insuffusiently explained</b>
+                  <ul>
+                    <li>Figure (.png, ...)</li>
+                    <li>Timeseries (.csv)</li>
+                    <li>Raster map (.tif)</li>
+                    <li>Vector map (.geojson)</li>
+                  </ul>
+                </p>
+                {Array.from({ length: nbBoxes }, (_, i) => (
+                  <div className="flex justify-between border-y border-black pb-2 gap-2">
+                    <div className="flex flex-col">
+                      <p>Title of the Output Box{i == 0 && "*"}</p>
+                      <input
+                        className="formQAs"
+                        type="text"
+                        placeholder="Box Title"
+                        value={formData.boxes[i].title}
+                        onChange={(e) => handleChange(e, "boxes", i, "title")}
+                      />
+                      <p>Description accompanying the figure{i == 0 && "*"}</p>
+                      <textarea
+                        className="formQAl"
+                        type="text"
+                        placeholder="Enter a Description"
+                        value={formData.boxes[i].desc}
+                        onChange={(e) => handleChange(e, "boxes", i, "desc")}
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <p>Title for output data{i == 0 && "*"}</p>
+                      <input
+                        className="formQAs"
+                        type="text"
+                        placeholder="Output Title"
+                        value={formData.boxes[i].figTitle}
+                        onChange={(e) =>
+                          handleChange(e, "boxes", i, "figTitle")
+                        }
+                      />
+                      <p>Upload output data here{i == 0 && "*"}</p>
+                      <div className="flex gap-[15px]">
+                        <input
+                          type="file"
+                          id={`file-upload${5 + i}`}
+                          accept=".png, .csv, .tif, .geojson"
+                          onChange={(e) => handleChange(e, "boxes", i, "fig")}
+                          className="hidden"
+                        />
+
+                        {/* Label acting as the "Browse..." button */}
+                        <label
+                          htmlFor={`file-upload${5 + i}`}
+                          className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
+                        >
+                          <p>Browse...</p>
+                        </label>
+
+                        <p>Allowed file types: .png, .csv, .tif, .geojson</p>
+                      </div>
+                      <p>
+                        n.b. Only data matching the requirements stated above
+                        can be shown!
+                      </p>
+                    </div>
+
+                    {i !== 0 && (
+                      <button
+                        onClick={() => handleChangeNbBoxes(false, i)}
+                        className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 m-1"
+                      >
+                        -
+                      </button>
+                    )}
+                  </div>
+                ))}
+                <p
+                  className="underline cursor-pointer"
+                  onClick={() => handleChangeNbBoxes()}
+                >
+                  Click here to add another output box
+                </p>
+              </div>
             </div>
             <div className="flex flex-col gap-[25px]">
               <div>
@@ -481,6 +593,38 @@ export const AddModelPage = () => {
                   />
                 )}
               </div>
+              <div>
+                <p>Description of the model itself</p>
+                <textarea
+                  className="formQAl"
+                  type="text"
+                  placeholder="Enter a description"
+                  value={formData.methodsDesc}
+                  onChange={(e) => handleChange(e, "methodsDesc")}
+                />
+              </div>
+              <div>
+                <p>Upload output data here</p>
+                <div className="flex gap-[15px]">
+                  <input
+                    type="file"
+                    id={`methods-file-upload`}
+                    accept=".csv, .tif, .geojson"
+                    onChange={(e) => handleChange(e, "methodsFile")}
+                    className="hidden"
+                  />
+
+                  {/* Label acting as the "Browse..." button */}
+                  <label
+                    htmlFor={`methods-file-upload`}
+                    className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
+                  >
+                    <p>Browse...</p>
+                  </label>
+
+                  <p>Allowed file types: .csv, .tif, .geojson</p>
+                </div>
+              </div>
             </div>
             <div className="flex flex-col gap-[25px]">
               <div>
@@ -498,6 +642,38 @@ export const AddModelPage = () => {
                     togglePopup={togglePopup}
                   />
                 )}
+              </div>
+              <div>
+                <p>How should people cite this model?*</p>
+                <input
+                  className="formQAs"
+                  type="text"
+                  placeholder="How to cite"
+                  value={formData.colofonCite}
+                  onChange={(e) => handleChange(e, "colofonCite")}
+                />
+              </div>
+              <div>
+                <p>
+                  Enter a licence* <b>Explain but what does this even mean?</b>
+                </p>
+                <input
+                  className="formQAs"
+                  type="text"
+                  placeholder="Enter licence"
+                  value={formData.colofonLicence}
+                  onChange={(e) => handleChange(e, "colofonLicence")}
+                />
+              </div>
+              <div>
+                <p>Do you want to include additional model in the Colofon?</p>
+                <textarea
+                  className="formQAl"
+                  type="text"
+                  placeholder="Model Description"
+                  value={formData.colofonAddition}
+                  onChange={(e) => handleChange(e, "colofonAddition")}
+                />
               </div>
             </div>
           </div>
