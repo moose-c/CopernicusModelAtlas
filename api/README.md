@@ -7,3 +7,5 @@ https://developer.auth0.com/resources/code-samples/api/flask/basic-role-based-ac
 start with `flask run`
 docker build -t api .
 docker run --env-file=.env --name api_container api
+
+curl http://0.0.0.0:4000/api/messages/public
