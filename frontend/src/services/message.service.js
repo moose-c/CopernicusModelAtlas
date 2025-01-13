@@ -32,7 +32,6 @@ export const getPublicResource = async () => {
     method: "GET",
     headers: {
       "content-type": "application/json",
-      "Access-Control-Allow-Origin": "*",  // Allow any origin (or specify a specific one if needed)
     },
   };
 
