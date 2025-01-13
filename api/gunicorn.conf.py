@@ -7,10 +7,6 @@ from common.utils import safe_get_env_var
 # WSGI application
 wsgi_app = "api.wsgi:app"
 
-# Server binding
-PORT = safe_get_env_var("PORT")
-bind = f"0.0.0.0:{PORT}"
-
 
 # Security: Remove 'Server' header from responses
 def wrap_default_headers(func):
