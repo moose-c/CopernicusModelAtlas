@@ -1,0 +1,16 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    io.kompose.service: flask-api
+  name: flask-api
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - from:
+        kind: DockerImage
+        name: python:3.9.2-slim-buster
+      name: 3.9.2-slim-buster
+      referencePolicy:
+        type: ""

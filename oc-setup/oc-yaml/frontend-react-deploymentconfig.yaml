@@ -1,0 +1,109 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: frontend-react
+  name: frontend-react
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: frontend-react
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: frontend-react
+    spec:
+      containers:
+        - command:
+            - /bin/bash
+            - /entrypoint.sh
+          env:
+            - name: VITE_APP_API_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_API_SERVER_URL
+                  name: frontend-react-env
+            - name: VITE_APP_AUTH0_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_AUTH0_AUDIENCE
+                  name: frontend-react-env
+            - name: VITE_APP_AUTH0_CALLBACK_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_AUTH0_CALLBACK_URL
+                  name: frontend-react-env
+            - name: VITE_APP_AUTH0_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_AUTH0_CLIENT_ID
+                  name: frontend-react-env
+            - name: VITE_APP_AUTH0_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_AUTH0_DOMAIN
+                  name: frontend-react-env
+            - name: VITE_APP_TRIAL_ENV
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_APP_TRIAL_ENV
+                  name: frontend-react-env
+          image: ' '
+          name: frontend-react
+          ports:
+            - containerPort: 4000
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /entrypoint.sh
+              name: frontend-react-cm0
+              subPath: entrypoint.sh
+            - mountPath: /dist/index.html
+              name: frontend-react-cm1
+              subPath: index.html
+            - mountPath: /dist/assets/images
+              name: frontend-react-cm2
+            - mountPath: /dist/assets/fonts/Merriweather
+              name: frontend-react-cm3
+            - mountPath: /dist/assets/fonts/Open_Sans
+              name: frontend-react-cm4
+            - mountPath: /dist/assets/fonts/Open_Sans/static
+              name: frontend-react-cm5
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: entrypoint.sh
+                path: entrypoint.sh
+            name: frontend-react-cm0
+          name: frontend-react-cm0
+        - configMap:
+            items:
+              - key: index.html
+                path: index.html
+            name: frontend-react-cm1
+          name: frontend-react-cm1
+        - configMap:
+            name: frontend-react-cm2
+          name: frontend-react-cm2
+        - configMap:
+            name: frontend-react-cm3
+          name: frontend-react-cm3
+        - configMap:
+            name: frontend-react-cm4
+          name: frontend-react-cm4
+        - configMap:
+            name: frontend-react-cm5
+          name: frontend-react-cm5
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - frontend-react
+        from:
+          kind: ImageStreamTag
+          name: frontend-react:16.15
+      type: ImageChange

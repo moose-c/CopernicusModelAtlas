@@ -1,6 +1,7 @@
-@import "theme.css";
-@import "general.css";
-@import "components/index.css";
+/* @import "theme.css"; */
+@import "content-layout.css";
+@import "code-snippet.css";
+/* code-snippet is not being applied to tailwind components maybe? */
 
 @tailwind base;
 @tailwind components;

@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
-import { Button } from "../components/buttons/button";
+import { Button } from "../components/button";
 
 export const ProfilePage = () => {
   const { user } = useAuth0();

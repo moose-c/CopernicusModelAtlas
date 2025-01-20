@@ -1,0 +1,125 @@
+apiVersion: v1
+data:
+  __init__.py: |
+    ##########################################
+    # External Modules
+    ##########################################
+
+    from flask import Flask
+    from flask_cors import CORS
+    from flask_talisman import Talisman
+
+    from api import exception_views
+    from api.messages import messages_views
+    from api.db_interaction import db_interaction_views
+    from api.security.auth0_service import auth0_service
+
+    from common.utils import safe_get_env_var
+
+
+    def create_app():
+        ##########################################
+        # Environment Variables
+        ##########################################
+        client_origin_url = safe_get_env_var("CLIENT_ORIGIN_URL")
+        auth0_audience = safe_get_env_var("AUTH0_AUDIENCE")
+        auth0_domain = safe_get_env_var("AUTH0_DOMAIN")
+
+        ##########################################
+        # Flask App Instance
+        ##########################################
+
+        app = Flask(__name__, instance_relative_config=True)
+
+        ##########################################
+        # HTTP Security Headers
+        ##########################################
+
+        csp = {"default-src": ["'self'"], "frame-ancestors": ["'none'"]}
+
+        Talisman(
+            app,
+            force_https=False,
+            frame_options="DENY",
+            content_security_policy=csp,
+            referrer_policy="no-referrer",
+            x_xss_protection=False,
+            x_content_type_options=True,
+        )
+
+        auth0_service.initialize(auth0_domain, auth0_audience)
+
+        @app.after_request
+        def add_headers(response):
+            response.headers["X-XSS-Protection"] = "0"
+            response.headers["Cache-Control"] = "no-store, max-age=0, must-revalidate"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+            response.headers["Content-Type"] = "application/json; charset=utf-8"
+            response.headers["Strict-Transport-Security"] = (
+                "max-age=31536000; includeSubDomains"
+            )
+            return response
+
+        ##########################################
+        # CORS
+        ##########################################
+
+        CORS(
+            app,
+            resources={r"/api/*": {"origins": "*"}},
+            allow_headers=["Authorization", "Content-Type"],
+            methods=["GET", "POST"],
+            max_age=86400,
+        )
+
+        ##########################################
+        # Blueprint Registration
+        ##########################################
+
+        app.register_blueprint(messages_views.bp)
+        app.register_blueprint(db_interaction_views.bp)
+        app.register_blueprint(exception_views.bp)
+
+        return app
+  exception_views.py: |
+    from flask import (
+        Blueprint, request, jsonify
+    )
+    from werkzeug import exceptions
+
+    bp_name = 'exceptions'
+    bp = Blueprint(bp_name, __name__)
+
+
+    @bp.app_errorhandler(exceptions.InternalServerError)
+    def _handle_internal_server_error(ex):
+        if request.path.startswith('/api/'):
+            return jsonify(message=str(ex)), ex.code
+        else:
+            return ex
+
+
+    @bp.app_errorhandler(exceptions.NotFound)
+    def _handle_not_found_error(ex):
+        if request.path.startswith('/api/'):
+            return {"message": "Not Found"}, ex.code
+        else:
+            return ex
+  utils.py: |-
+    from flask import jsonify, abort
+
+
+    def json_abort(status_code, data=None):
+        response = jsonify(data)
+        response.status_code = status_code
+        abort(response)
+  wsgi.py: |
+    from api import create_app
+
+    app = create_app()
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: flask-api
+  name: flask-api-cm1

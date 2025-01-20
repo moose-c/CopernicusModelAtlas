@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 
-import { NavBar } from "../components/navigation/nav-bar";
+import { NavBar } from "../components/nav-bar";
 import { PageLayout } from "../components/page-layout";
 
 export const CallbackPage = () => {

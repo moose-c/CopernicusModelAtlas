@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  entrypoint.sh: |-
+    #!/bin/bash
+
+    # Ensure directories are writable
+    npm install -g serve
+
+    serve -s dist -l 4000
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: frontend-react
+  name: frontend-react-cm0

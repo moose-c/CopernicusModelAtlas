@@ -1,7 +1,7 @@
-import { Button } from "../buttons/button";
+import { Button } from "./button";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { NavBarTab } from "./desktop/nav-bar-tab";
+import { NavBarTab } from "./nav-bar-tab";
 
 export const NavBar = () => {
   const { user, isAuthenticated } = useAuth0();

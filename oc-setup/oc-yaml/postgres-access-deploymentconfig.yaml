@@ -1,0 +1,78 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    io.kompose.service: postgres-access
+  name: postgres-access
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: postgres-access
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: postgres-access
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_HOST
+                  name: postgres-access-env
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_NAME
+                  name: postgres-access-env
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PASSWORD
+                  name: postgres-access-env
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_PORT
+                  name: postgres-access-env
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  key: DB_USERNAME
+                  name: postgres-access-env
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRESQL_PASSWORD
+                  name: postgres-access-env
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: postgres-access-env
+          image: ' '
+          name: postgres-access
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /scripts
+              name: postgres-access-cm0
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: postgres-access-cm0
+          name: postgres-access-cm0
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - postgres-access
+        from:
+          kind: ImageStreamTag
+          name: postgres-access:latest
+      type: ImageChange

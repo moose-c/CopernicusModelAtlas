@@ -1,4 +1,4 @@
-import { NavBar } from "./navigation/nav-bar";
+import { NavBar } from "./nav-bar";
 import { PageFooter } from "./page-footer";
 
 export const PageLayout = ({ children }) => {

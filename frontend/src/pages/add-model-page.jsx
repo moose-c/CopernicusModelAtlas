@@ -6,7 +6,7 @@ import { ExamplePopup } from "../components/form-elements";
 
 import { postModel } from "../services/message.service";
 
-import "../styles/components/form.css";
+import "../styles/form.css";
 
 export const AddModelPage = () => {
   const [examplePopups, setExamplePopups] = useState(Array(6).fill(false));

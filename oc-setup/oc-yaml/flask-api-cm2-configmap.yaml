@@ -1,0 +1,79 @@
+apiVersion: v1
+data:
+  __init__.py: ""
+  db_interaction_service.py: |
+    from common.utils import safe_get_env_var
+    import psycopg2
+    from flask import request, jsonify
+
+
+    def db_connection():
+        conn = psycopg2.connect(
+            dbname=safe_get_env_var("PGDATABASE"),
+            user=safe_get_env_var("PGUSER"),
+            password=safe_get_env_var("PGPASSWORD"),
+            host=safe_get_env_var("PGHOST"),
+            port=safe_get_env_var("PGPORT"),
+            sslmode=safe_get_env_var("PGUSER"),
+        )
+        return conn
+
+
+    def get_models():
+        conn = db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT name, model FROM modellers;")
+        modelList = cur.fetchall()
+        cur.close()
+        conn.close()
+        return jsonify(modelList)
+
+
+    def post_model():
+        try:
+            data = request.get_json()
+            name = data["name"]
+            model = data["model"]
+            print("inside")
+
+            conn = db_connection()
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO modellers (name, model) VALUES (%s, %s)", (name, model)
+            )
+            conn.commit()
+            cur.close()
+            conn.close()
+
+            return (
+                jsonify(
+                    {"message": "Model added successfully", "name": name, "model": model}
+                ),
+                201,
+            )
+        except Exception as e:
+            print("out")
+            return jsonify({"error": "Failed to add model", "details": str(e)}), 400
+  db_interaction_views.py: |
+    from flask import Blueprint
+
+    from api.db_interaction.db_interaction_service import get_models, post_model
+
+    bp_name = "api-models"
+    bp_url_prefix = "/api/models"
+    bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
+
+
+    @bp.route("/get")
+    def get():
+        return get_models()
+
+
+    @bp.route("/post", methods=(["POST"]))
+    def post():
+        return post_model()
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: flask-api
+  name: flask-api-cm2
