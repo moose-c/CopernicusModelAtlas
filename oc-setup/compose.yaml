@@ -3,9 +3,9 @@ services:
     image: bitnami/postgresql:latest
     env_file: ../database/.env
     volumes:
-      - ../database/scripts:/scripts  
+      - ../database/scripts:/scripts
     ports:
-      - "5433:5432" 
+      - "5433:5432"
 
   flask-api:
     image: python:3.9.2-slim-buster
@@ -21,10 +21,12 @@ services:
     env_file: ../api/.env
     ports:
       - "8080:8080"
-    entrypoint: ["/bin/bash", "/entrypoint.sh"]  # Set entrypoint to the script
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
 
   frontend-react:
     image: node:16.15
+    labels:
+      kompose.volume.type: hostPath
     volumes:
       - ../frontend/entrypoint.sh:/entrypoint.sh
       - ../frontend/dist/index.html:/dist/index.html
@@ -33,9 +35,8 @@ services:
       - ../frontend/dist/assets/fonts/Open_Sans:/dist/assets/fonts/Open_Sans
       - ../frontend/dist/assets/fonts/Open_Sans/static:/dist/assets/fonts/Open_Sans/static
     env_file:
-      - ../frontend/.env/
+      - ../frontend/.env  
     ports:
       - "4000:4000"
-    entrypoint: ["/bin/bash", "/entrypoint.sh"] 
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
 
-    

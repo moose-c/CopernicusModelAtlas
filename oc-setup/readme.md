@@ -10,13 +10,14 @@ oc delete -f ./oc-yaml
 ---
 Setting up local postgress container:
 docker-compose up postgres-access
-docker exec -it 3275a19f1b3d /bin/bash
+docker exec -it 42ace78c30e7 /bin/bash
 kompose --provider openshift --file compose.yaml --out ./oc-yaml convert 
 
 and now seeing if this also works from the compose.yaml to openshift:
-oc create -f ./oc-yaml
-oc logs postgres-1-f6ndf
-oc exec -it postgres-access-1-bfr97 -- /bin/bash
+oc create -f ./oc-yaml (IP adress seems to be random from 1/511, and in need 1/255, so retry?)
+oc logs access-1-l9849
+oc exec -it postgres-access-1-hccfc -- /bin/bash
+psql "host=psql03.its.uu.nl port=5432 user=geo-prd-copernicus-model-atlas dbname=geo-prd-copernicus-model-atlas sslmode=require"
 ---
 ---
 Setting up local flask:
@@ -27,7 +28,7 @@ kompose --provider openshift --file compose.yaml --out ./oc-yaml convert
 and now seeing if this also works from the compose.yaml to openshift:
 oc create -f ./oc-yaml
 oc logs flask-api-1-spvtp
-oc exec -it postgres-1-f6ndf -- /bin/bash
+oc exec -it postgres-access-1-hccfc -- /bin/bash
 
 and adding a route as usual.
 curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public

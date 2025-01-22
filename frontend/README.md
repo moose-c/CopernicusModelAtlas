@@ -9,3 +9,6 @@ RBAC for pages was configured following this: https://www.youtube.com/watch?v=yu
 # Building
 npm run build
 
+oc new-app registry.access.redhat.com/ubi8/nodejs-16~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name frontend --context-dir frontend
+oc delete all -l app=frontend
+

@@ -57,45 +57,37 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /entrypoint.sh
-              name: frontend-react-cm0
-              subPath: entrypoint.sh
+              name: frontend-react-hostpath0
             - mountPath: /dist/index.html
-              name: frontend-react-cm1
-              subPath: index.html
+              name: frontend-react-hostpath1
             - mountPath: /dist/assets/images
-              name: frontend-react-cm2
+              name: frontend-react-hostpath2
             - mountPath: /dist/assets/fonts/Merriweather
-              name: frontend-react-cm3
+              name: frontend-react-hostpath3
             - mountPath: /dist/assets/fonts/Open_Sans
-              name: frontend-react-cm4
+              name: frontend-react-hostpath4
             - mountPath: /dist/assets/fonts/Open_Sans/static
-              name: frontend-react-cm5
+              name: frontend-react-hostpath5
       restartPolicy: Always
       volumes:
-        - configMap:
-            items:
-              - key: entrypoint.sh
-                path: entrypoint.sh
-            name: frontend-react-cm0
-          name: frontend-react-cm0
-        - configMap:
-            items:
-              - key: index.html
-                path: index.html
-            name: frontend-react-cm1
-          name: frontend-react-cm1
-        - configMap:
-            name: frontend-react-cm2
-          name: frontend-react-cm2
-        - configMap:
-            name: frontend-react-cm3
-          name: frontend-react-cm3
-        - configMap:
-            name: frontend-react-cm4
-          name: frontend-react-cm4
-        - configMap:
-            name: frontend-react-cm5
-          name: frontend-react-cm5
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\entrypoint.sh
+          name: frontend-react-hostpath0
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\dist\index.html
+          name: frontend-react-hostpath1
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\dist\assets\images
+          name: frontend-react-hostpath2
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\dist\assets\fonts\Merriweather
+          name: frontend-react-hostpath3
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\dist\assets\fonts\Open_Sans
+          name: frontend-react-hostpath4
+        - hostPath:
+            path: C:\Users\moosc\Documents\3) Werk\CopernicusModelsOverview\Phase 4 Dev\application\frontend\dist\assets\fonts\Open_Sans\static
+          name: frontend-react-hostpath5
   test: false
   triggers:
     - type: ConfigChange
