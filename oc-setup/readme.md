@@ -29,8 +29,9 @@ kompose --provider openshift --file compose.yaml --out ./oc-yaml convert
 and now seeing if this also works from the compose.yaml to openshift:
 oc create -f ./oc-yaml
 oc logs flask-api-1-spvtp
-oc exec -it flask-api-1-2nm68 -- /bin/bash
+oc exec -it flask-api-1-z55vd -- /bin/bash
 add db password Secret, or enter manually
+oc logs flask-api-1-z55vd
 
 curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
 ---
@@ -40,8 +41,8 @@ Setting up local frontend:
 npm run build
 git commit
 
-oc get builds
-oc delete build frontend-
 oc start-build frontend
+oc delete build frontend-n-1
 oc get builds
 oc rollout restart deployment/frontend
+oc exec -it frontend-76bb4bcc84-777ld -- /bin/bash
