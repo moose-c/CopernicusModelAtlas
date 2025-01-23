@@ -38,3 +38,5 @@ oc apply -f ./frontend-deployment.yaml
 del frontend-deployment.yaml
 
 oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest
+
+oc rollout restart deployment/frontend -n geo-acc-modelatlas
