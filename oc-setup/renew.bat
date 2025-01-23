@@ -29,8 +29,8 @@ oc start-build frontend
 rem Wait for 1 minute (use timeout instead of sleep)
 call timeout /t 3
 
-echo 'this is reached'
-rem Set the image for the frontend deployment
-oc get deployment frontend -n geo-acc-modelatlas -o yaml > frontend-deployment.yaml
-oc delete -f ./frontend-deployment.yaml
-oc apply -f ./frontend-deployment.yaml
+@REM rem Set the image for the frontend deployment
+@REM oc get deployment frontend -n geo-acc-modelatlas -o yaml > frontend-deployment.yaml
+@REM oc delete -f ./frontend-deployment.yaml
+@REM oc apply -f ./frontend-deployment.yaml
+@REM del frontend-deployment.yaml
