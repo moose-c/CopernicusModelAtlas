@@ -12,13 +12,14 @@ rem Navigate to frontend and build the project
 cd ../frontend
 call npm run build
 rem Check if the build command was successful
-cd ../oc-setup
+cd ..
 
 rem Commit and push changes
 git add .
 git commit -m "new build"
 git push
 
+cd oc-setup
 @REM rem Delete all OpenShift builds
 @REM oc delete builds --all -n geo-acc-modelatlas
 

@@ -2,7 +2,7 @@ from api.messages.message import Message
 
 
 def get_public_message():
-    return Message("This is a public messag.")
+    return Message("This is a public message.")
 
 
 def get_protected_message():
