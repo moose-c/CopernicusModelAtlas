@@ -6,6 +6,7 @@ services:
       - ../database/scripts:/scripts
     ports:
       - "5433:5432"
+    command: ["sleep", "infinity"]
 
   flask-api:
     image: python:3.9.2-slim-buster

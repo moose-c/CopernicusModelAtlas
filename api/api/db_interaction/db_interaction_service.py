@@ -26,24 +26,24 @@ def get_models():
 
 
 def post_model():
+    print("post model called")
     try:
         data = request.get_json()
-        name = data["name"]
-        model = data["model"]
-        print("inside")
+        print(data)
 
         conn = db_connection()
         cur = conn.cursor()
         cur.execute(
-            "INSERT INTO modellers (name, model) VALUES (%s, %s)", (name, model)
+            "INSERT INTO modellers (modelName) VALUES (%s)", (data["modelName"])
         )
         conn.commit()
         cur.close()
         conn.close()
+        print("succesfully posted to db")
 
         return (
             jsonify(
-                {"message": "Model added successfully", "name": name, "model": model}
+                {"message": "Model added successfully", "modelName": data["modelName"]}
             ),
             201,
         )

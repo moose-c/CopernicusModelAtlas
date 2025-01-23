@@ -1,5 +1,5 @@
 -- init_script.sql
-CREATE TABLE example_table (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100)
+CREATE TABLE models (
+  id SERIAL PRIMARY KEY, 
+  model_name TEXT    
 );

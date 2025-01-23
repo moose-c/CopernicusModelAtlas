@@ -3,10 +3,9 @@ import axios from "axios";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
-export const postModel = async (modellerInfo) => {
+export const postModel = async (modelData) => {
   const url = `${apiServerUrl}/api/models/post`
-  console.log(modellerInfo)
-  axios.post(url, modellerInfo)
+  axios.post(url, modelData)
 }
 
 export const getModels = async () => {
@@ -27,6 +26,7 @@ export const getModels = async () => {
 };
 
 export const getPublicResource = async () => {
+  console.log(apiServerUrl)
   const config = {
     url: `${apiServerUrl}/api/messages/public`,
     method: "GET",

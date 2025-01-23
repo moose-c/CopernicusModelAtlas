@@ -16,31 +16,31 @@ spec:
         io.kompose.service: postgres-access
     spec:
       containers:
-        - env:
-            - name: DB_HOST
+        - args:
+            - sleep
+            - infinity
+          env:
+            - name: PGDATABASE
               valueFrom:
                 configMapKeyRef:
-                  key: DB_HOST
+                  key: PGDATABASE
                   name: postgres-access-env
-            - name: DB_NAME
+            - name: PGHOST
               valueFrom:
                 configMapKeyRef:
-                  key: DB_NAME
+                  key: PGHOST
                   name: postgres-access-env
-            - name: DB_PASSWORD
+            - name: PGPASSWORD
+              value: /run/secrets/db-password
+            - name: PGPORT
               valueFrom:
                 configMapKeyRef:
-                  key: DB_PASSWORD
+                  key: PGPORT
                   name: postgres-access-env
-            - name: DB_PORT
+            - name: PGUSER
               valueFrom:
                 configMapKeyRef:
-                  key: DB_PORT
-                  name: postgres-access-env
-            - name: DB_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  key: DB_USERNAME
+                  key: PGUSER
                   name: postgres-access-env
             - name: POSTGRESQL_PASSWORD
               valueFrom:
@@ -58,10 +58,19 @@ spec:
             - containerPort: 5432
               protocol: TCP
           volumeMounts:
+            - mountPath: /run/secrets
+              name: db-password
+              subPath: db-password
             - mountPath: /scripts
               name: postgres-access-cm0
       restartPolicy: Always
       volumes:
+        - name: db-password
+          secret:
+            items:
+              - key: db-password
+                path: db-password
+            secretName: db-password
         - configMap:
             name: postgres-access-cm0
           name: postgres-access-cm0

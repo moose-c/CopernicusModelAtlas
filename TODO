@@ -5,6 +5,8 @@ frontend:
 - check form on:
   - required fields are filled out.
   - entered files are correct
+- post form:
+  - also give the user to the api.
 - post fill out for modeller:
   - allow to submit and preview
   - allow to submit and enter new model
@@ -17,5 +19,5 @@ api:
 # - alternative login...
 
 database:
-- create models table
+- how to utilize secrets from docker-compose
 # - create user table maybe

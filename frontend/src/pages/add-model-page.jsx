@@ -93,7 +93,6 @@ export const AddModelPage = () => {
     } else if (check) {
       // perform more checks
     }
-    check = false;
     return check;
   };
 
@@ -102,13 +101,13 @@ export const AddModelPage = () => {
 
     event.preventDefault();
 
-    const check = performChecks(formData, false);
+    let check = performChecks(formData, false);
 
     if (check) {
       const doPost = async (formData) => {
         const { data, error } = postModel(formData);
         console.log(data, error);
-        setFormData(blankForm);
+        // setFormData(blankForm);
       };
       doPost(formData);
       return () => {
