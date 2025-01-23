@@ -41,9 +41,10 @@ Setting up local frontend:
 npm run build
 git commit
 
+oc delete builds --all -n geo-acc-modelatlas
 oc start-build frontend
-oc delete build frontend-n-1
 oc get builds
-oc scale deployment/frontend --replicas=0
-oc scale deployment/frontend --replicas=1
+oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
+
+
 oc exec -it frontend-76bb4bcc84-777ld -- /bin/bash
