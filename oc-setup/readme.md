@@ -44,5 +44,6 @@ git commit
 oc start-build frontend
 oc delete build frontend-n-1
 oc get builds
-oc rollout restart deployment/frontend
+oc scale deployment/frontend --replicas=0
+oc scale deployment/frontend --replicas=1
 oc exec -it frontend-76bb4bcc84-777ld -- /bin/bash
