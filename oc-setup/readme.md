@@ -16,7 +16,7 @@ kompose --provider openshift --file compose.yaml --out ./oc-yaml convert
 and now seeing if this also works from the compose.yaml to openshift:
 oc create -f ./oc-yaml (IP adress seems to be random from 1/511, and in need 1/255, so retry?)
 oc logs access-1-l9849
-oc exec -it postgres-access-1-hccfc -- /bin/bash
+oc exec -it postgres-access-1-xr2gt -- /bin/bash
 psql "host=psql03.its.uu.nl port=5432 user=geo-prd-copernicus-model-atlas dbname=geo-prd-copernicus-model-atlas sslmode=require"
 ---
 ---
@@ -35,10 +35,4 @@ curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
 ---
 ---
 Setting up local frontend:
-docker-compose up frontend-react
-docker exec -it 11492a5cb4e6 /bin/bash
-kompose --provider openshift --file compose.yaml --out ./oc-yaml convert 
-
-and now seeing if this also works from the compose.yaml to openshift:
-oc create -f ./oc-yaml
-shit, no files are too long..
+need to construct a PV and PVC from dist?

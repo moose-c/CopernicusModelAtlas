@@ -47,20 +47,74 @@ export const AddModelPage = () => {
   };
   const [formData, setFormData] = useState(blankForm);
 
+  const performChecks = (formData, performAll = true) => {
+    let check = true;
+    if (performAll) {
+      if (check === true) {
+        // Check if all mandatory fields are filled out
+        const mandatoryFields = [
+          "modelName",
+          "modellers[0].name",
+          "description",
+          "explanFig",
+          "theoryText",
+          "resText",
+          "boxes[0].title",
+          "boxes[0].figTitle",
+          "boxes[0].fig",
+          "boxes[0].desc",
+          "colofonCite",
+          "colofonLicence",
+        ];
+        mandatoryFields.some((mandField) => {
+          const value = mandField
+            .split(/[\.\[\]\'\"]/) // Split the path
+            .filter(Boolean) // Remove empty strings
+            .reduce((acc, key) => {
+              return acc && acc[key] !== undefined ? acc[key] : undefined;
+            }, formData); // Start reducing with formData as the base
+          console.log(value);
+
+          if (value === "") {
+            // ideally, the alert point to the empty field, flashing it red or something.
+            alert(`${mandField} is empty!`);
+            check = false;
+            return true;
+          }
+          // erronious value is empty string
+        });
+      }
+    }
+
+    // checking whether the files are in the correct format. only for the boxes, and then only .csv, .tif, .geojson
+    // implement later
+    if (check) {
+      console.log("you dont get here right");
+    } else if (check) {
+      // perform more checks
+    }
+    check = false;
+    return check;
+  };
+
   const handleSubmit = (event) => {
     let isMounted = true;
 
     event.preventDefault();
 
-    const doPost = async (formData) => {
-      const { data, error } = postModel(formData);
-      console.log(data, error);
-      setFormData(blankForm);
-    };
-    doPost(formData);
-    return () => {
-      isMounted = false;
-    };
+    const check = performChecks(formData, false);
+
+    if (check) {
+      const doPost = async (formData) => {
+        const { data, error } = postModel(formData);
+        console.log(data, error);
+        setFormData(blankForm);
+      };
+      doPost(formData);
+      return () => {
+        isMounted = false;
+      };
+    }
   };
 
   return (

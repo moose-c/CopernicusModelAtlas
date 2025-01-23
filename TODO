@@ -1,4 +1,7 @@
 frontend:
+- Fine tune form:
+  - browse should have some indication that something is entered.
+  - 
 - check form on:
   - required fields are filled out.
   - entered files are correct
