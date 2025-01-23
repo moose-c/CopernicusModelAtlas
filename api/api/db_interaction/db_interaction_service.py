@@ -10,7 +10,7 @@ def db_connection():
         password=safe_get_env_var("PGPASSWORD"),
         host=safe_get_env_var("PGHOST"),
         port=safe_get_env_var("PGPORT"),
-        sslmode=safe_get_env_var("PGUSER"),
+        sslmode=safe_get_env_var("PGSSLMODE"),
     )
     return conn
 
