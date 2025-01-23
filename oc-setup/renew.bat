@@ -11,7 +11,6 @@ oc create -f ./oc-yaml
 rem Navigate to frontend and build the project
 cd ../frontend
 call npm run build
-rem Check if the build command was successful
 cd ..
 
 rem Commit and push changes
@@ -32,4 +31,6 @@ call timeout /t 3
 
 echo 'this is reached'
 rem Set the image for the frontend deployment
-oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
+oc get deployment frontend -n geo-acc-modelatlas -o yaml > frontend-deployment.yaml
+oc delete -f ./frontend-deployment.yaml
+oc apply -f ./frontend-deployment.yaml
