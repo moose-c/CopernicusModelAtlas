@@ -1,0 +1,18 @@
+frontend:
+- check form on:
+  - required fields are filled out.
+  - entered files are correct
+- post fill out for modeller:
+  - allow to submit and preview
+  - allow to submit and enter new model
+- non modeller user views:
+  - view list of available models
+  - enter each page
+
+api:
+- handle form submit
+# - alternative login...
+
+database:
+- create models table
+# - create user table maybe
