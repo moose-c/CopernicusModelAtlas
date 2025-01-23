@@ -1,8 +1,0 @@
-apiVersion: v1
-data:
-  init_script.sql: "-- init_script.sql\nCREATE TABLE models (\n  id SERIAL PRIMARY KEY, \n  model_name TEXT    \n);\n"
-kind: ConfigMap
-metadata:
-  labels:
-    io.kompose.service: postgres-access
-  name: postgres-access-cm0

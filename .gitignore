@@ -1,4 +1,5 @@
 secrets/
+oc-yaml/
 .env
 secret-Readme.md
 oc.*
