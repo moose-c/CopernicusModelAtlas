@@ -29,4 +29,12 @@ oc start-build frontend
 rem Wait for 1 minute (use timeout instead of sleep)
 call timeout /t 60
 
-oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
+rem Get the current deployment YAML
+oc get deployment frontend -o yaml > frontend-deployment.yaml
+
+rem Delete and re-apply the YAML file to update deployment
+oc delete -f ./frontend-deployment.yaml
+oc apply -f ./frontend-deployment.yaml
+del frontend-deployment.yaml
+
+oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest
