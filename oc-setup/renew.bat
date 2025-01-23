@@ -19,14 +19,14 @@ git add .
 git commit -m "new build"
 git push
 
-rem Delete all OpenShift builds
-oc delete builds --all -n geo-acc-modelatlas
+@REM rem Delete all OpenShift builds
+@REM oc delete builds --all -n geo-acc-modelatlas
 
-rem Start the frontend build
-oc start-build frontend
+@REM rem Start the frontend build
+@REM oc start-build frontend
 
-rem Wait for 1 minute (use timeout instead of sleep)
-call timeout /t 60
+@REM rem Wait for 1 minute (use timeout instead of sleep)
+@REM call timeout /t 60
 
-rem Set the image for the frontend deployment
-oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
+@REM rem Set the image for the frontend deployment
+@REM oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
