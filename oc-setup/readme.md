@@ -41,18 +41,8 @@ Setting up local frontend:
 npm run build
 git commit
 
-oc delete builds --all -n geo-acc-modelatlas
-oc start-build frontend
-oc get builds
+oc delete all -l app=frontend
 
-oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest -n geo-acc-modelatlas
-oc tag image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest geo-acc-modelatlas/frontend:latest
-oc rollout restart deployment/frontend -n geo-acc-modelatlas
-oc delete pods -l app=frontend -n geo-acc-modelatlas
+oc new-app registry.access.redhat.com/ubi8/nodejs-16~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name frontend --context-dir frontend 
 
-oc get deployment frontend -n geo-acc-modelatlas -o yaml > frontend-deployment.yaml
-oc delete -f ./frontend-deployment.yaml
-oc apply -f ./frontend-deployment.yaml
-
-
-oc exec -it frontend-76bb4bcc84-777ld -- /bin/bash
+oc expose service/frontend

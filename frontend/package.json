@@ -14,10 +14,10 @@
     "serve": "^14.2.4"
   },
   "scripts": {
-    "start": "vite",
+    "local": "vite",
+    "start": "serve dist -s -p 8080",
     "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "serve dist -s -p 8080"
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [

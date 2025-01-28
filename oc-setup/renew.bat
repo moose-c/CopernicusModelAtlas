@@ -20,21 +20,6 @@ git push
 
 cd oc-setup
 
-rem Delete all OpenShift builds
-oc delete builds --all -n geo-acc-modelatlas
+oc delete all -l app=frontend
 
-rem Start the frontend build
-oc start-build frontend
-
-rem Wait for 1 minute (use timeout instead of sleep)
-call timeout /t 60
-
-rem Get the current deployment YAML
-oc get deployment frontend -o yaml > frontend-deployment.yaml
-
-rem Delete and re-apply the YAML file to update deployment
-oc delete deployment frontend 
-oc apply -f ./frontend-deployment.yaml
-del frontend-deployment.yaml
-
-oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest
+oc new-app registry.access.redhat.com/ubi8/nodejs-16~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name frontend --context-dir frontend 
