@@ -1,3 +1,3 @@
 @echo off
 cd frontend
-npm start
+npm run local

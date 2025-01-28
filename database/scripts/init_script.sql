@@ -9,7 +9,7 @@ CREATE TABLE models (
   modeller_name TEXT,
   modeller_url TEXT,
   icon TEXT,
-  desc TEXT,
+  descr TEXT,
   explanation_figure TEXT,
   button_text TEXT,
   button_url TEXT

@@ -30,23 +30,44 @@ def post_model():
     try:
         data = request.get_json()
         print(data)
+        columns = [
+            "model_name",
+            "keywords",
+            "modeller_name",
+            "modeller_url",
+            "icon",
+            "descr",
+            "explanation_figure",
+            "button_text",
+            "button_url",
+        ]
+
+        # Create a string with the correct number of placeholders (%s)
+        placeholders = ", ".join(["%s"] * len(columns))
+
+        # Prepare the values in the same order as the columns
+        values = (
+            data["modelName"],
+            data["keywords"][0],
+            data["modellers"][0]["name"],
+            data["modellers"][0]["url"],
+            data["icon"],
+            data["descr"],
+            data["explanFig"],
+            data["links"][0]["buttonText"],
+            data["links"][0]["url"],
+        )
 
         conn = db_connection()
         cur = conn.cursor()
-        cur.execute(
-            "INSERT INTO models VALUES ({})'.format(', '.join('%s' for s in range(9)))",
-            (
-                data["modelName"],
-                data["keywords"],
-                data["modellers"][0]["name"],
-                data["modellers"][0]["url"],
-                data["icon"],
-                data["descr"],
-                data["explanFig"],
-                data["links"][0]["buttonText"],
-                data["links"][0]["url"],
-            ),
-        )
+        # Define the columns and data dynamically
+
+        # Create the dynamic query
+        query = f"INSERT INTO models ({', '.join(columns)}) VALUES ({placeholders})"
+
+        # Execute the query with the data values
+        cur.execute(query, values)
+
         conn.commit()
         cur.close()
         conn.close()
