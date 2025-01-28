@@ -1,26 +1,30 @@
 import { PageLayout } from "../components/page-layout";
 import { useState, useEffect } from "react";
-import { CodeSnippet } from "../components/code-snippet";
-import { getModels } from "../services/message.service";
+import { ModelCards } from "../components/model-cards";
+import { getAllModels } from "../services/message.service";
 import Multiselect from "multiselect-react-dropdown";
 import { Searchbar } from "../components/searchbar";
 import { keywords } from "../util/globalVars";
 
 export const HomePage = () => {
-  const [models, setModels] = useState("");
-  const env = import.meta.env.VITE_APP_TRIAL_ENV;
+  const [models, setModels] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
     const getMessage = async () => {
-      const { data, error } = await getModels();
+      const { data, error } = await getAllModels();
 
       if (!isMounted) {
         return;
       }
 
       if (data) {
-        setModels(JSON.stringify(data, null, 2));
+        setModels(new Array(data)[0]);
+        const modelIds = [];
+        data.forEach((model) => {
+          modelIds.push(model[0]);
+        });
+        console.log(modelIds);
       }
 
       if (error) {
@@ -37,8 +41,8 @@ export const HomePage = () => {
 
   return (
     <PageLayout>
-      <div className="content-layout">
-        <h1>Model atlas perfect?</h1>
+      <div className="content-layout flex gap-5">
+        <h1>Model atlas</h1>
         <Searchbar />
         <Multiselect
           isObject={false}
@@ -50,7 +54,7 @@ export const HomePage = () => {
           placeholder="Select Keywords"
           className="dd w-fit"
         />
-        <CodeSnippet title="Models" code={models} />
+        <ModelCards models={models} />
       </div>
     </PageLayout>
   );

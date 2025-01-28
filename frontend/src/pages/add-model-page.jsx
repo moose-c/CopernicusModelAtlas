@@ -3,6 +3,7 @@ import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
 import { FormContent } from "../components/form-content";
 import { ExamplePopup } from "../components/form-elements";
+import { blankForm } from "../util/globalVars";
 
 import { postModel } from "../services/message.service";
 
@@ -17,34 +18,6 @@ export const AddModelPage = () => {
     );
   };
 
-  const blankBox = {
-    title: "",
-    figTitle: "",
-    fig: "",
-    descr: "",
-  };
-
-  const blankForm = {
-    modelName: "",
-    keywords: [],
-    modellers: [{ name: "", url: "" }],
-    icon: "",
-    descr: "",
-    explanFig: "",
-    links: [{ buttonText: "", url: "" }],
-    theoryText: "",
-    theoryFig: "",
-    theoryFigDesc: "",
-    resText: "",
-    resFig: "",
-    resFigDesc: "",
-    boxes: [blankBox],
-    methodsDesc: "",
-    methodsFile: "",
-    colofonCite: "",
-    colofonLicence: "",
-    colofonAddition: "",
-  };
   const [formData, setFormData] = useState(blankForm);
 
   const performChecks = (formData, performAll = true) => {

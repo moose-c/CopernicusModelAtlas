@@ -14,52 +14,25 @@ export const FormContent = ({
   const [nbLinks, setNbLinks] = useState(1);
   const [nbBoxes, setNbBoxes] = useState(1);
 
-  const blankBox = {
-    title: "",
-    figTitle: "",
-    fig: "",
-    descr: "",
-  };
-
-  const handleChange = (e, q, addVar1 = undefined, addVar2 = undefined) => {
-    if (
-      [
-        "modelName",
-        "descr",
-        "theoryText",
-        "theoryFigDesc",
-        "resText",
-        "resFigDesc",
-        "methodsDesc",
-        "colofonCite",
-        "colofonLicence",
-        "colofonAddition",
-      ].includes(q)
-    ) {
-      setFormData((prevState) => ({
-        ...prevState,
-        [q]: e.target.value,
-      }));
-    } else if (q === "keywords") {
+  const handleChange = (e, q) => {
+    if (q === "keywords") {
       setFormData((prevState) => ({
         ...prevState,
         keywords: e,
       }));
-    } else if (["modellers", "links", "boxes"].includes(q)) {
-      const newValue = addVar2 === "fig" ? e.target.files[0] : e.target.value;
-      setFormData((prevState) => ({
-        ...prevState,
-        [q]: prevState[q].map((entry, index) =>
-          index === addVar1 ? { ...entry, [addVar2]: newValue } : entry
-        ),
-      }));
     } else if (
-      ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q)
+      ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q) ||
+      q.includes("boxfig")
     ) {
       const file = e.target.files[0];
       setFormData((prevState) => ({
         ...prevState,
         [q]: file,
+      }));
+    } else {
+      setFormData((prevState) => ({
+        ...prevState,
+        [q]: e.target.value,
       }));
     }
   };
@@ -68,19 +41,28 @@ export const FormContent = ({
     if (add) {
       if (nbModellers < 5) {
         setNbModellers((prevState) => prevState + 1); // Increment the number of modellers
-        setFormData((prevState) => ({
-          ...prevState,
-          modellers: [...prevState.modellers, { name: "", url: "" }],
-        }));
       } else {
         alert("Only 5 modellers allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
       setNbModellers((prevState) => prevState - 1); // Increment the number of modellers
-      setFormData((prevState) => ({
-        ...prevState,
-        modellers: prevState.modellers.filter((_, index) => index !== i),
-      }));
+      setFormData((prevState) => {
+        const updatedState = { ...prevState };
+
+        // Shift modellerName and modellerUrl for all indices j > i up to 5
+        for (let j = i + 1; j <= 4; j++) {
+          updatedState[`modellerName${j - 1}`] =
+            prevState[`modellerName${j}`] || "";
+          updatedState[`modellerUrl${j - 1}`] =
+            prevState[`modellerUrl${j}`] || "";
+        }
+
+        // Clear the last modellerName and modellerUrl after the shift
+        updatedState[`modellerName4`] = "";
+        updatedState[`modellerUrl4`] = "";
+
+        return updatedState;
+      });
     }
   };
 
@@ -88,41 +70,61 @@ export const FormContent = ({
     if (add) {
       if (nbLinks < 5) {
         setNbLinks((prevState) => prevState + 1); // Increment the number of modellers
-        setFormData((prevState) => ({
-          ...prevState,
-          links: [...prevState.links, { buttonText: "", url: "" }],
-        }));
       } else {
         alert("Only 5 links allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
       setNbLinks((prevState) => prevState - 1); // Increment the number of modellers
-      setFormData((prevState) => ({
-        ...prevState,
-        links: prevState.links.filter((_, index) => index !== i),
-      }));
+      setFormData((prevState) => {
+        const updatedState = { ...prevState };
+
+        // Shift linkName and linkUrl for all indices j > i up to 5
+        for (let j = i + 1; j <= 4; j++) {
+          updatedState[`linkName${j - 1}`] = prevState[`linkName${j}`] || "";
+          updatedState[`linkUrl${j - 1}`] = prevState[`linkUrl${j}`] || "";
+        }
+
+        // Clear the last linkName and linkUrl after the shift
+        updatedState[`linkName4`] = "";
+        updatedState[`linkUrl4`] = "";
+
+        return updatedState;
+      });
     }
   };
 
   const handleChangeNbBoxes = (add = true, i = undefined) => {
     if (add) {
-      if (nbBoxes < 5) {
+      if (nbBoxes < 4) {
         setNbBoxes((prevState) => prevState + 1); // Increment the number of modellers
-        setFormData((prevState) => ({
-          ...prevState,
-          boxes: [...prevState.boxes, { ...blankBox }],
-        }));
       } else {
         alert("Only 4 boxes allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
       setNbBoxes((prevState) => prevState - 1); // Increment the number of modellers
-      setFormData((prevState) => ({
-        ...prevState,
-        boxes: prevState.boxes.filter((_, index) => index !== i),
-      }));
+      setFormData((prevState) => {
+        const updatedState = { ...prevState };
+
+        // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 5
+        for (let j = i + 1; j <= 3; j++) {
+          updatedState[`boxTitle${j - 1}`] = prevState[`boxTitle${j}`] || "";
+          updatedState[`boxFigTitle${j - 1}`] =
+            prevState[`boxFigTitle${j}`] || "";
+          updatedState[`boxfig${j - 1}`] = prevState[`boxfig${j}`] || "";
+          updatedState[`boxDescr${j - 1}`] = prevState[`boxDescr${j}`] || "";
+        }
+
+        // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
+        updatedState[`boxTitle3`] = "";
+        updatedState[`boxFigTitle3`] = "";
+        updatedState[`boxfig3`] = "";
+        updatedState[`boxDescr3`] = "";
+
+        return updatedState;
+      });
     }
   };
+
   return (
     <>
       <div className="flex flex-col gap-[25px]">
@@ -181,8 +183,8 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="Firstname Lastname"
-                    value={formData.modellers[i].name}
-                    onChange={(e) => handleChange(e, "modellers", i, "name")}
+                    value={formData[`modellerName${i}`]}
+                    onChange={(e) => handleChange(e, `modellerName${i}`)}
                   />
                 </div>
                 <p> | </p>
@@ -192,8 +194,8 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="www.firstname-lastname.org"
-                    value={formData.modellers[i].url}
-                    onChange={(e) => handleChange(e, "modellers", i, "url")}
+                    value={formData[`modellerUrl${i}`]}
+                    onChange={(e) => handleChange(e, `modellerUrl${i}`)}
                   />
                 </div>
               </div>
@@ -267,6 +269,16 @@ export const FormContent = ({
           </div>
         </div>
         <div>
+          <p>Please enter a caption for the figure uploaded above</p>
+          <input
+            className="formQAs"
+            type="text"
+            placeholder="Caption"
+            value={formData.explanFigCaption}
+            onChange={(e) => handleChange(e, "explanFigCaption")}
+          />
+        </div>
+        <div>
           <p>
             Do you want to link to other sites or files? (eg. github, dataverse,
             own page)
@@ -283,8 +295,8 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="eg. Github"
-                    value={formData.links[i].buttonText}
-                    onChange={(e) => handleChange(e, "links", i, "buttonText")}
+                    value={formData[`linkName${i}`]}
+                    onChange={(e) => handleChange(e, `linkName${i}`)}
                   />
                 </div>
 
@@ -295,8 +307,8 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="www.github.com/this-model"
-                    value={formData.links[i].url}
-                    onChange={(e) => handleChange(e, "links", i, "url")}
+                    value={formData[`linkUrl${i}`]}
+                    onChange={(e) => handleChange(e, `linkUrl${i}`)}
                   />
                 </div>
               </div>
@@ -457,16 +469,16 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="Box Title"
-                    value={formData.boxes[i].title}
-                    onChange={(e) => handleChange(e, "boxes", i, "title")}
+                    value={formData[`boxTitle${i}`]}
+                    onChange={(e) => handleChange(e, `boxTitle${i}`)}
                   />
                   <p>Description accompanying the figure{i == 0 && "*"}</p>
                   <textarea
                     className="formQAl"
                     type="text"
                     placeholder="Enter a Description"
-                    value={formData.boxes[i].descr}
-                    onChange={(e) => handleChange(e, "boxes", i, "descr")}
+                    value={formData[`boxDescr${i}`]}
+                    onChange={(e) => handleChange(e, `boxDescr${i}`)}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -475,8 +487,8 @@ export const FormContent = ({
                     className="formQAs"
                     type="text"
                     placeholder="Output Title"
-                    value={formData.boxes[i].figTitle}
-                    onChange={(e) => handleChange(e, "boxes", i, "figTitle")}
+                    value={formData[`boxFigTitle${i}`]}
+                    onChange={(e) => handleChange(e, `boxFigTitle${i}`)}
                   />
                   <p>Upload output data here{i == 0 && "*"}</p>
                   <div className="flex gap-[15px]">
@@ -484,7 +496,7 @@ export const FormContent = ({
                       type="file"
                       id={`file-upload${5 + i}`}
                       accept=".png, .csv, .tif, .geojson"
-                      onChange={(e) => handleChange(e, "boxes", i, "fig")}
+                      onChange={(e) => handleChange(e, `boxFig${i}`)}
                       className="hidden"
                     />
 

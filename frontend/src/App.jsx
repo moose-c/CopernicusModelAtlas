@@ -11,6 +11,7 @@ import { ProfilePage } from "./pages/profile-page";
 import { ProtectedPage } from "./pages/protected-page";
 import { PublicPage } from "./pages/public-page";
 import { AddModelPage } from "./pages/add-model-page";
+import { ModelPage } from "./pages/model-page";
 
 export const App = () => {
   const { isLoading } = useAuth0();
@@ -27,6 +28,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/add-model" element={<AddModelPage />} />
+      <Route path="/models/:modelId" element={<ModelPage />} />
       <Route
         path="/profile"
         element={<AuthenticationGuard component={ProfilePage} />}

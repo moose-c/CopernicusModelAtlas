@@ -19,5 +19,6 @@ api:
 # - alternative login...
 
 database:
-- how to utilize secrets from docker-compose
-# - create user table maybe
+- storing images, csv and tif is better as bytea, whilst geojson is better as jsonb
+- alternative method: storing not files but file PATHS. 
+

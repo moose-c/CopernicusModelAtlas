@@ -1,0 +1,33 @@
+import { Link } from "react-router-dom";
+
+export const ModelCards = ({ models }) => {
+  return (
+    <div className="flex flex-col justify-center">
+      {models.map((model) => (
+        <ModelCard key={model[0]} model={model} />
+      ))}
+    </div>
+  );
+};
+
+const ModelCard = ({ model }) => {
+  // Extracting the values from the model array
+  const modelName = model[1];
+  const name = model[2];
+  const desc = model[3];
+
+  return (
+    <Link
+      to={`/models/${model[0]}`}
+      className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
+    >
+      <div className="p-6">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+          {modelName}
+        </h2>
+        <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
+        <p className="text-gray-500">{desc}</p>
+      </div>
+    </Link>
+  );
+};

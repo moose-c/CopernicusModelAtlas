@@ -1,15 +1,24 @@
 from flask import Blueprint
 
-from api.db_interaction.db_interaction_service import get_models, post_model
+from api.db_interaction.db_interaction_service import (
+    get_all_models,
+    get_single_model,
+    post_model,
+)
 
 bp_name = "api-models"
 bp_url_prefix = "/api/models"
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 
 
-@bp.route("/get")
-def get():
-    return get_models()
+@bp.route("/get_all")
+def get_all():
+    return get_all_models()
+
+
+@bp.route("/get_single/<model_id>")
+def get_single(model_id):
+    return get_single_model(model_id)
 
 
 @bp.route("/post", methods=(["POST"]))
