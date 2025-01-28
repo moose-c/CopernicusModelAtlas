@@ -38,7 +38,7 @@ export const HomePage = () => {
   return (
     <PageLayout>
       <div className="content-layout">
-        <h1>Model atlas one more ....</h1>
+        <h1>Model atlas perfect?</h1>
         <Searchbar />
         <Multiselect
           isObject={false}
