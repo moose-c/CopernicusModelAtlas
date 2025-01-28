@@ -9,3 +9,6 @@ oc exec -it flask-api-1-x944729gtf -- /bin/bash
 oc logs -f flask-api-1-x9447
 
 curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
+
+$podName = (.\oc get pods --no-headers -o name | Select-String "flask-api" | Select-Object -First 1).ToString()
+.\oc logs $podName

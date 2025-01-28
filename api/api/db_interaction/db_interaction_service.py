@@ -10,7 +10,6 @@ def db_connection():
         password=safe_get_env_var("PGPASSWORD"),
         host=safe_get_env_var("PGHOST"),
         port=safe_get_env_var("PGPORT"),
-        sslmode=safe_get_env_var("PGSSLMODE"),
     )
     return conn
 
@@ -30,10 +29,12 @@ def post_model():
     try:
         data = request.get_json()
         print(data)
+        modelName = data["modelName"]
+        print(modelName)
 
         conn = db_connection()
         cur = conn.cursor()
-        cur.execute("INSERT INTO models (model_name) VALUES (%s)", (data["modelName"]))
+        cur.execute("INSERT INTO models (model_name) VALUES (%s)", (modelName))
         conn.commit()
         cur.close()
         conn.close()
@@ -46,5 +47,5 @@ def post_model():
             201,
         )
     except Exception as e:
-        print(jsonify({"error": "Failed to add model", "details": str(e)}))
+        print(f"failed to add model. reason: {str(e)}")
         return jsonify({"error": "Failed to add model", "details": str(e)}), 400

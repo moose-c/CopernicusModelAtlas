@@ -1,9 +1,9 @@
 @echo off
 REM Batch script to get logs from a specific pod while excluding a deployment pod
 
-REM Define the base name of the pods to filter and the deployment exclusion keyword
-SET POD_NAME_FILTER=flask-api
-SET EXCLUDE_DEPLOY=flask-api-1-deploy
+REM Use the first argument as the pod name filter
+SET "POD_NAME_FILTER=%1"
+SET "EXCLUDE_DEPLOY=%POD_NAME_FILTER%-1-deploy"
 
 REM Retrieve all pod names containing the filter string
 FOR /F "tokens=1" %%i IN ('oc get pods --no-headers ^| findstr %POD_NAME_FILTER%') DO (
@@ -14,8 +14,7 @@ FOR /F "tokens=1" %%i IN ('oc get pods --no-headers ^| findstr %POD_NAME_FILTER%
         echo %%i | findstr %EXCLUDE_DEPLOY% >nul
         IF ERRORLEVEL 1 (
             REM Get logs for the matching pod
-            echo Fetching logs for pod: %%i
-            oc logs -f %%i
+            oc exec -it %%i -- /bin/bash
         )
     )
 )
