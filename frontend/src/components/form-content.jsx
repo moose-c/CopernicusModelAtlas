@@ -25,7 +25,7 @@ export const FormContent = ({
     if (
       [
         "modelName",
-        "description",
+        "descr",
         "theoryText",
         "theoryFigDesc",
         "resText",
@@ -242,8 +242,8 @@ export const FormContent = ({
             className="formQAl"
             type="text"
             placeholder="Model Description"
-            value={formData.description}
-            onChange={(e) => handleChange(e, "description")}
+            value={formData.desc}
+            onChange={(e) => handleChange(e, "desc")}
           />
         </div>
         <div>

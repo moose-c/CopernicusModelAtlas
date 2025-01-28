@@ -30,12 +30,23 @@ def post_model():
     try:
         data = request.get_json()
         print(data)
-        modelName = data["modelName"]
-        print(modelName)
 
         conn = db_connection()
         cur = conn.cursor()
-        cur.execute("INSERT INTO models (model_name) VALUES (%s)", (modelName,))
+        cur.execute(
+            "INSERT INTO models VALUES ({})'.format(', '.join('%s' for s in range(9)))",
+            (
+                data["modelName"],
+                data["keywords"],
+                data["modellers"][0]["name"],
+                data["modellers"][0]["url"],
+                data["icon"],
+                data["descr"],
+                data["explanFig"],
+                data["links"][0]["buttonText"],
+                data["links"][0]["url"],
+            ),
+        )
         conn.commit()
         cur.close()
         conn.close()

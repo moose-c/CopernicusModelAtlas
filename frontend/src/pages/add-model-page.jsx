@@ -29,7 +29,7 @@ export const AddModelPage = () => {
     keywords: [],
     modellers: [{ name: "", url: "" }],
     icon: "",
-    description: "",
+    desc: "",
     explanFig: "",
     links: [{ buttonText: "", url: "" }],
     theoryText: "",
@@ -55,7 +55,7 @@ export const AddModelPage = () => {
         const mandatoryFields = [
           "modelName",
           "modellers[0].name",
-          "description",
+          "descr",
           "explanFig",
           "theoryText",
           "resText",
