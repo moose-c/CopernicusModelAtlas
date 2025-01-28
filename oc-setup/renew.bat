@@ -33,10 +33,8 @@ rem Get the current deployment YAML
 oc get deployment frontend -o yaml > frontend-deployment.yaml
 
 rem Delete and re-apply the YAML file to update deployment
-oc delete -f ./frontend-deployment.yaml
+oc delete deployment frontend 
 oc apply -f ./frontend-deployment.yaml
 del frontend-deployment.yaml
 
 oc set image deployment/frontend frontend=image-registry.openshift-image-registry.svc:5000/geo-acc-modelatlas/frontend:latest
-
-oc rollout restart deployment/frontend -n geo-acc-modelatlas
