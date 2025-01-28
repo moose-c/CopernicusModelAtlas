@@ -46,5 +46,5 @@ def post_model():
             201,
         )
     except Exception as e:
-        print("out")
+        print(jsonify({"error": "Failed to add model", "details": str(e)}))
         return jsonify({"error": "Failed to add model", "details": str(e)}), 400
