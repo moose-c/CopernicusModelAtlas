@@ -10,6 +10,7 @@ def db_connection():
         password=safe_get_env_var("PGPASSWORD"),
         host=safe_get_env_var("PGHOST"),
         port=safe_get_env_var("PGPORT"),
+        sslmode="require",
     )
     return conn
 
@@ -34,7 +35,7 @@ def post_model():
 
         conn = db_connection()
         cur = conn.cursor()
-        cur.execute("INSERT INTO models (model_name) VALUES (%s)", (modelName))
+        cur.execute("INSERT INTO models (model_name) VALUES (%s)", (modelName,))
         conn.commit()
         cur.close()
         conn.close()
