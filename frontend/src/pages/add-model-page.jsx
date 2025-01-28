@@ -21,7 +21,7 @@ export const AddModelPage = () => {
     title: "",
     figTitle: "",
     fig: "",
-    desc: "",
+    descr: "",
   };
 
   const blankForm = {
@@ -29,7 +29,7 @@ export const AddModelPage = () => {
     keywords: [],
     modellers: [{ name: "", url: "" }],
     icon: "",
-    desc: "",
+    descr: "",
     explanFig: "",
     links: [{ buttonText: "", url: "" }],
     theoryText: "",
@@ -62,7 +62,7 @@ export const AddModelPage = () => {
           "boxes[0].title",
           "boxes[0].figTitle",
           "boxes[0].fig",
-          "boxes[0].desc",
+          "boxes[0].descr",
           "colofonCite",
           "colofonLicence",
         ];

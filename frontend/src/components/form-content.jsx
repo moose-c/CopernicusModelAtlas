@@ -18,7 +18,7 @@ export const FormContent = ({
     title: "",
     figTitle: "",
     fig: "",
-    desc: "",
+    descr: "",
   };
 
   const handleChange = (e, q, addVar1 = undefined, addVar2 = undefined) => {
@@ -242,8 +242,8 @@ export const FormContent = ({
             className="formQAl"
             type="text"
             placeholder="Model Description"
-            value={formData.desc}
-            onChange={(e) => handleChange(e, "desc")}
+            value={formData.descr}
+            onChange={(e) => handleChange(e, "descr")}
           />
         </div>
         <div>
@@ -465,8 +465,8 @@ export const FormContent = ({
                     className="formQAl"
                     type="text"
                     placeholder="Enter a Description"
-                    value={formData.boxes[i].desc}
-                    onChange={(e) => handleChange(e, "boxes", i, "desc")}
+                    value={formData.boxes[i].descr}
+                    onChange={(e) => handleChange(e, "boxes", i, "descr")}
                   />
                 </div>
                 <div className="flex flex-col">

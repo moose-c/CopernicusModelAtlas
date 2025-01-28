@@ -1,3 +1,7 @@
+-- Remove the table if it already exists
+DROP TABLE IF EXISTS models;
+
+-- Create the `models` table
 CREATE TABLE models (
   id SERIAL PRIMARY KEY, 
   model_name TEXT NOT NULL,
@@ -5,7 +9,7 @@ CREATE TABLE models (
   modeller_name TEXT,
   modeller_url TEXT,
   icon TEXT,
-  descr TEXT,
+  desc TEXT,
   explanation_figure TEXT,
   button_text TEXT,
   button_url TEXT
