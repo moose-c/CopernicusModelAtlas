@@ -22,4 +22,7 @@ cd oc-setup
 
 oc delete all -l app=frontend
 
-oc new-app registry.access.redhat.com/ubi8/nodejs-16~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name frontend --context-dir frontend --env-file=./secrets/.env-frontend
+oc new-app registry.access.redhat.com/ubi8/nodejs-16~git@github.com:moose-c/CopernicusModelAtlas.git#acc --source-secret github-connection --name frontend --context-dir frontend --build-env-file=./secrets/.env-frontend
+
+timeout /t 15 /nobreak >nul
+echo Done!
