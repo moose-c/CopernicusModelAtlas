@@ -4,7 +4,7 @@ import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
 import { FormContent } from "../components/form-content";
 import { ExamplePopup } from "../components/form-elements";
-import { blankForm } from "../util/globalVars";
+import { blankForm, mandFields, fieldNameMapping } from "../util/globalVars";
 
 import { postModel } from "../services/message.service";
 
@@ -26,21 +26,8 @@ export const AddModelPage = () => {
     if (performAll) {
       if (check === true) {
         // Check if all mandatory fields are filled out
-        const mandatoryFields = [
-          "modelName",
-          "modellers[0].name",
-          "descr",
-          "explanFig",
-          "theoryText",
-          "resText",
-          "boxes[0].title",
-          "boxes[0].figTitle",
-          "boxes[0].fig",
-          "boxes[0].descr",
-          "colofonCite",
-          "colofonLicence",
-        ];
-        mandatoryFields.some((mandField) => {
+
+        mandFields.some((mandField) => {
           const value = mandField
             .split(/[\.\[\]\'\"]/) // Split the path
             .filter(Boolean) // Remove empty strings
@@ -51,7 +38,7 @@ export const AddModelPage = () => {
 
           if (value === "") {
             // ideally, the alert point to the empty field, flashing it red or something.
-            alert(`${mandField} is empty!`);
+            alert(`${fieldNameMapping[mandField]} is empty!`);
             check = false;
             return true;
           }
@@ -63,7 +50,7 @@ export const AddModelPage = () => {
     // checking whether the files are in the correct format. only for the boxes, and then only .csv, .tif, .geojson
     // implement later
     if (check) {
-      console.log("you dont get here right");
+      // console.log("you dont get here right");
     } else if (check) {
       // perform more checks
     }
@@ -75,6 +62,7 @@ export const AddModelPage = () => {
 
     event.preventDefault();
 
+    // change false -> true to actually perform
     let check = performChecks(formData, false);
 
     if (check) {

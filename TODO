@@ -1,12 +1,13 @@
 frontend:
-- Fine tune form:
-  - browse should have some indication that something is entered.
 - check form on:
   - required fields are filled out.
 
-database:
-- storing images, csv and tif is better as bytea, whilst geojson is better as jsonb
-- alternative method: storing not files but file PATHS. 
+difc files:
+- database:
+  - storing images, csv and tif is better as bytea, whilst geojson is better as jsonb
+  - alternative method: storing not files but file PATHS. 
+- fe:
+  - perform check after submission
 
 
 Log in:

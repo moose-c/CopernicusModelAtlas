@@ -77,3 +77,35 @@ export const blankForm = {
     colofonLicence: "",
     colofonAddition: "",
 };
+
+export const mandFields = [
+    "modelName",
+    "modellerName0",
+    "descr",
+    "explanFig",
+    "explanFigCaption",
+    "theoryText",
+    "resText",
+    "boxTitle0",
+    "boxFigTitle0",
+    "boxfig0",
+    "boxDescr0",
+    "colofonCite",
+    "colofonLicence",
+];
+
+export const fieldNameMapping = {
+    modelName: "Model Name",
+    modellerName0: "Modeller Name",
+    descr: "Description",
+    explanFig: "Explanation Figure",
+    explanFigCaption: "Expalnatory Figure Caption",
+    theoryText: "Theory Text",
+    resText: "Results Text",
+    boxTitle0: "Box Title",
+    boxFigTitle0: "Box Figure Title",
+    boxfig0: "Box Figure",
+    boxDescr0: "Box Description",
+    colofonCite: "Colophon Citation",
+    colofonLicence: "Colophon License",
+};
