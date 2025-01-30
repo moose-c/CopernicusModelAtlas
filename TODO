@@ -1,6 +1,4 @@
 frontend:
-- check form on:
-  - required fields are filled out.
 
 difc files:
 - database:
