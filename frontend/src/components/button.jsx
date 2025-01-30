@@ -17,7 +17,11 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
     } else if (log.toLocaleLowerCase() === "out") {
       logout({ logoutParams: { returnTo: window.location.origin } });
     } else {
-      navigate(to);
+      if (to.startsWith("http://") || to.startsWith("https://")) {
+        window.location.href = to;
+      } else {
+        navigate(to);
+      }
     }
   };
 

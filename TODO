@@ -1,24 +1,17 @@
 frontend:
 - Fine tune form:
   - browse should have some indication that something is entered.
-  - 
 - check form on:
   - required fields are filled out.
-  - entered files are correct
-- post form:
-  - also give the user to the api.
-- post fill out for modeller:
-  - allow to submit and preview
-  - allow to submit and enter new model
-- non modeller user views:
-  - view list of available models
-  - enter each page
-
-api:
-- handle form submit
-# - alternative login...
 
 database:
 - storing images, csv and tif is better as bytea, whilst geojson is better as jsonb
 - alternative method: storing not files but file PATHS. 
 
+
+Log in:
+- Make fe behind log wall
+  - User pages behind log wall
+  - allow to submit and preview
+- Api behind log wall
+  - also give the user to the api to allow users to view their own models.  

@@ -1,8 +1,17 @@
-import { useState } from "react";
-import Multiselect from "multiselect-react-dropdown";
+import { createContext, useContext, useState } from "react";
 
-import { keywords } from "../util/globalVars";
 import { ExamplePopup } from "../components/form-elements";
+import {
+  ShortTextField,
+  LongTextField,
+  FileField,
+  TwoField,
+  BoxesField,
+  KeyWordsField,
+} from "./form-fields";
+
+const FormContext = createContext();
+export const useForm = () => useContext(FormContext);
 
 export const FormContent = ({
   formData,
@@ -24,11 +33,18 @@ export const FormContent = ({
       ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q) ||
       q.includes("boxfig")
     ) {
-      const file = e.target.files[0];
-      setFormData((prevState) => ({
-        ...prevState,
-        [q]: file,
-      }));
+      if (e === "") {
+        setFormData((prevState) => ({
+          ...prevState,
+          [q]: "",
+        }));
+      } else {
+        const file = e.target.files[0];
+        setFormData((prevState) => ({
+          ...prevState,
+          [q]: file,
+        }));
+      }
     } else {
       setFormData((prevState) => ({
         ...prevState,
@@ -127,506 +143,199 @@ export const FormContent = ({
 
   return (
     <>
-      <div className="flex flex-col gap-[25px]">
-        <div className="relative">
-          <h2>Section 1: Introduction to the Model</h2>
-          <p
-            className="underline cursor-pointer select-none"
-            onClick={() => togglePopup(1)}
-          >
-            Show Example
-          </p>
-          {examplePopups[1] && (
-            <ExamplePopup nb={1} topPos={350} togglePopup={togglePopup} />
-          )}
-        </div>
-        <div>
-          <p>Enter the name of your model*</p>
-          <input
-            className="formQAs"
-            type="text"
-            placeholder="Name of Model"
-            value={formData.modelName}
-            onChange={(e) => handleChange(e, "modelName")}
-          />
-        </div>
-        <div>
-          <p>Choose relevant keywords from dropdown</p>
-          <Multiselect
-            isObject={false}
-            onKeyPressFn={function noRefCheck() {}}
-            onRemove={(e) => {
-              function noRefCheck() {}
-              handleChange(e, "keywords");
-            }}
-            onSearch={function noRefCheck() {}}
-            onSelect={(e) => {
-              function noRefCheck() {}
-              handleChange(e, "keywords");
-            }}
-            options={keywords}
-            placeholder="Select Keywords"
-            className="formQAs bg-white m-0 p-0 border-0"
-          />
-        </div>
-        <div>
-          <p>Who worked on this model?</p>
-          {Array.from({ length: nbModellers }, (_, i) => (
-            <div
-              key={`modeller-${i}`}
-              className="flex justify-between items-center"
-            >
-              <div className="flex gap-16">
-                <div className="flex gap-2">
-                  <p>Full name: *</p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="Firstname Lastname"
-                    value={formData[`modellerName${i}`]}
-                    onChange={(e) => handleChange(e, `modellerName${i}`)}
-                  />
-                </div>
-                <p> | </p>
-                <div className="flex gap-2">
-                  <p>URL to personal page: </p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="www.firstname-lastname.org"
-                    value={formData[`modellerUrl${i}`]}
-                    onChange={(e) => handleChange(e, `modellerUrl${i}`)}
-                  />
-                </div>
-              </div>
-              {i !== 0 && (
-                <button
-                  onClick={() => handleChangeNbModellers(false, i)}
-                  className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700"
-                >
-                  -
-                </button>
-              )}
-            </div>
-          ))}
-          <span
-            className="reg underline cursor-pointer select-none"
-            onClick={() => handleChangeNbModellers()}
-          >
-            Click here to add another name
-          </span>
-        </div>
-        <div>
-          <p>Do you have a picture/icon for your model?</p>
-          <div className="flex gap-[15px]">
-            <input
-              type="file"
-              id="file-upload"
-              accept=".png, .svg"
-              onChange={(e) => handleChange(e, "icon")}
-              className="hidden"
-            />
-
-            {/* Label acting as the "Browse..." button */}
-            <label
-              htmlFor="file-upload"
-              className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-            >
-              <p>Browse...</p>
-            </label>
-
-            <p>Allowed file types: .png, .svg</p>
-          </div>
-        </div>
-        <div>
-          <p>Enter a description of your model*</p>
-          <textarea
-            className="formQAl"
-            type="text"
-            placeholder="Model Description"
-            value={formData.descr}
-            onChange={(e) => handleChange(e, "descr")}
-          />
-        </div>
-        <div>
-          <p>Upload an explanatory or output figure for your model*</p>
-          <div className="flex gap-[15px]">
-            <input
-              type="file"
-              id="file-upload2"
-              accept=".png, .svg"
-              onChange={(e) => handleChange(e, "explanFig")}
-              className="hidden"
-            />
-            <label
-              htmlFor="file-upload2"
-              className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-            >
-              <p>Browse...</p>
-            </label>
-
-            <p>Allowed file types: .png, .svg</p>
-          </div>
-        </div>
-        <div>
-          <p>Please enter a caption for the figure uploaded above</p>
-          <input
-            className="formQAs"
-            type="text"
-            placeholder="Caption"
-            value={formData.explanFigCaption}
-            onChange={(e) => handleChange(e, "explanFigCaption")}
-          />
-        </div>
-        <div>
-          <p>
-            Do you want to link to other sites or files? (eg. github, dataverse,
-            own page)
-          </p>
-          {Array.from({ length: nbLinks }, (_, i) => (
-            <div
-              key={`link-${i}`}
-              className="flex justify-between items-center"
-            >
-              <div className="flex gap-16">
-                <div className="flex gap-2">
-                  <p>Button text: </p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="eg. Github"
-                    value={formData[`linkName${i}`]}
-                    onChange={(e) => handleChange(e, `linkName${i}`)}
-                  />
-                </div>
-
-                <p> | </p>
-                <div className="flex gap-2">
-                  <p>URL: </p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="www.github.com/this-model"
-                    value={formData[`linkUrl${i}`]}
-                    onChange={(e) => handleChange(e, `linkUrl${i}`)}
-                  />
-                </div>
-              </div>
-              {i !== 0 && (
-                <button
-                  onClick={() => handleChangeNbButtons(false, i)}
-                  className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700"
-                >
-                  -
-                </button>
-              )}
-            </div>
-          ))}
-          <span
-            className="underline cursor-pointer select-none reg"
-            onClick={() => handleChangeNbButtons()}
-          >
-            Click here to add another button
-          </span>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-[25px]">
-        <div className="relative">
-          <h2>Section 2: Theory behind the model</h2>
-          <p
-            className="underline cursor-pointer select-none"
-            onClick={() => togglePopup(2)}
-          >
-            Show Example
-          </p>
-          {examplePopups[2] && (
-            <ExamplePopup nb={2} topPos={1300} togglePopup={togglePopup} />
-          )}
-        </div>
-        <div>
-          <p>Enter some theory or applications of your model*</p>
-          <textarea
-            className="formQAl"
-            type="text"
-            placeholder="Model theory or applications"
-            value={formData.theoryText}
-            onChange={(e) => handleChange(e, "theoryText")}
-          />
-        </div>
-        <div>
-          <p>Do you want to show a supporting figure for this section?</p>
-          <div className="flex gap-[15px]">
-            <input
-              type="file"
-              id="file-upload3"
-              accept=".png"
-              onChange={(e) => handleChange(e, "theoryFig")}
-              className="hidden"
-            />
-
-            {/* Label acting as the "Browse..." button */}
-            <label
-              htmlFor="file-upload3"
-              className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-            >
-              <p>Browse...</p>
-            </label>
-
-            <p>Allowed file types: .png</p>
-          </div>
-        </div>
-        <div>
-          <p>Do you want the figure uploaded above to have a caption?</p>
-          <input
-            className="formQAs"
-            type="text"
-            placeholder="Caption"
-            value={formData.theoryFigDesc}
-            onChange={(e) => handleChange(e, "theoryFigDesc")}
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-[25px]">
-        <div className="relative">
-          <h2>Section 3: Results from this model</h2>
-          <p
-            className="underline cursor-pointer select-none"
-            onClick={() => togglePopup(3)}
-          >
-            Show Example
-          </p>
-          {examplePopups[3] && (
-            <ExamplePopup nb={3} topPos={1800} togglePopup={togglePopup} />
-          )}
-        </div>
-        <div>
-          <p>Enter a description of the result(s) created by the model*</p>
-          <textarea
-            className="formQAl"
-            type="text"
-            placeholder="Result description"
-            value={formData.resText}
-            onChange={(e) => handleChange(e, "resText")}
-          />
-        </div>
-        <div>
-          <p>Do you want to show a supporting figure for this section?</p>
-          <div className="flex gap-[15px]">
-            <input
-              type="file"
-              id="file-upload4"
-              accept=".png"
-              onChange={(e) => handleChange(e, "resFig")}
-              className="hidden"
-            />
-
-            {/* Label acting as the "Browse..." button */}
-            <label
-              htmlFor="file-upload4"
-              className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-            >
-              <p>Browse...</p>
-            </label>
-
-            <p>Allowed file types: .png</p>
-          </div>
-        </div>
-        <div>
-          <p>Do you want the figure uploaded above to have a caption?</p>
-          <input
-            className="formQAs"
-            type="text"
-            placeholder="Caption"
-            value={formData.resFigDesc}
-            onChange={(e) => handleChange(e, "resFigDesc")}
-          />
-        </div>
-        <div className="flex flex-col gap-[25px]">
-          <h3>Output boxes</h3>
-          <div>
-            <p>
-              This section gathers information for the boxes showcasing model
-              output. Output data can be shown in the following formats:
-              <b>Insuffusiently explained</b>
-            </p>
-            <ul className="reg">
-              <li key={0}>Figure (.png, ...)</li>
-              <li key={1}>Timeseries (.csv)</li>
-              <li key={3}>Raster map (.tif)</li>
-              <li key={4}>Vector map (.geojson)</li>
-            </ul>
-
-            {Array.from({ length: nbBoxes }, (_, i) => (
-              <div
-                key={`box-${i}`}
-                className="flex justify-between border-y border-black pb-2 gap-2"
-              >
-                <div className="flex flex-col">
-                  <p>Title of the Output Box{i == 0 && "*"}</p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="Box Title"
-                    value={formData[`boxTitle${i}`]}
-                    onChange={(e) => handleChange(e, `boxTitle${i}`)}
-                  />
-                  <p>Description accompanying the figure{i == 0 && "*"}</p>
-                  <textarea
-                    className="formQAl"
-                    type="text"
-                    placeholder="Enter a Description"
-                    value={formData[`boxDescr${i}`]}
-                    onChange={(e) => handleChange(e, `boxDescr${i}`)}
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p>Title for output data{i == 0 && "*"}</p>
-                  <input
-                    className="formQAs"
-                    type="text"
-                    placeholder="Output Title"
-                    value={formData[`boxFigTitle${i}`]}
-                    onChange={(e) => handleChange(e, `boxFigTitle${i}`)}
-                  />
-                  <p>Upload output data here{i == 0 && "*"}</p>
-                  <div className="flex gap-[15px]">
-                    <input
-                      type="file"
-                      id={`file-upload${5 + i}`}
-                      accept=".png, .csv, .tif, .geojson"
-                      onChange={(e) => handleChange(e, `boxFig${i}`)}
-                      className="hidden"
-                    />
-
-                    {/* Label acting as the "Browse..." button */}
-                    <label
-                      htmlFor={`file-upload${5 + i}`}
-                      className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-                    >
-                      <p>Browse...</p>
-                    </label>
-
-                    <p>Allowed file types: .png, .csv, .tif, .geojson</p>
-                  </div>
-                  <p>
-                    n.b. Only data matching the requirements stated above can be
-                    shown!
-                  </p>
-                </div>
-
-                {i !== 0 && (
-                  <button
-                    onClick={() => handleChangeNbBoxes(false, i)}
-                    className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 m-1"
-                  >
-                    -
-                  </button>
-                )}
-              </div>
-            ))}
-            <span
-              className="reg underline cursor-pointer select-none"
-              onClick={() => handleChangeNbBoxes()}
-            >
-              Click here to add another output box
-            </span>
-          </div>
-        </div>
+      <FormContext.Provider value={{ formData, handleChange }}>
         <div className="flex flex-col gap-[25px]">
           <div className="relative">
-            <h2>Section 4: Methods behind this model</h2>
+            <h2>Section 1: Introduction to the Model</h2>
             <p
               className="underline cursor-pointer select-none"
-              onClick={() => togglePopup(4)}
+              onClick={() => togglePopup(1)}
             >
               Show Example
             </p>
-            {examplePopups[4] && (
-              <ExamplePopup nb={4} topPos={2300} togglePopup={togglePopup} />
+            {examplePopups[1] && (
+              <ExamplePopup nb={1} topPos={350} togglePopup={togglePopup} />
             )}
           </div>
-          <div>
-            <p>Description of the model itself</p>
-            <textarea
-              className="formQAl"
-              type="text"
-              placeholder="Enter a description"
-              value={formData.methodsDesc}
-              onChange={(e) => handleChange(e, "methodsDesc")}
-            />
+          <ShortTextField
+            label={"Enter the name of your model*"}
+            placeholder={"Enter Model Name"}
+            field={"modelName"}
+          />
+          <KeyWordsField />
+          <TwoField
+            lgen={"Who worked on this model?"}
+            nb={nbModellers}
+            ch={handleChangeNbModellers}
+            l1={"Full name: *"}
+            f1={"modellerName"}
+            p1={"Firstname Lastname"}
+            l2={"URL to personal page: "}
+            f2={"modellerUrl"}
+            p2={"www.firstname-lastname.org"}
+            ladd={"Click here to add another name"}
+          />
+          <FileField
+            label={"Do you have a picture/icon for your model?"}
+            field={"icon"}
+            allowedFileTypes={".png, .svg"}
+          />
+          <LongTextField
+            label={"Enter a description of your model*"}
+            placeholder={"Model Description"}
+            field={"descr"}
+          />
+          <FileField
+            label={"Upload an explanatory or output figure for your model*"}
+            field={"explanFig"}
+            allowedFileTypes={".png, .svg"}
+            capField={"explanFigCaption"}
+          />
+          <TwoField
+            lgen={
+              "Do you want to link to other sites or files? (eg. github, dataverse, own page"
+            }
+            nb={nbLinks}
+            ch={handleChangeNbButtons}
+            l1={"Button text: "}
+            f1={"linkName"}
+            p1={"eg. Github"}
+            l2={"URL"}
+            f2={"linkUrl"}
+            p2={"e.g. www.github.com/this-model"}
+            ladd={"Click here to add another button"}
+          />
+        </div>
+
+        <div className="flex flex-col gap-[25px]">
+          <div className="relative">
+            <h2>Section 2: Theory behind the model</h2>
+            <p
+              className="underline cursor-pointer select-none"
+              onClick={() => togglePopup(2)}
+            >
+              Show Example
+            </p>
+            {examplePopups[2] && (
+              <ExamplePopup nb={2} topPos={1300} togglePopup={togglePopup} />
+            )}
           </div>
-          <div>
-            <p>Upload output data here</p>
-            <div className="flex gap-[15px]">
-              <input
-                type="file"
-                id={`methods-file-upload`}
-                accept=".csv, .tif, .geojson"
-                onChange={(e) => handleChange(e, "methodsFile")}
-                className="hidden"
+          <LongTextField
+            label={"Enter some theory or applications of your model*"}
+            placeholder={"Model theory or applications"}
+            field={"theoryText"}
+          />
+          <FileField
+            label={"Do you want to show a supporting figure for this section?"}
+            field={"theoryFig"}
+            allowedFileTypes={".png"}
+            capField={"theoryFigDesc"}
+          />
+        </div>
+
+        <div className="flex flex-col gap-[25px]">
+          <div className="relative">
+            <h2>Section 3: Results from this model</h2>
+            <p
+              className="underline cursor-pointer select-none"
+              onClick={() => togglePopup(3)}
+            >
+              Show Example
+            </p>
+            {examplePopups[3] && (
+              <ExamplePopup nb={3} topPos={1800} togglePopup={togglePopup} />
+            )}
+          </div>
+          <LongTextField
+            label={"Enter a description of the result(s) created by the model*"}
+            placeholder={"Result description"}
+            field={"resText"}
+          />
+          <FileField
+            label={"Do you want to show a supporting figure for this section?"}
+            field={"resFig"}
+            allowedFileTypes={".png"}
+            capField={"resFigDesc"}
+          />
+          <div className="flex flex-col gap-[25px]">
+            <h3>Output boxes</h3>
+            <div>
+              <p>
+                This section gathers information for the boxes showcasing model
+                output. Output data can be shown in the following formats:
+                <b>Insuffusiently explained</b>
+              </p>
+              <ul className="reg">
+                <li key={0}>Figure (.png, ...)</li>
+                <li key={1}>Timeseries (.csv)</li>
+                <li key={2}>Raster map (.tif)</li>
+                <li key={3}>Vector map (.geojson)</li>
+              </ul>
+              <BoxesField
+                nbBoxes={nbBoxes}
+                handleChangeNbBoxes={handleChangeNbBoxes}
               />
-
-              {/* Label acting as the "Browse..." button */}
-              <label
-                htmlFor={`methods-file-upload`}
-                className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-              >
-                <p>Browse...</p>
-              </label>
-
-              <p>Allowed file types: .csv, .tif, .geojson</p>
             </div>
           </div>
+          <div className="flex flex-col gap-[25px]">
+            <div className="relative">
+              <h2>Section 4: Methods behind this model</h2>
+              <p
+                className="underline cursor-pointer select-none"
+                onClick={() => togglePopup(4)}
+              >
+                Show Example
+              </p>
+              {examplePopups[4] && (
+                <ExamplePopup nb={4} topPos={2300} togglePopup={togglePopup} />
+              )}
+            </div>
+            <LongTextField
+              label={"Description of the model itself"}
+              placeholder={"Enter a description"}
+              field={"methodsDesc"}
+            />
+            <FileField
+              label={"Upload output data here"}
+              field={"methodsFile"}
+              allowedFileTypes={".csv, .tif, .geojson"}
+            />
+          </div>
+          <div className="flex flex-col gap-[25px]">
+            <div className="relative">
+              <h2>Section 5: Colofon</h2>
+              <p
+                className="underline cursor-pointer select-none"
+                onClick={() => togglePopup(5)}
+              >
+                Show Example
+              </p>
+              {examplePopups[5] && (
+                <ExamplePopup nb={5} topPos={2500} togglePopup={togglePopup} />
+              )}
+            </div>
+            <ShortTextField
+              label={"How should people cite this model?*"}
+              placeholder={"How to cite"}
+              field={"colofonCite"}
+            />
+            <ShortTextField
+              label={
+                "Enter a licence* <b>Explain but what does this even mean?</b>"
+              }
+              placeholder={"Enter licence"}
+              field={"colofonLicence"}
+            />
+            <LongTextField
+              label={
+                "Do you want to include additional information in the Colofon?"
+              }
+              placeholder={"Enter additional Colofon info"}
+              field={"colofonAddition"}
+            />
+          </div>
         </div>
-        <div className="flex flex-col gap-[25px]">
-          <div className="relative">
-            <h2>Section 5: Colofon</h2>
-            <p
-              className="underline cursor-pointer select-none"
-              onClick={() => togglePopup(5)}
-            >
-              Show Example
-            </p>
-            {examplePopups[5] && (
-              <ExamplePopup nb={5} topPos={2500} togglePopup={togglePopup} />
-            )}
-          </div>
-          <div>
-            <p>How should people cite this model?*</p>
-            <input
-              className="formQAs"
-              type="text"
-              placeholder="How to cite"
-              value={formData.colofonCite}
-              onChange={(e) => handleChange(e, "colofonCite")}
-            />
-          </div>
-          <div>
-            <p>
-              Enter a licence* <b>Explain but what does this even mean?</b>
-            </p>
-            <input
-              className="formQAs"
-              type="text"
-              placeholder="Enter licence"
-              value={formData.colofonLicence}
-              onChange={(e) => handleChange(e, "colofonLicence")}
-            />
-          </div>
-          <div>
-            <p>Do you want to include additional information in the Colofon?</p>
-            <textarea
-              className="formQAl"
-              type="text"
-              placeholder="Model Description"
-              value={formData.colofonAddition}
-              onChange={(e) => handleChange(e, "colofonAddition")}
-            />
-          </div>
-        </div>
-      </div>
+      </FormContext.Provider>
     </>
   );
 };
