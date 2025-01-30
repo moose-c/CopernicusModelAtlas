@@ -8,6 +8,7 @@ import { keywords } from "../util/globalVars";
 
 export const HomePage = () => {
   const [models, setModels] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -28,7 +29,7 @@ export const HomePage = () => {
       }
 
       if (error) {
-        setModels(JSON.stringify(error, null, 2));
+        setErrorMessage(JSON.stringify(error, null, 2));
       }
     };
 
@@ -54,7 +55,8 @@ export const HomePage = () => {
           placeholder="Select Keywords"
           className="dd w-fit"
         />
-        <ModelCards models={models} />
+        {models && <ModelCards models={models} />}
+        {errorMessage && <div> {errorMessage}</div>}
       </div>
     </PageLayout>
   );

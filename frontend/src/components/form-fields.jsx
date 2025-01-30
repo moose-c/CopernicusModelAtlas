@@ -22,7 +22,7 @@ export const ShortTextField = ({ label, placeholder, field }) => {
 };
 
 export const LongTextField = ({ label, placeholder, field }) => {
-  const { formData, handleChange } = useForm(); // Automatically gets values
+  const { formData, handleChange } = useForm(); // Automatically gets value
   return (
     <>
       <div>
