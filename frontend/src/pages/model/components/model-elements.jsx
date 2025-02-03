@@ -1,5 +1,5 @@
-import { useModel } from "../pages/model-page";
-import { Button } from "./button";
+import { useModel } from "../model-page";
+import { Button } from "../../../components/button";
 
 export const Introduction = () => {
   const { modelData } = useModel(); // Automatically gets values

@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect } from "react";
-import { CodeSnippet } from "../components/code-snippet";
-import { PageLayout } from "../components/page-layout";
-import { Button } from "../components/button";
+import { CodeSnippet } from "../../components/code-snippet";
+import { PageLayout } from "../../components/page-layout";
+import { Button } from "../../components/button";
 
 export const ProfilePage = () => {
   const { user } = useAuth0();
@@ -17,7 +17,7 @@ export const ProfilePage = () => {
         <div>
           <div className="flex justify-between items-center">
             <h1>Your Models</h1>
-            <Button text="Add Model" to="/add-model" />
+            <Button text="Add Model" to="/model/add" />
           </div>
           <h2>Here should go the models of this user</h2>
         </div>

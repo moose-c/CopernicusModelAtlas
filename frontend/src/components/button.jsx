@@ -7,7 +7,9 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault(); // Prevent navigation
+    e.stopPropagation(); // Stop parent <Link> from triggering'
     if (log.toLocaleLowerCase() === "in") {
       loginWithRedirect({
         appState: {

@@ -33,17 +33,17 @@ export const NavBar = () => {
         <div className="flex flex-row gap-4 text-white">
           {!isAuthenticated && (
             <>
-              <NavBarTab path="/public" label="Public" />
+              <NavBarTab path="/message/public" label="Public" />
               <Button text="Log in" log="in" />
             </>
           )}
           {isAuthenticated && (
             <>
-              <NavBarTab path="/add-model" label="Add Model" />
-              <NavBarTab path="/public" label="Public" />
+              <NavBarTab path="/model/add" label="Add Model" />
+              <NavBarTab path="/message/public" label="Public" />
               <NavBarTab path="/profile" label="Profile" />
-              <NavBarTab path="/protected" label="Private" />
-              {isAdmin && <NavBarTab path="/admin" label="Admin" />}
+              <NavBarTab path="/message/protected" label="Private" />
+              {isAdmin && <NavBarTab path="/message/admin" label="Admin" />}
               <Button text="Log out" log="out" />
             </>
           )}

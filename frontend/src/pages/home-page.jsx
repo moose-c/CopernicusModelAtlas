@@ -1,7 +1,7 @@
 import { PageLayout } from "../components/page-layout";
 import { useState, useEffect } from "react";
-import { ModelCards } from "../components/model-cards";
-import { getAllModels } from "../services/message.service";
+import { ModelCards } from "./model/components/model-cards";
+import { getAllModels } from "../services/db.service";
 import Multiselect from "multiselect-react-dropdown";
 import { Searchbar } from "../components/searchbar";
 import { keywords } from "../util/globalVars";

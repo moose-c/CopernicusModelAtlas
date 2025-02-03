@@ -1,4 +1,5 @@
 frontend:
+- model pages.
 
 difc files:
 - database:

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 
 import { ExamplePopup } from "../components/form-elements";
 import {
@@ -19,10 +19,6 @@ export const FormContent = ({
   examplePopups,
   togglePopup,
 }) => {
-  const [nbModellers, setNbModellers] = useState(1);
-  const [nbLinks, setNbLinks] = useState(1);
-  const [nbBoxes, setNbBoxes] = useState(1);
-
   const handleChange = (e, q) => {
     if (q === "keywords") {
       setFormData((prevState) => ({
@@ -31,19 +27,38 @@ export const FormContent = ({
       }));
     } else if (
       ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q) ||
-      q.includes("boxfig")
+      q.slice(0, -1) === "boxFile"
     ) {
+      const typeKey = q.slice(0, -1) + "Type" + q.charAt(q.length - 1);
       if (e === "") {
-        setFormData((prevState) => ({
-          ...prevState,
-          [q]: "",
-        }));
+        setFormData((prevState) => {
+          const updatedState = {
+            ...prevState,
+            [q]: "", // Always set q to an empty string
+          };
+
+          // Only add or update the typeKey if it exists in prevState
+          if (typeKey in prevState) {
+            updatedState[typeKey] = ""; // Set the value for typeKey
+          }
+
+          return updatedState;
+        });
       } else {
         const file = e.target.files[0];
-        setFormData((prevState) => ({
-          ...prevState,
-          [q]: file,
-        }));
+        setFormData((prevState) => {
+          const updatedState = {
+            ...prevState,
+            [q]: file, // Always set q to an empty string
+          };
+
+          // Only add or update the typeKey if it exists in prevState
+          if (typeKey in prevState) {
+            updatedState[typeKey] = ""; // Set the value for typeKey
+          }
+
+          return updatedState;
+        });
       }
     } else {
       setFormData((prevState) => ({
@@ -55,13 +70,15 @@ export const FormContent = ({
 
   const handleChangeNbModellers = (add = true, i = undefined) => {
     if (add) {
-      if (nbModellers < 5) {
-        setNbModellers((prevState) => prevState + 1); // Increment the number of modellers
+      if (formData["nbModellers"] < 5) {
+        setFormData((prevState) => ({
+          ...prevState,
+          ["nbModellers"]: prevState["nbModellers"] + 1,
+        }));
       } else {
         alert("Only 5 modellers allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
-      setNbModellers((prevState) => prevState - 1); // Increment the number of modellers
       setFormData((prevState) => {
         const updatedState = { ...prevState };
 
@@ -77,6 +94,7 @@ export const FormContent = ({
         updatedState[`modellerName4`] = "";
         updatedState[`modellerUrl4`] = "";
 
+        updatedState[`nbModellers`] = prevState[`nbModellers`] - 1;
         return updatedState;
       });
     }
@@ -84,13 +102,15 @@ export const FormContent = ({
 
   const handleChangeNbButtons = (add = true, i = undefined) => {
     if (add) {
-      if (nbLinks < 5) {
-        setNbLinks((prevState) => prevState + 1); // Increment the number of modellers
+      if (formData["nbLinks"] < 5) {
+        setFormData((prevState) => ({
+          ...prevState,
+          ["nbLinks"]: prevState["nbLinks"] + 1,
+        }));
       } else {
         alert("Only 5 links allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
-      setNbLinks((prevState) => prevState - 1); // Increment the number of modellers
       setFormData((prevState) => {
         const updatedState = { ...prevState };
 
@@ -104,6 +124,8 @@ export const FormContent = ({
         updatedState[`linkName4`] = "";
         updatedState[`linkUrl4`] = "";
 
+        updatedState[`nbLinks`] = prevState[`nbLinks`] - 1;
+
         return updatedState;
       });
     }
@@ -111,30 +133,36 @@ export const FormContent = ({
 
   const handleChangeNbBoxes = (add = true, i = undefined) => {
     if (add) {
-      if (nbBoxes < 4) {
-        setNbBoxes((prevState) => prevState + 1); // Increment the number of modellers
+      if (formData["nbBoxes"] < 4) {
+        setFormData((prevState) => ({
+          ...prevState,
+          ["nbBoxes"]: prevState["nbBoxes"] + 1,
+        }));
       } else {
         alert("Only 4 boxes allowed!"); // Show a popup when trying to exceed the limit
       }
     } else {
-      setNbBoxes((prevState) => prevState - 1); // Increment the number of modellers
       setFormData((prevState) => {
         const updatedState = { ...prevState };
 
         // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 5
         for (let j = i + 1; j <= 3; j++) {
           updatedState[`boxTitle${j - 1}`] = prevState[`boxTitle${j}`] || "";
-          updatedState[`boxFigTitle${j - 1}`] =
-            prevState[`boxFigTitle${j}`] || "";
-          updatedState[`boxfig${j - 1}`] = prevState[`boxfig${j}`] || "";
+          updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || "";
+          updatedState[`boxFileTitle${j - 1}`] =
+            prevState[`boxFileTitle${j}`] || "";
+          updatedState[`boxType${j - 1}`] = prevState[`boxType${j}`] || "";
           updatedState[`boxDescr${j - 1}`] = prevState[`boxDescr${j}`] || "";
         }
 
         // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
         updatedState[`boxTitle3`] = "";
         updatedState[`boxFigTitle3`] = "";
-        updatedState[`boxfig3`] = "";
+        updatedState[`boxFile3`] = "";
+        updatedState[`boxFileType3`] = "";
         updatedState[`boxDescr3`] = "";
+
+        updatedState[`nbBoxes`] = prevState[`nbBoxes`] - 1;
 
         return updatedState;
       });
@@ -165,7 +193,7 @@ export const FormContent = ({
           <KeyWordsField />
           <TwoField
             lgen={"Who worked on this model?"}
-            nb={nbModellers}
+            nb={formData["nbModellers"]}
             ch={handleChangeNbModellers}
             l1={"Full name: *"}
             f1={"modellerName"}
@@ -175,15 +203,20 @@ export const FormContent = ({
             p2={"www.firstname-lastname.org"}
             ladd={"Click here to add another name"}
           />
+          <LongTextField
+            label={"Enter a short description of your model* (max 100 words)"}
+            placeholder={"Short Description"}
+            field={"shortDescr"}
+          />
           <FileField
             label={"Do you have a picture/icon for your model?"}
             field={"icon"}
             allowedFileTypes={".png, .svg"}
           />
           <LongTextField
-            label={"Enter a description of your model*"}
+            label={"Enter a longer description of your model*"}
             placeholder={"Model Description"}
-            field={"descr"}
+            field={"longDescr"}
           />
           <FileField
             label={"Upload an explanatory or output figure for your model*"}
@@ -195,7 +228,7 @@ export const FormContent = ({
             lgen={
               "Do you want to link to other sites or files? (eg. github, dataverse, own page"
             }
-            nb={nbLinks}
+            nb={formData["nbLinks"]}
             ch={handleChangeNbButtons}
             l1={"Button text: "}
             f1={"linkName"}
@@ -272,7 +305,7 @@ export const FormContent = ({
                 <li key={3}>Vector map (.geojson)</li>
               </ul>
               <BoxesField
-                nbBoxes={nbBoxes}
+                nbBoxes={formData["nbBoxes"]}
                 handleChangeNbBoxes={handleChangeNbBoxes}
               />
             </div>
@@ -298,7 +331,7 @@ export const FormContent = ({
             <FileField
               label={"Upload output data here"}
               field={"methodsFile"}
-              allowedFileTypes={".csv, .tif, .geojson"}
+              allowedFileTypes={".png .csv, .tif, .geojson"}
             />
           </div>
           <div className="flex flex-col gap-[25px]">

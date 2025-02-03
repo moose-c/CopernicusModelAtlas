@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import { CodeSnippet } from "../components/code-snippet";
-import { PageLayout } from "../components/page-layout";
-import { FormContent } from "../components/form-content";
-import { ExamplePopup } from "../components/form-elements";
-import { blankForm, mandFields, fieldNameMapping } from "../util/globalVars";
+import { CodeSnippet } from "../../components/code-snippet";
+import { PageLayout } from "../../components/page-layout";
+import { FormContent } from "./components/form-content";
+import { ExamplePopup } from "./components/form-elements";
+import { blankForm, mandFields, fieldNameMapping } from "../../util/globalVars";
 
-import { postModel } from "../services/message.service";
+import { postModel } from "../../services/db.service";
 
-import "../styles/form.css";
+import "../../styles/form.css";
 
 export const AddModelPage = () => {
   const [examplePopups, setExamplePopups] = useState(Array(6).fill(false));

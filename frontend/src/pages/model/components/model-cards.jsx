@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Button } from "../../../components/button";
 
 export const ModelCards = ({ models }) => {
   return (
@@ -18,14 +19,19 @@ const ModelCard = ({ model }) => {
 
   return (
     <Link
-      to={`/models/${model[0]}`}
+      to={`/model/${model[0]}`}
       className="w-full max-w-4xl rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
     >
       <div className="p-6">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-          {modelName}
-        </h2>
-        <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
+        <div className="flex justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+              {modelName}
+            </h2>
+            <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
+          </div>
+          <Button text="Edit" to={`model/edit/${model[0]}`} />
+        </div>
         <p className="text-gray-500">{desc}</p>
       </div>
     </Link>

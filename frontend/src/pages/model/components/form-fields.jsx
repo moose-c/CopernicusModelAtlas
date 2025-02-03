@@ -1,7 +1,7 @@
 import Multiselect from "multiselect-react-dropdown";
 
 import { useForm } from "./form-content";
-import { keywords } from "../util/globalVars";
+import { keywords } from "../../../util/globalVars";
 
 export const ShortTextField = ({ label, placeholder, field }) => {
   const { formData, handleChange } = useForm(); // Automatically gets values
@@ -210,7 +210,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                 type="file"
                 id={`file-upload${5 + i}`}
                 accept=".png, .csv, .tif, .geojson"
-                onChange={(e) => handleChange(e, `boxFig${i}`)}
+                onChange={(e) => handleChange(e, `boxFile${i}`)}
                 className="hidden"
               />
 
@@ -224,6 +224,19 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
 
               <p>Allowed file types: .png, .csv, .tif, .geojson</p>
             </div>
+            {formData[`boxFile${i}`] !== "" && (
+              <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
+                <p className="text-sm text-green-600">
+                  {formData[`boxFile${i}`].name}
+                </p>
+                <button
+                  onClick={() => handleChange("", `boxFile${i}`)}
+                  className="ml-4 text-red-600 hover:underline text-sm"
+                >
+                  Remove
+                </button>
+              </div>
+            )}
             <p>
               n.b. Only data matching the requirements stated above can be
               shown!

@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
-import { CodeSnippet } from "../components/code-snippet";
-import { PageLayout } from "../components/page-layout";
-import { getProtectedResource } from "../services/message.service";
+import { CodeSnippet } from "../../components/code-snippet";
+import { PageLayout } from "../../components/page-layout";
+import { getProtectedResource } from "../../services/message.service";
 
 export const ProtectedPage = () => {
   const [message, setMessage] = useState("");

@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
-import { CodeSnippet } from "../components/code-snippet";
-import { PageLayout } from "../components/page-layout";
-import { getAdminResource } from "../services/message.service";
+import { CodeSnippet } from "../../components/code-snippet";
+import { PageLayout } from "../../components/page-layout";
+import { getAdminResource } from "../../services/message.service";
 
 export const AdminPage = () => {
   const [message, setMessage] = useState("");
