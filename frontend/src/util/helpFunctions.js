@@ -9,7 +9,8 @@ export const unpackModel = (modelResponse) => {
             }
         }
         if (modelResponse[key] == null) {
-            modelResponse[key] = ''
+            // correctly assign empty strings or 0
+            modelResponse[key] = blankForm[key]
         }
     });
     return modelResponse

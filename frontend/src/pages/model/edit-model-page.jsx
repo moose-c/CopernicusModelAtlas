@@ -89,7 +89,7 @@ export const EditModelPage = () => {
     event.preventDefault();
 
     // change false -> true to actually perform
-    let check = performChecks(formData, true);
+    let check = performChecks(formData, false);
 
     if (check) {
       const doPost = async (formData) => {

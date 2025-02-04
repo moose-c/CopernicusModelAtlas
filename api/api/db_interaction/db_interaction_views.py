@@ -23,7 +23,7 @@ def get_single(model_id):
     return get_single_model(model_id)
 
 
-@bp.route("/edit/<model_id>")
+@bp.route("/edit/<model_id>", methods=["DELETE", "POST"])
 def edit(model_id):
     return edit_model(model_id)
 
