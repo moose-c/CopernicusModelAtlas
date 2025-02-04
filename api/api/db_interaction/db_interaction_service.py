@@ -98,6 +98,9 @@ def get_single_model(model_id):
         "explanFig",
         "theoryFig",
         "resFig",
+    ]
+
+    lo_fields = [
         "methodsFile",
         "boxFile0",
         "boxFile1",
@@ -109,10 +112,22 @@ def get_single_model(model_id):
     cur = conn.cursor(cursor_factory=RealDictCursor)
     cur.execute("SELECT * FROM models WHERE id = %s", [model_id])
     model = dict(cur.fetchone())  # Fetch a single row
+
+    # Get images
     for key in bytea_fields:
         key = key.lower()
-        if model[key] != "":
+        if model[key] != None:
             model[key] = base64.b64encode(model[key]).decode("utf-8")
+
+    # Get files
+    for key in lo_fields:
+        key = key.lower()
+        if model[key] != None:
+            lo_id = model[key]
+            print(lo_id)
+            model[key] = int(lo_id)
+            # load and return
+    print(model["keywords"])
     cur.close()
     conn.close()
     return jsonify(model)

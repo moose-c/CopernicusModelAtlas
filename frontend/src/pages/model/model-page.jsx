@@ -17,8 +17,8 @@ export const useModel = () => useContext(ModelContext);
 
 export const ModelPage = () => {
   const { modelId } = useParams(); // Get modelId from URL params
-  const [modelResponse, setModelResponse] = useState([]);
   const [modelData, setModelData] = useState({});
+  console.log(modelData);
 
   useEffect(() => {
     let isMounted = true;
@@ -30,7 +30,7 @@ export const ModelPage = () => {
       }
 
       if (data) {
-        setModelResponse(new Array(data)[0]);
+        setModelData(unpackModel(data));
       }
 
       if (error) {
@@ -45,9 +45,6 @@ export const ModelPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    setModelData(unpackModel(modelResponse));
-  }, [modelResponse]);
   return (
     <>
       <ModelContext.Provider value={{ modelData }}>

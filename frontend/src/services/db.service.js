@@ -66,7 +66,6 @@ export const getAllModels = async () => {
 
 export const getSingleModel = async (model_id) => {
     const url = `${apiServerUrl}/api/models/get_single/${model_id}`
-    console.log(url)
     const config = {
         url: url,
         method: "GET",
