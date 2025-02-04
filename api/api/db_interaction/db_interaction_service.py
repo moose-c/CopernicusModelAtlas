@@ -1,9 +1,11 @@
 from common.utils import safe_get_env_var
 import psycopg2
+from psycopg2.extras import RealDictCursor
 import base64
 from flask import request, jsonify
 import copy
 import json
+import os
 
 # Python dictionary equivalent of blankForm
 blank_form_template = {
@@ -20,7 +22,7 @@ blank_form_template = {
     "modellerName4": "",
     "modellerUrl4": "",
     "icon": "",
-    "descr": "",
+    "longDescr": "",
     "explanFig": "",
     "explanFigCaption": "",
     "linkName0": "",
@@ -40,26 +42,31 @@ blank_form_template = {
     "resFig": "",
     "resFigDesc": "",
     "boxTitle0": "",
-    "boxFigTitle0": "",
-    "boxfig0": "",
+    "boxFileTitle0": "",
     "boxDescr0": "",
     "boxTitle1": "",
-    "boxFigTitle1": "",
-    "boxfig1": "",
+    "boxFileTitle1": "",
     "boxDescr1": "",
     "boxTitle2": "",
-    "boxFigTitle2": "",
-    "boxfig2": "",
+    "boxFileTitle2": "",
     "boxDescr2": "",
     "boxTitle3": "",
-    "boxFigTitle3": "",
-    "boxfig3": "",
+    "boxFileTitle3": "",
     "boxDescr3": "",
     "methodsDesc": "",
-    "methodsFile": "",
     "colofonCite": "",
     "colofonLicence": "",
     "colofonAddition": "",
+    "shortDescr": "",
+    "nbModellers": 1,
+    "nbLinks": 1,
+    "nbBoxes": 1,
+    "methodsFileCaption": "",
+    "boxFile0": 0,
+    "boxFile1": 0,
+    "boxFile2": 0,
+    "boxFile3": 0,
+    "methodsFile": 0,
 }
 
 
@@ -78,7 +85,7 @@ def db_connection():
 def get_all_models():
     conn = db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, modelname, modellername0, descr FROM models;")
+    cur.execute("SELECT id, modelname, modellername0, shortdescr FROM models;")
     modelList = cur.fetchall()
     cur.close()
     conn.close()
@@ -92,22 +99,20 @@ def get_single_model(model_id):
         "theoryFig",
         "resFig",
         "methodsFile",
-        "boxfig0",
-        "boxfig1",
-        "boxfig2",
-        "boxfig3",
+        "boxFile0",
+        "boxFile1",
+        "boxFile2",
+        "boxFile3",
     ]
 
-    keys = list(blank_form_template.keys())
-    bytea_indexes = [keys.index(field) + 1 for field in bytea_fields if field in keys]
-
     conn = db_connection()
-    cur = conn.cursor()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
     cur.execute("SELECT * FROM models WHERE id = %s", [model_id])
-    model = list(cur.fetchone())  # Fetch a single row
-    for index in bytea_indexes:
-        if model[index] != "":
-            model[index] = base64.b64encode(model[index]).decode("utf-8")
+    model = dict(cur.fetchone())  # Fetch a single row
+    for key in bytea_fields:
+        key = key.lower()
+        if model[key] != "":
+            model[key] = base64.b64encode(model[key]).decode("utf-8")
     cur.close()
     conn.close()
     return jsonify(model)
@@ -123,23 +128,38 @@ def post_model():
                 formData[key] = json.loads(request.form.get(key))
             else:
                 formData[key] = request.form.get(key)
-        print(formData)
 
         # add files
         for key in list(request.files.keys()):
             file = request.files.get(key)
-            file_data = psycopg2.Binary(file.read())
-            formData[key] = file_data
+
+            # Save file to temporarliy to not have it in ram.
+            file_path = os.path.join("/tmp", file.filename)
+            file.save(file_path)
+
+            # save file path to refference later
+            formData[key] = file_path
+
+        # Setup db connection
+        conn = db_connection()
+        cur = conn.cursor()
+
+        # upload large file objects
+        for key in list(request.files.keys()):
+            cur.execute("SELECT lo_create(0);")
+            lo_oid = cur.fetchone()[0]
+            lo = conn.lobject(lo_oid, "w")
+            with open(formData[key], "rb") as f:
+                lo.write(f.read())
+            formData[key] = lo_oid
 
         # create query
-        columns = list(formData.keys())
+        columns = formData.keys()
         values = tuple(formData.values())
         placeholders = ", ".join(["%s"] * len(columns))
         query = f"INSERT INTO models ({', '.join(columns)}) VALUES ({placeholders})"
 
-        # Execute the query
-        conn = db_connection()
-        cur = conn.cursor()
+        # insert model into models
         cur.execute(query, values)
         conn.commit()
 

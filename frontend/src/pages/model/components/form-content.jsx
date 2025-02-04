@@ -331,7 +331,7 @@ export const FormContent = ({
             <FileField
               label={"Upload output data here"}
               field={"methodsFile"}
-              allowedFileTypes={".png .csv, .tif, .geojson"}
+              allowedFileTypes={".png .csv, .tif, .geojson, .nc"}
             />
           </div>
           <div className="flex flex-col gap-[25px]">

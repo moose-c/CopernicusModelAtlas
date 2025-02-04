@@ -209,7 +209,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
               <input
                 type="file"
                 id={`file-upload${5 + i}`}
-                accept=".png, .csv, .tif, .geojson"
+                accept=".png, .csv, .tif, .geojson, .nc"
                 onChange={(e) => handleChange(e, `boxFile${i}`)}
                 className="hidden"
               />
@@ -222,7 +222,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                 <p>Browse...</p>
               </label>
 
-              <p>Allowed file types: .png, .csv, .tif, .geojson</p>
+              <p>Allowed file types: .png, .csv, .tif, .geojson, .nc</p>
             </div>
             {formData[`boxFile${i}`] !== "" && (
               <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
