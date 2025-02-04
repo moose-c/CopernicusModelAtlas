@@ -2,7 +2,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 
 // useNavigate seems to allow redirection within this site only, a problem for 0Auth?
-export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
+export const Button = ({
+  text = "Contribute",
+  to = "/admin",
+  log = "",
+  call = "",
+}) => {
   const navigate = useNavigate();
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
@@ -10,7 +15,9 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
   const handleClick = (e) => {
     e.preventDefault(); // Prevent navigation
     e.stopPropagation(); // Stop parent <Link> from triggering'
-    if (log.toLocaleLowerCase() === "in") {
+    if (call) {
+      call();
+    } else if (log.toLocaleLowerCase() === "in") {
       loginWithRedirect({
         appState: {
           returnTo: "/profile",
@@ -29,7 +36,7 @@ export const Button = ({ text = "Contribute", to = "/admin", log = "" }) => {
 
   return (
     <button
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
       className="flex gap-[11px] bg-copernicusYellow pl-[20px] h-[34px] items-center group"
     >
       <span className="buttonText uppercase">{text}</span>

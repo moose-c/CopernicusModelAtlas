@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/button";
+import { deleteModel } from "../../../services/db.service";
 
-export const ModelCards = ({ models }) => {
+export const ModelCards = ({ models, setRenewModel }) => {
   return (
     <div className="flex flex-col justify-center">
       {models.map((model) => (
-        <ModelCard key={model[0]} model={model} />
+        <ModelCard key={model[0]} model={model} setRenewModel={setRenewModel} />
       ))}
     </div>
   );
 };
 
-const ModelCard = ({ model }) => {
+const ModelCard = ({ model, setRenewModel }) => {
   // Extracting the values from the model array
   const modelName = model[1];
   const name = model[2];
@@ -30,7 +31,16 @@ const ModelCard = ({ model }) => {
             </h2>
             <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
           </div>
-          <Button text="Edit" to={`model/edit/${model[0]}`} />
+          <div className="flex flex-col gap-3">
+            <Button text="Edit" to={`model/edit/${model[0]}`} />
+            <Button
+              text="delete"
+              call={() => {
+                deleteModel(model[0]);
+                setRenewModel(true);
+              }}
+            />
+          </div>
         </div>
         <p className="text-gray-500">{desc}</p>
       </div>

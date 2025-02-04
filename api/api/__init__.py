@@ -66,7 +66,7 @@ def create_app():
         app,
         resources={r"/api/*": {"origins": "*"}},
         allow_headers=["Authorization", "Content-Type"],
-        methods=["GET", "POST"],
+        methods=["GET", "POST", "DELETE"],
         max_age=86400,
     )
 

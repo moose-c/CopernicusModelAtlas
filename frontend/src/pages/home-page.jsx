@@ -9,15 +9,13 @@ import { keywords } from "../util/globalVars";
 export const HomePage = () => {
   const [models, setModels] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [renewModel, setRenewModel] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
+    console.log("hi");
+    setRenewModel(false);
     const getMessage = async () => {
       const { data, error } = await getAllModels();
-
-      if (!isMounted) {
-        return;
-      }
 
       if (data) {
         setModels(new Array(data)[0]);
@@ -34,11 +32,7 @@ export const HomePage = () => {
     };
 
     getMessage();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  }, [renewModel]);
 
   return (
     <PageLayout>
@@ -55,7 +49,7 @@ export const HomePage = () => {
           placeholder="Select Keywords"
           className="dd w-fit"
         />
-        {models && <ModelCards models={models} />}
+        {models && <ModelCards models={models} setRenewModel={setRenewModel} />}
         {errorMessage && <div> {errorMessage}</div>}
       </div>
     </PageLayout>

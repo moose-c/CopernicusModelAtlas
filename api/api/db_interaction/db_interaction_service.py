@@ -127,10 +127,31 @@ def get_single_model(model_id):
             print(lo_id)
             model[key] = int(lo_id)
             # load and return
-    print(model["keywords"])
     cur.close()
     conn.close()
     return jsonify(model)
+
+
+def delete_model(model_id):
+    print("attempting to delete")
+    conn = db_connection()
+    cur = conn.cursor()
+    try:
+        query = "DELETE FROM models WHERE id = %s"
+
+        # insert model into models
+        cur.execute(query, (model_id,))
+        conn.commit()
+
+        print(f"Model with ID {model_id} deleted successfully.")
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error deleting model with ID {model_id}: {e}")
+
+    finally:
+        cur.close()
+        conn.close()
 
 
 def post_model():

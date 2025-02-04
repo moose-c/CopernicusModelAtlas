@@ -81,3 +81,21 @@ export const getSingleModel = async (model_id) => {
         error,
     };
 };
+
+export const deleteModel = async (model_id) => {
+    const url = `${apiServerUrl}/api/models/delete/${model_id}`; // Modify the endpoint to fit your DELETE route
+    const config = {
+        url: url,
+        method: "DELETE",  // Use DELETE method to delete the resource
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
