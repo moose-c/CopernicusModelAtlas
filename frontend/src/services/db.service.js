@@ -25,27 +25,41 @@ export const postModel = async (modelData) => {
     })
 }
 
-export const editModel = async (modelData) => {
-    // create suitable formData type (necessesary to handle file uploads)
+export const editModel = async (modelData, model_id) => {
+    // create suitable formData type (necessary to handle file uploads)
     const formData = new FormData();
     Object.keys(modelData).forEach((key) => {
-        const value = modelData[key]
+        const value = modelData[key];
         if (Array.isArray(value)) {
-            formData.append(key, JSON.stringify(value))
+            formData.append(key, JSON.stringify(value));  // Append arrays as JSON string
         } else if (value instanceof File) {
-            formData.append(key, value)
+            formData.append(key, value);  // Append files
         } else {
-            formData.append(key, value)
+            formData.append(key, value);  // Append other values (strings, numbers, etc.)
         }
-    })
+    });
 
-    const url = `${apiServerUrl}/api/models/edit/${model_id}`
-    axios.post(url, formData, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    })
-}
+    // Construct URL with model_id
+    const url = `${apiServerUrl}/api/models/edit/${model_id}`;
+
+    try {
+        // Send the formData with a POST request
+        const response = await axios.post(url, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",  // Ensure correct content type for file uploads
+            },
+        });
+
+        // Handle successful response
+        console.log('Model edited successfully', response.data);
+        return response.data;
+    } catch (error) {
+        // Handle error
+        console.error('Error editing model:', error);
+        throw error;  // Rethrow the error if needed for further handling
+    }
+};
+
 
 export const getAllModels = async () => {
     const config = {

@@ -13,10 +13,9 @@ import "../../styles/form.css";
 
 export const EditModelPage = () => {
   const { modelId } = useParams(); // Get modelId from URL params
-  const [modelResponse, setModelResponse] = useState([]);
-  const [modelData, setModelData] = useState({});
   const [formData, setFormData] = useState(blankForm);
 
+  console.log(formData);
   useEffect(() => {
     let isMounted = true;
     const getMessage = async () => {
@@ -27,7 +26,7 @@ export const EditModelPage = () => {
       }
 
       if (data) {
-        setModelResponse(new Array(data)[0]);
+        setFormData(unpackModel(data));
       }
 
       if (error) {
@@ -41,11 +40,6 @@ export const EditModelPage = () => {
       isMounted = false;
     };
   }, []);
-
-  useEffect(() => {
-    setModelData(unpackModel(modelResponse));
-    setFormData(unpackModel(modelResponse));
-  }, [modelResponse]);
 
   const [examplePopups, setExamplePopups] = useState(Array(6).fill(false));
 
@@ -92,8 +86,6 @@ export const EditModelPage = () => {
   };
 
   const handleSubmit = (event) => {
-    let isMounted = true;
-
     event.preventDefault();
 
     // change false -> true to actually perform
@@ -101,7 +93,7 @@ export const EditModelPage = () => {
 
     if (check) {
       const doPost = async (formData) => {
-        const { data, error } = postModel(formData);
+        const { data, error } = editModel(formData, modelId);
         console.log(data, error);
         // setFormData(blankForm);
       };

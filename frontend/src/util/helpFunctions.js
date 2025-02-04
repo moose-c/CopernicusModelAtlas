@@ -8,6 +8,9 @@ export const unpackModel = (modelResponse) => {
                 delete modelResponse[key.toLowerCase()];  // Delete old key
             }
         }
+        if (modelResponse[key] == null) {
+            modelResponse[key] = ''
+        }
     });
     return modelResponse
 };

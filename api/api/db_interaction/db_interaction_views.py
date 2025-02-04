@@ -4,6 +4,7 @@ from api.db_interaction.db_interaction_service import (
     get_all_models,
     get_single_model,
     post_model,
+    edit_model,
     delete_model,
 )
 
@@ -20,6 +21,11 @@ def get_all():
 @bp.route("/get_single/<model_id>")
 def get_single(model_id):
     return get_single_model(model_id)
+
+
+@bp.route("/edit/<model_id>")
+def edit(model_id):
+    return edit_model(model_id)
 
 
 @bp.route("/delete/<model_id>", methods=["DELETE"])

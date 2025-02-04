@@ -160,6 +160,7 @@ export const KeyWordsField = () => {
             handleChange(e, "keywords");
           }}
           options={keywords}
+          selectedValues={formData["keywords"]}
           placeholder="Select Keywords"
           className="formQAs bg-white m-0 p-0 border-0"
         />

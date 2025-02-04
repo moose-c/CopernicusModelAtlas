@@ -18,7 +18,6 @@ export const useModel = () => useContext(ModelContext);
 export const ModelPage = () => {
   const { modelId } = useParams(); // Get modelId from URL params
   const [modelData, setModelData] = useState({});
-  console.log(modelData);
 
   useEffect(() => {
     let isMounted = true;
