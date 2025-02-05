@@ -69,6 +69,14 @@ blank_form_template = {
     "methodsFile": 0,
 }
 
+lo_fields = [
+    "methodsFile",
+    "boxFile0",
+    "boxFile1",
+    "boxFile2",
+    "boxFile3",
+]
+
 
 def db_connection():
     conn = psycopg2.connect(
@@ -98,14 +106,6 @@ def get_single_model(model_id):
         "explanFig",
         "theoryFig",
         "resFig",
-    ]
-
-    lo_fields = [
-        "methodsFile",
-        "boxFile0",
-        "boxFile1",
-        "boxFile2",
-        "boxFile3",
     ]
 
     conn = db_connection()
@@ -166,7 +166,9 @@ def delete_model(model_id):
 
 
 def post_model():
+
     print("post model called")
+    print(request.form)
     formData = copy.deepcopy(blank_form_template)
     try:
         # add non files to formData
@@ -178,14 +180,19 @@ def post_model():
 
         # add files
         for key in list(request.files.keys()):
-            file = request.files.get(key)
+            if key in lo_fields:
+                file = request.files.get(key)
 
-            # Save file to temporarliy to not have it in ram.
-            file_path = os.path.join("/tmp", file.filename)
-            file.save(file_path)
+                # Save file to temporarliy to not have it in ram.
+                file_path = os.path.join("/tmp", file.filename)
+                file.save(file_path)
 
-            # save file path to refference later
-            formData[key] = file_path
+                # save file path to refference later
+                formData[key] = file_path
+            else:
+                file = request.files.get(key)
+                file_data = psycopg2.Binary(file.read())
+                formData[key] = file_data
 
         # Setup db connection
         conn = db_connection()
@@ -193,12 +200,13 @@ def post_model():
 
         # upload large file objects
         for key in list(request.files.keys()):
-            cur.execute("SELECT lo_create(0);")
-            lo_oid = cur.fetchone()[0]
-            lo = conn.lobject(lo_oid, "w")
-            with open(formData[key], "rb") as f:
-                lo.write(f.read())
-            formData[key] = lo_oid
+            if key in lo_fields:
+                cur.execute("SELECT lo_create(0);")
+                lo_oid = cur.fetchone()[0]
+                lo = conn.lobject(lo_oid, "w")
+                with open(formData[key], "rb") as f:
+                    lo.write(f.read())
+                formData[key] = lo_oid
 
         # create query
         columns = formData.keys()
@@ -213,7 +221,7 @@ def post_model():
         cur.close()
         conn.close()
 
-        print("Successfully posted to db")
+        print(f"Succesfully posted {formData["modelName"]} to db")
         return (
             jsonify(
                 {

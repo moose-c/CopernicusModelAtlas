@@ -95,6 +95,12 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
 };
 
 export const FileField = ({ label, field, allowedFileTypes, capField }) => {
+  let emptyField;
+  if (["methodsFile"].includes(field)) {
+    emptyField = 0;
+  } else {
+    emptyField = "";
+  }
   const { formData, handleChange } = useForm(); // Automatically gets values
   return (
     <>
@@ -117,11 +123,11 @@ export const FileField = ({ label, field, allowedFileTypes, capField }) => {
 
           <p>Allowed file types: {allowedFileTypes}</p>
 
-          {formData[field] !== "" && (
+          {formData[field] !== "" && formData[field] !== 0 && (
             <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
               <p className="text-sm text-green-600">{formData[field].name}</p>
               <button
-                onClick={() => handleChange("", field)}
+                onClick={() => handleChange(emptyField, field)}
                 className="ml-4 text-red-600 hover:underline text-sm"
               >
                 Remove
@@ -225,13 +231,13 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
 
               <p>Allowed file types: .png, .csv, .tif, .geojson, .nc</p>
             </div>
-            {formData[`boxFile${i}`] !== "" && (
+            {formData[`boxFile${i}`] !== 0 && (
               <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
                 <p className="text-sm text-green-600">
                   {formData[`boxFile${i}`].name}
                 </p>
                 <button
-                  onClick={() => handleChange("", `boxFile${i}`)}
+                  onClick={() => handleChange(0, `boxFile${i}`)}
                   className="ml-4 text-red-600 hover:underline text-sm"
                 >
                   Remove

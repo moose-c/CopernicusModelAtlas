@@ -32,7 +32,9 @@ const ModelCard = ({ model, setRenewModel }) => {
             <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
           </div>
           <div className="flex flex-col gap-3">
-            <Button text="Edit" to={`model/edit/${model[0]}`} />
+            <div>
+              <Button text="Edit" to={`model/edit/${model[0]}`} />
+            </div>
             <Button
               text="delete"
               call={() => {

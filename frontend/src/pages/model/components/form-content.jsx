@@ -29,18 +29,12 @@ export const FormContent = ({
       ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q) ||
       q.slice(0, -1) === "boxFile"
     ) {
-      const typeKey = q.slice(0, -1) + "Type" + q.charAt(q.length - 1);
-      if (e === "") {
+      if (["", 0].includes(e)) {
         setFormData((prevState) => {
           const updatedState = {
             ...prevState,
-            [q]: "", // Always set q to an empty string
+            [q]: e, // Always set q to an empty string or 0
           };
-
-          // Only add or update the typeKey if it exists in prevState
-          if (typeKey in prevState) {
-            updatedState[typeKey] = ""; // Set the value for typeKey
-          }
 
           return updatedState;
         });
@@ -51,11 +45,6 @@ export const FormContent = ({
             ...prevState,
             [q]: file, // Always set q to an empty string
           };
-
-          // Only add or update the typeKey if it exists in prevState
-          if (typeKey in prevState) {
-            updatedState[typeKey] = ""; // Set the value for typeKey
-          }
 
           return updatedState;
         });
@@ -148,7 +137,7 @@ export const FormContent = ({
         // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 5
         for (let j = i + 1; j <= 3; j++) {
           updatedState[`boxTitle${j - 1}`] = prevState[`boxTitle${j}`] || "";
-          updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || "";
+          updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || 0;
           updatedState[`boxFileTitle${j - 1}`] =
             prevState[`boxFileTitle${j}`] || "";
           updatedState[`boxType${j - 1}`] = prevState[`boxType${j}`] || "";
@@ -158,7 +147,7 @@ export const FormContent = ({
         // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
         updatedState[`boxTitle3`] = "";
         updatedState[`boxFigTitle3`] = "";
-        updatedState[`boxFile3`] = "";
+        updatedState[`boxFile3`] = 0;
         updatedState[`boxFileType3`] = "";
         updatedState[`boxDescr3`] = "";
 

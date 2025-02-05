@@ -1,11 +1,11 @@
 frontend:
 - model pages.
-- correctly rerender on delete.
 
 difc files:
 - database:
-  - storing images, csv and tif is better as bytea, whilst geojson is better as jsonb
-  - alternative method: storing not files but file PATHS. 
+  - retrieval of lo's 
+-api:
+  - no server clog.
 - fe:
   - perform check after submission
 
