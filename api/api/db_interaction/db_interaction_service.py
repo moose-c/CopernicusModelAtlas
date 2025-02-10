@@ -22,8 +22,10 @@ blank_form_template = {
     "modellerName4": "",
     "modellerUrl4": "",
     "icon": "",
+    "iconName": "",
     "longDescr": "",
     "explanFig": "",
+    "explanFigName": "",
     "explanFigCaption": "",
     "linkName0": "",
     "linkUrl0": "",
@@ -37,9 +39,11 @@ blank_form_template = {
     "linkUrl4": "",
     "theoryText": "",
     "theoryFig": "",
+    "theoryFigName": "",
     "theoryFigDesc": "",
     "resText": "",
     "resFig": "",
+    "resFigName": "",
     "resFigDesc": "",
     "boxTitle0": "",
     "boxFileTitle0": "",
@@ -63,11 +67,17 @@ blank_form_template = {
     "nbBoxes": 1,
     "methodsFileCaption": "",
     "boxFile0": 0,
+    "boxFile0Name": "",
     "boxFile1": 0,
+    "boxFile1Name": "",
     "boxFile2": 0,
+    "boxFile2Name": "",
     "boxFile3": 0,
+    "boxFile3Name": "",
     "methodsFile": 0,
+    "methodsFileName": "",
 }
+
 
 lo_fields = [
     "methodsFile",
@@ -195,12 +205,6 @@ def post_model():
 
                 # save file path to refference later
                 formData[key] = file_path
-            else:
-                # Here files that need to be converted to bytea.
-                # Remove this after fixed frontend
-                file = request.files.get(key)
-                file_data = psycopg2.Binary(file.read())
-                formData[key] = file_data
 
         # Setup db connection
         conn = db_connection()
