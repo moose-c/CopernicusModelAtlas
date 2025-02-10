@@ -1,5 +1,6 @@
 frontend:
 - model pages.
+- editing also removes the icon (so probably messes up all byteas)
 
 difc files:
 - database:

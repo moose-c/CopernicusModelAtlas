@@ -77,6 +77,13 @@ lo_fields = [
     "boxFile3",
 ]
 
+bytea_fields = [
+        "icon",
+        "explanFig",
+        "theoryFig",
+        "resFig",
+    ]
+
 
 def db_connection():
     conn = psycopg2.connect(
@@ -101,12 +108,6 @@ def get_all_models():
 
 
 def get_single_model(model_id):
-    bytea_fields = [
-        "icon",
-        "explanFig",
-        "theoryFig",
-        "resFig",
-    ]
 
     conn = db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -175,6 +176,11 @@ def post_model():
         for key in list(request.form.keys()):
             if key == "keywords":
                 formData[key] = json.loads(request.form.get(key))
+            
+            # if you edit a model and resubmit it images are already in binary string format and not as file.
+            # Better would be to decode it always in frontend on post.
+            if key in bytea_fields:
+                formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
             else:
                 formData[key] = request.form.get(key)
 
@@ -190,6 +196,8 @@ def post_model():
                 # save file path to refference later
                 formData[key] = file_path
             else:
+                # Here files that need to be converted to bytea.
+                # Remove this after fixed frontend
                 file = request.files.get(key)
                 file_data = psycopg2.Binary(file.read())
                 formData[key] = file_data

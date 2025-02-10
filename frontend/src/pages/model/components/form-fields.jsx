@@ -125,7 +125,9 @@ export const FileField = ({ label, field, allowedFileTypes, capField }) => {
 
           {formData[field] !== "" && formData[field] !== 0 && (
             <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-              <p className="text-sm text-green-600">{formData[field].name}</p>
+              <p className="text-sm text-green-600">
+                {formData[`${field}Name`]}
+              </p>
               <button
                 onClick={() => handleChange(emptyField, field)}
                 className="ml-4 text-red-600 hover:underline text-sm"
@@ -234,7 +236,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
             {formData[`boxFile${i}`] !== 0 && (
               <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
                 <p className="text-sm text-green-600">
-                  {formData[`boxFile${i}`].name}
+                  {formData[`boxFile${i}Name`]}
                 </p>
                 <button
                   onClick={() => handleChange(0, `boxFile${i}`)}

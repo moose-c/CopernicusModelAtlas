@@ -25,15 +25,37 @@ export const FormContent = ({
         ...prevState,
         keywords: e,
       }));
-    } else if (
-      ["icon", "explanFig", "theoryFig", "resFig", "methodsFile"].includes(q) ||
-      q.slice(0, -1) === "boxFile"
-    ) {
+    } else if (["icon", "explanFig", "theoryFig", "resFig"].includes(q)) {
+      if (e == "") {
+        setFormData((prevState) => {
+          const updatedState = {
+            ...prevState,
+            [q]: "",
+            [`${q}Name`]: "",
+          };
+
+          return updatedState;
+        });
+      } else {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64String = reader.result.split(",")[1]; // Strip metadata
+          setFormData((prevState) => ({
+            ...prevState,
+            [q]: base64String, // Send pure Base64 string
+            [`${q}Name`]: file.name,
+          }));
+        };
+      }
+    } else if (["methodsFile"].includes(q) || q.slice(0, -1) === "boxFile") {
       if (["", 0].includes(e)) {
         setFormData((prevState) => {
           const updatedState = {
             ...prevState,
             [q]: e, // Always set q to an empty string or 0
+            [`${q}Name`]: "",
           };
 
           return updatedState;
@@ -44,6 +66,7 @@ export const FormContent = ({
           const updatedState = {
             ...prevState,
             [q]: file, // Always set q to an empty string
+            [`${q}Name`]: file.name,
           };
 
           return updatedState;

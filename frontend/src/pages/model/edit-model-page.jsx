@@ -139,6 +139,7 @@ export const EditModelPage = () => {
           </button>
         </form>
       </div>
+      <div>{JSON.stringify(formData, null, 2)}</div>
     </PageLayout>
   );
 };
