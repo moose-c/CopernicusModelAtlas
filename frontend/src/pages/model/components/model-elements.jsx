@@ -146,7 +146,7 @@ export const Methods = () => {
           <h2>Methods</h2>
           <p className="reg">{modelData.methodsDesc}</p>
         </div>
-        {modelData.theoryFig && (
+        {modelData.methodsFile != 0 && (
           <div className="border-2 border-copernicusGrey pb-10">
             <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
               <p className="ddHeading">{modelData.methodsFileCaption}</p>

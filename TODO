@@ -1,10 +1,17 @@
 difc files:
 - database:
   - retrieval of lo's 
--api:
-  - no server clog.
 - fe:
   - perform check after submission
+
+POTENTIAL ISSUE: does the oid's change over time? If so, write name to pg_largeobject_metadata (however, this is also not ideal.)
+currently in pg_largeobject_metadata: 16723, 16730, 16731
+currently in fe: 16723, 16730, 16731
+
+After editing something else in this model:
+pg_largeobject_metadata: -
+fe: 16743 ->
+
 
 
 Log in:
@@ -17,3 +24,6 @@ Log in:
 
 WH:
 - allow modellers to input text including bold and \n etc
+
+MH:
+- improve connection for extended period to keep alive during file streaming

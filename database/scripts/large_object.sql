@@ -2,4 +2,4 @@
 SELECT * FROM pg_largeobject_metadata;
 select * from models where id = 9;
 SELECT lo_get('');
-SELECT lo_unlink('');
+SELECT lo_unlink('16738');

@@ -6,6 +6,7 @@ from api.db_interaction.db_interaction_service import (
     post_model,
     edit_model,
     delete_model,
+    retrieve_data,
 )
 
 bp_name = "api-models"
@@ -36,3 +37,8 @@ def delete(model_id):
 @bp.route("/post", methods=(["POST"]))
 def post():
     return post_model()
+
+
+@bp.route("/get_file/<file_id>")
+def get_data(file_id):
+    return retrieve_data(file_id)

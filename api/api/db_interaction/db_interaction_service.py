@@ -2,7 +2,7 @@ from common.utils import safe_get_env_var
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import base64
-from flask import request, jsonify
+from flask import request, jsonify, Response
 import copy
 import json
 import os
@@ -143,22 +143,13 @@ def get_single_model(model_id):
     return jsonify(model)
 
 
-def delete_model(model_id):
+def delete_model(model_id, los_to_delete=[]):
     print("attempting to delete")
     conn = db_connection()
     cur = conn.cursor()
     try:
-        # get lo's
-        cur.execute(
-            "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3 FROM models WHERE id = %s",
-            [model_id],
-        )
-        oldModel = list(cur.fetchone())  # Fetch a single row
-
-        # delete lo's
-        for loid in oldModel:
-            if loid != 0:
-                cur.execute("SELECT lo_unlink(%s);", (loid,))
+        for loid in los_to_delete:
+            cur.execute("SELECT lo_unlink(%s);", (loid,))
 
         # delete model into models
         cur.execute("DELETE FROM models WHERE id = %s", (model_id,))
@@ -177,9 +168,7 @@ def delete_model(model_id):
 
 
 def post_model():
-
     print("post model called")
-    print(request.form)
     formData = copy.deepcopy(blank_form_template)
     try:
         # add non files to formData
@@ -192,30 +181,27 @@ def post_model():
             else:
                 formData[key] = request.form.get(key)
 
-        # add files
-        for key in list(request.files.keys()):
-            if key in lo_fields:
-                file = request.files.get(key)
-
-                # Save file to temporarliy to not have it in ram.
-                file_path = os.path.join("/tmp", file.filename)
-                file.save(file_path)
-
-                # save file path to refference later
-                formData[key] = file_path
-
         # Setup db connection
         conn = db_connection()
         cur = conn.cursor()
 
-        # upload large file objects
+        # Upload large file objects directly to the database
+        # can be further improved by using asynchronous uploading (e.g. Celery) or external storage Services (S3)
+
         for key in list(request.files.keys()):
             if key in lo_fields:
+                file = request.files.get(key)
+
                 cur.execute("SELECT lo_create(0);")
                 lo_oid = cur.fetchone()[0]
                 lo = conn.lobject(lo_oid, "w")
-                with open(formData[key], "rb") as f:
-                    lo.write(f.read())
+
+                # Stream the file from the request directly into the large object
+                with file.stream as f:
+                    while chunk := f.read(1024 * 1024):  # Read 1MB at a time
+                        lo.write(chunk)
+
+                # Save the LO OID for later reference
                 formData[key] = lo_oid
 
         # create query
@@ -250,7 +236,37 @@ def post_model():
 def edit_model(model_id):
     try:
         print("edit model called")
-        delete_model(model_id)
+
+        # Need to learn which lo's to delete
+        los_to_delete = []
+        newValues = []
+        for key in ["methodsFile", "boxFile0", "boxFile1", "boxFile2", "boxFile3"]:
+            try:
+                newValue = int(request.form.get(key))
+                newValues.append(newValue)
+            except:
+                newValues.append(-1)
+
+        conn = db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+            "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3 FROM models WHERE id = %s",
+            [model_id],
+        )
+        oldValues = list(cur.fetchone())  # Fetch a single row
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        print(oldValues, newValues)
+
+        for i, oldValue in enumerate(oldValues):
+            if oldValue != newValues[i]:
+                los_to_delete.append(oldValue)
+        print(los_to_delete)
+
+        delete_model(model_id, los_to_delete=los_to_delete)
         post_model()
         return (
             jsonify(
@@ -264,3 +280,36 @@ def edit_model(model_id):
     except Exception as e:
         print(f"Failed to add model. Reason: {str(e)}")
         return jsonify({"error": "Failed to add model", "details": str(e)}), 400
+
+
+def generate_large_object(data_loid, chunk_size=1024 * 1024):
+    conn = db_connection()
+    cur = conn.cursor()
+
+    # Open the large object
+    cur.execute("SELECT lo_open(%s, 'r');", (data_loid,))
+    lo_fd = cur.fetchone()[0]
+
+    # Stream the object in chunks
+    lo = conn.lobject(lo_fd)
+    while True:
+        chunk = lo.read(chunk_size)
+        if not chunk:
+            break
+        yield chunk
+
+    # Close large object
+    cur.execute("SELECT lo_close(%s);", (lo_fd,))
+
+    cur.close()
+    conn.close()
+
+
+def retrieve_data(data_loid):
+    try:
+        return Response(
+            generate_large_object(data_loid), mimetype="application/octet-stream"
+        )
+
+    except Exception as e:
+        jsonify({"error": "Error retrieving file", "details": str(e)}), 500
