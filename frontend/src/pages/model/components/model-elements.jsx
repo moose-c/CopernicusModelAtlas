@@ -1,5 +1,7 @@
 import { useModel } from "../model-page";
 import { Button } from "../../../components/button";
+import { getLargeFile } from "../../../services/db.service";
+import { useState, useEffect } from "react";
 
 export const Introduction = () => {
   const { modelData } = useModel(); // Automatically gets values
@@ -119,10 +121,15 @@ export const Results = () => {
                 <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
                   <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
                 </div>
-                <div className="h-[500px] flex gap-[20px] p-5 w-full">
+                <div className=" flex gap-[20px] p-5 w-full">
                   <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey">
                     <h3>{modelData[`boxFileTitle${i}`]}</h3>
-                    <div>Currenlty loid: {modelData[`boxFile${i}`]}</div>
+                    <div className="border-red-300 border-2 h-full">
+                      <DataElement
+                        loid={modelData[`boxFile${i}`]}
+                        name={modelData[`boxFile${i}Name`]}
+                      />
+                    </div>
                   </div>
                   <div className="p-3 border-2 border-copernicusGrey w-full">
                     <p>{modelData[`boxDescr${i}`]}</p>
@@ -138,7 +145,7 @@ export const Results = () => {
 };
 
 export const Methods = () => {
-  const { modelData } = useModel(); // Automatically gets values
+  const { modelData } = useModel();
   return (
     <>
       <div className="flex flex-col gap-[10px]">
@@ -152,12 +159,12 @@ export const Methods = () => {
               <p className="ddHeading">{modelData.methodsFileCaption}</p>
             </div>
             <div className="items-center flex flex-col gap-[10px]">
-              <p>{modelData.methodsFile}</p>
-              <img
-                src={`data:image/png;base64,${modelData.methodsFile}`}
-                alt="Model Icon"
-                className="max-w-[500px]" // Maximum width and height
-              />
+              {modelData.methodsFile != 0 && (
+                <DataElement
+                  loid={modelData.methodsFile}
+                  name={modelData.methodsFileName}
+                />
+              )}
               <p className="caption">{modelData.methodsFileCaption}</p>
             </div>
           </div>
@@ -179,6 +186,49 @@ export const Colofon = () => {
           <p className="reg">Additional: {modelData.colofonAddition}</p>
         </div>
       </div>
+    </>
+  );
+};
+
+const DataElement = ({ loid, name }) => {
+  const [fileBin, setFileBin] = useState(null);
+  const [decodedFile, setDecodedFile] = useState(null);
+
+  useEffect(() => {
+    const fetchFile = async () => {
+      const { data, error } = await getLargeFile(loid);
+      if (error) {
+        console.log(error);
+      } else {
+        setFileBin(data);
+      }
+    };
+
+    if (loid) {
+      fetchFile();
+    }
+
+    return () => {};
+  }, [loid]);
+
+  useEffect(() => {
+    if (name) {
+      const fileType = name.split(".")[1];
+      if (fileType == "png") {
+        setDecodedFile(URL.createObjectURL(fileBin));
+      } else if (fileType == "csv") {
+        console.log("not yet implemented");
+      }
+    }
+  }, [fileBin]);
+
+  return (
+    <>
+      <img
+        src={decodedFile}
+        alt="Model Icon"
+        className="max-w-[500px]" // Maximum width and height
+      />
     </>
   );
 };

@@ -149,7 +149,8 @@ def delete_model(model_id, los_to_delete=[]):
     cur = conn.cursor()
     try:
         for loid in los_to_delete:
-            cur.execute("SELECT lo_unlink(%s);", (loid,))
+            if loid != 0:
+                cur.execute("SELECT lo_unlink(%s);", (loid,))
 
         # delete model into models
         cur.execute("DELETE FROM models WHERE id = %s", (model_id,))
@@ -286,12 +287,8 @@ def generate_large_object(data_loid, chunk_size=1024 * 1024):
     conn = db_connection()
     cur = conn.cursor()
 
-    # Open the large object
-    cur.execute("SELECT lo_open(%s, 'r');", (data_loid,))
-    lo_fd = cur.fetchone()[0]
-
     # Stream the object in chunks
-    lo = conn.lobject(lo_fd)
+    lo = conn.lobject(int(data_loid), "rb")
     while True:
         chunk = lo.read(chunk_size)
         if not chunk:
@@ -299,7 +296,7 @@ def generate_large_object(data_loid, chunk_size=1024 * 1024):
         yield chunk
 
     # Close large object
-    cur.execute("SELECT lo_close(%s);", (lo_fd,))
+    lo.close()
 
     cur.close()
     conn.close()

@@ -113,3 +113,26 @@ export const deleteModel = async (model_id) => {
         error,
     };
 };
+
+export const getLargeFile = async (dataLoid) => {
+    const config = {
+        url: `${apiServerUrl}/api/models/get_file/${dataLoid}`,
+        method: "GET",
+        responseType: "blob", // Ensures the response is treated as a binary file
+        headers: {
+            "Content-Type": "application/octet-stream",
+        },
+    };
+
+    try {
+        const response = await callExternalApi({ config });
+
+        if (response.error) {
+            return { data: null, error: response.error };
+        }
+
+        return { data: response.data, error: null };
+    } catch (error) {
+        return { data: null, error };
+    }
+};

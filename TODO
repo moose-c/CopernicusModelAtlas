@@ -24,6 +24,7 @@ Log in:
 
 WH:
 - allow modellers to input text including bold and \n etc
+- side bar?
 
 MH:
 - improve connection for extended period to keep alive during file streaming
