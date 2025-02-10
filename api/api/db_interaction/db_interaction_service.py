@@ -88,11 +88,11 @@ lo_fields = [
 ]
 
 bytea_fields = [
-        "icon",
-        "explanFig",
-        "theoryFig",
-        "resFig",
-    ]
+    "icon",
+    "explanFig",
+    "theoryFig",
+    "resFig",
+]
 
 
 def db_connection():
@@ -186,10 +186,8 @@ def post_model():
         for key in list(request.form.keys()):
             if key == "keywords":
                 formData[key] = json.loads(request.form.get(key))
-            
             # if you edit a model and resubmit it images are already in binary string format and not as file.
-            # Better would be to decode it always in frontend on post.
-            if key in bytea_fields:
+            elif key in bytea_fields:
                 formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
             else:
                 formData[key] = request.form.get(key)
@@ -233,7 +231,7 @@ def post_model():
         cur.close()
         conn.close()
 
-        print(f"Succesfully posted {formData["modelName"]} to db")
+        print(f"Succesfully posted {formData['modelName']} to db")
         return (
             jsonify(
                 {
@@ -250,6 +248,19 @@ def post_model():
 
 
 def edit_model(model_id):
-    print("edit model called")
-    delete_model(model_id)
-    post_model()
+    try:
+        print("edit model called")
+        delete_model(model_id)
+        post_model()
+        return (
+            jsonify(
+                {
+                    "message": "Model edited successfully",
+                    "modelName": request.form.get("modelName"),
+                }
+            ),
+            201,
+        )
+    except Exception as e:
+        print(f"Failed to add model. Reason: {str(e)}")
+        return jsonify({"error": "Failed to add model", "details": str(e)}), 400

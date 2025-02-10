@@ -94,7 +94,13 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
   );
 };
 
-export const FileField = ({ label, field, allowedFileTypes, capField }) => {
+export const FileField = ({
+  label,
+  field,
+  allowedFileTypes,
+  capField,
+  capText,
+}) => {
   let emptyField;
   if (["methodsFile"].includes(field)) {
     emptyField = 0;
@@ -139,7 +145,10 @@ export const FileField = ({ label, field, allowedFileTypes, capField }) => {
         </div>
         {capField && (
           <ShortTextField
-            label={"Do you want the figure uploaded above to have a caption?"}
+            label={
+              capText ||
+              "Do you want the figure uploaded above to have a caption?"
+            }
             placeholder={"Caption"}
             field={capField}
           />
@@ -210,8 +219,8 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
               className="formQAs"
               type="text"
               placeholder="Output Title"
-              value={formData[`boxFigTitle${i}`]}
-              onChange={(e) => handleChange(e, `boxFigTitle${i}`)}
+              value={formData[`boxFileTitle${i}`]}
+              onChange={(e) => handleChange(e, `boxFileTitle${i}`)}
             />
             <p>Upload output data here{i == 0 && "*"}</p>
             <div className="flex gap-[15px]">

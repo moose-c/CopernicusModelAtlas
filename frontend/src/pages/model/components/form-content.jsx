@@ -169,7 +169,7 @@ export const FormContent = ({
 
         // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
         updatedState[`boxTitle3`] = "";
-        updatedState[`boxFigTitle3`] = "";
+        updatedState[`boxFileTitle3`] = "";
         updatedState[`boxFile3`] = 0;
         updatedState[`boxFileType3`] = "";
         updatedState[`boxDescr3`] = "";
@@ -341,9 +341,11 @@ export const FormContent = ({
               field={"methodsDesc"}
             />
             <FileField
-              label={"Upload output data here"}
+              label={"Upload methods data here"}
               field={"methodsFile"}
               allowedFileTypes={".png .csv, .tif, .geojson, .nc"}
+              capField={"methodsFileCaption"}
+              capText={"Enter a title for this data field"}
             />
           </div>
           <div className="flex flex-col gap-[25px]">
