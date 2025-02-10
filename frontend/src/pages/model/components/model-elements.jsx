@@ -10,7 +10,7 @@ export const Introduction = () => {
           <div className="flex flex-col gap-[10px] w-full ">
             <h1>{modelData.modelName}</h1>
             <p>{modelData.keywords && modelData.keywords.join(", ")}</p>
-            <p className="top">{modelData.descr}</p>
+            <p className="top">{modelData.longDescr}</p>
           </div>
           <div className="w-[270px] flex flex-col gap-[5px] items-center">
             <img
@@ -18,7 +18,7 @@ export const Introduction = () => {
               alt="Model Icon"
               className="your-tailwind-classes"
             />
-            {[0, 1, 2, 3, 4].map((i) => {
+            {[...Array(modelData.nbModellers)].map((_, i) => {
               const nameKey = `modellerName${i}`;
               const urlKey = `modellerUrl${i}`;
 
@@ -45,13 +45,13 @@ export const Introduction = () => {
           <img
             src={`data:image/png;base64,${modelData.explanFig}`}
             alt="Model Icon"
-            className="your-tailwind-classes"
+            className="w-full max-w-[800px] h-auto object-contain"
           />
           <p className="caption">{modelData.explanFigCaption}</p>
         </div>
         <div className="flex gap-[80px] justify-center">
-          {[0, 1, 2, 3, 4].map(
-            (i) =>
+          {[...Array(modelData.nbLinks)].map(
+            (_, i) =>
               modelData[`linkName${i}`] &&
               modelData[`linkUrl${i}`] && (
                 <Button
@@ -71,8 +71,8 @@ export const Theory = () => {
   const { modelData } = useModel(); // Automatically gets values
   return (
     <>
-      <div className="flex flex-col gap-[10px]">
-        <div className="w-[80%] flex gap-[10px]">
+      <div className="flex gap-[10px]">
+        <div className="w-[80%] flex flex-col gap-[10px]">
           <h2>Theory</h2>
           <p className="reg">{modelData.theoryText}</p>
         </div>
@@ -81,7 +81,7 @@ export const Theory = () => {
             <img
               src={`data:image/png;base64,${modelData.theoryFig}`}
               alt="Model Icon"
-              className="your-tailwind-classes"
+              className="w-full max-w-[500px] h-auto object-contain"
             />
             <p className="caption">{modelData.theoryFigDesc}</p>
           </div>
@@ -95,21 +95,43 @@ export const Results = () => {
   const { modelData } = useModel(); // Automatically gets values
   return (
     <>
-      <div className="flex flex-col gap-[10px]">
-        <div className="w-[80%] flex gap-[10px]">
-          <h2>Theory</h2>
-          <p className="reg">{modelData.theoryText}</p>
-        </div>
-        {modelData.theoryFig && (
-          <div className="items-center flex flex-col gap-[10px]">
-            <img
-              src={`data:image/png;base64,${modelData.theoryFig}`}
-              alt="Model Icon"
-              className="your-tailwind-classes"
-            />
-            <p className="caption">{modelData.theoryFigDesc}</p>
+      <div className="flex flex-col gap-[30px]">
+        <div className="flex gap-[10px]">
+          <div className="w-[80%] flex flex-col gap-[10px]">
+            <h2>Results</h2>
+            <p className="reg">{modelData.resText}</p>
           </div>
-        )}
+          {modelData.resFig && (
+            <div className="items-center flex flex-col gap-[10px]">
+              <img
+                src={`data:image/png;base64,${modelData.resFig}`}
+                alt="Model Icon"
+                className="w-full max-w-[500px] h-auto object-contain"
+              />
+              <p className="caption">{modelData.resFigDesc}</p>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col">
+          {[...Array(modelData.nbBoxes)].map((_, i) => {
+            return (
+              <div key={i} className="border-2 border-copernicusGrey">
+                <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
+                  <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
+                </div>
+                <div className="h-[500px] flex gap-[20px] p-5 w-full">
+                  <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey">
+                    <h3>{modelData[`boxFileTitle${i}`]}</h3>
+                    <div>Currenlty loid: {modelData[`boxFile${i}`]}</div>
+                  </div>
+                  <div className="p-3 border-2 border-copernicusGrey w-full">
+                    <p>{modelData[`boxDescr${i}`]}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}{" "}
+        </div>
       </div>
     </>
   );
@@ -120,18 +142,24 @@ export const Methods = () => {
   return (
     <>
       <div className="flex flex-col gap-[10px]">
-        <div className="w-[80%] flex gap-[10px]">
-          <h2>Theory</h2>
-          <p className="reg">{modelData.theoryText}</p>
+        <div className="w-[80%] flex flex-col gap-[10px]">
+          <h2>Methods</h2>
+          <p className="reg">{modelData.methodsDesc}</p>
         </div>
         {modelData.theoryFig && (
-          <div className="items-center flex flex-col gap-[10px]">
-            <img
-              src={`data:image/png;base64,${modelData.theoryFig}`}
-              alt="Model Icon"
-              className="your-tailwind-classes"
-            />
-            <p className="caption">{modelData.theoryFigDesc}</p>
+          <div className="border-2 border-copernicusGrey pb-10">
+            <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
+              <p className="ddHeading">{modelData.methodsFileCaption}</p>
+            </div>
+            <div className="items-center flex flex-col gap-[10px]">
+              <p>{modelData.methodsFile}</p>
+              <img
+                src={`data:image/png;base64,${modelData.methodsFile}`}
+                alt="Model Icon"
+                className="max-w-[500px]" // Maximum width and height
+              />
+              <p className="caption">{modelData.methodsFileCaption}</p>
+            </div>
           </div>
         )}
       </div>
@@ -143,21 +171,13 @@ export const Colofon = () => {
   const { modelData } = useModel(); // Automatically gets values
   return (
     <>
-      <div className="flex flex-col gap-[10px]">
-        <div className="w-[80%] flex gap-[10px]">
-          <h2>Theory</h2>
-          <p className="reg">{modelData.theoryText}</p>
+      <div className="flex gap-[10px]">
+        <div className="w-[80%] flex flex-col gap-[10px]">
+          <h2>Colofon</h2>
+          <p className="reg">How to Cite: {modelData.colofonCite}</p>
+          <p className="reg">Model Licence: {modelData.colofonLicence}</p>
+          <p className="reg">Additional: {modelData.colofonAddition}</p>
         </div>
-        {modelData.theoryFig && (
-          <div className="items-center flex flex-col gap-[10px]">
-            <img
-              src={`data:image/png;base64,${modelData.theoryFig}`}
-              alt="Model Icon"
-              className="your-tailwind-classes"
-            />
-            <p className="caption">{modelData.theoryFigDesc}</p>
-          </div>
-        )}
       </div>
     </>
   );
