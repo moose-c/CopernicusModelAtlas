@@ -1,7 +1,6 @@
 import { useModel } from "../model-page";
 import { Button } from "../../../components/button";
-import { getLargeFile } from "../../../services/db.service";
-import { useState, useEffect } from "react";
+import { DataElement } from "./data-vis";
 
 export const Introduction = () => {
   const { modelData } = useModel(); // Automatically gets values
@@ -122,9 +121,9 @@ export const Results = () => {
                   <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
                 </div>
                 <div className=" flex gap-[20px] p-5 w-full">
-                  <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey">
+                  <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
                     <h3>{modelData[`boxFileTitle${i}`]}</h3>
-                    <div className="border-red-300 border-2 h-full">
+                    <div className="w-[1000px]">
                       <DataElement
                         loid={modelData[`boxFile${i}`]}
                         name={modelData[`boxFile${i}Name`]}
@@ -186,49 +185,6 @@ export const Colofon = () => {
           <p className="reg">Additional: {modelData.colofonAddition}</p>
         </div>
       </div>
-    </>
-  );
-};
-
-const DataElement = ({ loid, name }) => {
-  const [fileBin, setFileBin] = useState(null);
-  const [decodedFile, setDecodedFile] = useState(null);
-
-  useEffect(() => {
-    const fetchFile = async () => {
-      const { data, error } = await getLargeFile(loid);
-      if (error) {
-        console.log(error);
-      } else {
-        setFileBin(data);
-      }
-    };
-
-    if (loid) {
-      fetchFile();
-    }
-
-    return () => {};
-  }, [loid]);
-
-  useEffect(() => {
-    if (name) {
-      const fileType = name.split(".")[1];
-      if (fileType == "png") {
-        setDecodedFile(URL.createObjectURL(fileBin));
-      } else if (fileType == "csv") {
-        console.log("not yet implemented");
-      }
-    }
-  }, [fileBin]);
-
-  return (
-    <>
-      <img
-        src={decodedFile}
-        alt="Model Icon"
-        className="max-w-[500px]" // Maximum width and height
-      />
     </>
   );
 };

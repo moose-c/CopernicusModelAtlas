@@ -31,10 +31,10 @@ export const AddModelPage = () => {
     let check = performChecks(formData, true);
 
     if (check) {
+      console.log("starting to perform post");
       const doPost = async (formData) => {
         const { data, error } = postModel(formData);
         console.log(data, error);
-        // setFormData(blankForm);
       };
       doPost(formData);
       return () => {
@@ -77,37 +77,6 @@ export const AddModelPage = () => {
             Submit
           </button>
         </form>
-        <CodeSnippet
-          title="form data"
-          code={JSON.stringify(formData, null, 2)}
-        />
-        {formData.icon && (
-          <div>
-            <h2>Preview Icon</h2>
-            <p>File ready to be uploaded: {formData.icon.name}</p>
-            <p>File Type: {formData.icon.type}</p>
-            <p>File Size: {formData.icon.size} bytes</p>
-
-            {/* Display image preview */}
-            <img
-              src={URL.createObjectURL(formData.icon)} // Create a temporary URL for the uploaded file
-              alt="Preview"
-              width="100" // Set the desired preview size
-              height="100" // Set the desired preview size
-            />
-          </div>
-        )}
-        {formData.explanFig && (
-          <div>
-            {/* Display image preview */}
-            <img
-              src={URL.createObjectURL(formData.explanFig)} // Create a temporary URL for the uploaded file
-              alt="Preview"
-              width="100" // Set the desired preview size
-              height="100" // Set the desired preview size
-            />
-          </div>
-        )}
       </div>
     </PageLayout>
   );

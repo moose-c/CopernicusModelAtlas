@@ -25,6 +25,14 @@ Log in:
 WH:
 - allow modellers to input text including bold and \n etc
 - side bar?
+- long description = short description if left empty
+- preview field for images: 
+<img
+              src={`data:image/png;base64,${formData.icon}`}
+              alt="Preview"
+              width="100" // Set the desired preview size
+              height="100" // Set the desired preview size
+            />
 
 MH:
 - improve connection for extended period to keep alive during file streaming

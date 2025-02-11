@@ -52,7 +52,7 @@ export const ModelPage = () => {
             <Introduction />
             <Theory />
             <Results />
-            <Methods />
+            {modelData["methodsDesc"] && <Methods />}
             <Colofon />
           </div>
         </PageLayout>

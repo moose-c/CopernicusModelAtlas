@@ -35,7 +35,6 @@ const checkMandatoryFields = (formData) => {
             .reduce((acc, key) => {
                 return acc && acc[key] !== undefined ? acc[key] : undefined;
             }, formData); // Start reducing with formData as the base
-        console.log(value);
 
         if (value === "") {
             // ideally, the alert point to the empty field, flashing it red or something.

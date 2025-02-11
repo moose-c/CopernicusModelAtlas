@@ -117,7 +117,7 @@ export const FileField = ({
           <input
             type="file"
             id={`file-upload-${field}`}
-            accept=".png, .svg"
+            accept={allowedFileTypes}
             onChange={(e) => handleChange(e, field)}
             className="hidden"
           />
