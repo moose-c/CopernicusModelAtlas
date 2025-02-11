@@ -4,14 +4,15 @@ import { CodeSnippet } from "../../components/code-snippet";
 import { PageLayout } from "../../components/page-layout";
 import { FormContent } from "./components/form-content";
 import { ExamplePopup } from "./components/form-elements";
-import { blankForm, mandFields, fieldNameMapping } from "../../util/globalVars";
+import { blankForm } from "../../util/globalVars";
+import { performChecks } from "../../util/form-checks";
 
 import { postModel } from "../../services/db.service";
 
 import "../../styles/form.css";
 
 export const AddModelPage = () => {
-  const [examplePopups, setExamplePopups] = useState(Array(6).fill(false));
+  const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
 
   const togglePopup = (popupNb) => {
     setExamplePopups((prevState) =>
@@ -21,49 +22,13 @@ export const AddModelPage = () => {
 
   const [formData, setFormData] = useState(blankForm);
 
-  const performChecks = (formData, performAll = true) => {
-    let check = true;
-    if (performAll) {
-      if (check === true) {
-        // Check if all mandatory fields are filled out
-
-        mandFields.some((mandField) => {
-          const value = mandField
-            .split(/[\.\[\]\'\"]/) // Split the path
-            .filter(Boolean) // Remove empty strings
-            .reduce((acc, key) => {
-              return acc && acc[key] !== undefined ? acc[key] : undefined;
-            }, formData); // Start reducing with formData as the base
-          console.log(value);
-
-          if (value === "") {
-            // ideally, the alert point to the empty field, flashing it red or something.
-            alert(`${fieldNameMapping[mandField]} is empty!`);
-            check = false;
-            return true;
-          }
-          // erronious value is empty string
-        });
-      }
-    }
-
-    // checking whether the files are in the correct format. only for the boxes, and then only .csv, .tif, .geojson
-    // implement later
-    if (check) {
-      // console.log("you dont get here right");
-    } else if (check) {
-      // perform more checks
-    }
-    return check;
-  };
-
   const handleSubmit = (event) => {
     let isMounted = true;
 
     event.preventDefault();
 
     // change false -> true to actually perform
-    let check = performChecks(formData, false);
+    let check = performChecks(formData, true);
 
     if (check) {
       const doPost = async (formData) => {

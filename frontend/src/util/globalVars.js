@@ -92,6 +92,10 @@ export const blankForm = {
     methodsFileName: "",
 };
 
+export const fileFields = [
+    "methodsFile", "boxFile0", "boxFile1", "boxFile2", "boxFile3"
+]
+
 export const mandFields = [
     "modelName",
     "modellerName0",

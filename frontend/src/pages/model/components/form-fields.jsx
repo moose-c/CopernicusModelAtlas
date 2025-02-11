@@ -2,6 +2,7 @@ import Multiselect from "multiselect-react-dropdown";
 
 import { useForm } from "./form-content";
 import { keywords } from "../../../util/globalVars";
+import { ExamplePopup } from "./form-elements";
 
 export const ShortTextField = ({ label, placeholder, field }) => {
   const { formData, handleChange } = useForm(); // Automatically gets values
@@ -277,6 +278,84 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
       >
         Click here to add another output box
       </span>
+    </>
+  );
+};
+
+export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
+  return (
+    <>
+      <p>
+        This section gathers information for the boxes showcasing model output.
+        Output data can be shown in the following file types, please click on
+        each type to learn the exact format required for that type.
+      </p>
+      <ul className="reg relative">
+        <li key={0}>Figure (.png)</li>
+        <li
+          key={1}
+          className="cursor-pointer hover:underline"
+          onClick={() => togglePopup(6)}
+        >
+          Timeseries (.csv, .xlsx)
+        </li>
+        {examplePopups[6] && (
+          <ExamplePopup
+            nb={0}
+            togglePopup={togglePopup}
+            content={
+              <>
+                <h1>CSV Format Explanation</h1>
+                The first row contains the names of input and output variables
+                in the following way.
+                <ul>
+                  <li>
+                    The first column is the first input variable and is titled{" "}
+                    <strong>"time"</strong>.
+                  </li>
+                  <li>
+                    The second column can contain a second input variable (e.g.,{" "}
+                    <em>"region"</em>) or is left empty.
+                  </li>
+                  <li>
+                    The second column can contain a third input variable (e.g.,{" "}
+                    <em>"scenario"</em>) or is left empty.
+                  </li>
+                  <li>
+                    After the first three columns, each subsequent column title
+                    represents the name of an output variable.
+                  </li>
+                </ul>
+                <br />
+                <p>The second row contains units for each variable.</p>
+                <br />
+                <p>
+                  From the third row onwards each row contains values of input
+                  and corresponding output variables. Can be numbers or strings
+                  as you see fit, except for the first cells which need to be
+                  instances of an excel Date.
+                </p>
+              </>
+            }
+          />
+        )}
+        <li
+          key={2}
+          className="cursor-pointer hover:underline"
+          onClick={() => togglePopup(7)}
+        >
+          Raster map (.tif, .tiff)
+        </li>
+        {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} />}
+        <li
+          key={3}
+          className="cursor-pointer hover:underline"
+          onClick={() => togglePopup(8)}
+        >
+          Vector map (.geojson)
+        </li>
+        {examplePopups[8] && <ExamplePopup nb={8} togglePopup={togglePopup} />}
+      </ul>
     </>
   );
 };

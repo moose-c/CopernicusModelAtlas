@@ -8,7 +8,10 @@ import {
   TwoField,
   BoxesField,
   KeyWordsField,
+  BoxesExplanation,
 } from "./form-fields";
+
+import { Tooltip } from "react-tooltip";
 
 const FormContext = createContext();
 export const useForm = () => useContext(FormContext);
@@ -37,6 +40,7 @@ export const FormContent = ({
           return updatedState;
         });
       } else {
+        // obtain bytea ready content
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -194,7 +198,7 @@ export const FormContent = ({
               Show Example
             </p>
             {examplePopups[1] && (
-              <ExamplePopup nb={1} topPos={350} togglePopup={togglePopup} />
+              <ExamplePopup nb={1} togglePopup={togglePopup} />
             )}
           </div>
           <ShortTextField
@@ -251,7 +255,6 @@ export const FormContent = ({
             ladd={"Click here to add another button"}
           />
         </div>
-
         <div className="flex flex-col gap-[25px]">
           <div className="relative">
             <h2>Section 2: Theory behind the model</h2>
@@ -262,7 +265,7 @@ export const FormContent = ({
               Show Example
             </p>
             {examplePopups[2] && (
-              <ExamplePopup nb={2} topPos={1300} togglePopup={togglePopup} />
+              <ExamplePopup nb={2} togglePopup={togglePopup} />
             )}
           </div>
           <LongTextField
@@ -277,7 +280,6 @@ export const FormContent = ({
             capField={"theoryFigDesc"}
           />
         </div>
-
         <div className="flex flex-col gap-[25px]">
           <div className="relative">
             <h2>Section 3: Results from this model</h2>
@@ -288,7 +290,7 @@ export const FormContent = ({
               Show Example
             </p>
             {examplePopups[3] && (
-              <ExamplePopup nb={3} topPos={1800} togglePopup={togglePopup} />
+              <ExamplePopup nb={3} togglePopup={togglePopup} />
             )}
           </div>
           <LongTextField
@@ -304,23 +306,14 @@ export const FormContent = ({
           />
           <div className="flex flex-col gap-[25px]">
             <h3>Output boxes</h3>
-            <div>
-              <p>
-                This section gathers information for the boxes showcasing model
-                output. Output data can be shown in the following formats:
-                <b>Insuffusiently explained</b>
-              </p>
-              <ul className="reg">
-                <li key={0}>Figure (.png, ...)</li>
-                <li key={1}>Timeseries (.csv)</li>
-                <li key={2}>Raster map (.tif)</li>
-                <li key={3}>Vector map (.geojson)</li>
-              </ul>
-              <BoxesField
-                nbBoxes={formData["nbBoxes"]}
-                handleChangeNbBoxes={handleChangeNbBoxes}
-              />
-            </div>
+            <BoxesExplanation
+              examplePopups={examplePopups}
+              togglePopup={togglePopup}
+            />
+            <BoxesField
+              nbBoxes={formData["nbBoxes"]}
+              handleChangeNbBoxes={handleChangeNbBoxes}
+            />
           </div>
           <div className="flex flex-col gap-[25px]">
             <div className="relative">
@@ -332,7 +325,7 @@ export const FormContent = ({
                 Show Example
               </p>
               {examplePopups[4] && (
-                <ExamplePopup nb={4} topPos={2300} togglePopup={togglePopup} />
+                <ExamplePopup nb={4} togglePopup={togglePopup} />
               )}
             </div>
             <LongTextField
@@ -358,7 +351,7 @@ export const FormContent = ({
                 Show Example
               </p>
               {examplePopups[5] && (
-                <ExamplePopup nb={5} topPos={2500} togglePopup={togglePopup} />
+                <ExamplePopup nb={5} togglePopup={togglePopup} />
               )}
             </div>
             <ShortTextField

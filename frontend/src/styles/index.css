@@ -78,3 +78,8 @@
     line-height: 100%;
     @apply text-CopernicusText font-sans
   }
+
+  ul,
+  ol {
+    list-style:inside; 
+  }
