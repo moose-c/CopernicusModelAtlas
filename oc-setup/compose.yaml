@@ -24,19 +24,12 @@ services:
       - "8080:8080"
     entrypoint: ["/bin/bash", "/entrypoint.sh"]
 
-  # frontend-react:
-  #   image: node:16.15
-  #   labels:
-  #     kompose.volume.type: hostPath
-  #   volumes:
-  #     - ../frontend/entrypoint.sh:/entrypoint.sh
-  #     - ../frontend/dist/index.html:/dist/index.html
-  #     - ../frontend/dist/assets/images:/dist/assets/images
-  #     - ../frontend/dist/assets/fonts/Merriweather:/dist/assets/fonts/Merriweather
-  #     - ../frontend/dist/assets/fonts/Open_Sans:/dist/assets/fonts/Open_Sans
-  #     - ../frontend/dist/assets/fonts/Open_Sans/static:/dist/assets/fonts/Open_Sans/static
-  #   env_file:
-  #     - ../frontend/.env  
-  #   ports:
-  #     - "4000:4000"
-  #   entrypoint: ["/bin/bash", "/entrypoint.sh"]
+  nginx:
+    image: nginx
+    ports:
+      - 80:80 # HTTP port
+      - 443:443 # HTTPS port
+      
+    volumes:
+      - ./certificates:/etc/nginx/certificates:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro

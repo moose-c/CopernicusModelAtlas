@@ -82,11 +82,14 @@ export const DataElement = ({ loid, name }) => {
   }, [loid]);
 
   useEffect(() => {
-    if (name) {
+    if (name && fileBin) {
       const fileType = name.split(".")[1];
       setFileTypeState(fileType);
       if (fileType == "png") {
-        setDecodedFile(URL.createObjectURL(fileBin));
+        console.log(fileType);
+        // Convert Blob to JSON
+        const url = URL.createObjectURL(fileBin);
+        setDecodedFile(url);
       } else if (fileType == "csv") {
         const reader = new FileReader();
 

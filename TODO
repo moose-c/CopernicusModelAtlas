@@ -1,18 +1,4 @@
 difc files:
-- database:
-  - retrieval of lo's 
-- fe:
-  - perform check after submission
-
-POTENTIAL ISSUE: does the oid's change over time? If so, write name to pg_largeobject_metadata (however, this is also not ideal.)
-currently in pg_largeobject_metadata: 16723, 16730, 16731
-currently in fe: 16723, 16730, 16731
-
-After editing something else in this model:
-pg_largeobject_metadata: -
-fe: 16743 ->
-
-
 
 Log in:
 - Make fe behind log wall
@@ -33,6 +19,11 @@ WH:
               width="100" // Set the desired preview size
               height="100" // Set the desired preview size
             />
+
+-	Ook scenarios 
+-	Uncertainty bands
+-	Xxx
+
 
 MH:
 - improve connection for extended period to keep alive during file streaming
