@@ -2,29 +2,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 
 // useNavigate seems to allow redirection within this site only, a problem for 0Auth?
-export const Button = ({
-  text = "Contribute",
-  to = "/admin",
-  log = "",
-  call = "",
-}) => {
+export const Button = ({ text = "Contribute", to = "/admin", call = "" }) => {
   const navigate = useNavigate();
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
 
   const handleClick = (e) => {
     e.preventDefault(); // Prevent navigation
     e.stopPropagation(); // Stop parent <Link> from triggering'
     if (call) {
       call();
-    } else if (log.toLocaleLowerCase() === "in") {
-      loginWithRedirect({
-        appState: {
-          returnTo: "/profile",
-        },
-      });
-    } else if (log.toLocaleLowerCase() === "out") {
-      logout({ logoutParams: { returnTo: window.location.origin } });
     } else {
       if (to.startsWith("http://") || to.startsWith("https://")) {
         window.location.href = to;

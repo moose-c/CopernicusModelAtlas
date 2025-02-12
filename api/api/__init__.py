@@ -5,11 +5,12 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_talisman import Talisman
+from flask_oidc import OpenIDConnect
 
 from api import exception_views
 from api.messages import messages_views
 from api.db_interaction import db_interaction_views
-from api.security.auth0_service import auth0_service
+from api.auth import auth_views
 
 from common.utils import safe_get_env_var
 
@@ -18,15 +19,14 @@ def create_app():
     ##########################################
     # Environment Variables
     ##########################################
-    client_origin_url = safe_get_env_var("CLIENT_ORIGIN_URL")
-    auth0_audience = safe_get_env_var("AUTH0_AUDIENCE")
-    auth0_domain = safe_get_env_var("AUTH0_DOMAIN")
+    # get necessary envs
 
     ##########################################
     # Flask App Instance
     ##########################################
 
     app = Flask(__name__, instance_relative_config=True)
+    oidc = OpenIDConnect(app)
 
     ##########################################
     # HTTP Security Headers
@@ -43,8 +43,6 @@ def create_app():
         x_xss_protection=False,
         x_content_type_options=True,
     )
-
-    auth0_service.initialize(auth0_domain, auth0_audience)
 
     @app.after_request
     def add_headers(response):
@@ -74,6 +72,7 @@ def create_app():
     # Blueprint Registration
     ##########################################
 
+    app.register_blueprint(auth_views.bp)
     app.register_blueprint(messages_views.bp)
     app.register_blueprint(db_interaction_views.bp)
     app.register_blueprint(exception_views.bp)

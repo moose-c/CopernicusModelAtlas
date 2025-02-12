@@ -12,7 +12,6 @@ export const HomePage = () => {
   const [renewModel, setRenewModel] = useState(false);
 
   useEffect(() => {
-    console.log("hi");
     setRenewModel(false);
     const getMessage = async () => {
       const { data, error } = await getAllModels();

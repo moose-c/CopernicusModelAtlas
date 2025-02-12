@@ -1,16 +1,11 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { CodeSnippet } from "../../components/code-snippet";
 import { PageLayout } from "../../components/page-layout";
 import { Button } from "../../components/button";
+import { AuthContext } from "../..";
 
 export const ProfilePage = () => {
-  const { user } = useAuth0();
-
-  if (!user) {
-    return null;
-  }
-
+  const { user } = useContext(AuthContext);
   return (
     <PageLayout>
       <div className="content-layout">

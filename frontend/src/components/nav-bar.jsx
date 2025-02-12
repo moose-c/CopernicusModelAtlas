@@ -1,11 +1,12 @@
 import { Button } from "./button";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { AuthContext } from "..";
 import { NavBarTab } from "./nav-bar-tab";
+import { useContext } from "react";
 
 export const NavBar = () => {
-  const { user, isAuthenticated } = useAuth0();
-  const isAdmin = user?.["https://namespace.com/roles"]?.includes("admin");
+  const { user, login, logout } = useContext(AuthContext);
+  // const isAdmin = user?.["https://namespace.com/roles"]?.includes("admin");
 
   return (
     <>
@@ -31,20 +32,20 @@ export const NavBar = () => {
           </p>
         </div>
         <div className="flex flex-row gap-4 text-white">
-          {!isAuthenticated && (
+          {!user && (
             <>
               <NavBarTab path="/message/public" label="Public" />
-              <Button text="Log in" log="in" />
+              <Button text="Log in" call={login} />
             </>
           )}
-          {isAuthenticated && (
+          {user && (
             <>
               <NavBarTab path="/model/add" label="Add Model" />
               <NavBarTab path="/message/public" label="Public" />
               <NavBarTab path="/profile" label="Profile" />
               <NavBarTab path="/message/protected" label="Private" />
-              {isAdmin && <NavBarTab path="/message/admin" label="Admin" />}
-              <Button text="Log out" log="out" />
+              {/* {isAdmin && <NavBarTab path="/message/admin" label="Admin" />} */}
+              <Button text="Log out" call={logout} />
             </>
           )}
         </div>
