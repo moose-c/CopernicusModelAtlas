@@ -127,3 +127,16 @@ export const fieldNameMapping = {
     colofonCite: "Colophon Citation",
     colofonLicence: "Colophon License",
 };
+
+export const colorPalette = [
+    'rgba(255, 99, 132, 1)',  // Red
+    'rgba(54, 162, 235, 1)',  // Blue
+    'rgba(75, 192, 192, 1)',  // Green
+    'rgba(153, 102, 255, 1)', // Purple
+    'rgba(255, 159, 64, 1)',  // Orange
+    'rgba(255, 99, 71, 1)',   // Tomato
+    'rgba(123, 104, 238, 1)', // MediumSlateBlue
+    'rgba(255, 165, 0, 1)',   // OrangeRed
+    'rgba(60, 179, 113, 1)',  // MediumSeaGreen
+    'rgba(238, 130, 238, 1)', // Violet
+];
