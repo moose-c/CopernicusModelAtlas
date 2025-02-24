@@ -11,12 +11,12 @@ services:
   api:
     image: python:3.9.2-slim-buster
     volumes:
-      - ../api/requirements.txt:/requirements.txt
       - ../api/api/:/api/
       - ../api/api/db_interaction/:/api/db_interaction/
       - ../api/api/messages/:/api/messages/
-      - ../api/api/security/:/api/security/
-      - ../api/common/utils:/common/utils/
+      - ../api/api/auth/:/api/auth/
+
+      - ../api/requirements.txt:/requirements.txt
       - ../api/gunicorn.conf.py:/gunicorn.conf.py
       - ../api/entrypoint.sh:/entrypoint.sh
     env_file: ../api/.env

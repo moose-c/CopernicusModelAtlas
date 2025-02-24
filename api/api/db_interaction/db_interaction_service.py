@@ -1,4 +1,3 @@
-from common.utils import safe_get_env_var
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import base64
@@ -6,6 +5,10 @@ from flask import request, jsonify, Response
 import copy
 import json
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Python dictionary equivalent of blankForm
 blank_form_template = {
@@ -97,11 +100,11 @@ bytea_fields = [
 
 def db_connection():
     conn = psycopg2.connect(
-        dbname=safe_get_env_var("PGDATABASE"),
-        user=safe_get_env_var("PGUSER"),
-        password=safe_get_env_var("PGPASSWORD"),
-        host=safe_get_env_var("PGHOST"),
-        port=safe_get_env_var("PGPORT"),
+        dbname=os.getenv("PGDATABASE"),
+        user=os.getenv("PGUSER"),
+        password=os.getenv("PGPASSWORD"),
+        host=os.getenv("PGHOST"),
+        port=os.getenv("PGPORT"),
         sslmode="require",
     )
     return conn

@@ -18,8 +18,6 @@ import { ModelPage } from './pages/model/model-page';
 const ProtectedRoute = ({ element, adminOnly = false }) => {
     const { user } = useContext(AuthContext);
 
-    console.log(user);
-
     if (!user) {
         return <Navigate to="/" />;
     }

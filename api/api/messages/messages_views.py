@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify, request
 
 from api.messages.messages_service import (
     get_public_message,
@@ -6,11 +6,7 @@ from api.messages.messages_service import (
     get_admin_message,
 )
 
-from api.security.guards import (
-    authorization_guard,
-    permissions_guard,
-    admin_messages_permissions,
-)
+from api.auth.jwt_validation import verify_jwt
 
 bp_name = "api-messages"
 bp_url_prefix = "/api/messages"
@@ -23,13 +19,17 @@ def public():
 
 
 @bp.route("/protected")
-@authorization_guard
 def protected():
-    return vars(get_protected_message())
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        verify_jwt(token)
+        return vars(get_protected_message())
+
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 401
 
 
 @bp.route("/admin")
-@authorization_guard
-@permissions_guard([admin_messages_permissions.read])
 def admin():
     return vars(get_admin_message())
