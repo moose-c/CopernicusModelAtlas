@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request, jsonify
 
 from api.db_interaction.db_interaction_service import (
     get_all_models,
@@ -8,6 +8,8 @@ from api.db_interaction.db_interaction_service import (
     delete_model,
     retrieve_data,
 )
+
+from api.auth.jwt_validation import verify_jwt
 
 bp_name = "api-models"
 bp_url_prefix = "/api/models"
@@ -24,21 +26,42 @@ def get_single(model_id):
     return get_single_model(model_id)
 
 
+@bp.route("/get_file/<file_id>")
+def get_data(file_id):
+    return retrieve_data(file_id)
+
+
 @bp.route("/edit/<model_id>", methods=["DELETE", "POST"])
 def edit(model_id):
-    return edit_model(model_id)
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        verify_jwt(token)
+        return edit_model(model_id)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
 
 
 @bp.route("/delete/<model_id>", methods=["DELETE"])
 def delete(model_id):
-    return delete_model(model_id)
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        verify_jwt(token)
+        return delete_model(model_id)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
 
 
 @bp.route("/post", methods=(["POST"]))
 def post():
-    return post_model()
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        verify_jwt(token)
+        return post_model()
 
-
-@bp.route("/get_file/<file_id>")
-def get_data(file_id):
-    return retrieve_data(file_id)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401

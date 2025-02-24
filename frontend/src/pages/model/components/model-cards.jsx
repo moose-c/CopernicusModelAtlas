@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/button';
 import { deleteModel } from '../../../services/db.service';
+import { useContext } from 'react';
+import { AuthContext } from '../../..';
 
 export const ModelCards = ({ models, setRenewModel, editAble }) => {
     return (
@@ -13,6 +15,7 @@ export const ModelCards = ({ models, setRenewModel, editAble }) => {
 };
 
 const ModelCard = ({ model, setRenewModel, editAble }) => {
+    const { user } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
     const name = model[2];
@@ -30,20 +33,24 @@ const ModelCard = ({ model, setRenewModel, editAble }) => {
                         <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
                     </div>
                     <div className="flex flex-col gap-3">
-                        {editAble && (
-                            <>
-                                <div>
-                                    <Button text="Edit" to={`model/edit/${model[0]}`} />
-                                </div>
-                                <Button
-                                    text="delete"
-                                    call={() => {
-                                        deleteModel(model[0]);
-                                        setRenewModel(true);
-                                    }}
-                                />
-                            </>
-                        )}
+                        {editAble &&
+                            (() => {
+                                const accessToken = user.id_token;
+                                return (
+                                    <>
+                                        <div>
+                                            <Button text="Edit" to={`/model/edit/${model[0]}`} />
+                                        </div>
+                                        <Button
+                                            text="Delete"
+                                            call={() => {
+                                                deleteModel(model[0], accessToken);
+                                                setRenewModel(true);
+                                            }}
+                                        />
+                                    </>
+                                );
+                            })()}
                     </div>
                 </div>
                 <p className="text-gray-500">{desc}</p>

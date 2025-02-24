@@ -3,7 +3,7 @@ import axios from "axios";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
-export const postModel = async (modelData) => {
+export const postModel = async (modelData, accessToken) => {
     // create suitable formData type (necessesary to handle file uploads)
     const formData = new FormData();
     Object.keys(modelData).forEach((key) => {
@@ -21,11 +21,12 @@ export const postModel = async (modelData) => {
     axios.post(url, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
         },
     })
 }
 
-export const editModel = async (modelData, model_id) => {
+export const editModel = async (modelData, model_id, accessToken) => {
     // create suitable formData type (necessary to handle file uploads)
     const formData = new FormData();
     Object.keys(modelData).forEach((key) => {
@@ -42,11 +43,13 @@ export const editModel = async (modelData, model_id) => {
     // Construct URL with model_id
     const url = `${apiServerUrl}/api/models/edit/${model_id}`;
 
+    console.log('accessToken', accessToken)
     try {
         // Send the formData with a POST request
         const response = await axios.post(url, formData, {
             headers: {
                 "Content-Type": "multipart/form-data",  // Ensure correct content type for file uploads
+                Authorization: `Bearer ${accessToken}`,
             },
         });
 
@@ -96,13 +99,14 @@ export const getSingleModel = async (model_id) => {
     };
 };
 
-export const deleteModel = async (model_id) => {
+export const deleteModel = async (model_id, accessToken) => {
     const url = `${apiServerUrl}/api/models/delete/${model_id}`; // Modify the endpoint to fit your DELETE route
     const config = {
         url: url,
         method: "DELETE",  // Use DELETE method to delete the resource
         headers: {
             "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
         },
     };
 

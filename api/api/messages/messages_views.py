@@ -26,7 +26,7 @@ def protected():
         verify_jwt(token)
         return vars(get_protected_message())
 
-    except ValueError as e:
+    except Exception as e:
         return jsonify({"error": str(e)}), 401
 
 

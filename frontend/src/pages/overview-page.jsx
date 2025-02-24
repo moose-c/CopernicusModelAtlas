@@ -28,7 +28,6 @@ export const OverviewPage = ({ getForUser, editAble }) => {
                 data.forEach((model) => {
                     modelIds.push(model[0]);
                 });
-                console.log(modelIds);
             }
 
             if (error) {

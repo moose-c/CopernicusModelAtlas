@@ -1,83 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from 'react';
 
-import { CodeSnippet } from "../../components/code-snippet";
-import { PageLayout } from "../../components/page-layout";
-import { FormContent } from "./components/form-content";
-import { ExamplePopup } from "./components/form-elements";
-import { blankForm } from "../../util/globalVars";
-import { performChecks } from "../../util/form-checks";
+import { CodeSnippet } from '../../components/code-snippet';
+import { PageLayout } from '../../components/page-layout';
+import { FormContent } from './components/form-content';
+import { ExamplePopup } from './components/form-elements';
+import { blankForm } from '../../util/globalVars';
+import { performChecks } from '../../util/form-checks';
 
-import { postModel } from "../../services/db.service";
+import { postModel } from '../../services/db.service';
+import { AuthContext } from '../..';
 
-import "../../styles/form.css";
+import '../../styles/form.css';
 
 export const AddModelPage = () => {
-  const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
+    const { user } = useContext(AuthContext);
+    const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
 
-  const togglePopup = (popupNb) => {
-    setExamplePopups((prevState) =>
-      prevState.map((val, i) => (i === popupNb ? !val : false))
+    const togglePopup = (popupNb) => {
+        setExamplePopups((prevState) => prevState.map((val, i) => (i === popupNb ? !val : false)));
+    };
+
+    const [formData, setFormData] = useState(blankForm);
+
+    const handleSubmit = (event) => {
+        let isMounted = true;
+
+        event.preventDefault();
+
+        // change false -> true to actually perform
+        let check = performChecks(formData, true);
+        const accessToken = user.id_token;
+
+        if (check) {
+            console.log('starting to perform post');
+            const doPost = async (formData) => {
+                const { data, error } = postModel(formData, accessToken);
+            };
+            doPost(formData);
+            return () => {
+                isMounted = false;
+            };
+        }
+    };
+
+    return (
+        <PageLayout>
+            <div className="content-layout px-[100px]">
+                <h1>Form to create new model page</h1>
+                <p>
+                    Fill out this form to create add a new model to the overview. To see an example of what the model page will look like, click{' '}
+                    <span className="cursor-pointer underline select-none" onClick={() => togglePopup(0)}>
+                        here
+                    </span>
+                    {examplePopups[0] && <ExamplePopup nb={0} topPos={300} togglePopup={togglePopup} />}
+                </p>
+                <form onSubmit={handleSubmit} className="p-[20px] bg-gray-100 rounded shadow-md w-full flex flex-col gap-[20px] ">
+                    <FormContent formData={formData} setFormData={setFormData} examplePopups={examplePopups} togglePopup={togglePopup} />
+                    <button
+                        type="submit"
+                        className="sticky bottom-6 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </PageLayout>
     );
-  };
-
-  const [formData, setFormData] = useState(blankForm);
-
-  const handleSubmit = (event) => {
-    let isMounted = true;
-
-    event.preventDefault();
-
-    // change false -> true to actually perform
-    let check = performChecks(formData, true);
-
-    if (check) {
-      console.log("starting to perform post");
-      const doPost = async (formData) => {
-        const { data, error } = postModel(formData);
-        console.log(data, error);
-      };
-      doPost(formData);
-      return () => {
-        isMounted = false;
-      };
-    }
-  };
-
-  return (
-    <PageLayout>
-      <div className="content-layout px-[100px]">
-        <h1>Form to create new model page</h1>
-        <p>
-          Fill out this form to create add a new model to the overview. To see
-          an example of what the model page will look like, click{" "}
-          <span
-            className="cursor-pointer underline select-none"
-            onClick={() => togglePopup(0)}
-          >
-            here
-          </span>
-          {examplePopups[0] && (
-            <ExamplePopup nb={0} topPos={300} togglePopup={togglePopup} />
-          )}
-        </p>
-        <form
-          onSubmit={handleSubmit}
-          className="p-[20px] bg-gray-100 rounded shadow-md w-full flex flex-col gap-[20px] "
-        >
-          <FormContent
-            formData={formData}
-            setFormData={setFormData}
-            examplePopups={examplePopups}
-            togglePopup={togglePopup}
-          />
-          <button
-            type="submit"
-            className="sticky bottom-6 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-    </PageLayout>
-  );
 };
