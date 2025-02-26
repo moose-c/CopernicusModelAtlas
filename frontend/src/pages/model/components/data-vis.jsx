@@ -153,8 +153,8 @@ const Timeseries = ({ fileBin }) => {
             for (let cellNB of Object.keys(worksheet)) {
                 if (cellNB.slice(1) === '1') {
                     if (!['A', 'B', 'C'].includes(cellNB[0])) {
-                        const outpVar = worksheet[cellNB].v;
-                        constOutNames.push(outpVar);
+                        const outVar = worksheet[cellNB].v;
+                        constOutNames.push(outVar);
                     }
                 } else {
                     break;
@@ -168,16 +168,17 @@ const Timeseries = ({ fileBin }) => {
 
     useEffect(() => {
         console.log('changing plotting');
-        if (outVarVal.length > 0) {
+        if (outVarVal != [0]) {
             // Extract values for different categories
             let datasets = [];
 
             // what happens when no inpvar2val?
             let i = 0;
             for (let outVar of outVarVal) {
-                if (inpVar2Val.length > 0) {
+                if (inpVar2Options.length > 0) {
+                    console.log('inpvaroptions', inpVar2Options);
                     for (let inpVar2 of inpVar2Val) {
-                        if (inpVar3Val.length > 0) {
+                        if (inpVar3Options.length > 0) {
                             for (let inpVar3 of inpVar3Val) {
                                 datasets.push({
                                     label: `${outVar}, ${inpVar2}, ${inpVar3}`,
@@ -223,7 +224,7 @@ const Timeseries = ({ fileBin }) => {
                             i++;
                         }
                     }
-                } else if (inpVar3Val.length > 0) {
+                } else if (inpVar3Options.length > 0) {
                     for (let inpVar3 of inpVar3Val) {
                         datasets.push({
                             label: `${outVar}, ${inpVar3}`,
@@ -247,8 +248,9 @@ const Timeseries = ({ fileBin }) => {
                         i++;
                     }
                 } else {
+                    console.log('getting here', outVar);
                     datasets.push({
-                        label: `${outVar}`,
+                        label: outVar,
                         data: allDataRef.current.map((item) => {
                             let date;
                             try {
