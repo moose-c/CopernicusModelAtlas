@@ -8,7 +8,7 @@ export const PageLayout = ({ children, sideBarContent = false }) => {
             <NavBar />
             <div className="flex">
                 {sideBarContent && <SideBar sideBarContent={sideBarContent} />}
-                <div>{children}</div>
+                <div className="flex-1">{children}</div>
             </div>
             <PageFooter />
         </div>

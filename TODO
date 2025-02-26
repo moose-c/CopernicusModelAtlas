@@ -8,19 +8,10 @@ File types:
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
 MH:
--	Colofon nicer!
-  - Bold how to cite
-  - List of papers might be huge
-
-
-CSV information: 
--	Second column -> third
-- Except for the ‘time’ column, this can be left empty.
-- Each cell can be numbers or strings as you see fit, except for cells in the ‘time’ column which need to be instances of an excel data
-- Give example for the units [mg/l].
 
 CSV plotting:
 - Plotting with a single variable.
+- make compatible with date-time strings.
 
 
 - email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)
@@ -31,3 +22,4 @@ WH:
 - allow modellers to input text including bold and \n etc
 - Maybe also a sidebar under names
 - specify number of input variables
+- List of papers might be huge

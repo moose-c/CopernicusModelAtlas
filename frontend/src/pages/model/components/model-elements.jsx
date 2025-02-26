@@ -145,7 +145,7 @@ export const Colofon = () => {
             <div id="colofon" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Colofon</h2>
-                    <p className="reg">How to Cite: {modelData.colofonCite}</p>
+                    <p className="reg font-bold">How to Cite: {modelData.colofonCite}</p>
                     <p className="reg">Model Licence: {modelData.colofonLicence}</p>
                     <p className="reg">Additional: {modelData.colofonAddition}</p>
                 </div>

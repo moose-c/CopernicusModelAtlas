@@ -141,78 +141,92 @@ export const KeyWordsField = () => {
 export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
     const { formData, handleChange } = useForm(); // Automatically gets values
     return (
-        <>
+        <div>
             {Array.from({ length: nbBoxes }, (_, i) => (
-                <div key={`box-${i}`} className="flex justify-between border-y border-black pb-2 gap-2">
-                    <div className="flex flex-col">
-                        <p>Title of the Output Box{i == 0 && '*'}</p>
-                        <input
-                            className="formQAs"
-                            type="text"
-                            placeholder="Box Title"
-                            value={formData[`boxTitle${i}`]}
-                            onChange={(e) => handleChange(e, `boxTitle${i}`)}
-                        />
-                        <p>Description accompanying the figure{i == 0 && '*'}</p>
-                        <textarea
-                            className="formQAl"
-                            type="text"
-                            placeholder="Enter a Description"
-                            value={formData[`boxDescr${i}`]}
-                            onChange={(e) => handleChange(e, `boxDescr${i}`)}
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <p>Title for output data{i == 0 && '*'}</p>
-                        <input
-                            className="formQAs"
-                            type="text"
-                            placeholder="Output Title"
-                            value={formData[`boxFileTitle${i}`]}
-                            onChange={(e) => handleChange(e, `boxFileTitle${i}`)}
-                        />
-                        <p>Upload output data here{i == 0 && '*'}</p>
-                        <div className="flex gap-[15px]">
-                            <input
-                                type="file"
-                                id={`file-upload${5 + i}`}
-                                accept=".png, .csv, .tif, .geojson, .nc"
-                                onChange={(e) => handleChange(e, `boxFile${i}`)}
-                                className="hidden"
-                            />
-
-                            {/* Label acting as the "Browse..." button */}
-                            <label htmlFor={`file-upload${5 + i}`} className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer">
-                                <p>Browse...</p>
-                            </label>
-
-                            <p>Allowed file types: .png, .csv, .tif, .geojson, .nc</p>
-                        </div>
-                        {formData[`boxFile${i}`] !== 0 && (
-                            <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-                                <p className="text-sm text-green-600">{formData[`boxFile${i}Name`]}</p>
-                                <button onClick={() => handleChange(0, `boxFile${i}`)} className="ml-4 text-red-600 hover:underline text-sm">
-                                    Remove
-                                </button>
+                <div className="border-y border-black pb-2">
+                    <div key={`box-${i}`} className="flex justify-between gap-4">
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <p>Title of the Output Box{i == 0 && '*'}</p>
+                                <input
+                                    className="formQAs"
+                                    type="text"
+                                    placeholder="Box Title"
+                                    value={formData[`boxTitle${i}`]}
+                                    onChange={(e) => handleChange(e, `boxTitle${i}`)}
+                                />
                             </div>
-                        )}
-                        <p>n.b. Only data matching the requirements stated above can be shown!</p>
-                    </div>
+                            <div>
+                                <p>Description accompanying the figure{i == 0 && '*'}</p>
+                                <textarea
+                                    className="formQAl w-[400px]"
+                                    type="text"
+                                    placeholder="Enter a Description"
+                                    value={formData[`boxDescr${i}`]}
+                                    onChange={(e) => handleChange(e, `boxDescr${i}`)}
+                                />
+                            </div>
+                        </div>
+                        <div className="flex flex-col gap-4">
+                            <div>
+                                <p>Title for output data{i == 0 && '*'}</p>
+                                <input
+                                    className="formQAs"
+                                    type="text"
+                                    placeholder="Output Title"
+                                    value={formData[`boxFileTitle${i}`]}
+                                    onChange={(e) => handleChange(e, `boxFileTitle${i}`)}
+                                />
+                            </div>
+                            <div>
+                                <p>Upload output data here{i == 0 && '*'}</p>
+                                <div className="flex gap-[15px]">
+                                    <input
+                                        type="file"
+                                        id={`file-upload${5 + i}`}
+                                        accept=".png, .csv, .tif, .geojson, .nc"
+                                        onChange={(e) => handleChange(e, `boxFile${i}`)}
+                                        className="hidden"
+                                    />
 
-                    {i !== 0 && (
-                        <button
-                            onClick={() => handleChangeNbBoxes(false, i)}
-                            className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 m-1"
-                        >
-                            -
-                        </button>
-                    )}
+                                    {/* Label acting as the "Browse..." button */}
+                                    <label
+                                        htmlFor={`file-upload${5 + i}`}
+                                        className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
+                                    >
+                                        <p>Browse...</p>
+                                    </label>
+
+                                    <p>Allowed file types: .png, .csv, .tif, .geojson, .nc</p>
+                                </div>
+                                <p className="font-bold">n.b. Only data matching the requirements stated above can be shown!</p>
+                            </div>
+
+                            {formData[`boxFile${i}`] !== 0 && (
+                                <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
+                                    <p className="text-sm text-green-600">{formData[`boxFile${i}Name`]}</p>
+                                    <button onClick={() => handleChange(0, `boxFile${i}`)} className="ml-4 text-red-600 hover:underline text-sm">
+                                        Remove
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                        {i !== 0 && (
+                            <button
+                                onClick={() => handleChangeNbBoxes(false, i)}
+                                className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 m-1"
+                            >
+                                -
+                            </button>
+                        )}
+                    </div>
+                    <span className="reg underline cursor-pointer select-none" onClick={() => handleChangeNbBoxes()}>
+                        Click here to add another output box
+                    </span>
                 </div>
             ))}
-            <span className="reg underline cursor-pointer select-none" onClick={() => handleChangeNbBoxes()}>
-                Click here to add another output box
-            </span>
-        </>
+        </div>
     );
 };
 
@@ -244,16 +258,23 @@ export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
                                         The second column can contain a second input variable (e.g., <em>"region"</em>) or is left empty.
                                     </li>
                                     <li>
-                                        The second column can contain a third input variable (e.g., <em>"scenario"</em>) or is left empty.
+                                        The third column can contain a third input variable (e.g., <em>"scenario"</em>) or is left empty.
                                     </li>
                                     <li>After the first three columns, each subsequent column title represents the name of an output variable.</li>
                                 </ul>
                                 <br />
-                                <p>The second row contains units for each variable.</p>
+                                <p>
+                                    The second row contains units for each variable including the brackets such as [mg/l]. The first 'time' column doesn't need
+                                    a unit and can be left empty{' '}
+                                </p>
                                 <br />
                                 <p>
-                                    From the third row onwards each row contains values of input and corresponding output variables. Can be numbers or strings
-                                    as you see fit, except for the first cells which need to be instances of an excel Date.
+                                    From the third row onwards each row contains values of input and corresponding output variables. These can be numbers or
+                                    strings as you see fit, except for the cells in the 'time' column which need to be instances of an excel Date or in a{' '}
+                                    <a className="underline" href="https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format">
+                                        date-time string format
+                                    </a>
+                                    .
                                 </p>
                             </>
                         }
