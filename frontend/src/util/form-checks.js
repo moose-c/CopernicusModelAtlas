@@ -63,7 +63,6 @@ const checkSheet = async (file) => {
             const workbook = XLSX.read(e.target.result, { type: "array", sheetRows: 3 });
             const sheetName = workbook.SheetNames[0]; // Read the first sheet
             const sheetValue = workbook.Sheets[sheetName];
-            console.log(sheetValue)
 
             const jsonData = XLSX.utils.sheet_to_json(sheetValue)
             const unitRow = jsonData[0]
@@ -76,7 +75,15 @@ const checkSheet = async (file) => {
 
             // check if time values can be interpreted correctly
             try {
-                getJsDateFromExcel(sheetValue['A3'].v)
+                const dateValue = sheetValue['A3'].v
+                if (typeof dateValue == 'number') {
+                    getJsDateFromExcel(dateValue)
+                } else if (typeof dateValue == 'string') {
+                    if (isNaN(Date.parse(dateValue))) {
+                        throw new Error('Invalid date-time format');
+                    }
+                }
+
             } catch (error) {
                 alert('time column contains incorrect values')
                 return resolve(false)

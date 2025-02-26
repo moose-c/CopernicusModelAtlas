@@ -63,22 +63,22 @@ export const ChangeModelPage = ({ edit = false }) => {
         event.preventDefault();
 
         // change false -> true to actually perform
-        let check = performChecks(formData, true);
 
-        if (check) {
-            const doPost = async (formData) => {
+        const doPost = async (formData) => {
+            let check = await performChecks(formData, true);
+            if (check) {
                 const accessToken = user.id_token;
                 if (edit) {
                     editModel(formData, modelId, accessToken);
                 } else {
                     postModel(formData, accessToken);
                 }
-            };
-            doPost(formData);
-            return () => {
-                isMounted = false;
-            };
-        }
+            }
+        };
+        doPost(formData);
+        return () => {
+            isMounted = false;
+        };
     };
 
     return (

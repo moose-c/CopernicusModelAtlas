@@ -150,9 +150,15 @@ const Timeseries = ({ fileBin }) => {
             }
 
             const constOutNames = [];
-            for (let coln = 3; coln <= Object.keys(jsonData[0]).length; coln++) {
-                const colChar = getExcelColumnName(coln);
-                constOutNames.push(worksheet?.[`${colChar}1`].v);
+            for (let cellNB of Object.keys(worksheet)) {
+                if (cellNB.slice(1) === '1') {
+                    if (!['A', 'B', 'C'].includes(cellNB[0])) {
+                        const outpVar = worksheet[cellNB].v;
+                        constOutNames.push(outpVar);
+                    }
+                } else {
+                    break;
+                }
             }
             setOutVarOptions(constOutNames);
             setOutVarVal([constOutNames[0]]);
@@ -162,16 +168,16 @@ const Timeseries = ({ fileBin }) => {
 
     useEffect(() => {
         console.log('changing plotting');
-        if (outVarVal) {
+        if (outVarVal.length > 0) {
             // Extract values for different categories
             let datasets = [];
 
             // what happens when no inpvar2val?
             let i = 0;
             for (let outVar of outVarVal) {
-                if (inpVar2Val) {
+                if (inpVar2Val.length > 0) {
                     for (let inpVar2 of inpVar2Val) {
-                        if (inpVar3Val) {
+                        if (inpVar3Val.length > 0) {
                             for (let inpVar3 of inpVar3Val) {
                                 datasets.push({
                                     label: `${outVar}, ${inpVar2}, ${inpVar3}`,
@@ -217,7 +223,7 @@ const Timeseries = ({ fileBin }) => {
                             i++;
                         }
                     }
-                } else if (inpVar3Val) {
+                } else if (inpVar3Val.length > 0) {
                     for (let inpVar3 of inpVar3Val) {
                         datasets.push({
                             label: `${outVar}, ${inpVar3}`,
@@ -261,8 +267,7 @@ const Timeseries = ({ fileBin }) => {
                     i++;
                 }
             }
-            console.log(datasets);
-
+            console.log('datasets', datasets);
             const chartData = {
                 datasets: datasets,
             };
@@ -288,7 +293,7 @@ const Timeseries = ({ fileBin }) => {
         <>
             {decodedFile && (
                 <>
-                    <Line options={plotOptions} data={decodedFile} className="max-w-[600px]" />
+                    <Line options={plotOptions} data={decodedFile} className="min-w-[600px] max-w-[600px]" />
                     <div className="flex gap-5">
                         {inpVar2Name && (
                             <Multiselect
@@ -342,7 +347,6 @@ function getDate(date) {
     if (typeof date == 'number') {
         return getJsDateFromExcel(date);
     } else {
-        console.log('date is probably date-time, need to implement this.');
-        return false;
+        return Date.parse(date);
     }
 }

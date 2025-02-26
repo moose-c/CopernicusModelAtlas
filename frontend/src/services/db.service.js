@@ -43,7 +43,6 @@ export const editModel = async (modelData, model_id, accessToken) => {
     // Construct URL with model_id
     const url = `${apiServerUrl}/api/models/edit/${model_id}`;
 
-    console.log('accessToken', accessToken)
     try {
         // Send the formData with a POST request
         const response = await axios.post(url, formData, {
