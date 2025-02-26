@@ -10,8 +10,9 @@ File types:
 MH:
 
 CSV plotting:
-- Plotting with a single variable.
+- Plotting with a single variable. 
 - make compatible with date-time strings.
+  -> get such a csv from chat after 4 pm.
 
 
 - email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)

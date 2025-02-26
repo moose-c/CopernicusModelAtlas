@@ -14,6 +14,54 @@ Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryS
 export const DataElement = ({ loid, name }) => {
     const [fileTypeState, setFileTypeState] = useState('');
     const [fileBin, setFileBin] = useState(null);
+
+    useEffect(() => {
+        const fetchFile = async () => {
+            const { data, error } = await getLargeFile(loid);
+            if (error) {
+                console.log(error);
+            } else {
+                setFileBin(data);
+            }
+        };
+
+        if (loid) {
+            fetchFile();
+        }
+
+        return () => {};
+    }, [loid]);
+
+    useEffect(() => {
+        if (name && fileBin) {
+            const fileType = name.split('.')[1];
+            setFileTypeState(fileType);
+        }
+    }, [fileBin]);
+
+    return (
+        <>
+            {fileTypeState == 'png' && <Figure fileBin={fileBin} />}
+            {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} />}
+        </>
+    );
+};
+
+const Figure = ({ fileBin }) => {
+    // Convert Blob to JSON
+    const url = URL.createObjectURL(fileBin);
+    return (
+        <>
+            <img
+                src={url}
+                alt="Model Icon"
+                className="max-w-none max-h-[400px]" // Maximum width and height
+            />
+        </>
+    );
+};
+
+const Timeseries = ({ fileBin }) => {
     const [decodedFile, setDecodedFile] = useState(null);
 
     const [inpVar2Name, setInpVar2Name] = useState('');
@@ -59,87 +107,58 @@ export const DataElement = ({ loid, name }) => {
     });
 
     useEffect(() => {
-        const fetchFile = async () => {
-            const { data, error } = await getLargeFile(loid);
-            if (error) {
-                console.log(error);
-            } else {
-                setFileBin(data);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const data = e.target.result;
+
+            // Parse the Excel file using SheetJS (XLSX)
+            const workbook = XLSX.read(data, { type: 'binary' });
+
+            // Assuming you're reading the first sheet:
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+
+            // Convert the worksheet to JSON (array of objects)
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            allDataRef.current = jsonData;
+
+            if (worksheet?.B1) {
+                setInpVar2Name(worksheet.B1.v);
+                const constVar2 = [];
+                for (let i = 3; i < jsonData.length; i++) {
+                    const newVal = worksheet?.[`B${i}`]?.v;
+                    if (newVal && !constVar2.includes(newVal)) {
+                        constVar2.push(newVal);
+                    }
+                }
+                setInpVar2Options(constVar2);
+                setInpVar2Val([constVar2[0]]);
             }
+
+            if (worksheet?.C1) {
+                setInpVar3Name(worksheet.C1.v);
+                const constVar3 = [];
+                for (let i = 3; i < jsonData.length; i++) {
+                    const newVal = worksheet?.[`C${i}`]?.v;
+                    if (newVal && !constVar3.includes(newVal)) {
+                        constVar3.push(newVal);
+                    }
+                }
+
+                setInpVar3Options(constVar3);
+                setInpVar3Val([constVar3[0]]);
+            }
+
+            const constOutNames = [];
+            for (let coln = 3; coln <= Object.keys(jsonData[0]).length; coln++) {
+                const colChar = getExcelColumnName(coln);
+                constOutNames.push(worksheet?.[`${colChar}1`].v);
+            }
+            setOutVarOptions(constOutNames);
+            setOutVarVal([constOutNames[0]]);
         };
-
-        if (loid) {
-            fetchFile();
-        }
-
-        return () => {};
-    }, [loid]);
-
-    useEffect(() => {
-        if (name && fileBin) {
-            const fileType = name.split('.')[1];
-            setFileTypeState(fileType);
-            if (fileType == 'png') {
-                // Convert Blob to JSON
-                const url = URL.createObjectURL(fileBin);
-                setDecodedFile(url);
-            } else if (fileType == 'csv') {
-                const reader = new FileReader();
-
-                reader.onload = (e) => {
-                    const data = e.target.result;
-
-                    // Parse the Excel file using SheetJS (XLSX)
-                    const workbook = XLSX.read(data, { type: 'binary' });
-
-                    // Assuming you're reading the first sheet:
-                    const firstSheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[firstSheetName];
-
-                    // Convert the worksheet to JSON (array of objects)
-                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
-                    allDataRef.current = jsonData;
-
-                    if (worksheet?.B1) {
-                        setInpVar2Name(worksheet.B1.v);
-                        const constVar2 = [];
-                        for (let i = 3; i < jsonData.length; i++) {
-                            const newVal = worksheet?.[`B${i}`]?.v;
-                            if (newVal && !constVar2.includes(newVal)) {
-                                constVar2.push(newVal);
-                            }
-                        }
-                        setInpVar2Options(constVar2);
-                        setInpVar2Val([constVar2[0]]);
-                    }
-
-                    if (worksheet?.C1) {
-                        setInpVar3Name(worksheet.C1.v);
-                        const constVar3 = [];
-                        for (let i = 3; i < jsonData.length; i++) {
-                            const newVal = worksheet?.[`C${i}`]?.v;
-                            if (newVal && !constVar3.includes(newVal)) {
-                                constVar3.push(newVal);
-                            }
-                        }
-
-                        setInpVar3Options(constVar3);
-                        setInpVar3Val([constVar3[0]]);
-                    }
-
-                    const constOutNames = [];
-                    for (let coln = 3; coln <= Object.keys(jsonData[0]).length; coln++) {
-                        const colChar = getExcelColumnName(coln);
-                        constOutNames.push(worksheet?.[`${colChar}1`].v);
-                    }
-                    setOutVarOptions(constOutNames);
-                    setOutVarVal([constOutNames[0]]);
-                };
-
-                reader.readAsBinaryString(fileBin);
-            }
-        }
-    }, [fileBin]);
+        reader.readAsBinaryString(fileBin);
+    }, []);
 
     useEffect(() => {
         console.log('changing plotting');
@@ -161,7 +180,7 @@ export const DataElement = ({ loid, name }) => {
                                         .map((item) => {
                                             let date;
                                             try {
-                                                date = getJsDateFromExcel(item.time);
+                                                date = getDate(item.time);
                                             } catch (error) {
                                                 console.log('decoding dates failed', item.time);
                                             }
@@ -183,7 +202,7 @@ export const DataElement = ({ loid, name }) => {
                                     .map((item) => {
                                         let date;
                                         try {
-                                            date = getJsDateFromExcel(item.time);
+                                            date = getDate(item.time);
                                         } catch (error) {
                                             console.log('decoding dates failed', item.time);
                                         }
@@ -207,7 +226,7 @@ export const DataElement = ({ loid, name }) => {
                                 .map((item) => {
                                     let date;
                                     try {
-                                        date = getJsDateFromExcel(item.time);
+                                        date = getDate(item.time);
                                     } catch (error) {
                                         console.log('decoding dates failed', item.time);
                                     }
@@ -227,7 +246,7 @@ export const DataElement = ({ loid, name }) => {
                         data: allDataRef.current.map((item) => {
                             let date;
                             try {
-                                date = getJsDateFromExcel(item.time);
+                                date = getDate(item.time);
                             } catch (error) {
                                 console.log('decoding dates failed', item.time);
                             }
@@ -264,19 +283,12 @@ export const DataElement = ({ loid, name }) => {
             setDecodedFile(chartData);
         }
     }, [inpVar2Val, inpVar3Val, outVarVal]);
+
     return (
         <>
-            {fileTypeState == 'png' && (
-                <img
-                    src={decodedFile}
-                    alt="Model Icon"
-                    className="max-w-none max-h-[400px]" // Maximum width and height
-                />
-            )}
-            {['csv', 'xlsx'].includes(fileTypeState) && decodedFile && (
+            {decodedFile && (
                 <>
-                    {' '}
-                    <Line options={plotOptions} data={decodedFile} className="w-[800px]" />
+                    <Line options={plotOptions} data={decodedFile} className="max-w-[600px]" />
                     <div className="flex gap-5">
                         {inpVar2Name && (
                             <Multiselect
@@ -286,7 +298,7 @@ export const DataElement = ({ loid, name }) => {
                                 options={inpVar2Options}
                                 selectedValues={inpVar2Val}
                                 placeholder={`Select ${inpVar2Name}`}
-                                className="dd w-fit"
+                                className="dd w-fit list-decimal"
                             />
                         )}
                         {inpVar3Name && (
@@ -307,7 +319,7 @@ export const DataElement = ({ loid, name }) => {
                             onSelect={(e) => setOutVarVal(e)}
                             options={outVarOptions}
                             selectedValues={outVarVal}
-                            placeholder={`Select Output Variable`}
+                            placeholder={`Select output variable`}
                             className="dd w-fit"
                         />
                     </div>
@@ -324,4 +336,13 @@ function getExcelColumnName(colNumber) {
         colNumber = Math.floor(colNumber / 26) - 1;
     }
     return columnName;
+}
+
+function getDate(date) {
+    if (typeof date == 'number') {
+        return getJsDateFromExcel(date);
+    } else {
+        console.log('date is probably date-time, need to implement this.');
+        return false;
+    }
 }
