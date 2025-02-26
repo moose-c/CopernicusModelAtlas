@@ -1,5 +1,89 @@
 import { useState } from 'react';
 
+export const SideBarChangeContent = () => {
+    const handleScroll = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    return (
+        <>
+            <ul className="list-none">
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('navbar')}>
+                    Top
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('introduction')}>
+                    1. Introduction
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('theory')}>
+                    2. Theory
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('results')}>
+                    3. Results
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('methods')}>
+                    4. Methods
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
+                    5. Colofon
+                </li>
+                <li className="cursor-pointer p-2 reg list-none" onClick={() => handleScroll('footer')}>
+                    Bottom
+                </li>
+            </ul>
+        </>
+    );
+};
+
+export const SideBarModelContent = () => {
+    const handleScroll = (sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    return (
+        <>
+            <ul className="list-none">
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('navbar')}>
+                    Top
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('introduction')}>
+                    1. Introduction
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('theory')}>
+                    2. Theory
+                </li>
+                <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('results')}>
+                    3. Results
+                </li>
+                {document.getElementById('methods') && (
+                    <>
+                        <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('methods')}>
+                            4. Methods
+                        </li>
+                        <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
+                            5. Colofon
+                        </li>
+                    </>
+                )}
+                {!document.getElementById('methods') && (
+                    <>
+                        <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
+                            4. Colofon
+                        </li>
+                    </>
+                )}
+
+                <li className="cursor-pointer p-2 reg list-none" onClick={() => handleScroll('footer')}>
+                    Bottom
+                </li>
+            </ul>
+        </>
+    );
+};
+
 export const SideBar = ({ sideBarContent }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 

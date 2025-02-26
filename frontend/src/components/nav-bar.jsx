@@ -9,7 +9,7 @@ export const NavBar = () => {
     const isAdmin = user?.profile['https://namespace.com/roles']?.includes('admin');
 
     return (
-        <>
+        <div id="navbar">
             <div className="bg-copernicusYellow w-full px-[42px] py-[18px]">
                 <p className="font-sans text-[40px] font-thin leading-[34px] text-black">Copernicus Institute of Sustainable Development</p>
             </div>
@@ -45,6 +45,6 @@ export const NavBar = () => {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 };

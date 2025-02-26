@@ -8,10 +8,6 @@ File types:
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
 MH:
-- side bar
-  - check grijze van copernicus
-  - quicklinks
-  - Including important colofon info
 -	Colofon nicer!
   - Bold how to cite
   - List of papers might be huge

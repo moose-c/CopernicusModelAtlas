@@ -10,6 +10,7 @@ import { performChecks } from '../../util/form-checks';
 
 import { editModel, getSingleModel } from '../../services/db.service';
 import { AuthContext } from '../..';
+import { SideBarChangeContent } from '../../components/side-bar';
 
 import '../../styles/form.css';
 
@@ -81,7 +82,7 @@ export const ChangeModelPage = ({ edit = false }) => {
     };
 
     return (
-        <PageLayout>
+        <PageLayout sideBarContent={<SideBarChangeContent />}>
             <div className="content-layout px-[100px] mx-auto max-w-[1000px]">
                 <h1>Form to create or edit your model page</h1>
                 <p>

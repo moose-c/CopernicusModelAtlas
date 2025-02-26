@@ -174,7 +174,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
             <FormContext.Provider value={{ formData, handleChange }}>
                 <div className="flex flex-col gap-[25px]">
                     <div className="relative">
-                        <h2>Section 1: Introduction to the Model</h2>
+                        <h2 id="introduction">Section 1: Introduction to the Model</h2>
                         <p className="underline cursor-pointer select-none" onClick={() => togglePopup(1)}>
                             Show Example
                         </p>
@@ -226,7 +226,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                 </div>
                 <div className="flex flex-col gap-[25px]">
                     <div className="relative">
-                        <h2>Section 2: Theory behind the model</h2>
+                        <h2 id="theory">Section 2: Theory behind the model</h2>
                         <p className="underline cursor-pointer select-none" onClick={() => togglePopup(2)}>
                             Show Example
                         </p>
@@ -246,7 +246,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                 </div>
                 <div className="flex flex-col gap-[25px]">
                     <div className="relative">
-                        <h2>Section 3: Results from this model</h2>
+                        <h2 id="results">Section 3: Results from this model</h2>
                         <p className="underline cursor-pointer select-none" onClick={() => togglePopup(3)}>
                             Show Example
                         </p>
@@ -266,7 +266,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     </div>
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">
-                            <h2>Section 4: Methods behind this model</h2>
+                            <h2 id="methods">Section 4: Methods behind this model</h2>
                             <p className="underline cursor-pointer select-none" onClick={() => togglePopup(4)}>
                                 Show Example
                             </p>
@@ -283,7 +283,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     </div>
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">
-                            <h2>Section 5: Colofon</h2>
+                            <h2 id="colofon">Section 5: Colofon</h2>
                             <p className="underline cursor-pointer select-none" onClick={() => togglePopup(5)}>
                                 Show Example
                             </p>

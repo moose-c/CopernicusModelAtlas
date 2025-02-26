@@ -6,7 +6,7 @@ export const Introduction = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
-            <div className="flex flex-col gap-[20px]">
+            <div id="introduction" className="flex flex-col gap-[20px]">
                 <div className="flex gap-[10px] pr-[30px]">
                     <div className="flex flex-col gap-[10px] w-full ">
                         <h1>{modelData.modelName}</h1>
@@ -53,7 +53,7 @@ export const Theory = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
-            <div className="flex gap-[10px]">
+            <div id="theory" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Theory</h2>
                     <p className="reg">{modelData.theoryText}</p>
@@ -73,7 +73,7 @@ export const Results = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
-            <div className="flex flex-col gap-[30px]">
+            <div id="results" className="flex flex-col gap-[30px]">
                 <div className="flex gap-[10px]">
                     <div className="w-[80%] flex flex-col gap-[10px]">
                         <h2>Results</h2>
@@ -117,7 +117,7 @@ export const Methods = () => {
     const { modelData } = useModel();
     return (
         <>
-            <div className="flex flex-col gap-[10px]">
+            <div id="methods" className="flex flex-col gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Methods</h2>
                     <p className="reg">{modelData.methodsDesc}</p>
@@ -142,7 +142,7 @@ export const Colofon = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
-            <div className="flex gap-[10px]">
+            <div id="colofon" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Colofon</h2>
                     <p className="reg">How to Cite: {modelData.colofonCite}</p>
