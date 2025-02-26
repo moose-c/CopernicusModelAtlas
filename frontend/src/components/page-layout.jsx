@@ -4,9 +4,9 @@ import { PageFooter } from './page-footer';
 
 export const PageLayout = ({ children, sideBarContent = false }) => {
     return (
-        <div>
+        <div className="flex flex-col">
             <NavBar />
-            <div className="flex h-full">
+            <div className="flex">
                 {sideBarContent && <SideBar sideBarContent={sideBarContent} />}
                 <div>{children}</div>
             </div>
