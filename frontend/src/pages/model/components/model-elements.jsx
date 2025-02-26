@@ -1,4 +1,4 @@
-import { useModel } from '../model-page';
+import { useModel } from '../view-model-page';
 import { Button } from '../../../components/button';
 import { DataElement } from './data-vis';
 

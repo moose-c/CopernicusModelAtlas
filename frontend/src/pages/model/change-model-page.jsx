@@ -1,40 +1,77 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom'; // for dynamic routing
 
-import { CodeSnippet } from '../../components/code-snippet';
 import { PageLayout } from '../../components/page-layout';
 import { FormContent } from './components/form-content';
 import { ExamplePopup } from './components/form-elements';
 import { blankForm } from '../../util/globalVars';
+import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
 
-import { postModel } from '../../services/db.service';
+import { editModel, getSingleModel } from '../../services/db.service';
 import { AuthContext } from '../..';
 
 import '../../styles/form.css';
 
-export const AddModelPage = () => {
+export const ChangeModelPage = ({ edit = false }) => {
     const { user } = useContext(AuthContext);
+
     const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
+    const [formData, setFormData] = useState(blankForm);
+
+    let modelId;
+    if (edit) {
+        modelId = useParams().modelId; // Get modelId from URL params
+    }
+
+    useEffect(() => {
+        if (edit) {
+            console.log(modelId);
+            let isMounted = true;
+
+            const getMessage = async () => {
+                const { data, error } = await getSingleModel(modelId);
+
+                if (!isMounted) {
+                    return;
+                }
+
+                if (data) {
+                    setFormData(unpackModel(data));
+                }
+
+                if (error) {
+                    console.log('error', error);
+                }
+            };
+
+            getMessage();
+
+            return () => {
+                isMounted = false;
+            };
+        }
+    }, []);
 
     const togglePopup = (popupNb) => {
         setExamplePopups((prevState) => prevState.map((val, i) => (i === popupNb ? !val : false)));
     };
 
-    const [formData, setFormData] = useState(blankForm);
-
     const handleSubmit = (event) => {
         let isMounted = true;
-
         event.preventDefault();
 
         // change false -> true to actually perform
         let check = performChecks(formData, true);
-        const accessToken = user.id_token;
 
         if (check) {
-            console.log('starting to perform post');
             const doPost = async (formData) => {
-                const { data, error } = postModel(formData, accessToken);
+                const accessToken = user.id_token;
+                if (edit) {
+                    editModel(formData, modelId, accessToken);
+                } else {
+                    postModel(formData, accessToken);
+                }
             };
             doPost(formData);
             return () => {
@@ -46,7 +83,7 @@ export const AddModelPage = () => {
     return (
         <PageLayout>
             <div className="content-layout px-[100px] mx-auto max-w-[1000px]">
-                <h1>Form to create new model page</h1>
+                <h1>Form to create or edit your model page</h1>
                 <p>
                     Fill out this form to create add a new model to the overview. To see an example of what the model page will look like, click{' '}
                     <span className="cursor-pointer underline select-none" onClick={() => togglePopup(0)}>

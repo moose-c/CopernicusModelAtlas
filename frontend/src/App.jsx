@@ -11,9 +11,8 @@ import { ProtectedPage } from './pages/message/protected-page';
 import { PublicPage } from './pages/message/public-page';
 import { AdminPage } from './pages/message/admin-page';
 
-import { AddModelPage } from './pages/model/add-model-page';
-import { EditModelPage } from './pages/model/edit-model-page';
-import { ModelPage } from './pages/model/model-page';
+import { ChangeModelPage } from './pages/model/change-model-page';
+import { ModelPage } from './pages/model/view-model-page';
 
 const ProtectedRoute = ({ element, adminOnly = false }) => {
     const { user } = useContext(AuthContext);
@@ -38,8 +37,8 @@ export const App = () => {
             <Route path="/message/public" element={<PublicPage />} />
             <Route path="/model/:modelId" element={<ModelPage />} />
 
-            <Route path="/model/add" element={<ProtectedRoute element={<AddModelPage />} />} />
-            <Route path="/model/edit/:modelId" element={<ProtectedRoute element={<EditModelPage />} />} />
+            <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
+            <Route path="/model/edit/:modelId" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
             <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
             <Route path="/message/protected" element={<ProtectedRoute element={<ProtectedPage />} />} />
 
