@@ -270,7 +270,7 @@ export const DataElement = ({ loid, name }) => {
                 <img
                     src={decodedFile}
                     alt="Model Icon"
-                    className="max-w-[500px]" // Maximum width and height
+                    className="max-w-none max-h-[400px]" // Maximum width and height
                 />
             )}
             {['csv', 'xlsx'].includes(fileTypeState) && decodedFile && (

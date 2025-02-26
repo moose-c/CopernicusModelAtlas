@@ -34,7 +34,7 @@ export const Introduction = () => {
                     </div>
                 </div>
                 <div className="items-center flex flex-col gap-[10px]">
-                    <img src={`data:image/png;base64,${modelData.explanFig}`} alt="Model Icon" className="w-full max-w-[800px] h-auto object-contain" />
+                    <img src={`data:image/png;base64,${modelData.explanFig}`} alt="Model Icon" className="w-full max-w-[400px] h-auto object-contain" />
                     <p className="caption">{modelData.explanFigCaption}</p>
                 </div>
                 <div className="flex gap-[80px] justify-center">
@@ -86,7 +86,7 @@ export const Results = () => {
                         </div>
                     )}
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-2">
                     {[...Array(modelData.nbBoxes)].map((_, i) => {
                         return (
                             <div key={i} className="border-2 border-copernicusGrey">
@@ -128,7 +128,7 @@ export const Methods = () => {
                             <p className="ddHeading">{modelData.methodsFileCaption}</p>
                         </div>
                         <div className="items-center flex flex-col gap-[10px]">
-                            {modelData.methodsFile != 0 && <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} />}
+                            <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} />
                             <p className="caption">{modelData.methodsFileCaption}</p>
                         </div>
                     </div>

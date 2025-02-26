@@ -45,7 +45,7 @@ export const AddModelPage = () => {
 
     return (
         <PageLayout>
-            <div className="content-layout px-[100px]">
+            <div className="content-layout px-[100px] mx-auto max-w-[1000px]">
                 <h1>Form to create new model page</h1>
                 <p>
                     Fill out this form to create add a new model to the overview. To see an example of what the model page will look like, click{' '}

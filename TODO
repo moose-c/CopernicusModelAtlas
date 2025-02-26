@@ -1,30 +1,39 @@
-difc files:
-
 Log in:
-- Make fe behind log wall
-  - User pages behind log wall
-  - allow to submit and preview
-- Api behind log wall
-  - also give the user to the api to allow users to view their own models.  
+  - Change to UU.
+  - also give the user to the api to allow users to view their own models. 
+  - Give a flag that checks whether it is approved 
+
+File types:
+ - Raster file: .tif. Up to 2 variables (such as ‘time’ or ‘variable’)
+ - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
+
+MH:
+- side bar
+  - check grijze van copernicus
+  - quicklinks
+  - Including important colofon info
+-	Colofon nicer!
+  - Bold how to cite
+  - List of papers might be huge
+
+
+-	Footer: back to copernicus, back to home page
+
+CSV information: 
+-	Second column -> third
+- Except for the ‘time’ column, this can be left empty.
+- Each cell can be numbers or strings as you see fit, except for cells in the ‘time’ column which need to be instances of an excel data
+- Give example for the units [mg/l].
+
+CSV plotting:
+- Plotting with a single variable.
+
+
+- email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)
 
 
 WH:
-- allow modellers to input text including bold and \n etc
-- side bar?
-- long description = short description if left empty
-- preview field for images: 
-<img
-              src={`data:image/png;base64,${formData.icon}`}
-              alt="Preview"
-              width="100" // Set the desired preview size
-              height="100" // Set the desired preview size
-            />
-
--	Ook scenarios 
--	Uncertainty bands
--	Xxx
-- first value of every variable is the one that is shown
-
-
-MH:
 - improve connection for extended period to keep alive during file streaming
+- allow modellers to input text including bold and \n etc
+- Maybe also a sidebar under names
+- specify number of input variables

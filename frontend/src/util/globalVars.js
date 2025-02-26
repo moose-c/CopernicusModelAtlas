@@ -99,7 +99,7 @@ export const fileFields = [
 export const mandFields = [
     "modelName",
     "modellerName0",
-    "descr",
+    "shortDescr",
     "explanFig",
     "explanFigCaption",
     "theoryText",
