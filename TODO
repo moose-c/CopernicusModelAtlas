@@ -10,8 +10,7 @@ File types:
 MH:
 
 csv:
-- no removing all variables goos wrong.
-
+- don't allow plotting together if the unit's differ
 
 - email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)
 
@@ -23,3 +22,4 @@ WH:
 - specify number of input variables
 - List of papers might be huge
 - Download underlying CSV.
+- boxes alternate data left vs data right

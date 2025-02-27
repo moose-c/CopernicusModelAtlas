@@ -40,10 +40,10 @@ export const DataElement = ({ loid, name }) => {
     }, [fileBin]);
 
     return (
-        <>
+        <div className="min-w-[400px] max-w-[600px]">
             {fileTypeState == 'png' && <Figure fileBin={fileBin} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} />}
-        </>
+        </div>
     );
 };
 
@@ -295,39 +295,40 @@ const Timeseries = ({ fileBin }) => {
         <>
             {decodedFile && (
                 <>
-                    <Line options={plotOptions} data={decodedFile} className="min-w-[600px] max-w-[600px]" />
-                    <div className="flex gap-5">
-                        {inpVar2Name && (
-                            <Multiselect
-                                isObject={false}
-                                onRemove={(e) => setInpVar2Val(e)}
-                                onSelect={(e) => setInpVar2Val(e)}
-                                options={inpVar2Options}
-                                selectedValues={inpVar2Val}
-                                placeholder={`Select ${inpVar2Name}`}
-                                className="dd w-fit list-decimal"
-                            />
-                        )}
-                        {inpVar3Name && (
-                            <Multiselect
-                                isObject={false}
-                                onRemove={(e) => setInpVar3Val(e)}
-                                onSelect={(e) => setInpVar3Val(e)}
-                                options={inpVar3Options}
-                                selectedValues={inpVar3Val}
-                                placeholder={`Select ${inpVar3Name}`}
-                                className="dd w-fit"
-                            />
-                        )}
-
+                    <Line options={plotOptions} data={decodedFile} />
+                    <div className="flex flex-col gap-2">
+                        <div className="flex gap-5">
+                            {inpVar2Name && (
+                                <Multiselect
+                                    isObject={false}
+                                    onRemove={(e) => setInpVar2Val(e)}
+                                    onSelect={(e) => setInpVar2Val(e)}
+                                    options={inpVar2Options}
+                                    selectedValues={inpVar2Val}
+                                    placeholder={`Select ${inpVar2Name}`}
+                                    className="dd list-decimal"
+                                />
+                            )}
+                            {inpVar3Name && (
+                                <Multiselect
+                                    isObject={false}
+                                    onRemove={(e) => setInpVar3Val(e)}
+                                    onSelect={(e) => setInpVar3Val(e)}
+                                    options={inpVar3Options}
+                                    selectedValues={inpVar3Val}
+                                    placeholder={`Select ${inpVar3Name}`}
+                                    className="dd "
+                                />
+                            )}
+                        </div>
                         <Multiselect
                             isObject={false}
                             onRemove={(e) => setOutVarVal(e)}
                             onSelect={(e) => setOutVarVal(e)}
                             options={outVarOptions}
                             selectedValues={outVarVal}
-                            placeholder={`Select output variable`}
-                            className="dd w-fit"
+                            placeholder={`Select output variables`}
+                            className="dd "
                         />
                     </div>
                 </>
