@@ -9,6 +9,7 @@ import { ModelCards } from '../model/components/model-cards';
 const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
 
 export const ProfilePage = () => {
+    const [toggle, setToggle] = useState(true);
     const [models, setModels] = useState([]);
     const { user } = useContext(AuthContext);
     const isAdmin = user?.profile.sub == adminUser;
@@ -29,7 +30,7 @@ export const ProfilePage = () => {
             };
             getModels();
         }
-    }, []);
+    }, [toggle]);
     return (
         <PageLayout>
             <div className="content-layout">
@@ -38,7 +39,7 @@ export const ProfilePage = () => {
                         <h1>Your Models</h1>
                         <Button text="Add Model" to="/model/add" />
                     </div>
-                    {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} />}
+                    {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} setToggle={setToggle} />}
                 </div>
                 <div>
                     <h1>User Information</h1>

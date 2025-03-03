@@ -4,15 +4,17 @@ import { deleteModel, approveModel } from '../../../services/db.service';
 import { useContext } from 'react';
 import { AuthContext } from '../../..';
 
-export const ModelCards = ({ models, editAble, isAdmin }) => {
+export const ModelCards = ({ models, editAble, isAdmin, setToggle }) => {
     return (
         <div className="flex flex-col justify-center">
-            {models.map((model) => (editAble || model[4]) && <ModelCard key={model[0]} model={model} editAble={editAble} isAdmin={isAdmin} />)}
+            {models.map(
+                (model) => (editAble || model[4]) && <ModelCard key={model[0]} model={model} editAble={editAble} isAdmin={isAdmin} setToggle={setToggle} />
+            )}
         </div>
     );
 };
 
-const ModelCard = ({ model, editAble, isAdmin }) => {
+const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const { user } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
@@ -44,7 +46,7 @@ const ModelCard = ({ model, editAble, isAdmin }) => {
                                                 text="Delete"
                                                 call={async () => {
                                                     await deleteModel(model[0], accessToken);
-                                                    window.location.reload();
+                                                    setToggle((prevValue) => !prevValue);
                                                 }}
                                             />
                                         </div>
@@ -56,7 +58,7 @@ const ModelCard = ({ model, editAble, isAdmin }) => {
                                                     text="Toggle Approval"
                                                     call={async () => {
                                                         await approveModel(model[0], accessToken);
-                                                        window.location.reload();
+                                                        setToggle((prevValue) => !prevValue);
                                                     }}
                                                 />
                                             </div>
