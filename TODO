@@ -12,6 +12,7 @@ csv:
 
 
 WH:
+- Sorting of models based on id & approval
 - improve connection for extended period to keep alive during file streaming
 - allow modellers to input text including bold and \n etc
 - Maybe also a sidebar under names

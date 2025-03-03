@@ -195,7 +195,7 @@ def approve_model(model_id):
     try:
 
         cur.execute(
-            "UPDATE models SET isApproved = NOT isApproved WHERE id = %s", (model_id)
+            "UPDATE models SET isApproved = NOT isApproved WHERE id = %s", (model_id,)
         )
         conn.commit()
 
