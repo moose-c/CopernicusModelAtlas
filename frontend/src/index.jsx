@@ -5,6 +5,8 @@ import { userManager } from './util/authConfig';
 import { App } from './App';
 import './styles/index.css';
 
+const logoutUri = import.meta.env.VITE_APP_AUTH_LOGOUT_URL;
+
 // Create AuthContext
 export const AuthContext = createContext(null);
 
@@ -20,7 +22,12 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     const login = () => userManager.signinRedirect();
-    const logout = () => userManager.signoutRedirect({ id_token_hint: user.id_token });
+    const logout = () => {
+        userManager.signoutRedirect({
+            id_token_hint: user.id_token,
+            post_logout_redirect_uri: logoutUri,
+        });
+    };
 
     return <AuthContext.Provider value={{ user, setUser, login, logout, loading }}>{children}</AuthContext.Provider>;
 };
