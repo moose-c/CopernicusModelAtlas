@@ -6,7 +6,6 @@ import { useContext } from 'react';
 
 export const NavBar = () => {
     const { user, login, logout } = useContext(AuthContext);
-    const isAdmin = user?.profile['https://namespace.com/roles']?.includes('admin');
 
     return (
         <div id="navbar">
@@ -39,7 +38,6 @@ export const NavBar = () => {
                             <NavBarTab path="/message/public" label="Public" />
                             <NavBarTab path="/profile" label="Profile" />
                             <NavBarTab path="/message/protected" label="Private" />
-                            {isAdmin && <NavBarTab path="/model/admin" label="Admin" />}
                             <Button text="Log out" call={logout} />
                         </>
                     )}

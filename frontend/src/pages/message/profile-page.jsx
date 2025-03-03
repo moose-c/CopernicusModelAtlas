@@ -3,19 +3,25 @@ import { CodeSnippet } from '../../components/code-snippet';
 import { PageLayout } from '../../components/page-layout';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
-import { getUserModels } from '../../services/db.service';
+import { getAllModels, getUserModels } from '../../services/db.service';
 import { ModelCards } from '../model/components/model-cards';
+
+const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
 
 export const ProfilePage = () => {
     const [models, setModels] = useState([]);
     const { user } = useContext(AuthContext);
+    const isAdmin = user?.profile.sub == adminUser;
 
     useEffect(() => {
         if (user) {
-            console.log(user['profile']['sub']);
             const getModels = async () => {
                 let data, error;
-                ({ data, error } = await getUserModels(user['profile']['sub']));
+                if (isAdmin) {
+                    ({ data, error } = await getAllModels());
+                } else {
+                    ({ data, error } = await getUserModels(user['profile']['sub']));
+                }
                 if (data) {
                     console.log(data);
                     setModels(new Array(data)[0]);
