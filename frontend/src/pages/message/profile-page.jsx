@@ -1,11 +1,29 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { CodeSnippet } from '../../components/code-snippet';
 import { PageLayout } from '../../components/page-layout';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
+import { getUserModels } from '../../services/db.service';
+import { ModelCards } from '../model/components/model-cards';
 
 export const ProfilePage = () => {
+    const [models, setModels] = useState([]);
     const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (user) {
+            console.log(user['profile']['sub']);
+            const getModels = async () => {
+                let data, error;
+                ({ data, error } = await getUserModels(user['profile']['sub']));
+                if (data) {
+                    console.log(data);
+                    setModels(new Array(data)[0]);
+                }
+            };
+            getModels();
+        }
+    }, []);
     return (
         <PageLayout>
             <div className="content-layout">
@@ -14,7 +32,7 @@ export const ProfilePage = () => {
                         <h1>Your Models</h1>
                         <Button text="Add Model" to="/model/add" />
                     </div>
-                    <h2>Here should go the models of this user</h2>
+                    {models && <ModelCards models={models} editAble={true} />}
                 </div>
                 <div>
                     <h1>User Information</h1>

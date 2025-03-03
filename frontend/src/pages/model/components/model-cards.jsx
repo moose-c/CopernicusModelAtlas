@@ -4,17 +4,17 @@ import { deleteModel } from '../../../services/db.service';
 import { useContext } from 'react';
 import { AuthContext } from '../../..';
 
-export const ModelCards = ({ models, setRenewModel, editAble }) => {
+export const ModelCards = ({ models, editAble }) => {
     return (
         <div className="flex flex-col justify-center">
             {models.map((model) => (
-                <ModelCard key={model[0]} model={model} setRenewModel={setRenewModel} editAble={editAble} />
+                <ModelCard key={model[0]} model={model} editAble={editAble} />
             ))}
         </div>
     );
 };
 
-const ModelCard = ({ model, setRenewModel, editAble }) => {
+const ModelCard = ({ model, editAble }) => {
     const { user } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
@@ -45,7 +45,7 @@ const ModelCard = ({ model, setRenewModel, editAble }) => {
                                             text="Delete"
                                             call={() => {
                                                 deleteModel(model[0], accessToken);
-                                                setRenewModel(true);
+                                                window.location.reload();
                                             }}
                                         />
                                     </>

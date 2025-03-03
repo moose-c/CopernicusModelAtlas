@@ -125,7 +125,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, shortdescr FROM models WHERE user = %s",
+        'SELECT id, modelname, modellername0, shortdescr FROM models WHERE "user" = %s',
         [user_id],
     )
     modelList = cur.fetchall()

@@ -10,11 +10,9 @@ import { AuthContext } from '..';
 export const OverviewPage = ({ editAble }) => {
     const [models, setModels] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-    const [renewModel, setRenewModel] = useState(false);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        setRenewModel(false);
         const getMessage = async () => {
             let data, error;
             if (!editAble) {
@@ -24,11 +22,8 @@ export const OverviewPage = ({ editAble }) => {
             }
 
             if (data) {
+                console.log(data);
                 setModels(new Array(data)[0]);
-                const modelIds = [];
-                data.forEach((model) => {
-                    modelIds.push(model[0]);
-                });
             }
 
             if (error) {
@@ -37,7 +32,7 @@ export const OverviewPage = ({ editAble }) => {
         };
 
         getMessage();
-    }, [renewModel]);
+    }, []);
 
     return (
         <PageLayout>
@@ -54,7 +49,7 @@ export const OverviewPage = ({ editAble }) => {
                     placeholder="Select Keywords"
                     className="dd w-fit"
                 />
-                {models && <ModelCards models={models} setRenewModel={setRenewModel} editAble={editAble} />}
+                {models && <ModelCards models={models} editAble={editAble} />}
                 {errorMessage && <div> {errorMessage}</div>}
             </div>
         </PageLayout>

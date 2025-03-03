@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CodeSnippet } from '../../components/code-snippet';
 import { PageLayout } from '../../components/page-layout';
-import { getAdminResource } from '../../services/message.service';
 
 export const AdminPage = () => {
     const [message, setMessage] = useState('');
@@ -10,9 +9,6 @@ export const AdminPage = () => {
         let isMounted = true;
 
         const getMessage = async () => {
-            // const accessToken = await getAccessTokenSilently();
-            // const { data, error } = await getAdminResource(accessToken);
-
             console.log(accessToken);
             if (!isMounted) {
                 return;
