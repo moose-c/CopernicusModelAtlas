@@ -43,8 +43,8 @@ const ModelCard = ({ model, editAble }) => {
                                         </div>
                                         <Button
                                             text="Delete"
-                                            call={() => {
-                                                deleteModel(model[0], accessToken);
+                                            call={async () => {
+                                                await deleteModel(model[0], accessToken);
                                                 window.location.reload();
                                             }}
                                         />
