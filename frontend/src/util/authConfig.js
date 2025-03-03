@@ -14,8 +14,7 @@ const oidcConfig = {
     redirect_uri: redirectUri,
     response_type: "code",
     scope: "openid profile email",
-    logout_redirect_uri: logoutUri,
-    post_logout_redirect_uri: postLogoutUri,
+    frontchannel_logout_uri: logoutUri,
 };
 
 export const userManager = new UserManager(oidcConfig);
