@@ -80,6 +80,7 @@ blank_form_template = {
     "methodsFile": 0,
     "methodsFileName": "",
     "uuUser": "",
+    "isApproved": False,
 }
 
 

@@ -91,6 +91,7 @@ export const blankForm = {
     methodsFile: 0,
     methodsFileName: "",
     uuUser: "",
+    isApproved: false
 };
 
 export const fileFields = [
