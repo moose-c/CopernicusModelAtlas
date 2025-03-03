@@ -1,25 +1,26 @@
 import { PageLayout } from '../components/page-layout';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ModelCards } from './model/components/model-cards';
-import { getAllModels } from '../services/db.service';
+import { getAllModels, getUserModels } from '../services/db.service';
 import Multiselect from 'multiselect-react-dropdown';
 import { Searchbar } from '../components/searchbar';
 import { keywords } from '../util/globalVars';
+import { AuthContext } from '..';
 
-export const OverviewPage = ({ getForUser, editAble }) => {
+export const OverviewPage = ({ editAble }) => {
     const [models, setModels] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [renewModel, setRenewModel] = useState(false);
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         setRenewModel(false);
         const getMessage = async () => {
             let data, error;
-            if (!getForUser) {
+            if (!editAble) {
                 ({ data, error } = await getAllModels());
             } else {
-                // get models only for a single user
-                console.log('to be implemented');
+                ({ data, error } = await getUserModels(user['profile']['sub']));
             }
 
             if (data) {

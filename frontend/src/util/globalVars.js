@@ -90,6 +90,7 @@ export const blankForm = {
     boxFile3Name: "",
     methodsFile: 0,
     methodsFileName: "",
+    user: "",
 };
 
 export const fileFields = [

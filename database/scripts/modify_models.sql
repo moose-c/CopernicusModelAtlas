@@ -1,10 +1,3 @@
-ALTER TABLE models
-    ADD COLUMN iconName TEXT,
-    ADD COLUMN explanFigName TEXT,
-    ADD COLUMN theoryFigName TEXT,
-    ADD COLUMN resFigName TEXT,
-    ADD COLUMN boxFile0Name TEXT,
-    ADD COLUMN boxFile1Name TEXT,
-    ADD COLUMN boxFile2Name TEXT,
-    ADD COLUMN boxFile3Name TEXT,
-    ADD COLUMN methodsFileName TEXT;
+UPDATE models
+ SET "user" = 'auth0|674077c5770f0139bf2992e5'
+ WHERE id IN (68, 69, 70);

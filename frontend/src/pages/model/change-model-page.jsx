@@ -25,7 +25,11 @@ export const ChangeModelPage = ({ edit = false }) => {
         modelId = useParams().modelId; // Get modelId from URL params
     }
 
+    console.log(formData);
+
     useEffect(() => {
+        setFormData({ ...formData, user: user['profile']['sub'] });
+
         if (edit) {
             console.log(modelId);
             let isMounted = true;

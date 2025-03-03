@@ -80,6 +80,23 @@ export const getAllModels = async () => {
     };
 };
 
+export const getUserModels = async (user_id) => {
+    const config = {
+        url: `${apiServerUrl}/api/models/get_user/${user_id}`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getSingleModel = async (model_id) => {
     const url = `${apiServerUrl}/api/models/get_single/${model_id}`
     const config = {

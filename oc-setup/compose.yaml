@@ -19,7 +19,7 @@ services:
       - ../api/requirements.txt:/requirements.txt
       - ../api/gunicorn.conf.py:/gunicorn.conf.py
       - ../api/entrypoint.sh:/entrypoint.sh
-    env_file: ../api/.env
+    env_file: ./secrets/.env-api
     ports:
       - "8080:8080"
     entrypoint: ["/bin/bash", "/entrypoint.sh"]

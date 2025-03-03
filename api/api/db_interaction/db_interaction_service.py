@@ -79,6 +79,7 @@ blank_form_template = {
     "boxFile3Name": "",
     "methodsFile": 0,
     "methodsFileName": "",
+    "user": "",
 }
 
 
@@ -114,6 +115,19 @@ def get_all_models():
     conn = db_connection()
     cur = conn.cursor()
     cur.execute("SELECT id, modelname, modellername0, shortdescr FROM models;")
+    modelList = cur.fetchall()
+    cur.close()
+    conn.close()
+    return jsonify(modelList)
+
+
+def get_user_models(user_id):
+    conn = db_connection()
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT id, modelname, modellername0, shortdescr FROM models WHERE user = %s",
+        [user_id],
+    )
     modelList = cur.fetchall()
     cur.close()
     conn.close()
