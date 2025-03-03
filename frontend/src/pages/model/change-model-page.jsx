@@ -28,7 +28,7 @@ export const ChangeModelPage = ({ edit = false }) => {
     console.log(formData);
 
     useEffect(() => {
-        setFormData({ ...formData, user: user['profile']['sub'] });
+        setFormData({ ...formData, uuUser: user['profile']['sub'] });
 
         if (edit) {
             console.log(modelId);
