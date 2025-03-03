@@ -53,7 +53,7 @@ const ModelCard = ({ model, editAble, isAdmin }) => {
                                         {isAdmin && (
                                             <div>
                                                 <Button
-                                                    text="Approve"
+                                                    text="Toggle Approval"
                                                     call={async () => {
                                                         await approveModel(model[0], accessToken);
                                                         window.location.reload();
