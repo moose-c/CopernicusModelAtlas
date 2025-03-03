@@ -8,7 +8,7 @@ import { blankForm } from '../../util/globalVars';
 import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
 
-import { editModel, getSingleModel } from '../../services/db.service';
+import { editModel, getSingleModel, postModel } from '../../services/db.service';
 import { AuthContext } from '../..';
 import { SideBarChangeContent } from '../../components/side-bar';
 
