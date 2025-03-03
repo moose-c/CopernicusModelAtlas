@@ -8,6 +8,7 @@ File types:
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
 MH:
+- footer at the bottom.
 
 csv:
 - don't allow plotting together if the unit's differ
