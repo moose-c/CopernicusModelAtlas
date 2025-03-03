@@ -115,7 +115,9 @@ def db_connection():
 def get_all_models():
     conn = db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT id, modelname, modellername0, shortdescr FROM models;")
+    cur.execute(
+        "SELECT id, modelname, modellername0, shortdescr, isapproved FROM models;"
+    )
     modelList = cur.fetchall()
     cur.close()
     conn.close()
@@ -126,7 +128,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, shortdescr FROM models WHERE uuUser = %s",
+        "SELECT id, modelname, modellername0, shortdescr, isapproved FROM models WHERE uuUser = %s",
         [user_id],
     )
     modelList = cur.fetchall()
@@ -180,6 +182,27 @@ def delete_model(model_id, los_to_delete=[]):
     except Exception as e:
         conn.rollback()
         print(f"Error deleting model with ID {model_id}: {e}")
+
+    finally:
+        cur.close()
+        conn.close()
+
+
+def approve_model(model_id):
+    print("attempting to approve")
+    conn = db_connection()
+    cur = conn.cursor()
+    try:
+
+        cur.execute("UPDATE models SET isApproved = %s WHERE id = %s", (True, model_id))
+        conn.commit()
+
+        print(f"Model with ID {model_id} apprvoed successfully.")
+        return jsonify(f"Model with ID {model_id} approved successfully.")
+
+    except Exception as e:
+        conn.rollback()
+        print(f"Error approving model with ID {model_id}: {e}")
 
     finally:
         cur.close()

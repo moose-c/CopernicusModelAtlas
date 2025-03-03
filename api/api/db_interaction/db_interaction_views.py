@@ -7,6 +7,7 @@ from api.db_interaction.db_interaction_service import (
     post_model,
     edit_model,
     delete_model,
+    approve_model,
     retrieve_data,
 )
 
@@ -56,6 +57,18 @@ def delete(model_id):
         token = request.headers.get("Authorization", None).split(" ")[1]
         verify_jwt(token)
         return delete_model(model_id)
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
+
+
+@bp.route("/approve/<model_id>")
+def approve(model_id):
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        verify_jwt(token)
+        return approve_model(model_id)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 401

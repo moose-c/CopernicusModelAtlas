@@ -134,6 +134,24 @@ export const deleteModel = async (model_id, accessToken) => {
     };
 };
 
+export const approveModel = async (model_id, accessToken) => {
+    const url = `${apiServerUrl}/api/models/approve/${model_id}`; // Modify the endpoint to fit your DELETE route
+    const config = {
+        url: url,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getLargeFile = async (dataLoid) => {
     const config = {
         url: `${apiServerUrl}/api/models/get_file/${dataLoid}`,

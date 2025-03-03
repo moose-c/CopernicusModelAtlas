@@ -38,7 +38,7 @@ export const ProfilePage = () => {
                         <h1>Your Models</h1>
                         <Button text="Add Model" to="/model/add" />
                     </div>
-                    {models && <ModelCards models={models} editAble={true} />}
+                    {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} />}
                 </div>
                 <div>
                     <h1>User Information</h1>

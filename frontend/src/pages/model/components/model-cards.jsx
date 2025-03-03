@@ -1,20 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/button';
-import { deleteModel } from '../../../services/db.service';
+import { deleteModel, approveModel } from '../../../services/db.service';
 import { useContext } from 'react';
 import { AuthContext } from '../../..';
 
-export const ModelCards = ({ models, editAble }) => {
+export const ModelCards = ({ models, editAble, isAdmin }) => {
     return (
         <div className="flex flex-col justify-center">
-            {models.map((model) => (
-                <ModelCard key={model[0]} model={model} editAble={editAble} />
-            ))}
+            {models.map((model) => (editAble || model[4]) && <ModelCard key={model[0]} model={model} editAble={editAble} isAdmin={isAdmin} />)}
         </div>
     );
 };
 
-const ModelCard = ({ model, editAble }) => {
+const ModelCard = ({ model, editAble, isAdmin }) => {
     const { user } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
@@ -41,13 +39,28 @@ const ModelCard = ({ model, editAble }) => {
                                         <div>
                                             <Button text="Edit" to={`/model/edit/${model[0]}`} />
                                         </div>
-                                        <Button
-                                            text="Delete"
-                                            call={async () => {
-                                                await deleteModel(model[0], accessToken);
-                                                window.location.reload();
-                                            }}
-                                        />
+                                        <div>
+                                            <Button
+                                                text="Delete"
+                                                call={async () => {
+                                                    await deleteModel(model[0], accessToken);
+                                                    window.location.reload();
+                                                }}
+                                            />
+                                        </div>
+                                        {!model[4] && <p className="text-red-500 font-bold">Not yet approved</p>}
+
+                                        {isAdmin && (
+                                            <div>
+                                                <Button
+                                                    text="Approve"
+                                                    call={async () => {
+                                                        await approveModel(model[0], accessToken);
+                                                        window.location.reload();
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
                                     </>
                                 );
                             })()}
