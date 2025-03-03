@@ -1,6 +1,3 @@
-Log in:
-  - Give a flag that checks whether it is approved 
-
 File types:
  - Raster file: .tif. Up to 2 variables (such as ‘time’ or ‘variable’)
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
