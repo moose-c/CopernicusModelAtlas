@@ -25,8 +25,11 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         userManager.signoutRedirect({
             id_token_hint: user.id_token,
-            post_logout_redirect_uri: logoutUri,
         });
+
+        setTimeout(() => {
+            window.location.href = logoutUri;
+        }, 3000);
     };
 
     return <AuthContext.Provider value={{ user, setUser, login, logout, loading }}>{children}</AuthContext.Provider>;
