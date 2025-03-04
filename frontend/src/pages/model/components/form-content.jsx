@@ -1,21 +1,14 @@
 import { createContext, useContext } from 'react';
 
-import { ExamplePopup } from '../components/form-elements';
+import { ExamplePopup } from './examplePopup';
 import { ShortTextField, LongTextField, FileField, TwoField, BoxesField, KeyWordsField, BoxesExplanation } from './form-fields';
-
-import { Tooltip } from 'react-tooltip';
 
 const FormContext = createContext();
 export const useForm = () => useContext(FormContext);
 
 export const FormContent = ({ formData, setFormData, examplePopups, togglePopup }) => {
     const handleChange = (e, q) => {
-        if (q === 'keywords') {
-            setFormData((prevState) => ({
-                ...prevState,
-                keywords: e,
-            }));
-        } else if (['icon', 'explanFig', 'theoryFig', 'resFig'].includes(q)) {
+        if (['icon', 'explanFig', 'theoryFig', 'resFig'].includes(q)) {
             if (e == '') {
                 setFormData((prevState) => {
                     const updatedState = {
@@ -52,6 +45,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     return updatedState;
                 });
             } else {
+                console.log(q);
                 const file = e.target.files[0];
                 setFormData((prevState) => {
                     const updatedState = {
@@ -66,7 +60,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
         } else {
             setFormData((prevState) => ({
                 ...prevState,
-                [q]: e.target.value,
+                [q]: e,
             }));
         }
     };
@@ -276,7 +270,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         <FileField
                             label={'Upload methods data here'}
                             field={'methodsFile'}
-                            allowedFileTypes={'.png .csv, .tif, .geojson, .nc'}
+                            allowedFileTypes={'.png, .csv, .xlsx'}
                             capField={'methodsFileCaption'}
                             capText={'Enter a title for this data field'}
                         />

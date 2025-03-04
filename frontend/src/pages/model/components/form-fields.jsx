@@ -2,7 +2,9 @@ import Multiselect from 'multiselect-react-dropdown';
 
 import { useForm } from './form-content';
 import { keywords } from '../../../util/globalVars';
-import { ExamplePopup } from './form-elements';
+import { ExamplePopup } from './examplePopup';
+import { CSVFormatExplanation } from './vis/csvFormatExplanation';
+import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 
 export const ShortTextField = ({ label, placeholder, field }) => {
     const { formData, handleChange } = useForm(); // Automatically gets values
@@ -10,7 +12,13 @@ export const ShortTextField = ({ label, placeholder, field }) => {
         <>
             <div>
                 <p>{label}</p>
-                <input className="formQAs" type="text" placeholder={placeholder} value={formData[field]} onChange={(e) => handleChange(e, field)} />
+                <input
+                    className="formQAs"
+                    type="text"
+                    placeholder={placeholder}
+                    value={formData[field]}
+                    onChange={(e) => handleChange(e.target.value, field)}
+                />
             </div>
         </>
     );
@@ -22,7 +30,13 @@ export const LongTextField = ({ label, placeholder, field }) => {
         <>
             <div>
                 <p>{label}</p>
-                <textarea className="formQAl" type="text" placeholder={placeholder} value={formData[field]} onChange={(e) => handleChange(e, field)} />
+                <textarea
+                    className="formQAl"
+                    type="text"
+                    placeholder={placeholder}
+                    value={formData[field]}
+                    onChange={(e) => handleChange(e.target.value, field)}
+                />
             </div>
         </>
     );
@@ -44,7 +58,7 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
                                     type="text"
                                     placeholder={p1}
                                     value={formData[`${f1}${i}`]}
-                                    onChange={(e) => handleChange(e, `${f1}${i}`)}
+                                    onChange={(e) => handleChange(e.target.value, `${f1}${i}`)}
                                 />
                             </div>
                             <div className="flex flex-col gap-1">
@@ -54,7 +68,7 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
                                     type="text"
                                     placeholder={p2}
                                     value={formData[`${f2}${i}`]}
-                                    onChange={(e) => handleChange(e, `${f2}${i}`)}
+                                    onChange={(e) => handleChange(e.target.value, `${f2}${i}`)}
                                 />
                             </div>
                         </div>
@@ -102,6 +116,20 @@ export const FileField = ({ label, field, allowedFileTypes, capField, capText })
                         </div>
                     )}
                 </div>
+                {['xlsx', 'csv'].includes(formData[`${field}Name`].split('.')[1]) && (
+                    <FormGroup>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    onChange={(e) => {
+                                        handleChange(e.target.checked, `${field}Bar`);
+                                    }}
+                                />
+                            }
+                            label="Plot as Bar (empty gives Line)"
+                        />
+                    </FormGroup>
+                )}
                 {capField && (
                     <ShortTextField label={capText || 'Do you want the figure uploaded above to have a caption?'} placeholder={'Caption'} field={capField} />
                 )}
@@ -121,12 +149,12 @@ export const KeyWordsField = () => {
                     onKeyPressFn={function noRefCheck() {}}
                     onRemove={(e) => {
                         function noRefCheck() {}
-                        handleChange(e, 'keywords');
+                        handleChange(e.target.value, 'keywords');
                     }}
                     onSearch={function noRefCheck() {}}
                     onSelect={(e) => {
                         function noRefCheck() {}
-                        handleChange(e, 'keywords');
+                        handleChange(e.target.value, 'keywords');
                     }}
                     options={keywords}
                     selectedValues={formData['keywords']}
@@ -153,7 +181,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                     type="text"
                                     placeholder="Box Title"
                                     value={formData[`boxTitle${i}`]}
-                                    onChange={(e) => handleChange(e, `boxTitle${i}`)}
+                                    onChange={(e) => handleChange(e.target.value, `boxTitle${i}`)}
                                 />
                             </div>
                             <div>
@@ -163,11 +191,9 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                     type="text"
                                     placeholder="Enter a Description"
                                     value={formData[`boxDescr${i}`]}
-                                    onChange={(e) => handleChange(e, `boxDescr${i}`)}
+                                    onChange={(e) => handleChange(e.target.value, `boxDescr${i}`)}
                                 />
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-4">
                             <div>
                                 <p>Title for output data{i == 0 && '*'}</p>
                                 <input
@@ -175,16 +201,19 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                     type="text"
                                     placeholder="Output Title"
                                     value={formData[`boxFileTitle${i}`]}
-                                    onChange={(e) => handleChange(e, `boxFileTitle${i}`)}
+                                    onChange={(e) => handleChange(e.target.value, `boxFileTitle${i}`)}
                                 />
                             </div>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
                             <div>
                                 <p>Upload output data here{i == 0 && '*'}</p>
                                 <div className="flex gap-[15px]">
                                     <input
                                         type="file"
                                         id={`file-upload${5 + i}`}
-                                        accept=".png, .csv, .tif, .geojson, .nc"
+                                        accept=".png, .csv, .xlsx"
                                         onChange={(e) => handleChange(e, `boxFile${i}`)}
                                         className="hidden"
                                     />
@@ -197,18 +226,34 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                         <p>Browse...</p>
                                     </label>
 
-                                    <p>Allowed file types: .png, .csv, .tif, .geojson, .nc</p>
+                                    <p>Allowed file types: .png, .csv, .xlsx</p>
                                 </div>
-                                <p className="font-bold">n.b. Only data matching the requirements stated above can be shown!</p>
+                                <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                             </div>
 
                             {formData[`boxFile${i}`] !== 0 && (
-                                <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-                                    <p className="text-sm text-green-600">{formData[`boxFile${i}Name`]}</p>
-                                    <button onClick={() => handleChange(0, `boxFile${i}`)} className="ml-4 text-red-600 hover:underline text-sm">
-                                        Remove
-                                    </button>
-                                </div>
+                                <>
+                                    <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
+                                        <p className="text-sm text-green-600">{formData[`boxFile${i}Name`]}</p>
+                                        <button onClick={() => handleChange(0, `boxFile${i}`)} className="ml-4 text-red-600 hover:underline text-sm">
+                                            Remove
+                                        </button>
+                                    </div>
+                                    {['xlsx', 'csv'].includes(formData[`boxFile${i}Name`].split('.')[1]) && (
+                                        <FormGroup>
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        onChange={(e) => {
+                                                            handleChange(e.target.checked, `boxFile${i}Bar`);
+                                                        }}
+                                                    />
+                                                }
+                                                label="Plot as Bar (empty gives Line)"
+                                            />
+                                        </FormGroup>
+                                    )}
+                                </>
                             )}
                         </div>
 
@@ -242,52 +287,15 @@ export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
                 <li key={1} className="cursor-pointer hover:underline" onClick={() => togglePopup(6)}>
                     Timeseries (.csv, .xlsx)
                 </li>
-                {examplePopups[6] && (
-                    <ExamplePopup
-                        nb={0}
-                        togglePopup={togglePopup}
-                        content={
-                            <>
-                                <h1>CSV Format Explanation</h1>
-                                The first row contains the names of input and output variables in the following way.
-                                <ul>
-                                    <li>
-                                        The first column is the first input variable and is titled <strong>"time"</strong>.
-                                    </li>
-                                    <li>
-                                        The second column can contain a second input variable (e.g., <em>"region"</em>) or is left empty.
-                                    </li>
-                                    <li>
-                                        The third column can contain a third input variable (e.g., <em>"scenario"</em>) or is left empty.
-                                    </li>
-                                    <li>After the first three columns, each subsequent column title represents the name of an output variable.</li>
-                                </ul>
-                                <br />
-                                <p>
-                                    The second row contains units for each variable including the brackets such as [mg/l]. The first 'time' column doesn't need
-                                    a unit and can be left empty{' '}
-                                </p>
-                                <br />
-                                <p>
-                                    From the third row onwards each row contains values of input and corresponding output variables. These can be numbers or
-                                    strings as you see fit, except for the cells in the 'time' column which need to be instances of an excel Date or in a{' '}
-                                    <a className="underline" href="https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format">
-                                        date-time string format
-                                    </a>
-                                    .
-                                </p>
-                            </>
-                        }
-                    />
-                )}
-                <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
+                {examplePopups[6] && <ExamplePopup nb={6} togglePopup={togglePopup} content={<CSVFormatExplanation />} />}
+                {/* <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
                     Raster map (.tif, .tiff)
                 </li>
                 {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} />}
                 <li key={3} className="cursor-pointer hover:underline" onClick={() => togglePopup(8)}>
                     Vector map (.geojson)
-                </li>
-                {examplePopups[8] && <ExamplePopup nb={8} togglePopup={togglePopup} />}
+                </li> */}
+                {/* {examplePopups[8] && <ExamplePopup nb={8} togglePopup={togglePopup} />} */}
             </ul>
         </>
     );

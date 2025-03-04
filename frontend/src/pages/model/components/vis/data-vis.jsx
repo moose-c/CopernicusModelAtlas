@@ -1,7 +1,7 @@
-import { getLargeFile } from '../../../services/db.service';
+import { getLargeFile } from '../../../../services/db.service';
 import { useState, useEffect } from 'react';
-import { Timeseries } from './vis/timeseries';
-import { Figure } from './vis/image';
+import { Timeseries } from './timeseries';
+import { Figure } from './image';
 
 export const DataElement = ({ loid, name }) => {
     const [fileTypeState, setFileTypeState] = useState('');
@@ -32,7 +32,7 @@ export const DataElement = ({ loid, name }) => {
     }, [fileBin]);
 
     return (
-        <div className="min-w-[400px] max-w-[600px]">
+        <div className="min-w-[500px] max-w-[700px]">
             {fileTypeState == 'png' && <Figure fileBin={fileBin} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} />}
         </div>

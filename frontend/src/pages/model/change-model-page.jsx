@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'; // for dynamic routing
 
 import { PageLayout } from '../../components/page-layout';
 import { FormContent } from './components/form-content';
-import { ExamplePopup } from './components/form-elements';
+import { ExamplePopup } from './components/examplePopup';
 import { blankForm } from '../../util/globalVars';
 import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';

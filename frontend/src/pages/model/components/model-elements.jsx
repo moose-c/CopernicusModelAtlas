@@ -1,6 +1,6 @@
 import { useModel } from '../view-model-page';
 import { Button } from '../../../components/button';
-import { DataElement } from './data-vis';
+import { DataElement } from './vis/data-vis';
 
 export const Introduction = () => {
     const { modelData } = useModel(); // Automatically gets values

@@ -81,6 +81,11 @@ blank_form_template = {
     "methodsFileName": "",
     "uuUser": "",
     "isApproved": False,
+    "boxFile0Bar": False,
+    "boxFile1Bar": False,
+    "boxFile2Bar": False,
+    "boxFile3Bar": False,
+    "methodsFileBar": False,
 }
 
 
