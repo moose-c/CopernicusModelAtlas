@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Timeseries } from './timeseries';
 import { Figure } from './image';
 
-export const DataElement = ({ loid, name }) => {
+export const DataElement = ({ loid, name, isBar }) => {
     const [fileTypeState, setFileTypeState] = useState('');
     const [fileBin, setFileBin] = useState(null);
 
@@ -34,7 +34,7 @@ export const DataElement = ({ loid, name }) => {
     return (
         <div className="min-w-[500px] max-w-[700px]">
             {fileTypeState == 'png' && <Figure fileBin={fileBin} />}
-            {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} />}
+            {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} isBar={isBar} />}
         </div>
     );
 };

@@ -71,6 +71,7 @@ export const Theory = () => {
 
 export const Results = () => {
     const { modelData } = useModel(); // Automatically gets values
+    console.log(modelData);
     return (
         <>
             <div id="results" className="flex flex-col gap-[30px]">
@@ -97,7 +98,11 @@ export const Results = () => {
                                     <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
                                         <h3>{modelData[`boxFileTitle${i}`]}</h3>
                                         <div className="">
-                                            <DataElement loid={modelData[`boxFile${i}`]} name={modelData[`boxFile${i}Name`]} />
+                                            <DataElement
+                                                loid={modelData[`boxFile${i}`]}
+                                                name={modelData[`boxFile${i}Name`]}
+                                                isBar={modelData[`boxFile${i}Bar`]}
+                                            />
                                         </div>
                                     </div>
                                     <div className="p-3 border-2 border-copernicusGrey w-full">
@@ -128,7 +133,7 @@ export const Methods = () => {
                             <p className="ddHeading">{modelData.methodsFileCaption}</p>
                         </div>
                         <div className="items-center flex flex-col gap-[10px]">
-                            <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} />
+                            <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} isBar={modelData.methodsFileBar} />
                             <p className="caption">{modelData.methodsFileCaption}</p>
                         </div>
                     </div>

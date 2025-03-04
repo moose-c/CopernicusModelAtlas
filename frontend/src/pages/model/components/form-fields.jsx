@@ -116,11 +116,13 @@ export const FileField = ({ label, field, allowedFileTypes, capField, capText })
                         </div>
                     )}
                 </div>
+
                 {['xlsx', 'csv'].includes(formData[`${field}Name`].split('.')[1]) && (
                     <FormGroup>
                         <FormControlLabel
                             control={
                                 <Checkbox
+                                    checked={formData[`${field}Bar`]}
                                     onChange={(e) => {
                                         handleChange(e.target.checked, `${field}Bar`);
                                     }}
@@ -244,6 +246,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
+                                                        checked={formData[`boxFile${i}Bar`]}
                                                         onChange={(e) => {
                                                             handleChange(e.target.checked, `boxFile${i}Bar`);
                                                         }}

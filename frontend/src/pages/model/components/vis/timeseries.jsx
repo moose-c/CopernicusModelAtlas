@@ -26,7 +26,7 @@ import {
 // Register the necessary components for Line and Bar charts
 Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, TimeScale, Tooltip, Legend, Title, BarController, BarElement);
 
-export const Timeseries = ({ fileBin }) => {
+export const Timeseries = ({ fileBin, isBar }) => {
     const [decodedFile, setDecodedFile] = useState(null);
 
     const [inpVar2Name, setInpVar2Name] = useState('');
@@ -38,6 +38,7 @@ export const Timeseries = ({ fileBin }) => {
 
     const [outVarVal, setOutVarVal] = useState([]);
     const [outVarOptions, setOutVarOptions] = useState([]);
+    const [colorIndex, setColorIndex] = useState(0);
 
     const allDataRef = useRef([]);
 
@@ -141,7 +142,8 @@ export const Timeseries = ({ fileBin }) => {
             let datasets = [];
 
             // what happens when no inpvar2val?
-            let i = 0;
+            let i = Math.floor(Math.random() * 10);
+
             for (let outVar of outVarVal) {
                 if (inpVar2Options.length > 0) {
                     for (let inpVar2 of inpVar2Val) {
@@ -321,7 +323,8 @@ export const Timeseries = ({ fileBin }) => {
         <>
             {decodedFile && (
                 <>
-                    <Bar options={plotOptions} data={decodedFile} />
+                    {!isBar && <Line options={plotOptions} data={decodedFile} />}
+                    {isBar && <Bar options={plotOptions} data={decodedFile} />}
                     <div className="flex flex-col gap-2">
                         <div className="flex gap-5">
                             {inpVar2Name && (
