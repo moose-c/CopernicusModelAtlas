@@ -71,7 +71,6 @@ export const Theory = () => {
 
 export const Results = () => {
     const { modelData } = useModel(); // Automatically gets values
-    console.log(modelData);
     return (
         <>
             <div id="results" className="flex flex-col gap-[30px]">

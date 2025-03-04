@@ -75,9 +75,9 @@ export const CSVFormatExplanation = () => {
                         <pre className="bg-gray-200 p-4 rounded-lg mt-2 font-mono">
                             {`Time ,Region ,,Temp  ,CO2 emission, CH4 emission
      ,       ,,[°C]  , [Mt]       , [Mt]
-     ,       ,,false , true       , true
 2023 ,Europe ,,10.5  , 3500       , 22
 2023 ,Asia   ,,12.3  , 17000      , 110`}
+                            {/*      ,       ,,false , true       , true */}
                         </pre>
                     </>
                 )}
