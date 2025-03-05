@@ -4,7 +4,7 @@ import { AuthContext } from "..";
 export const getAccessToken = () => {
     const { user, setUser } = useContext(AuthContext);
 
-    if (!user || !user.access_token || !user.refresh_token || !user.expires_at) {
+    if (!user || !user.id_token || !user.refresh_token || !user.expires_at) {
         console.error("Invalid user object");
         return null;
     }
@@ -13,7 +13,7 @@ export const getAccessToken = () => {
     console.log(currentTime, user.expires_at)
     if (currentTime < user.expires_at) {
         console.log('token still valid', currentTime, user.expires_at)
-        return user.access_token; // Token is still valid
+        return user.id_token; // Token is still valid
     }
 
     // // Token is expired, refresh it
