@@ -5,10 +5,12 @@ import { Button } from '../components/button';
 import { AuthContext } from '..';
 import { getAllModels, getUserModels } from '../services/db.service';
 import { ModelCards } from './model/components/model-cards';
+import { useLocation } from 'react-router-dom';
 
 const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
 
 export const ProfilePage = () => {
+    const location = useLocation();
     const [toggle, setToggle] = useState(true);
     const [models, setModels] = useState([]);
     const { user } = useContext(AuthContext);
@@ -30,7 +32,7 @@ export const ProfilePage = () => {
             };
             getModels();
         }
-    }, [toggle]);
+    }, [toggle, location.pathname]);
     return (
         <PageLayout>
             <div className="content-layout">
