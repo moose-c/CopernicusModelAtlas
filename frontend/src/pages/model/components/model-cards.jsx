@@ -3,6 +3,7 @@ import { Button } from '../../../components/button';
 import { deleteModel, approveModel } from '../../../services/db.service';
 import { useContext } from 'react';
 import { AuthContext } from '../../..';
+import { getAccessToken } from '../../../util/getAccessToken';
 
 export const ModelCards = ({ models, editAble, isAdmin, setToggle }) => {
     return (
@@ -35,7 +36,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     <div className="flex flex-col gap-3">
                         {editAble &&
                             (() => {
-                                const accessToken = user.id_token;
+                                const accessToken = getAccessToken(user);
                                 return (
                                     <>
                                         <div>

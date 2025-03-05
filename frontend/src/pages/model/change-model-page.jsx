@@ -7,6 +7,7 @@ import { ExamplePopup } from './components/examplePopup';
 import { blankForm } from '../../util/globalVars';
 import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
+import { getAccessToken } from '../../util/getAccessToken';
 
 import { editModel, getSingleModel, postModel } from '../../services/db.service';
 import { AuthContext } from '../..';
@@ -71,7 +72,7 @@ export const ChangeModelPage = ({ edit = false }) => {
         const doPost = async (formData) => {
             let check = await performChecks(formData, false);
             if (check) {
-                const accessToken = user.id_token;
+                const accessToken = getAccessToken(user);
                 if (edit) {
                     editModel(formData, modelId, accessToken);
                 } else {
