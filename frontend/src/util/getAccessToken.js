@@ -1,4 +1,4 @@
-export const getAccessToken = ({ user, setUser }) => {
+export const getAccessToken = (user, setUser) => {
 
     if (!user || !user.id_token || !user.refresh_token || !user.expires_at) {
         console.log(user)

@@ -16,7 +16,7 @@ export const ModelCards = ({ models, editAble, isAdmin, setToggle }) => {
 };
 
 const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
-    const { user } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
     const name = model[2];
@@ -36,7 +36,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     <div className="flex flex-col gap-3">
                         {editAble &&
                             (() => {
-                                const accessToken = getAccessToken(user);
+                                const accessToken = getAccessToken(user, setUser);
                                 return (
                                     <>
                                         <div>
