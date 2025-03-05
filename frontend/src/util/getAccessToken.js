@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "..";
 
-export const useAccessToken = () => {
+export const getAccessToken = () => {
     const { user, setUser } = useContext(AuthContext);
 
     const getAccessToken = async () => {
