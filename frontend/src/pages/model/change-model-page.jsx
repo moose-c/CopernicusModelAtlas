@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom'; // for dynamic routing
+import { useParams, useNavigate } from 'react-router-dom'; // for dynamic routing
 
 import { PageLayout } from '../../components/page-layout';
 import { FormContent } from './components/form-content';
@@ -16,6 +16,7 @@ import { SideBarChangeContent } from '../../components/side-bar';
 import '../../styles/form.css';
 
 export const ChangeModelPage = ({ edit = false }) => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
     const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
@@ -81,6 +82,8 @@ export const ChangeModelPage = ({ edit = false }) => {
             }
         };
         doPost(formData);
+        navigate('/profile');
+
         return () => {
             isMounted = false;
         };
