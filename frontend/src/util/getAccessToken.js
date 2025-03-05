@@ -5,15 +5,15 @@ export const getAccessToken = () => {
     const { user, setUser } = useContext(AuthContext);
 
     const getAccessToken = async () => {
-        if (!user || !user.accessToken || !user.refreshToken || !user.expiresAt) {
+        if (!user || !user.access_token || !user.refresh_token || !user.expires_at) {
             console.error("Invalid user object");
             return null;
         }
 
         const currentTime = Date.now() / 1000; // Convert to seconds
-        if (currentTime < user.expiresAt) {
-            console.log('token still valid', currentTime, user.expiresAt)
-            return user.accessToken; // Token is still valid
+        if (currentTime < user.expires_at) {
+            console.log('token still valid', currentTime, user.expires_at)
+            return user.access_token; // Token is still valid
         }
 
         // // Token is expired, refresh it
@@ -23,7 +23,7 @@ export const getAccessToken = () => {
         //         headers: {
         //             "Content-Type": "application/json"
         //         },
-        //         body: JSON.stringify({ refreshToken: user.refreshToken })
+        //         body: JSON.stringify({ refresh_token: user.refresh_token })
         //     });
 
         //     if (!response.ok) {
@@ -35,13 +35,13 @@ export const getAccessToken = () => {
         //     // Update user state with new tokens
         //     const updatedUser = {
         //         ...user,
-        //         accessToken: data.accessToken,
-        //         expiresAt: Date.now() / 1000 + data.expiresIn, // Convert expiresIn to absolute time
+        //         access_token: data.access_token,
+        //         expires_at: Date.now() / 1000 + data.expiresIn, // Convert expiresIn to absolute time
         //     };
 
         //     setUser(updatedUser);
 
-        //     return data.accessToken;
+        //     return data.access_token;
         // } catch (error) {
         //     console.error("Error refreshing token:", error);
         //     return null;
