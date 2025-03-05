@@ -76,14 +76,14 @@ export const ChangeModelPage = ({ edit = false }) => {
             if (check) {
                 const accessToken = getAccessToken(user);
                 if (edit) {
-                    editModel(formData, modelId, accessToken);
+                    await editModel(formData, modelId, accessToken);
                 } else {
-                    postModel(formData, accessToken);
+                    await postModel(formData, accessToken);
                 }
             }
+            navigate('/profile');
         };
         doPost(formData);
-        navigate('/profile');
 
         return () => {
             isMounted = false;

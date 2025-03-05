@@ -37,7 +37,6 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                         {editAble &&
                             (() => {
                                 const accessToken = getAccessToken(user);
-                                console.log(accessToken);
                                 return (
                                     <>
                                         <div>
