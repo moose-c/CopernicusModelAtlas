@@ -1,7 +1,6 @@
 import { Button } from './button';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '..';
-import { NavBarTab } from './nav-bar-tab';
 import { useContext } from 'react';
 
 export const NavBar = () => {
@@ -25,19 +24,20 @@ export const NavBar = () => {
                         </Link>
                     </p>
                 </div>
-                <div className="flex flex-row gap-4 text-white">
+                <div className="flex flex-row items-center gap-4 text-white">
                     {!user && (
                         <>
-                            <NavBarTab path="/message/public" label="Public" />
                             <Button text="Log in" call={login} />
                         </>
                     )}
                     {user && (
                         <>
-                            <NavBarTab path="/model/add" label="Add Model" />
-                            <NavBarTab path="/message/public" label="Public" />
-                            <NavBarTab path="/profile" label="Profile" />
-                            <NavBarTab path="/message/protected" label="Private" />
+                            <div>
+                                <NavLink to="/model/add">Add Model</NavLink>
+                            </div>
+                            <div>
+                                <NavLink to="/profile">Profile</NavLink>
+                            </div>
                             <Button text="Log out" call={logout} />
                         </>
                     )}

@@ -6,10 +6,7 @@ import { CallbackPage } from './pages/callback-page';
 import { OverviewPage } from './pages/overview-page';
 import { NotFoundPage } from './pages/not-found-page';
 
-import { ProfilePage } from './pages/message/profile-page';
-import { ProtectedPage } from './pages/message/protected-page';
-import { PublicPage } from './pages/message/public-page';
-import { AdminPage } from './pages/message/admin-page';
+import { ProfilePage } from './pages/profile-page';
 
 import { ChangeModelPage } from './pages/model/change-model-page';
 import { ModelPage } from './pages/model/view-model-page';
@@ -34,16 +31,13 @@ export const App = () => {
             <Route path="/" element={<OverviewPage />} />
             <Route path="/callback" element={<CallbackPage />} />
 
-            <Route path="/message/public" element={<PublicPage />} />
             <Route path="/model/:modelId" element={<ModelPage />} />
 
             <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
             <Route path="/model/edit/:modelId" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
             <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
-            <Route path="/message/protected" element={<ProtectedRoute element={<ProtectedPage />} />} />
 
             <Route path="/model/admin" element={<ProtectedRoute element={<OverviewPage editAble={true} />} adminOnly={true} />} />
-            <Route path="/message/admin" element={<ProtectedRoute element={<AdminPage />} adminOnly={true} />} />
 
             <Route path="/callback" element={<CallbackPage />} />
             <Route path="*" element={<NotFoundPage />} />

@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { CodeSnippet } from '../../components/code-snippet';
-import { PageLayout } from '../../components/page-layout';
-import { Button } from '../../components/button';
-import { AuthContext } from '../..';
-import { getAllModels, getUserModels } from '../../services/db.service';
-import { ModelCards } from '../model/components/model-cards';
+import { CodeSnippet } from '../components/code-snippet';
+import { PageLayout } from '../components/page-layout';
+import { Button } from '../components/button';
+import { AuthContext } from '..';
+import { getAllModels, getUserModels } from '../services/db.service';
+import { ModelCards } from './model/components/model-cards';
 
 const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
 
