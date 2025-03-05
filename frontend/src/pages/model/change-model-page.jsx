@@ -17,7 +17,7 @@ import '../../styles/form.css';
 
 export const ChangeModelPage = ({ edit = false }) => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
 
     const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
     const [formData, setFormData] = useState(blankForm);
@@ -74,7 +74,8 @@ export const ChangeModelPage = ({ edit = false }) => {
         const doPost = async (formData) => {
             let check = await performChecks(formData, false);
             if (check) {
-                const accessToken = getAccessToken(user);
+                const accessToken = getAccessToken(user, setUser);
+                console.log(accessToken);
                 if (edit) {
                     await editModel(formData, modelId, accessToken);
                 } else {

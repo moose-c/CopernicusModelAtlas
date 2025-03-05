@@ -1,8 +1,4 @@
-import { useContext } from "react";
-import { AuthContext } from "..";
-
-export const getAccessToken = () => {
-    const { user, setUser } = useContext(AuthContext);
+export const getAccessToken = ({ user, setUser }) => {
 
     if (!user || !user.id_token || !user.refresh_token || !user.expires_at) {
         console.error("Invalid user object");
