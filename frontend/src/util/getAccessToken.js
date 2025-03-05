@@ -1,6 +1,7 @@
 export const getAccessToken = ({ user, setUser }) => {
 
     if (!user || !user.id_token || !user.refresh_token || !user.expires_at) {
+        console.log(user)
         console.error("Invalid user object");
         return null;
     }
@@ -8,7 +9,11 @@ export const getAccessToken = ({ user, setUser }) => {
     const currentTime = Date.now() / 1000; // Convert to seconds
     if (currentTime < user.expires_at) {
         return user.id_token; // Token is still valid
+    } else {
+        alert('Token expired! Please log out and log in again')
+        console.log('token expired! not yet implemented')
     }
+
 
     // // Token is expired, refresh it
     // try {
