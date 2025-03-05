@@ -12,7 +12,7 @@ export const getAccessToken = () => {
 
         const currentTime = Date.now() / 1000; // Convert to seconds
         if (currentTime < user.expiresAt) {
-            console.log('token still valid')
+            console.log('token still valid', currentTime, user.expiresAt)
             return user.accessToken; // Token is still valid
         }
 
