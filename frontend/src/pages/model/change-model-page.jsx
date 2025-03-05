@@ -80,8 +80,8 @@ export const ChangeModelPage = ({ edit = false }) => {
                 } else {
                     await postModel(formData, accessToken);
                 }
+                navigate('/profile');
             }
-            navigate('/profile');
         };
         doPost(formData);
 
