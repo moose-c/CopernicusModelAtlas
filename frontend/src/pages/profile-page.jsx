@@ -41,10 +41,10 @@ export const ProfilePage = () => {
                     </div>
                     {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} setToggle={setToggle} />}
                 </div>
-                <div>
+                {/* <div>
                     <h1>User Information</h1>
                     <CodeSnippet title="Decoded ID Token" code={JSON.stringify(user, null, 2)} />
-                </div>
+                </div> */}
             </div>
         </PageLayout>
     );

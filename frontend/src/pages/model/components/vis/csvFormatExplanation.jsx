@@ -4,11 +4,6 @@ export const CSVFormatExplanation = () => {
     // Define state to track the active tab
     const [activeTab, setActiveTab] = useState('text');
 
-    // Handle tab switch
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-    };
-
     return (
         <div className="p-2">
             <h1>CSV Format Explanation</h1>
@@ -16,18 +11,20 @@ export const CSVFormatExplanation = () => {
             {/* Tabs */}
             <div className="flex mb-0">
                 <button
+                    type="button"
                     className={`px-4 rounded-tl-lg rounded-tr-lg text-sm font-medium ${
                         activeTab === 'text' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
                     }`}
-                    onClick={() => handleTabChange('text')}
+                    onClick={() => setActiveTab('text')}
                 >
                     Text
                 </button>
                 <button
+                    type="button"
                     className={`px-4 py-2 rounded-tl-lg rounded-tr-lg text-sm font-medium ml-2 ${
                         activeTab === 'example' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
                     }`}
-                    onClick={() => handleTabChange('example')}
+                    onClick={() => setActiveTab('example')}
                 >
                     Example
                 </button>

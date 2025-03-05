@@ -65,6 +65,7 @@ export const ChangeModelPage = ({ edit = false }) => {
     };
 
     const handleSubmit = (event) => {
+        console.log('handle submit called');
         let isMounted = true;
         event.preventDefault();
 
