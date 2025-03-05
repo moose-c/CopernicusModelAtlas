@@ -122,7 +122,7 @@ export const mandFields = [
 export const fieldNameMapping = {
     modelName: "Model Name",
     modellerName0: "Modeller Name",
-    descr: "Description",
+    shortDescr: "Description",
     explanFig: "Explanation Figure",
     explanFigCaption: "Expalnatory Figure Caption",
     theoryText: "Theory Text",
