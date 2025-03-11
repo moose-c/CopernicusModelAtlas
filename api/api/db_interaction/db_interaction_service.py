@@ -160,7 +160,7 @@ def get_single_model(model_id):
         key = key.lower()
         if model[key] != None:
             lo_id = model[key]
-            print(lo_id)
+
             model[key] = int(lo_id)
             # load and return
     cur.close()
@@ -254,11 +254,17 @@ def post_model():
                 formData[key] = lo_oid
 
         # create query
-        columns = formData.keys()
+        columns = list(formData.keys())
         values = tuple(formData.values())
         placeholders = ", ".join(["%s"] * len(columns))
+        if "id" in columns:
+            cur.execute("SELECT nextval('models_id_seq');")
+            next_id = cur.fetchone()[0]
+            values = values[:-1] + (next_id,)
+
         query = f"INSERT INTO models ({', '.join(columns)}) VALUES ({placeholders})"
 
+        print(columns, values)
         # insert model into models
         cur.execute(query, values)
         conn.commit()
@@ -279,13 +285,21 @@ def post_model():
 
     except Exception as e:
         print(f"Failed to add model. Reason: {str(e)}")
-        return jsonify({"error": "Failed to add model", "details": str(e)}), 400
+        raise
 
 
 def edit_model(model_id):
-    try:
-        print("edit model called")
+    print("edit model called")
 
+    try:
+        post_model()
+        print("adding went succesfully")
+
+    except Exception as e:
+        print("do not delete model if you can't add a new one")
+        return
+
+    try:
         # Need to learn which lo's to delete
         los_to_delete = []
         newValues = []
@@ -308,15 +322,13 @@ def edit_model(model_id):
         conn.commit()
         cur.close()
         conn.close()
-        print(oldValues, newValues)
 
         for i, oldValue in enumerate(oldValues):
             if oldValue != newValues[i]:
                 los_to_delete.append(oldValue)
-        print(los_to_delete)
 
         delete_model(model_id, los_to_delete=los_to_delete)
-        post_model()
+        print("deleting went succesfully")
         return (
             jsonify(
                 {

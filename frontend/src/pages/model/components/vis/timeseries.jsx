@@ -372,7 +372,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
 };
 
 function getDate(date) {
-    if (typeof date == 'number') {
+    if (typeof date == 'number' && date.toString().length != 4) {
         return getJsDateFromExcel(date);
     } else {
         return Date.parse(date);
