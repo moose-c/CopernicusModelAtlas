@@ -22,7 +22,6 @@ export const OverviewPage = ({ editAble }) => {
             }
 
             if (data) {
-                console.log(data);
                 setModels(new Array(data)[0]);
             }
 

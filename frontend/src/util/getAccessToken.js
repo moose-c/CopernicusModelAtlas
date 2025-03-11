@@ -34,8 +34,8 @@ export const getAccessToken = async (user, setUser) => {
         }
 
         const data = await response.json();
-
-        console.log(data)
+        console.log('user', user)
+        console.log('response data', data)
         // // Update user state with new tokens
         // const updatedUser = {
         //     ...user,
