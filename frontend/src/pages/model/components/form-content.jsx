@@ -177,7 +177,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <ShortTextField label={'Enter the name of your model*'} placeholder={'Enter Model Name'} field={'modelName'} />
                     <KeyWordsField />
                     <TwoField
-                        lgen={'Who worked on this model?'}
+                        lgen={'Contact person(s)'}
                         nb={formData['nbModellers']}
                         ch={handleChangeNbModellers}
                         l1={'Full name: *'}
@@ -188,15 +188,10 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         p2={'www.firstname-lastname.org'}
                         ladd={'Click here to add another name'}
                     />
-                    <LongTextField
-                        label={'Enter a short description of your model to display on the home page* (max 100 words)'}
-                        placeholder={'Short Description'}
-                        field={'shortDescr'}
-                    />
+                    <LongTextField label={'Enter a short description of your model to display on the home page* (max 100 words)'} field={'shortDescr'} />
                     <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png, .svg'} />
                     <LongTextField
                         label={'Enter a longer description of your model. (If left empty defaults to the short description entered above)'}
-                        placeholder={'Model Description'}
                         field={'longDescr'}
                     />
                     <FileField
@@ -218,6 +213,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         ladd={'Click here to add another button'}
                     />
                 </div>
+
                 <div className="flex flex-col gap-[25px]">
                     <div className="relative">
                         <h2 id="theory">Section 2: Theory behind the model</h2>
@@ -226,11 +222,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </p>
                         {examplePopups[2] && <ExamplePopup nb={2} togglePopup={togglePopup} />}
                     </div>
-                    <LongTextField
-                        label={'Enter some theory or applications of your model*'}
-                        placeholder={'Model theory or applications'}
-                        field={'theoryText'}
-                    />
+                    <LongTextField label={'Enter some theory or applications of your model*'} field={'theoryText'} />
                     <FileField
                         label={'Do you want to show a supporting figure for this section?'}
                         field={'theoryFig'}
@@ -246,7 +238,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </p>
                         {examplePopups[3] && <ExamplePopup nb={3} togglePopup={togglePopup} />}
                     </div>
-                    <LongTextField label={'Enter a description of the result(s) created by the model*'} placeholder={'Result description'} field={'resText'} />
+                    <LongTextField label={'Enter a description of the result(s) created by the model*'} field={'resText'} />
                     <FileField
                         label={'Do you want to show a supporting figure for this section?'}
                         field={'resFig'}
@@ -266,7 +258,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             </p>
                             {examplePopups[4] && <ExamplePopup nb={4} togglePopup={togglePopup} />}
                         </div>
-                        <LongTextField label={'Description of the model itself'} placeholder={'Enter a description'} field={'methodsDesc'} />
+                        <LongTextField label={'Description of the model itself'} field={'methodsDesc'} />
                         <FileField
                             label={'Upload methods data here'}
                             field={'methodsFile'}
@@ -289,11 +281,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             placeholder={'Enter licence'}
                             field={'colofonLicence'}
                         />
-                        <LongTextField
-                            label={'Do you want to include additional information in the Colofon?'}
-                            placeholder={'Enter additional Colofon info'}
-                            field={'colofonAddition'}
-                        />
+                        <LongTextField label={'Do you want to include additional information in the Colofon?'} field={'colofonAddition'} />
                     </div>
                 </div>
             </FormContext.Provider>

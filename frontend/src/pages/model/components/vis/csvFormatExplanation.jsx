@@ -70,7 +70,7 @@ export const CSVFormatExplanation = () => {
                         <h2 className="text-xl font-semibold mb-2">Example</h2>
                         <p>Here is an example of what the CSV format might look like with two input variables:</p>
                         <pre className="bg-gray-200 p-4 rounded-lg mt-2 font-mono">
-                            {`Time ,Region ,,Temp  ,CO2 emission, CH4 emission
+                            {`time ,Region ,,Temp  ,CO2 emission, CH4 emission
      ,       ,,[°C]  , [Mt]       , [Mt]
 2023 ,Europe ,,10.5  , 3500       , 22
 2023 ,Asia   ,,12.3  , 17000      , 110`}

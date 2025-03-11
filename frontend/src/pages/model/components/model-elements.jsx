@@ -15,13 +15,14 @@ export const Introduction = () => {
                     </div>
                     <div className="w-[270px] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" className="your-tailwind-classes" />
+                        <h3>Contact Person(s)</h3>
                         {[...Array(modelData.nbModellers)].map((_, i) => {
                             const nameKey = `modellerName${i}`;
                             const urlKey = `modellerUrl${i}`;
 
                             return modelData[urlKey] && modelData[urlKey] !== '' ? (
                                 <a key={i} href={modelData[urlKey]} target="_blank" rel="noopener noreferrer">
-                                    <p>{modelData[nameKey]}</p>
+                                    <p className="underline">{modelData[nameKey]}</p>
                                 </a>
                             ) : (
                                 modelData[nameKey] && modelData[nameKey] !== '' && (

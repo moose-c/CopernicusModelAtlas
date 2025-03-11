@@ -5,6 +5,8 @@ import { keywords } from '../../../util/globalVars';
 import { ExamplePopup } from './examplePopup';
 import { CSVFormatExplanation } from './vis/csvFormatExplanation';
 import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export const ShortTextField = ({ label, placeholder, field }) => {
     const { formData, handleChange } = useForm(); // Automatically gets values
@@ -24,19 +26,13 @@ export const ShortTextField = ({ label, placeholder, field }) => {
     );
 };
 
-export const LongTextField = ({ label, placeholder, field }) => {
+export const LongTextField = ({ label, field, width }) => {
     const { formData, handleChange } = useForm(); // Automatically gets value
     return (
         <>
             <div>
                 <p>{label}</p>
-                <textarea
-                    className="formQAl"
-                    type="text"
-                    placeholder={placeholder}
-                    value={formData[field]}
-                    onChange={(e) => handleChange(e.target.value, field)}
-                />
+                <ReactQuill className={`formQAl ${width}`} value={formData[field]} onChange={(content) => handleChange(content, field)} />
             </div>
         </>
     );
@@ -176,60 +172,16 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                 <div className="border-y border-black pb-2">
                     <div key={`box-${i}`} className="flex justify-between gap-4">
                         <div className="flex flex-col gap-4">
-                            <div>
-                                <p>Title of the Output Box{i == 0 && '*'}</p>
-                                <input
-                                    className="formQAs"
-                                    type="text"
-                                    placeholder="Box Title"
-                                    value={formData[`boxTitle${i}`]}
-                                    onChange={(e) => handleChange(e.target.value, `boxTitle${i}`)}
-                                />
-                            </div>
-                            <div>
-                                <p>Description accompanying the figure{i == 0 && '*'}</p>
-                                <textarea
-                                    className="formQAl w-[400px]"
-                                    type="text"
-                                    placeholder="Enter a Description"
-                                    value={formData[`boxDescr${i}`]}
-                                    onChange={(e) => handleChange(e.target.value, `boxDescr${i}`)}
-                                />
-                            </div>
-                            <div>
-                                <p>Title for output data{i == 0 && '*'}</p>
-                                <input
-                                    className="formQAs"
-                                    type="text"
-                                    placeholder="Output Title"
-                                    value={formData[`boxFileTitle${i}`]}
-                                    onChange={(e) => handleChange(e.target.value, `boxFileTitle${i}`)}
-                                />
-                            </div>
+                            <ShortTextField label={`Title of the Output Box${i == 0 && '*'}`} placeholder={'Box Title'} field={`boxTitle${i}`} />
+                            <LongTextField width="w-[400px]" label={`Description accompanying the figure${i == 0 && '*'}`} field={`boxDescr${i}`} />
                         </div>
 
                         <div className="flex flex-col gap-4">
                             <div>
-                                <p>Upload output data here{i == 0 && '*'}</p>
-                                <div className="flex gap-[15px]">
-                                    <input
-                                        type="file"
-                                        id={`file-upload${5 + i}`}
-                                        accept=".png, .csv, .xlsx"
-                                        onChange={(e) => handleChange(e, `boxFile${i}`)}
-                                        className="hidden"
-                                    />
+                                <ShortTextField label={`Title for output data${i == 0 && '*'}`} placeholder={'Output Title'} field={`boxFileTitle${i}`} />
 
-                                    {/* Label acting as the "Browse..." button */}
-                                    <label
-                                        htmlFor={`file-upload${5 + i}`}
-                                        className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer"
-                                    >
-                                        <p>Browse...</p>
-                                    </label>
+                                <FileField label={`Upload output data here${i == 0 && '*'}`} field={`boxFile${i}`} allowedFileTypes={'.png, .csv, .xlsx'} />
 
-                                    <p>Allowed file types: .png, .csv, .xlsx</p>
-                                </div>
                                 <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                             </div>
 
