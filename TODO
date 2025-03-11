@@ -4,8 +4,7 @@ File types:
 
 Today:
 - Feedback Oreane
-    - Tekst met opmaak
-    - Meer boxen
+    - Meer boxen (hoeveel dan? dit staat hardcoded in db)
     - alternerende boxen
     - alleen jaar in csv werkt niet
 - Token refresh

@@ -2,7 +2,7 @@ import { useModel } from '../view-model-page';
 import { Button } from '../../../components/button';
 import { DataElement } from './vis/data-vis';
 import DOMPurify from 'dompurify';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 
 export const Introduction = () => {
     const { modelData } = useModel(); // Automatically gets values
@@ -13,7 +13,7 @@ export const Introduction = () => {
                     <div className="flex flex-col gap-[10px] w-full ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
-                        {ReactHtmlParser(DOMPurify.sanitize(modelData.longDescr).replace('<p>', '<p class="top">'))}
+                        {parse(DOMPurify.sanitize(modelData.longDescr).replace('<p>', '<p class="top">'))}
                     </div>
                     <div className="w-[270px] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" className="your-tailwind-classes" />
@@ -59,7 +59,7 @@ export const Theory = () => {
             <div id="theory" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Theory</h2>
-                    {ReactHtmlParser(DOMPurify.sanitize(modelData.theoryText).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.theoryText).replace('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.theoryFig && (
                     <div className="items-center flex flex-col gap-[10px]">
@@ -80,7 +80,7 @@ export const Results = () => {
                 <div className="flex gap-[10px]">
                     <div className="w-[80%] flex flex-col gap-[10px]">
                         <h2>Results</h2>
-                        {ReactHtmlParser(DOMPurify.sanitize(modelData.resText).replace('<p>', '<p class="reg">'))}
+                        {parse(DOMPurify.sanitize(modelData.resText).replace('<p>', '<p class="reg">'))}
                     </div>
                     {modelData.resFig && (
                         <div className="items-center flex flex-col gap-[10px]">
@@ -108,7 +108,7 @@ export const Results = () => {
                                         </div>
                                     </div>
                                     <div className="p-3 border-2 border-copernicusGrey w-full">
-                                        {ReactHtmlParser(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
+                                        {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@ export const Methods = () => {
             <div id="methods" className="flex flex-col gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Methods</h2>
-                    {ReactHtmlParser(DOMPurify.sanitize(modelData.methodsDesc).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.methodsDesc).replace('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.methodsFile != 0 && (
                     <div className="border-2 border-copernicusGrey pb-10">
@@ -154,7 +154,7 @@ export const Colofon = () => {
                     <h2>Colofon</h2>
                     <p className="reg font-bold">How to Cite: {modelData.colofonCite}</p>
                     <p className="reg">Model Licence: {modelData.colofonLicence}</p>
-                    {ReactHtmlParser(DOMPurify.sanitize(modelData.colofonAddition).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.colofonAddition).replace('<p>', '<p class="reg">'))}
                 </div>
             </div>
         </>
