@@ -95,14 +95,15 @@ export const FileField = ({ label, field, allowedFileTypes, capField, capText })
         <>
             <div>
                 <p>{label}</p>
-                <div className="flex gap-[15px]">
-                    <input type="file" id={`file-upload-${field}`} accept={allowedFileTypes} onChange={(e) => handleChange(e, field)} className="hidden" />
-                    <label htmlFor={`file-upload-${field}`} className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer">
-                        <p>Browse...</p>
-                    </label>
+                <div>
+                    <div className="flex gap-[15px]">
+                        <input type="file" id={`file-upload-${field}`} accept={allowedFileTypes} onChange={(e) => handleChange(e, field)} className="hidden" />
+                        <label htmlFor={`file-upload-${field}`} className="border-2 border-[#D7D7D7] px-2 rounded-lg hover:bg-[#DBDBD8] cursor-pointer">
+                            <p>Browse...</p>
+                        </label>
 
-                    <p>Allowed file types: {allowedFileTypes}</p>
-
+                        <p>Allowed file types: {allowedFileTypes}</p>
+                    </div>
                     {formData[field] !== '' && formData[field] !== 0 && (
                         <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
                             <p className="text-sm text-green-600">{formData[`${field}Name`]}</p>
@@ -172,54 +173,18 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                 <div className="border-y border-black pb-2">
                     <div key={`box-${i}`} className="flex justify-between gap-4">
                         <div className="flex flex-col gap-4">
-                            <ShortTextField label={`Title of the Output Box${i == 0 && '*'}`} placeholder={'Box Title'} field={`boxTitle${i}`} />
-                            <LongTextField width="w-[400px]" label={`Description accompanying the figure${i == 0 && '*'}`} field={`boxDescr${i}`} />
+                            <ShortTextField label={`Title of the output box${i === 0 ? '*' : ''}`} placeholder={'Box Title'} field={`boxTitle${i}`} />
+                            <ShortTextField label={`Title for output data${i === 0 ? '*' : ''}`} placeholder={'Output Title'} field={`boxFileTitle${i}`} />
+                            <FileField label={`Upload output data here${i === 0 ? '*' : ''}`} field={`boxFile${i}`} allowedFileTypes={'.png, .csv, .xlsx'} />
+
+                            <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                         </div>
 
                         <div className="flex flex-col gap-4">
                             <div>
-                                <ShortTextField label={`Title for output data${i == 0 && '*'}`} placeholder={'Output Title'} field={`boxFileTitle${i}`} />
-
-                                <FileField label={`Upload output data here${i == 0 && '*'}`} field={`boxFile${i}`} allowedFileTypes={'.png, .csv, .xlsx'} />
-
-                                <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
+                                <LongTextField width="w-[400px]" label={`Description accompanying the figure${i === 0 ? '*' : ''}`} field={`boxDescr${i}`} />
                             </div>
-
-                            {formData[`boxFile${i}`] !== 0 && (
-                                <>
-                                    <div className="flex items-center justify-between bg-green-100 p-2 rounded-lg">
-                                        <p className="text-sm text-green-600">{formData[`boxFile${i}Name`]}</p>
-                                        <button onClick={() => handleChange(0, `boxFile${i}`)} className="ml-4 text-red-600 hover:underline text-sm">
-                                            Remove
-                                        </button>
-                                    </div>
-                                    {['xlsx', 'csv'].includes(formData[`boxFile${i}Name`].split('.')[1]) && (
-                                        <FormGroup>
-                                            <FormControlLabel
-                                                control={
-                                                    <Checkbox
-                                                        checked={formData[`boxFile${i}Bar`]}
-                                                        onChange={(e) => {
-                                                            handleChange(e.target.checked, `boxFile${i}Bar`);
-                                                        }}
-                                                    />
-                                                }
-                                                label="Plot as Bar (empty gives Line)"
-                                            />
-                                        </FormGroup>
-                                    )}
-                                </>
-                            )}
                         </div>
-
-                        {i !== 0 && (
-                            <button
-                                onClick={() => handleChangeNbBoxes(false, i)}
-                                className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 m-1"
-                            >
-                                -
-                            </button>
-                        )}
                     </div>
                     <span className="reg underline cursor-pointer select-none" onClick={() => handleChangeNbBoxes()}>
                         Click here to add another output box
