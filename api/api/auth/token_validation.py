@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Step 1: Load OIDC configurations from environment variables
-OIDC_ISSUER = os.getenv("OIDC_ISSUER")
-OIDC_AUDIENCE = os.getenv("OIDC_AUDIENCE")
 OIDC_INTROSPECTION_URL = os.getenv("OIDC_INTROSPECTION_URL")
 OIDC_CLIENT_ID = os.getenv("OIDC_CLIENT_ID")
 OIDC_CLIENT_SECRET = os.getenv("OIDC_CLIENT_SECRET")
@@ -35,7 +33,6 @@ def introspect_token(token):
 
         # Check if the token is active
         if introspection_data.get("active"):
-            print("Token is valid!")
             return introspection_data  # Return the token details (payload-like data)
         else:
             print("Token is not valid or expired")
@@ -50,15 +47,3 @@ def introspect_token(token):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
         raise ValueError(f"An error occurred during token validation: {str(e)}")
-
-
-# Example usage
-def validate_access_token(access_token):
-    payload = introspect_token(access_token)  # Call the introspection function
-    # If successful, the payload will contain token details, such as user information, scope, etc.
-    print("Token is valid and has the following details:", payload)
-
-
-# Example: Validate an opaque access token
-access_token = "your-opaque-access-token-here"
-validate_access_token(access_token)

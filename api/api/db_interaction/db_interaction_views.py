@@ -11,7 +11,7 @@ from api.db_interaction.db_interaction_service import (
     retrieve_data,
 )
 
-from api.auth.jwt_validation import verify_jwt
+from api.auth.token_validation import introspect_token
 
 bp_name = "api-models"
 bp_url_prefix = "/api/models"
@@ -43,7 +43,7 @@ def edit(model_id):
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
-        verify_jwt(token)
+        introspect_token(token)
         return edit_model(model_id)
 
     except Exception as e:
@@ -55,7 +55,7 @@ def delete(model_id):
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
-        verify_jwt(token)
+        introspect_token(token)
         return delete_model(model_id)
 
     except Exception as e:
@@ -67,7 +67,7 @@ def approve(model_id):
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
-        verify_jwt(token)
+        introspect_token(token)
         return approve_model(model_id)
 
     except Exception as e:
@@ -79,7 +79,7 @@ def post():
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
-        verify_jwt(token)
+        introspect_token(token)
         return post_model()
 
     except Exception as e:

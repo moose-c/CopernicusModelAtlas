@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
 
-from api.messages import messages_views
 from api.db_interaction import db_interaction_views
 
 
@@ -33,7 +32,6 @@ def create_app():
     # Blueprint Registration
     ##########################################
 
-    app.register_blueprint(messages_views.bp)
     app.register_blueprint(db_interaction_views.bp)
 
     return app

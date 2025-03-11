@@ -264,7 +264,6 @@ def post_model():
 
         query = f"INSERT INTO models ({', '.join(columns)}) VALUES ({placeholders})"
 
-        print(columns, values)
         # insert model into models
         cur.execute(query, values)
         conn.commit()
