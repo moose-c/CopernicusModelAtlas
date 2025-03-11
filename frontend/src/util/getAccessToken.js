@@ -10,10 +10,11 @@ export const getAccessToken = async (user, setUser) => {
         return null;
     }
 
-    // const currentTime = Date.now() / 1000; // Convert to seconds
-    // if (currentTime < user.expires_at) {
-    //     return user.id_token; // Token is still valid
-    // }
+    const currentTime = Date.now() / 1000; // Convert to seconds
+    if (currentTime < user.expires_at) {
+        return user.id_token; // Token is still valid
+    }
+    alert('token expired, please log out and in again.')
     // Token is expired, refresh it
     try {
         const response = await fetch(refreshDomain, {
