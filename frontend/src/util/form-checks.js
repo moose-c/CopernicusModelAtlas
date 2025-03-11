@@ -51,7 +51,7 @@ const checkUploadedFile = async (file, name) => {
     const type = name.split('.')[1]
     if (['csv', 'xlsx'].includes(type)) {
         result = await checkSheet(file)
-    } else if (['.png'].includes(type)) {
+    } else if (['png'].includes(type)) {
         result = true
     }
     return result
