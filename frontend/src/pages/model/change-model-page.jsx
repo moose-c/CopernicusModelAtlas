@@ -75,7 +75,7 @@ export const ChangeModelPage = ({ edit = false }) => {
             let check = await performChecks(formData, false);
             if (check) {
                 console.log('checks passed');
-                const accessToken = getAccessToken(user, setUser);
+                const accessToken = await getAccessToken(user, setUser);
                 if (edit) {
                     await editModel(formData, modelId, accessToken);
                 } else {

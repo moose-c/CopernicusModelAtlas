@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/button';
 import { deleteModel, approveModel } from '../../../services/db.service';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../..';
 import { getAccessToken } from '../../../util/getAccessToken';
 import DOMPurify from 'dompurify';
@@ -24,6 +24,15 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name = model[2];
     const desc = parse(DOMPurify.sanitize(model[3]));
 
+    const [accessToken, setAccesToken] = useState('');
+
+    useEffect(() => {
+        (async function () {
+            const retrievedAccessToken = await getAccessToken(user, setUser);
+            setAccesToken(retrievedAccessToken);
+        })();
+    }, []);
+
     return (
         <Link
             to={`/model/${model[0]}`}
@@ -37,8 +46,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     </div>
                     <div className="flex flex-col gap-3">
                         {editAble &&
+                            accessToken &&
                             (() => {
-                                const accessToken = getAccessToken(user, setUser);
                                 return (
                                     <>
                                         <div>
