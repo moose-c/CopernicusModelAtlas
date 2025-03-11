@@ -41,7 +41,7 @@ export const getAccessToken = async (user, setUser) => {
         const updatedUser = {
             ...user,
             access_token: data.access_token,
-            expires_at: Date.now() / 1000 + data.expiresIn, // Convert expiresIn to absolute time
+            expires_at: Date.now() / 1000 + data.expires_in, // Convert expiresIn to absolute time
         };
 
         setUser(updatedUser);
