@@ -4,6 +4,8 @@ import { deleteModel, approveModel } from '../../../services/db.service';
 import { useContext } from 'react';
 import { AuthContext } from '../../..';
 import { getAccessToken } from '../../../util/getAccessToken';
+import DOMPurify from 'dompurify';
+import ReactHtmlParser from 'react-html-parser';
 
 export const ModelCards = ({ models, editAble, isAdmin, setToggle }) => {
     return (
@@ -20,7 +22,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     // Extracting the values from the model array
     const modelName = model[1];
     const name = model[2];
-    const desc = model[3];
+    const desc = ReactHtmlParser(DOMPurify.sanitize(model[3]));
 
     return (
         <Link
