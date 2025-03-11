@@ -5,10 +5,9 @@ File types:
 Today:
 - Feedback Oreane
     - Meer boxen (hoeveel dan? dit staat hardcoded in db)
-    - alternerende boxen
     - alleen jaar in csv werkt niet
 - Token refresh
-- Allow multiple lines
+- Allow multiple lines in initial plot
 
 MH:
 - footer at the bottom.

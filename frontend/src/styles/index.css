@@ -1,11 +1,22 @@
 /* @import "theme.css"; */
 @import "content-layout.css";
-@import "code-snippet.css";
 /* code-snippet is not being applied to tailwind components maybe? */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ql-editor li {
+  font-size: 18px;
+  @apply text-CopernicusText font-merr
+}
+
+@layer base {
+  ul, ol {
+    list-style: revert;
+    padding-left: 30px;
+  }
+}
 
 @font-face {
     font-family: "Merriweather";
@@ -77,9 +88,4 @@
     font-style: italic;
     line-height: 100%;
     @apply text-CopernicusText font-sans
-  }
-
-  ul,
-  ol {
-    list-style:none; 
   }

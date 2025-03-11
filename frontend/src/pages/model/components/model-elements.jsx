@@ -13,7 +13,8 @@ export const Introduction = () => {
                     <div className="flex flex-col gap-[10px] w-full ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
-                        {parse(DOMPurify.sanitize(modelData.longDescr).replace('<p>', '<p class="top">'))}
+                        {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replace('<p>', '<p class="top">'))}
+                        {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replace('<p>', '<p class="top">'))}
                     </div>
                     <div className="w-[270px] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" className="your-tailwind-classes" />
@@ -91,29 +92,54 @@ export const Results = () => {
                 </div>
                 <div className="flex flex-col gap-2">
                     {[...Array(modelData.nbBoxes)].map((_, i) => {
-                        return (
-                            <div key={i} className="border-2 border-copernicusGrey">
-                                <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
-                                    <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
-                                </div>
-                                <div className=" flex gap-[20px] p-5 w-full">
-                                    <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
-                                        <h3>{modelData[`boxFileTitle${i}`]}</h3>
-                                        <div className="">
-                                            <DataElement
-                                                loid={modelData[`boxFile${i}`]}
-                                                name={modelData[`boxFile${i}Name`]}
-                                                isBar={modelData[`boxFile${i}Bar`]}
-                                            />
+                        if (i % 2 == 0) {
+                            return (
+                                <div key={i} className="border-2 border-copernicusGrey">
+                                    <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
+                                        <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
+                                    </div>
+                                    <div className=" flex gap-[20px] p-5 w-full">
+                                        <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
+                                            <h3>{modelData[`boxFileTitle${i}`]}</h3>
+                                            <div className="">
+                                                <DataElement
+                                                    loid={modelData[`boxFile${i}`]}
+                                                    name={modelData[`boxFile${i}Name`]}
+                                                    isBar={modelData[`boxFile${i}Bar`]}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="p-3 border-2 border-copernicusGrey w-full">
+                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
                                         </div>
                                     </div>
-                                    <div className="p-3 border-2 border-copernicusGrey w-full">
-                                        {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div key={i} className="border-2 border-copernicusGrey">
+                                    <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
+                                        <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
+                                    </div>
+                                    <div className=" flex gap-[20px] p-5 w-full">
+                                        <div className="p-3 border-2 border-copernicusGrey w-full">
+                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
+                                        </div>
+                                        <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
+                                            <h3>{modelData[`boxFileTitle${i}`]}</h3>
+                                            <div className="">
+                                                <DataElement
+                                                    loid={modelData[`boxFile${i}`]}
+                                                    name={modelData[`boxFile${i}Name`]}
+                                                    isBar={modelData[`boxFile${i}Bar`]}
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}{' '}
+                            );
+                        }
+                    })}
                 </div>
             </div>
         </>
