@@ -37,16 +37,16 @@ export const getAccessToken = async (user, setUser) => {
         const data = await response.json();
         console.log('user', user)
         console.log('response data', data)
-        // // Update user state with new tokens
-        // const updatedUser = {
-        //     ...user,
-        //     access_token: data.access_token,
-        //     expires_at: Date.now() / 1000 + data.expiresIn, // Convert expiresIn to absolute time
-        // };
+        // Update user state with new tokens
+        const updatedUser = {
+            ...user,
+            access_token: data.access_token,
+            expires_at: Date.now() / 1000 + data.expiresIn, // Convert expiresIn to absolute time
+        };
 
-        // setUser(updatedUser);
+        setUser(updatedUser);
 
-        // return data.access_token;
+        return data.access_token;
     } catch (error) {
         console.error("Error refreshing token:", error);
         return null;
