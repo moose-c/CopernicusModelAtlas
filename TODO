@@ -2,14 +2,14 @@ File types:
  - Raster file: .tif. Up to 2 variables (such as ‘time’ or ‘variable’)
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
+Today:
+- Feedback Oreane
+- Token refresh
+- Allow multiple lines
+
 MH:
 - footer at the bottom.
-
-csv:
 - don't allow plotting together if the unit's differ
-
-- email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)
-
 
 WH:
 - Sorting of models based on id & approval
@@ -20,3 +20,4 @@ WH:
 - List of papers might be huge
 - Download underlying CSV.
 - boxes alternate data left vs data right
+- email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)

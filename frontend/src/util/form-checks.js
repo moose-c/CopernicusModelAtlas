@@ -54,6 +54,9 @@ const checkUploadedFile = async (file, name) => {
     } else if (['png'].includes(type)) {
         result = true
     }
+    if (!result) {
+        alert('Uploaded file not correct!')
+    }
     return result
 }
 

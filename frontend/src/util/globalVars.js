@@ -124,7 +124,7 @@ export const fieldNameMapping = {
     modellerName0: "Modeller Name",
     shortDescr: "Description",
     explanFig: "Explanation Figure",
-    explanFigCaption: "Expalnatory Figure Caption",
+    explanFigCaption: "Explanatory Figure Caption",
     theoryText: "Theory Text",
     resText: "Results Text",
     boxTitle0: "Box Title",
