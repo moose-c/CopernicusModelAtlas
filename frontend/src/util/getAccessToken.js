@@ -4,7 +4,7 @@ const clientSecret = import.meta.env.VITE_APP_AUTH_CLIENT_SECRET;
 
 export const getAccessToken = async (user, setUser) => {
 
-    if (!user || !user.id_token || !user.refresh_token || !user.expires_at) {
+    if (!user || !user.access_token || !user.refresh_token || !user.expires_at) {
         console.log(user)
         console.error("Invalid user object");
         return null;
@@ -12,7 +12,7 @@ export const getAccessToken = async (user, setUser) => {
 
     const currentTime = Date.now() / 1000; // Convert to seconds
     if (currentTime < user.expires_at) {
-        return user.id_token; // Token is still valid
+        return user.access_token; // Token is still valid
     }
     alert('token expired, please log out and in again.')
     // Token is expired, refresh it
