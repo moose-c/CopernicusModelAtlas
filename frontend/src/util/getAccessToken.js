@@ -6,7 +6,7 @@ export const getAccessToken = async (user, setUser) => {
 
     if (!user || !user.access_token || !user.refresh_token || !user.expires_at) {
         console.log(user)
-        console.error("Invalid user object");
+        // console.error("Invalid user object");
         return null;
     }
 
