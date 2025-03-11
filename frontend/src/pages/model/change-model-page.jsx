@@ -74,14 +74,16 @@ export const ChangeModelPage = ({ edit = false }) => {
         const doPost = async (formData) => {
             let check = await performChecks(formData, true);
             if (check) {
+                console.log('checks passed');
                 const accessToken = getAccessToken(user, setUser);
-                console.log(accessToken);
                 if (edit) {
                     await editModel(formData, modelId, accessToken);
                 } else {
                     await postModel(formData, accessToken);
                 }
                 navigate('/profile');
+            } else {
+                console.log('check not passed');
             }
         };
         doPost(formData);
