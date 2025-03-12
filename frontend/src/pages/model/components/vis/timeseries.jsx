@@ -38,7 +38,6 @@ export const Timeseries = ({ fileBin, isBar }) => {
 
     const [outVarVal, setOutVarVal] = useState([]);
     const [outVarOptions, setOutVarOptions] = useState([]);
-    const [colorIndex, setColorIndex] = useState(0);
 
     const allDataRef = useRef([]);
 
@@ -101,7 +100,20 @@ export const Timeseries = ({ fileBin, isBar }) => {
                     }
                 }
                 setInpVar2Options(constVar2);
-                setInpVar2Val([constVar2[0]]);
+
+                try {
+                    const defVals = worksheet.B3.v.split('&');
+                    for (const val of defVals) {
+                        if (!constVar2.includes(val)) {
+                            throw 'incorrect default value';
+                        }
+                    }
+                    setInpVar2Val(defVals);
+                } catch {
+                    console.error('Error processing default values:', err);
+                    alert('No or incorrect default value specified, using first value');
+                    setInpVar2Val([constVar2[0]]);
+                }
             }
 
             if (worksheet?.C1) {
@@ -115,7 +127,19 @@ export const Timeseries = ({ fileBin, isBar }) => {
                 }
 
                 setInpVar3Options(constVar3);
-                setInpVar3Val([constVar3[0]]);
+                try {
+                    const defVals = worksheet.C3.v.split('&');
+                    for (const val of defVals) {
+                        if (!constVar3.includes(val)) {
+                            throw 'incorrect default value';
+                        }
+                    }
+                    setInpVar3Val(defVals);
+                } catch {
+                    console.error('Error processing default values:', err);
+                    alert('No or incorrect default value specified, using first value');
+                    setInpVar3Val([constVar3[0]]);
+                }
             }
 
             const constOutNames = [];
@@ -130,7 +154,17 @@ export const Timeseries = ({ fileBin, isBar }) => {
                 }
             }
             setOutVarOptions(constOutNames);
-            setOutVarVal([constOutNames[0]]);
+
+            // Setting starting values for output variables
+            const filteredKeys = Object.keys(worksheet).filter((key) => /[a-zA-Z]3$/.test(key));
+            const startingOutputValues = [];
+            for (const key of filteredKeys) {
+                if (!['A3', 'B3', 'C3'].includes(key) && worksheet[key].v) {
+                    const variableKey = key.slice(0, -1) + '1';
+                    startingOutputValues.push(worksheet[variableKey].v);
+                }
+            }
+            setOutVarVal(startingOutputValues);
         };
         reader.readAsBinaryString(fileBin);
     }, []);

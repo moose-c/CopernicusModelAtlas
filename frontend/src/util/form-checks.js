@@ -105,8 +105,11 @@ const checkSheet = async (file) => {
 
             // check if third row contains default values
             const filteredKeys = Object.keys(sheetValue).filter(key => /[a-zA-Z]3$/.test(key));
+
             for (const key of filteredKeys) {
-                if (!(['A3', 'B3', 'C3'].includes(key)) && typeof sheetValue[key].v != 'boolean') {
+                if (!(['A3', 'B3', 'C3'].includes(key)) &&
+                    !(typeof sheetValue[key].v === 'boolean' || sheetValue[key].v == 'true' || sheetValue[key].v == 'false')) {
+
                     console.log(key, sheetValue[key])
                     alert('default value row not correct')
                     return resolve(false)
