@@ -11,7 +11,7 @@ export const ModelCards = ({ models, editAble, isAdmin, setToggle }) => {
     return (
         <div className="flex flex-col justify-center">
             {models.map(
-                (model) => (editAble || model[4]) && <ModelCard key={model[0]} model={model} editAble={editAble} isAdmin={isAdmin} setToggle={setToggle} />
+                (model) => (editAble || model[7]) && <ModelCard key={model[0]} model={model} editAble={editAble} isAdmin={isAdmin} setToggle={setToggle} />
             )}
         </div>
     );
