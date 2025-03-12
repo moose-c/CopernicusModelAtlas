@@ -21,16 +21,21 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const { user, setUser } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
-    const name = model[2];
-    const desc = parse(DOMPurify.sanitize(model[3]));
+    const name0 = model[2];
+    const name1 = model[3];
+    const name2 = model[4];
+    const name3 = model[5];
+    const desc = parse(DOMPurify.sanitize(model[6]).replace('<p>', '<p className="text-gray-500">'));
 
     const [accessToken, setAccesToken] = useState('');
 
     useEffect(() => {
-        (async function () {
-            const retrievedAccessToken = await getAccessToken(user, setUser);
-            setAccesToken(retrievedAccessToken);
-        })();
+        if (user) {
+            (async function () {
+                const retrievedAccessToken = await getAccessToken(user, setUser);
+                setAccesToken(retrievedAccessToken);
+            })();
+        }
     }, []);
 
     return (
@@ -42,7 +47,12 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                 <div className="flex justify-between">
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-800 mb-2">{modelName}</h2>
-                        <h3 className="text-xl font-medium text-gray-600 mb-2">{name}</h3>
+                        <h3 className="text-xl font-medium text-gray-600 mb-2">
+                            {name0 && name0}
+                            {name1 && ', ' + name1}
+                            {name2 && ', ' + name2}
+                            {name3 && ', ' + name3}
+                        </h3>
                     </div>
                     <div className="flex flex-col gap-3">
                         {editAble &&
@@ -62,7 +72,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                                 }}
                                             />
                                         </div>
-                                        {!model[4] && <p className="text-red-500 font-bold">Not yet approved</p>}
+                                        {!model[7] && <p className="text-red-500 font-bold">Not yet approved</p>}
 
                                         {isAdmin && (
                                             <div>
@@ -80,7 +90,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                             })()}
                     </div>
                 </div>
-                <p className="text-gray-500">{desc}</p>
+                {desc}
             </div>
         </Link>
     );

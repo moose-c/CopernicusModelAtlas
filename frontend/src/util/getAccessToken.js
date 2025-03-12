@@ -5,8 +5,8 @@ const clientSecret = import.meta.env.VITE_APP_AUTH_CLIENT_SECRET;
 export const getAccessToken = async (user, setUser) => {
 
     if (!user || !user.access_token || !user.refresh_token || !user.expires_at) {
-        console.log(user)
-        // console.error("Invalid user object");
+        // console.log(user)
+        console.error("Invalid user object");
         return null;
     }
 

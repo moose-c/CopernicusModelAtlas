@@ -8,16 +8,14 @@ Today:
 - Allow multiple lines in initial plot
 
 MH:
+- Meer namen op 1e pagina
+- Zoeken!
 - footer at the bottom.
 - don't allow plotting together if the unit's differ
 
 WH:
 - Sorting of models based on id & approval
 - improve connection for extended period to keep alive during file streaming
-- allow modellers to input text including bold and \n etc
-- Maybe also a sidebar under names
 - specify number of input variables
 - List of papers might be huge
-- Download underlying CSV.
-- boxes alternate data left vs data right
 - email over ruimtelijke bestanden!! (Na interview dingen hebben doorgekeken)

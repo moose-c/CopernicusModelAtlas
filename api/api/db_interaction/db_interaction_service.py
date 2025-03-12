@@ -121,7 +121,7 @@ def get_all_models():
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, shortdescr, isapproved FROM models;"
+        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, shortdescr, isapproved FROM models;"
     )
     modelList = cur.fetchall()
     cur.close()
@@ -133,7 +133,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, shortdescr, isapproved FROM models WHERE uuUser = %s",
+        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, shortdescr, isapproved FROM models WHERE uuUser = %s",
         [user_id],
     )
     modelList = cur.fetchall()
