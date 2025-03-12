@@ -37,7 +37,6 @@ export const OverviewPage = ({ editAble }) => {
         <PageLayout>
             <div className="content-layout flex gap-5">
                 <h1>Model atlas</h1>
-                <p>text</p>
                 <Searchbar />
                 <Multiselect
                     isObject={false}
