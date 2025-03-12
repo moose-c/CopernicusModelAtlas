@@ -25,7 +25,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name1 = model[3];
     const name2 = model[4];
     const name3 = model[5];
-    const desc = parse(DOMPurify.sanitize(model[6]).replace('<p>', '<p className="text-gray-500">'));
+    const desc = parse(DOMPurify.sanitize(model[6]).replaceAll('<p>', '<p className="text-gray-500">'));
 
     const [accessToken, setAccesToken] = useState('');
 

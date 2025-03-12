@@ -13,8 +13,8 @@ export const Introduction = () => {
                     <div className="flex flex-col gap-[10px] w-full ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
-                        {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replace('<p>', '<p class="top">'))}
-                        {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replace('<p>', '<p class="top">'))}
+                        {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replaceAll('<p>', '<p class="top">'))}
+                        {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
                     </div>
                     <div className="w-[270px] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" className="your-tailwind-classes" />
@@ -60,7 +60,7 @@ export const Theory = () => {
             <div id="theory" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Theory</h2>
-                    {parse(DOMPurify.sanitize(modelData.theoryText).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.theoryText).replaceAll('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.theoryFig && (
                     <div className="items-center flex flex-col gap-[10px]">
@@ -81,7 +81,7 @@ export const Results = () => {
                 <div className="flex gap-[10px]">
                     <div className="w-[80%] flex flex-col gap-[10px]">
                         <h2>Results</h2>
-                        {parse(DOMPurify.sanitize(modelData.resText).replace('<p>', '<p class="reg">'))}
+                        {parse(DOMPurify.sanitize(modelData.resText).replaceAll('<p>', '<p class="reg">'))}
                     </div>
                     {modelData.resFig && (
                         <div className="items-center flex flex-col gap-[10px]">
@@ -110,7 +110,7 @@ export const Results = () => {
                                             </div>
                                         </div>
                                         <div className="p-3 border-2 border-copernicusGrey w-full">
-                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
+                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ export const Results = () => {
                                     </div>
                                     <div className=" flex gap-[20px] p-5 w-full">
                                         <div className="p-3 border-2 border-copernicusGrey w-full">
-                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replace('<p>', '<p class="reg">'))}
+                                            {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                         </div>
                                         <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
                                             <h3>{modelData[`boxFileTitle${i}`]}</h3>
@@ -153,7 +153,7 @@ export const Methods = () => {
             <div id="methods" className="flex flex-col gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Methods</h2>
-                    {parse(DOMPurify.sanitize(modelData.methodsDesc).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.methodsDesc).replaceAll('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.methodsFile != 0 && (
                     <div className="border-2 border-copernicusGrey pb-10">
@@ -180,7 +180,7 @@ export const Colofon = () => {
                     <h2>Colofon</h2>
                     <p className="reg font-bold">How to Cite: {modelData.colofonCite}</p>
                     <p className="reg">Model Licence: {modelData.colofonLicence}</p>
-                    {parse(DOMPurify.sanitize(modelData.colofonAddition).replace('<p>', '<p class="reg">'))}
+                    {parse(DOMPurify.sanitize(modelData.colofonAddition).replaceAll('<p>', '<p class="reg">'))}
                 </div>
             </div>
         </>
