@@ -159,7 +159,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             const filteredKeys = Object.keys(worksheet).filter((key) => /[a-zA-Z]3$/.test(key));
             const startingOutputValues = [];
             for (const key of filteredKeys) {
-                if (!['A3', 'B3', 'C3'].includes(key) && worksheet[key].v) {
+                if (!['A3', 'B3', 'C3'].includes(key) && eval(worksheet[key].v)) {
                     const variableKey = key.slice(0, -1) + '1';
                     startingOutputValues.push(worksheet[variableKey].v);
                 }
