@@ -68,8 +68,8 @@ export const CSVFormatExplanation = () => {
                             as you see fit, except for the cells in the 'time' column which need to be instances of an Excel Date or in a{' '}
                             <a className="underline text-blue-500" href="https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format">
                                 date-time string format
-                            </a>
-                            .
+                            </a>{' '}
+                            (so a substring of 'YYYY-MM-DDTHH:mm:ss.sss').
                         </p>
                     </div>
                 )}

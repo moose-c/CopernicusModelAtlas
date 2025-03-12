@@ -38,7 +38,7 @@ const checkMandatoryFields = (formData) => {
 
         if (value === "") {
             // ideally, the alert point to the empty field, flashing it red or something.
-            alert(`${fieldNameMapping[mandField]} field is empty!`);
+            alert(`${fieldNameMapping[mandField]} field is empty! If you wish continue later with this field, please fill out a intermediate value like 'X'.`);
             check = false;
             return true;
         }

@@ -2,17 +2,24 @@ File types:
  - Raster file: .tif. Up to 2 variables (such as ‘time’ or ‘variable’)
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
-Today:
-- Feedback Oreane
+
+Over praten:
+    - Bij mijn output zou er een lijn zonder stippen mooier uitzien. Misschien ook een user keuze waar je kan aanvinken of je stippen in een line plot wilt of niet? (kleinere stippen)
+    - Hetzelfde over de kleur: mag de user de kleur kiezen voor de plot? Of wordt het te moeilijk als er meerdere variabelen zijn? 
     - Meer boxen (hoeveel dan? dit staat hardcoded in db)
 
 Volgende keer:
-- of sla even op als x
 - Icoon er nog bij op de voorpagina
 - Klikken op de plaatjes
 - Smaller beeldscherm/telefoon dan worden 
     - max value tot helft
 
+FB Stefanie
+- Modelbeschrijving - Maximum 100 woorden: het aantal worden die al in de box zitten aan de gebruiker laten zien om te weten hoe veel je nog mag toevoegen?
+- ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
+- Cancel button naast submit button? En als je op cancel drukt kom je weer terug naar Profile of Atlas
+- Bijvoorbeeld GitHub link: open nieuw pagina in plaats van in dezelfde tab
+- Namen op Atlas pagina onder model titel: een naam ontbreekt. Is er een maximaal aantal namen die je onder de titel kan zien?
 
 MH:
 - Zoeken!

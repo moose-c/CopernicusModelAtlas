@@ -25,7 +25,9 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name1 = model[3];
     const name2 = model[4];
     const name3 = model[5];
-    const desc = parse(DOMPurify.sanitize(model[6]).replaceAll('<p>', '<p className="text-gray-500">'));
+    const name4 = model[6];
+    const desc = parse(DOMPurify.sanitize(model[7]).replaceAll('<p>', '<p className="text-gray-500">'));
+    const approved = model[8];
 
     const [accessToken, setAccesToken] = useState('');
 
@@ -52,6 +54,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                             {name1 && ', ' + name1}
                             {name2 && ', ' + name2}
                             {name3 && ', ' + name3}
+                            {name4 && ', ' + name4}
                         </h3>
                     </div>
                     <div className="flex flex-col gap-3">
@@ -71,7 +74,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                                 }}
                                             />
                                         </div>
-                                        {!model[7] && <p className="text-red-500 font-bold">Not yet approved</p>}
+                                        {!approved && <p className="text-red-500 font-bold">Not yet approved</p>}
 
                                         {isAdmin && (
                                             <div>
