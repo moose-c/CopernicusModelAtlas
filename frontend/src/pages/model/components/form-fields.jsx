@@ -207,7 +207,7 @@ export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
                 <li key={1} className="cursor-pointer hover:underline" onClick={() => togglePopup(6)}>
                     Timeseries (.csv, .xlsx)
                 </li>
-                {examplePopups[6] && <ExamplePopup nb={6} togglePopup={togglePopup} content={<CSVFormatExplanation />} />}
+                {examplePopups[6] && <ExamplePopup nb={6} togglePopup={togglePopup} content={<CSVFormatExplanation />} width="w-[600px]" />}
                 {/* <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
                     Raster map (.tif, .tiff)
                 </li>

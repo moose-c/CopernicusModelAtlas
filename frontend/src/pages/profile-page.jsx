@@ -14,10 +14,10 @@ export const ProfilePage = () => {
     const [toggle, setToggle] = useState(true);
     const [models, setModels] = useState([]);
     const { user } = useContext(AuthContext);
-    const isAdmin = user?.profile.sub == adminUser;
+    const isAdmin = user?.profile?.sub == adminUser;
 
     useEffect(() => {
-        if (user) {
+        if (user && typeof user === 'object') {
             const getModels = async () => {
                 let data, error;
                 if (isAdmin) {

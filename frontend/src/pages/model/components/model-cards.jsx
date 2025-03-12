@@ -56,7 +56,6 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     </div>
                     <div className="flex flex-col gap-3">
                         {editAble &&
-                            accessToken &&
                             (() => {
                                 return (
                                     <>

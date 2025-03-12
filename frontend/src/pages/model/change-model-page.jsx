@@ -82,8 +82,6 @@ export const ChangeModelPage = ({ edit = false }) => {
                     await postModel(formData, accessToken);
                 }
                 navigate('/profile');
-            } else {
-                console.log('check not passed');
             }
         };
         doPost(formData);

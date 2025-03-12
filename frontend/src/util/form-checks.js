@@ -65,13 +65,12 @@ const checkSheet = async (file) => {
         const reader = new FileReader()
 
         reader.onload = (e) => {
-            const workbook = XLSX.read(e.target.result, { type: "array", sheetRows: 3 });
+            const workbook = XLSX.read(e.target.result, { type: "array", sheetRows: 4 });
             const sheetName = workbook.SheetNames[0]; // Read the first sheet
             const sheetValue = workbook.Sheets[sheetName];
 
             const jsonData = XLSX.utils.sheet_to_json(sheetValue)
             const unitRow = jsonData[0]
-            const defRow = jsonData[1]
 
             // first column needs to be titled time
             if (!(sheetValue?.['A1'].v === 'time')) {
@@ -79,9 +78,10 @@ const checkSheet = async (file) => {
                 return resolve(false)
             }
 
+            console.log(sheetValue)
             // check if time values can be interpreted correctly
             try {
-                const dateValue = sheetValue['A3'].v
+                const dateValue = sheetValue['A4'].v
                 if (typeof dateValue == 'number') {
                     getJsDateFromExcel(dateValue)
                 } else if (typeof dateValue == 'string') {
@@ -92,6 +92,7 @@ const checkSheet = async (file) => {
 
             } catch (error) {
                 alert('time column contains incorrect values')
+                console.log(error)
                 return resolve(false)
             }
 
@@ -102,13 +103,15 @@ const checkSheet = async (file) => {
                 return resolve(false)
             }
 
-            // console.log(defRow)
-            // // check if third row contains default values
-            // const allBoolean = Object.values(defRow).every(value => typeof value === 'number');
-            // if (!allStrings) {
-            //     alert('unit row contains non-strings')
-            //     return resolve(false)
-            // }
+            // check if third row contains default values
+            const filteredKeys = Object.keys(sheetValue).filter(key => /[a-zA-Z]3$/.test(key));
+            for (const key of filteredKeys) {
+                if (!(['A3', 'B3', 'C3'].includes(key)) && typeof sheetValue[key].v != 'boolean') {
+                    console.log(key, sheetValue[key])
+                    alert('default value row not correct')
+                    return resolve(false)
+                }
+            }
 
             return resolve(true)
         }

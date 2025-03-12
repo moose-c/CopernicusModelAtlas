@@ -55,9 +55,12 @@ export const CSVFormatExplanation = () => {
                         </p>
                         <br />
                         <p>
-                            The third row contains information for the plot shown upon loading the page. It should contain for each input variable the desired
-                            default value, and for each variable true or false (nb. that only output variables with the same unit can be plotted together!). The
-                            first 'time' column is utilized regardless and can be left empty.
+                            The third row contains information for the plot shown upon loading the page.
+                            <ul>
+                                <li>For the 'time' column, no value is required as this column will be used regardless</li>
+                                <li>For each other input variable the desired default value(s), seperated by a & and no spaces</li>
+                                <li>For each output variable true or false. NB that only variables with the same unit can be plotted together</li>
+                            </ul>
                         </p>
                         <br />
                         <p>
@@ -76,11 +79,11 @@ export const CSVFormatExplanation = () => {
                         <h2 className="text-xl font-semibold mb-2">Example</h2>
                         <p>Here is an example of what the CSV format might look like with two input variables:</p>
                         <pre className="bg-gray-200 p-4 rounded-lg mt-2 font-mono">
-                            {`time, Region,, Temp , CO2 emission, CH4 emission
-    ,       ,, [°C] , [Mt]         , [Mt]
-    , Asia  ,, false, true         , true
-2023, Europe,, 10.5 , 3500         , 22
-2023, Asia  ,, 12.3 , 17000        , 110`}
+                            {`time, Region ,, Temp , CO2 emission, CH4 emission
+    ,        ,, [°C] , [Mt]         , [Mt]
+    , CAN&BRA,, false, true         , true
+2023, CAN    ,, 10.5 , 3500         , 22
+2023, NED    ,, 12.3 , 17000        , 110`}
                             {/*      ,       ,,false , true       , true */}
                         </pre>
                     </>
