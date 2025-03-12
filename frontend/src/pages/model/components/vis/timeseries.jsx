@@ -135,7 +135,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                         }
                     }
                     setInpVar3Val(defVals);
-                } catch {
+                } catch (err) {
                     console.error('Error processing default values:', err);
                     alert('No or incorrect default value specified, using first value');
                     setInpVar3Val([constVar3[0]]);
@@ -153,6 +153,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                     break;
                 }
             }
+            console.log(constOutNames);
             setOutVarOptions(constOutNames);
 
             // Setting starting values for output variables

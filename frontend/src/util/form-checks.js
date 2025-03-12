@@ -73,8 +73,8 @@ const checkSheet = async (file) => {
             const unitRow = jsonData[0]
 
             // first column needs to be titled time
-            if (!(sheetValue?.['A1'].v === 'time')) {
-                alert('first column needs to be titled "time"');
+            if (!(['time', 'Time'].includes(sheetValue?.['A1'].v))) {
+                alert('first column needs to be titled "time" or "Time"');
                 return resolve(false)
             }
 
