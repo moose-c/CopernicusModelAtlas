@@ -55,8 +55,14 @@ export const CSVFormatExplanation = () => {
                         </p>
                         <br />
                         <p>
-                            From the third row onwards, each row contains values of input and corresponding output variables. These can be numbers or strings as
-                            you see fit, except for the cells in the 'time' column which need to be instances of an Excel Date or in a{' '}
+                            The third row contains information for the plot shown upon loading the page. It should contain for each input variable the desired
+                            default value, and for each variable true or false (nb. that only output variables with the same unit can be plotted together!). The
+                            first 'time' column is utilized regardless and can be left empty.
+                        </p>
+                        <br />
+                        <p>
+                            From the fourth row onwards, each row contains values of input and corresponding output variables. These can be numbers or strings
+                            as you see fit, except for the cells in the 'time' column which need to be instances of an Excel Date or in a{' '}
                             <a className="underline text-blue-500" href="https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format">
                                 date-time string format
                             </a>
@@ -70,10 +76,11 @@ export const CSVFormatExplanation = () => {
                         <h2 className="text-xl font-semibold mb-2">Example</h2>
                         <p>Here is an example of what the CSV format might look like with two input variables:</p>
                         <pre className="bg-gray-200 p-4 rounded-lg mt-2 font-mono">
-                            {`time ,Region ,,Temp  ,CO2 emission, CH4 emission
-     ,       ,,[°C]  , [Mt]       , [Mt]
-2023 ,Europe ,,10.5  , 3500       , 22
-2023 ,Asia   ,,12.3  , 17000      , 110`}
+                            {`time, Region,, Temp , CO2 emission, CH4 emission
+    ,       ,, [°C] , [Mt]         , [Mt]
+    , Asia  ,, false, true         , true
+2023, Europe,, 10.5 , 3500         , 22
+2023, Asia  ,, 12.3 , 17000        , 110`}
                             {/*      ,       ,,false , true       , true */}
                         </pre>
                     </>

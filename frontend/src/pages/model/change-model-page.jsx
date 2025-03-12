@@ -72,7 +72,7 @@ export const ChangeModelPage = ({ edit = false }) => {
         // change false -> true to actually perform
 
         const doPost = async (formData) => {
-            let check = await performChecks(formData, false);
+            let check = await performChecks(formData, true);
             if (check) {
                 console.log('checks passed');
                 const accessToken = await getAccessToken(user, setUser);

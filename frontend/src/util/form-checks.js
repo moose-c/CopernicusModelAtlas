@@ -71,6 +71,7 @@ const checkSheet = async (file) => {
 
             const jsonData = XLSX.utils.sheet_to_json(sheetValue)
             const unitRow = jsonData[0]
+            const defRow = jsonData[1]
 
             // first column needs to be titled time
             if (!(sheetValue?.['A1'].v === 'time')) {
@@ -100,6 +101,14 @@ const checkSheet = async (file) => {
                 alert('unit row contains non-strings')
                 return resolve(false)
             }
+
+            // console.log(defRow)
+            // // check if third row contains default values
+            // const allBoolean = Object.values(defRow).every(value => typeof value === 'number');
+            // if (!allStrings) {
+            //     alert('unit row contains non-strings')
+            //     return resolve(false)
+            // }
 
             return resolve(true)
         }
