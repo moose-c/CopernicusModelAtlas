@@ -14,6 +14,7 @@ import { AuthContext } from '../..';
 import { SideBarChangeContent } from '../../components/side-bar';
 
 import '../../styles/form.css';
+import { Button } from '../../components/button';
 
 export const ChangeModelPage = ({ edit = false }) => {
     const navigate = useNavigate();
@@ -104,12 +105,15 @@ export const ChangeModelPage = ({ edit = false }) => {
                 </p>
                 <form onSubmit={handleSubmit} className="p-[20px] bg-gray-100 rounded shadow-md w-full flex flex-col gap-[20px] ">
                     <FormContent formData={formData} setFormData={setFormData} examplePopups={examplePopups} togglePopup={togglePopup} />
-                    <button
-                        type="submit"
-                        className="sticky bottom-6 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                        Submit
-                    </button>
+                    <div className="flex gap-4 items-center">
+                        <Button text="Cancel" to="/profile" />
+                        <button
+                            type="submit"
+                            className="bottom-6 w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        >
+                            Submit
+                        </button>
+                    </div>
                 </form>
             </div>
         </PageLayout>
