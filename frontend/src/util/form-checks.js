@@ -18,12 +18,30 @@ export const performChecks = async (formData, performAll = true) => {
             }
         }
         if (check) {
+            check = checkLength(formData)
+        }
+        if (check) {
             check = checkMandatoryFields(formData)
         }
+
     }
     return check;
 };
 
+const checkLength = (formData) => {
+    let check = true
+    const fieldLengthDict = {
+        shortDescr: 100
+    }
+    for (const [key, value] of Object.entries(fieldLengthDict)) {
+        if (formData[key].split(' ').length > value) {
+            alert(`${fieldNameMapping[key]} field is too long!`);
+            check = false;
+            return check
+        }
+    }
+    return check
+}
 
 // Check if all mandatory fields are filled out
 const checkMandatoryFields = (formData) => {

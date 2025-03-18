@@ -188,7 +188,11 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         p2={'www.firstname-lastname.org'}
                         ladd={'Click here to add another name'}
                     />
-                    <LongTextField label={'Enter a short description of your model to display on the home page* (max 100 words)'} field={'shortDescr'} />
+                    <LongTextField
+                        label={'Enter a short description of your model to display on the home page* (max 100 words)'}
+                        field={'shortDescr'}
+                        maxWords={100}
+                    />
                     <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png, .svg'} />
                     <LongTextField
                         label={'Enter a longer description of your model. (If left empty defaults to the short description entered above)'}

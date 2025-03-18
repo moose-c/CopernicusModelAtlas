@@ -26,13 +26,17 @@ export const ShortTextField = ({ label, placeholder, field }) => {
     );
 };
 
-export const LongTextField = ({ label, field, width }) => {
+export const LongTextField = ({ label, field, width, maxWords }) => {
     const { formData, handleChange } = useForm(); // Automatically gets value
     return (
         <>
             <div>
                 <p>{label}</p>
                 <ReactQuill className={`formQAl ${width}`} value={formData[field]} onChange={(content) => handleChange(content, field)} />
+                {maxWords > 0 && formData[field].split(' ').length / maxWords <= 1 && <p>{`Currently: ${formData[field].split(' ').length}/${maxWords}`}</p>}
+                {maxWords > 0 && formData[field].split(' ').length / maxWords > 1 && (
+                    <p className="text-red-500 font-bold">{`Currently: ${formData[field].split(' ').length}/${maxWords}`}</p>
+                )}
             </div>
         </>
     );
