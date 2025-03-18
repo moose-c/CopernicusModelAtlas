@@ -13,7 +13,6 @@ services:
     volumes:
       - ../api/api/:/api/
       - ../api/api/db_interaction/:/api/db_interaction/
-      - ../api/api/messages/:/api/messages/
       - ../api/api/auth/:/api/auth/
 
       - ../api/requirements.txt:/requirements.txt

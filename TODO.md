@@ -9,17 +9,39 @@ Over praten:
     - Meer boxen (hoeveel dan? dit staat hardcoded in db)
     - How to Cite: gaat dus over hoe ze de pagina moeten citeren en niet referenties? Als dat inderdaad zo is dan zouden we misschien een standaard formuleren moeten maken voor alle modellen. Of we kunnen we ook voor kiezen om in plaats daarvan wel hier te refereren naar papers. Dan zou ik de titel veranderen naar “References”. Kunnen we volgende week ook even bespreken.   
     - Promile teken niet goed weergegeven?
+    - Is 100 woorden niet te veel? max 50?
 
 Volgende keer:
-- Icoon er nog bij op de voorpagina
 - Klikken op de plaatjes
 - Smaller beeldscherm/telefoon dan worden 
     - max value tot helft
 - Die model license is inderdaad niet heel duidelijk wat we daarmee bedoelen. Ik zou dat in ieder geval optioneel maken.
+- check file size
 
 
-FB Stefanie
+FB Stefanie:
 - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
+
+FB Kaj:
+- Format output: time but Region (capital letter inconsistency)
+- Cite: should also format (DOI url etc)
+- Licence: "<b>" still in there
+- When submitted: no feedback
+
+- How do you remove output boxes?
+- Make result boxes responsive: media query if screen width < XXX px, put graph above/below text.
+- Formatted text for theory etc is great, but urls are still black and invisible. For everything in the content, I would remove the:
+a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
+
+Kaj over praten:
+- SVG icon doesn't work (Eigenlijk gedoe om ook te fixen, is alleen png ok?)
+- Text homepage grey
+- Keywords doorheen lopen (kan ook met oreane en stefanie)
+- /model/id/ Url suggestie?
+- saving before everything filled in
+- Home/overview button not clear now. It's just "Atlas", which can mean many things. Maybe like "Return to model overview" or something similar
+- Can someone take over the edit rights of a page, if someone leaves the university?
+- Are plot colours random?
 
 MH:
 - Zoeken!
