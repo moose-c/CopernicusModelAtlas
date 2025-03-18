@@ -11,7 +11,7 @@ export const Button = ({ text = 'Contribute', to = '/admin', call = '' }) => {
             call();
         } else {
             if (to.startsWith('http://') || to.startsWith('https://')) {
-                window.location.href = to;
+                window.open(to, '_blank');
             } else {
                 navigate(to);
             }
