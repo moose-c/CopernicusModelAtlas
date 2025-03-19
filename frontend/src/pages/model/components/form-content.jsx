@@ -128,20 +128,20 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
 
     const handleChangeNbBoxes = (add = true, i = undefined) => {
         if (add) {
-            if (formData['nbBoxes'] < 4) {
+            if (formData['nbBoxes'] < 8) {
                 setFormData((prevState) => ({
                     ...prevState,
                     ['nbBoxes']: prevState['nbBoxes'] + 1,
                 }));
             } else {
-                alert('Only 4 boxes allowed!'); // Show a popup when trying to exceed the limit
+                alert('Only 8 boxes allowed!'); // Show a popup when trying to exceed the limit
             }
         } else {
             setFormData((prevState) => {
                 const updatedState = { ...prevState };
 
-                // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 5
-                for (let j = i + 1; j <= 3; j++) {
+                // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 8
+                for (let j = i + 1; j < 8; j++) {
                     updatedState[`boxTitle${j - 1}`] = prevState[`boxTitle${j}`] || '';
                     updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || 0;
                     updatedState[`boxFileTitle${j - 1}`] = prevState[`boxFileTitle${j}`] || '';
@@ -150,11 +150,11 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                 }
 
                 // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
-                updatedState[`boxTitle3`] = '';
-                updatedState[`boxFileTitle3`] = '';
-                updatedState[`boxFile3`] = 0;
-                updatedState[`boxFileType3`] = '';
-                updatedState[`boxDescr3`] = '';
+                updatedState[`boxTitle8`] = '';
+                updatedState[`boxFileTitle8`] = '';
+                updatedState[`boxFile8`] = 0;
+                updatedState[`boxFileType8`] = '';
+                updatedState[`boxDescr8`] = '';
 
                 updatedState[`nbBoxes`] = prevState[`nbBoxes`] - 1;
 

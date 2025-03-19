@@ -97,10 +97,35 @@ export const blankForm = {
     boxFile2Bar: false,
     boxFile3Bar: false,
     methodsFileBar: false,
+    boxTitle4: "",
+    boxFileTitle4: "",
+    boxDescr4: "",
+    boxFile4: 0,
+    boxFile4Name: "",
+    boxFile4Bar: false,
+    boxTitle5: "",
+    boxFileTitle5: "",
+    boxDescr5: "",
+    boxFile5: 0,
+    boxFile5Name: "",
+    boxFile5Bar: false,
+    boxTitle6: "",
+    boxFileTitle6: "",
+    boxDescr6: "",
+    boxFile6: 0,
+    boxFile6Name: "",
+    boxFile6Bar: false,
+    boxTitle7: "",
+    boxFileTitle7: "",
+    boxDescr7: "",
+    boxFile7: 0,
+    boxFile7Name: "",
+    boxFile7Bar: false,
 };
 
 export const fileFields = [
-    "methodsFile", "boxFile0", "boxFile1", "boxFile2", "boxFile3"
+    "methodsFile", "boxFile0", "boxFile1", "boxFile2", "boxFile3", "boxFile4", "boxFile5", "boxFile6", "boxFile7",
+
 ]
 
 export const mandFields = [

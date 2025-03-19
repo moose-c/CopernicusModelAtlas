@@ -86,6 +86,30 @@ blank_form_template = {
     "boxFile2Bar": False,
     "boxFile3Bar": False,
     "methodsFileBar": False,
+    "boxTitle4": "",
+    "boxFileTitle4": "",
+    "boxDescr4": "",
+    "boxFile4": 0,
+    "boxFile4Name": "",
+    "boxFile4Bar": False,
+    "boxTitle5": "",
+    "boxFileTitle5": "",
+    "boxDescr5": "",
+    "boxFile5": 0,
+    "boxFile5Name": "",
+    "boxFile5Bar": False,
+    "boxTitle6": "",
+    "boxFileTitle6": "",
+    "boxDescr6": "",
+    "boxFile6": 0,
+    "boxFile6Name": "",
+    "boxFile6Bar": False,
+    "boxTitle7": "",
+    "boxFileTitle7": "",
+    "boxDescr7": "",
+    "boxFile7": 0,
+    "boxFile7Name": "",
+    "boxFile7Bar": False,
 }
 
 
@@ -95,6 +119,10 @@ lo_fields = [
     "boxFile1",
     "boxFile2",
     "boxFile3",
+    "boxFile4",
+    "boxFile5",
+    "boxFile6",
+    "boxFile7",
 ]
 
 bytea_fields = [
@@ -315,7 +343,7 @@ def edit_model(model_id):
         # Need to learn which lo's to delete
         los_to_delete = []
         newValues = []
-        for key in ["methodsFile", "boxFile0", "boxFile1", "boxFile2", "boxFile3"]:
+        for key in lo_fields:
             try:
                 newValue = int(request.form.get(key))
                 newValues.append(newValue)
@@ -326,7 +354,7 @@ def edit_model(model_id):
         cur = conn.cursor()
 
         cur.execute(
-            "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3 FROM models WHERE id = %s",
+            "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3, boxfile4, boxfile5, boxfile6, boxfile7 FROM models WHERE id = %s",
             [model_id],
         )
         oldValues = list(cur.fetchone())  # Fetch a single row
