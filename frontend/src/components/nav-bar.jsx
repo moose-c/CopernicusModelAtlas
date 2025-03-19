@@ -15,7 +15,7 @@ export const NavBar = () => {
                 <div className="flex flex-1 gap-4">
                     <p className="text-white font-sans text-[16px] leading-[34px]">
                         <Link className="hover:underline" to="/">
-                            Atlas
+                            Overview
                         </Link>
                     </p>
                     <p className="text-white font-sans text-[16px] leading-[34px]">

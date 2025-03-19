@@ -35,6 +35,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
     const [inpVar3Name, setInpVar3Name] = useState('');
     const [inpVar3Val, setInpVar3Val] = useState([]);
     const [inpVar3Options, setInpVar3Options] = useState([]);
+    const [colorIndex, setColorIndex] = useState(0);
 
     const [outVarVal, setOutVarVal] = useState([]);
     const [outVarOptions, setOutVarOptions] = useState([]);
@@ -175,6 +176,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             setOutVarVal(startingOutputValues);
         };
         reader.readAsArrayBuffer(fileBin);
+        setColorIndex(Math.floor(Math.random() * 10));
     }, []);
 
     useEffect(() => {
@@ -184,8 +186,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             let datasets = [];
 
             // what happens when no inpvar2val?
-            let i = Math.floor(Math.random() * 10);
-
+            let i = colorIndex;
             for (let outVar of outVarVal) {
                 if (inpVar2Options.length > 0) {
                     for (let inpVar2 of inpVar2Val) {
