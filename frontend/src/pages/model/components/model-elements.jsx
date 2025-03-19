@@ -111,9 +111,12 @@ export const Results = () => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="p-3 border-2 border-copernicusGrey w-full">
+                                        <div className="p-3 hidden md:block border-2 border-copernicusGrey w-full">
                                             {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                         </div>
+                                    </div>
+                                    <div className="p-3 border-2 block md:hidden border-copernicusGrey w-full">
+                                        {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                     </div>
                                 </div>
                             );
@@ -124,7 +127,7 @@ export const Results = () => {
                                         <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
                                     </div>
                                     <div className=" flex gap-[20px] p-5 w-full">
-                                        <div className="p-3 border-2 border-copernicusGrey w-full">
+                                        <div className="p-3 hidden md:block border-2 border-copernicusGrey w-full">
                                             {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                         </div>
                                         <div className="flex flex-col gap-[20px] p-3 border-2 border-copernicusGrey items-center">
@@ -137,6 +140,9 @@ export const Results = () => {
                                                 />
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className="p-3 border-2 block md:hidden border-copernicusGrey w-full">
+                                        {parse(DOMPurify.sanitize(modelData[`boxDescr${i}`]).replaceAll('<p>', '<p class="reg">'))}
                                     </div>
                                 </div>
                             );
