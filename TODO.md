@@ -29,8 +29,6 @@ FB Kaj:
 - Licence: "<b>" still in there
 - When submitted: no feedback
 
-- How do you remove output boxes?
-- Make result boxes responsive: media query if screen width < XXX px, put graph above/below text.
 - Formatted text for theory etc is great, but urls are still black and invisible. For everything in the content, I would remove the:
 a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
 
