@@ -188,16 +188,14 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         p2={'www.firstname-lastname.org'}
                         ladd={'Click here to add another name'}
                     />
-                    <LongTextField
-                        label={'Enter a short description of your model to display on the home page* (max 100 words)'}
-                        field={'shortDescr'}
-                        maxWords={100}
-                    />
+                    <LongTextField field={'shortDescr'} maxWords={100}>
+                        Enter a short description of your model to display on the home page* (max 100 words){' '}
+                    </LongTextField>
                     <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png, .svg'} />
-                    <LongTextField
-                        label={'Enter a longer description of your model. (If left empty defaults to the short description entered above)'}
-                        field={'longDescr'}
-                    />
+                    <LongTextField field={'longDescr'}>
+                        {' '}
+                        Enter a longer description of your model. (If left empty defaults to the short description entered above)
+                    </LongTextField>
                     <FileField
                         label={'Upload an explanatory or output figure for your model*'}
                         field={'explanFig'}
@@ -226,7 +224,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </p>
                         {examplePopups[2] && <ExamplePopup nb={2} togglePopup={togglePopup} />}
                     </div>
-                    <LongTextField label={'Enter some theory or applications of your model*'} field={'theoryText'} />
+                    <LongTextField field={'theoryText'}>Enter some theory or applications of your model* </LongTextField>
                     <FileField
                         label={'Do you want to show a supporting figure for this section?'}
                         field={'theoryFig'}
@@ -242,7 +240,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </p>
                         {examplePopups[3] && <ExamplePopup nb={3} togglePopup={togglePopup} />}
                     </div>
-                    <LongTextField label={'Enter a description of the result(s) created by the model*'} field={'resText'} />
+                    <LongTextField field={'resText'}>Enter a description of the result(s) created by the model* </LongTextField>
                     <FileField
                         label={'Do you want to show a supporting figure for this section?'}
                         field={'resFig'}
@@ -262,7 +260,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             </p>
                             {examplePopups[4] && <ExamplePopup nb={4} togglePopup={togglePopup} />}
                         </div>
-                        <LongTextField label={'Description of the model itself'} field={'methodsDesc'} />
+                        <LongTextField field={'methodsDesc'}>Description of the model itself</LongTextField>
                         <FileField
                             label={'Upload methods data here'}
                             field={'methodsFile'}
@@ -285,7 +283,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             placeholder={'Enter licence'}
                             field={'colofonLicence'}
                         />
-                        <LongTextField label={'Do you want to include additional information in the Colofon?'} field={'colofonAddition'} />
+                        <LongTextField field={'colofonAddition'}>Do you want to include additional information in the Colofon? </LongTextField>
                     </div>
                 </div>
             </FormContext.Provider>

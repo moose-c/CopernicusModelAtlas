@@ -4,7 +4,6 @@ File types:
 
 
 Over praten:
-    - Hetzelfde over de kleur: mag de user de kleur kiezen voor de plot? Of wordt het te moeilijk als er meerdere variabelen zijn? (Zeg dit in de form)
     - Meer boxen (hoeveel dan? dit staat hardcoded in db, maximaal 8. WH in de sidebar)
     - How to Cite: gaat dus over hoe ze de pagina moeten citeren en niet referenties? Als dat inderdaad zo is dan zouden we misschien een standaard formuleren moeten maken voor alle modellen. Of we kunnen we ook voor kiezen om in plaats daarvan wel hier te refereren naar papers. Dan zou ik de titel veranderen naar “References”. Kunnen we volgende week ook even bespreken.    (How to cite -> Reference. How should people cite this model? -> Do you want to add references? niet verplicth)
     - Promile teken niet goed weergegeven?
@@ -16,6 +15,7 @@ Over praten:
     - Zoeken & Keyword selection!
     - footer at the bottom.
     - don't allow plotting together if the unit's differ
+    - default value for longDescr
 
 Grote zaken:
 - Geojson ook

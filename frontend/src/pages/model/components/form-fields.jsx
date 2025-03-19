@@ -26,12 +26,12 @@ export const ShortTextField = ({ label, placeholder, field }) => {
     );
 };
 
-export const LongTextField = ({ label, field, width, maxWords }) => {
+export const LongTextField = ({ children, field, width, maxWords }) => {
     const { formData, handleChange } = useForm(); // Automatically gets value
     return (
         <>
             <div>
-                <p>{label}</p>
+                <p>{children}</p>
                 <ReactQuill className={`formQAl ${width}`} value={formData[field]} onChange={(content) => handleChange(content, field)} />
                 {maxWords > 0 && formData[field].split(' ').length / maxWords <= 1 && <p>{`Currently: ${formData[field].split(' ').length}/${maxWords}`}</p>}
                 {maxWords > 0 && formData[field].split(' ').length / maxWords > 1 && (
@@ -186,7 +186,10 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
 
                         <div className="flex flex-col gap-4">
                             <div>
-                                <LongTextField width="w-[400px]" label={`Description accompanying the figure${i === 0 ? '*' : ''}`} field={`boxDescr${i}`} />
+                                <LongTextField width="w-[400px]" field={`boxDescr${i}`}>
+                                    Description accompanying the figure{i === 0 ? '*' : ''}.{' '}
+                                    <p>The color of the lines/bars are chosen randomly so please refer to the variables instead of the colors. </p>
+                                </LongTextField>
                             </div>
                         </div>
                     </div>
