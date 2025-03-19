@@ -158,7 +158,6 @@ def get_all_models():
         modelList[i] = list(modelList[i])
         modelList[i][8] = base64.b64encode(row[8]).decode("utf-8")
 
-    print(modelList)
     cur.close()
     conn.close()
     return jsonify(modelList)
@@ -344,6 +343,7 @@ def edit_model(model_id):
         los_to_delete = []
         newValues = []
         for key in lo_fields:
+            # if already put in the database, the request.form.get gives the loid
             try:
                 newValue = int(request.form.get(key))
                 newValues.append(newValue)
@@ -364,7 +364,7 @@ def edit_model(model_id):
         conn.close()
 
         for i, oldValue in enumerate(oldValues):
-            if oldValue != newValues[i]:
+            if oldValue not in newValues:
                 los_to_delete.append(oldValue)
 
         delete_model(model_id, los_to_delete=los_to_delete)

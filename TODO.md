@@ -14,6 +14,7 @@ Over praten:
     - footer at the bottom.
     - don't allow plotting together if the unit's differ
     - default value for longDescr
+    - Figure kaj error?
 
 Grote zaken:
 - Geojson ook
