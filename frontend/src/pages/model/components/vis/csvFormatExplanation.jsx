@@ -38,7 +38,7 @@ export const CSVFormatExplanation = () => {
                         <p>The first row contains the names of input and output variables in the following way:</p>
                         <ul className="list-disc pl-5">
                             <li>
-                                The first column is the first input variable and is titled <strong>"time"</strong>.
+                                The first column is the first input variable and is titled <strong>"time"</strong> or <strong>"Time"</strong>.
                             </li>
                             <li>
                                 The second column can contain a second input variable (e.g., <em>"region"</em>) or is left empty.
@@ -79,7 +79,7 @@ export const CSVFormatExplanation = () => {
                         <h2 className="text-xl font-semibold mb-2">Example</h2>
                         <p>Here is an example of what the CSV format might look like with two input variables:</p>
                         <pre className="bg-gray-200 p-4 rounded-lg mt-2 font-mono">
-                            {`time, Region ,, Temp , CO2 emission, CH4 emission
+                            {`Time, Region ,, Temp , CO2 emission, CH4 emission
     ,        ,, [°C] , [Mt]         , [Mt]
     , CAN&BRA,, false, true         , true
 2023, CAN    ,, 10.5 , 3500         , 22
