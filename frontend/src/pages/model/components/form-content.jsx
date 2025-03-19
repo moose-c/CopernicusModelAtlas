@@ -279,12 +279,8 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             </p>
                             {examplePopups[5] && <ExamplePopup nb={5} togglePopup={togglePopup} />}
                         </div>
-                        <ShortTextField label={'How should people cite this model?*'} placeholder={'How to cite'} field={'colofonCite'} />
-                        <ShortTextField
-                            label={'Enter a licence* <b>Explain but what does this even mean?</b>'}
-                            placeholder={'Enter licence'}
-                            field={'colofonLicence'}
-                        />
+                        <ShortTextField label={'Do you want to add references?'} placeholder={'How to cite'} field={'colofonCite'} />
+                        <ShortTextField label={'Do want to add a model licence?'} placeholder={'Enter licence'} field={'colofonLicence'} />
                         <LongTextField field={'colofonAddition'}>Do you want to include additional information in the Colofon? </LongTextField>
                     </div>
                 </div>

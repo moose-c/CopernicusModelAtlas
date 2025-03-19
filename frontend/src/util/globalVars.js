@@ -140,8 +140,6 @@ export const mandFields = [
     "boxFileTitle0",
     "boxFile0",
     "boxDescr0",
-    "colofonCite",
-    "colofonLicence",
 ];
 
 export const fieldNameMapping = {

@@ -4,9 +4,7 @@ File types:
 
 
 Over praten:
-    - How to Cite: gaat dus over hoe ze de pagina moeten citeren en niet referenties? Als dat inderdaad zo is dan zouden we misschien een standaard formuleren moeten maken voor alle modellen. Of we kunnen we ook voor kiezen om in plaats daarvan wel hier te refereren naar papers. Dan zou ik de titel veranderen naar “References”. Kunnen we volgende week ook even bespreken.    (How to cite -> Reference. How should people cite this model? -> Do you want to add references? niet verplicth)
     - Promile teken niet goed weergegeven?
-    - Licence optioneel!
     - check file size
     - result en method boxen ook clickable
     - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
