@@ -66,6 +66,12 @@ const checkMandatoryFields = (formData) => {
 
 const checkUploadedFile = async (file, name) => {
     let result = false
+
+    if (file.size / (1024 * 1024) > 1) {
+        alert(`${name} is too big! 1MB is maximal`)
+        return false
+    }
+
     const type = name.split('.')[1]
     if (['csv', 'xlsx'].includes(type)) {
         result = await checkSheet(file)

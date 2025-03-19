@@ -2,9 +2,7 @@ File types:
  - Raster file: .tif. Up to 2 variables (such as ‘time’ or ‘variable’)
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
-
 Over praten:
-    - check file size
     - result en method boxen ook clickable
     - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
     - Zoeken & Keyword selection!
