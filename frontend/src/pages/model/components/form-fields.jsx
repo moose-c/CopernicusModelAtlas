@@ -184,14 +184,10 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                             <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                         </div>
 
-                        <div className="flex flex-col gap-4">
-                            <div>
-                                <LongTextField width="w-[400px]" field={`boxDescr${i}`}>
-                                    Description accompanying the figure{i === 0 ? '*' : ''}.{' '}
-                                    <p>The color of the lines/bars are chosen randomly so please refer to the variables instead of the colors. </p>
-                                </LongTextField>
-                            </div>
-                        </div>
+                        <LongTextField width="w-[400px]" field={`boxDescr${i}`}>
+                            Description accompanying the figure{i === 0 ? '*' : ''}.{' '}
+                            <p>The color of the lines/bars are chosen randomly so please refer to the variables instead of the colors. </p>
+                        </LongTextField>
                     </div>
                     <span className="reg underline cursor-pointer select-none" onClick={() => handleChangeNbBoxes()}>
                         Click here to add another output box
