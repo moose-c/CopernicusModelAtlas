@@ -153,7 +153,6 @@ export const Timeseries = ({ fileBin, isBar }) => {
                     break;
                 }
             }
-            console.log(constOutNames);
             setOutVarOptions(constOutNames);
 
             // Setting starting values for output variables

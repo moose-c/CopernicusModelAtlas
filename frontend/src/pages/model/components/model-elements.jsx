@@ -3,6 +3,7 @@ import { Button } from '../../../components/button';
 import { DataElement } from './vis/data-vis';
 import DOMPurify from 'dompurify';
 import parse from 'html-react-parser';
+import { ClickableFigure } from './vis/image';
 
 export const Introduction = () => {
     const { modelData } = useModel(); // Automatically gets values
@@ -38,7 +39,8 @@ export const Introduction = () => {
                     </div>
                 </div>
                 <div className="items-center flex flex-col gap-[10px]">
-                    <img src={`data:image/png;base64,${modelData.explanFig}`} alt="Model Icon" className="w-full max-w-[400px] h-auto object-contain" />
+                    <ClickableFigure fileBin={modelData.explanFig} />
+                    {/* <img src={`data:image/png;base64,${modelData.explanFig}`} alt="Model Icon" className="w-full max-w-[400px] h-auto object-contain" /> */}
                     <p className="caption">{modelData.explanFigCaption}</p>
                 </div>
                 <div className="flex gap-[80px] justify-center">

@@ -10,12 +10,12 @@ Over praten:
     - How to Cite: gaat dus over hoe ze de pagina moeten citeren en niet referenties? Als dat inderdaad zo is dan zouden we misschien een standaard formuleren moeten maken voor alle modellen. Of we kunnen we ook voor kiezen om in plaats daarvan wel hier te refereren naar papers. Dan zou ik de titel veranderen naar “References”. Kunnen we volgende week ook even bespreken.   
     - Promile teken niet goed weergegeven?
     - Is 100 woorden niet te veel? max 50?
+    - Licence optioneel?
 
 Volgende keer:
 - Klikken op de plaatjes
 - Smaller beeldscherm/telefoon dan worden 
     - max value tot helft
-- Die model license is inderdaad niet heel duidelijk wat we daarmee bedoelen. Ik zou dat in ieder geval optioneel maken.
 - check file size
 
 
