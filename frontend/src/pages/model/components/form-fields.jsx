@@ -73,9 +73,12 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
                             </div>
                         </div>
                         {i !== 0 && (
-                            <button onClick={() => ch(false, i)} className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700">
+                            <div
+                                onClick={() => ch(false, i)}
+                                className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 flex items-center justify-center"
+                            >
                                 -
-                            </button>
+                            </div>
                         )}
                     </div>
                 ))}
@@ -188,6 +191,16 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                             Description accompanying the figure{i === 0 ? '*' : ''}.{' '}
                             <p>The color of the lines/bars are chosen randomly so please refer to the variables instead of the colors. </p>
                         </LongTextField>
+                        {i !== 0 && (
+                            <div>
+                                <div
+                                    onClick={() => handleChangeNbBoxes(false, i)}
+                                    className="w-6 h-6 rounded-full bg-red-500 text-white cursor-pointer text-xs hover:bg-red-700 flex items-center justify-center"
+                                >
+                                    -
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <span className="reg underline cursor-pointer select-none" onClick={() => handleChangeNbBoxes()}>
                         Click here to add another output box
