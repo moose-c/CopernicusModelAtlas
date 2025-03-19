@@ -31,7 +31,7 @@ export const performChecks = async (formData, performAll = true) => {
 const checkLength = (formData) => {
     let check = true
     const fieldLengthDict = {
-        shortDescr: 100
+        shortDescr: 65
     }
     for (const [key, value] of Object.entries(fieldLengthDict)) {
         if (formData[key].split(' ').length > value) {

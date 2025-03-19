@@ -190,7 +190,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         p2={'www.firstname-lastname.org'}
                         ladd={'Click here to add another name'}
                     />
-                    <LongTextField field={'shortDescr'} maxWords={100}>
+                    <LongTextField field={'shortDescr'} maxWords={65}>
                         Enter a short description of your model to display on the home page* (max 100 words){' '}
                     </LongTextField>
                     <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png, .svg'} />
