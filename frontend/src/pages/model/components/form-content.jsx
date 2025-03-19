@@ -193,7 +193,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <LongTextField field={'shortDescr'} maxWords={65}>
                         Enter a short description of your model to display on the home page* (max 100 words){' '}
                     </LongTextField>
-                    <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png, .svg'} />
+                    <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png'} />
                     <LongTextField field={'longDescr'}>
                         {' '}
                         Enter a longer description of your model. (If left empty defaults to the short description entered above)
@@ -201,7 +201,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <FileField
                         label={'Upload an explanatory or output figure for your model*'}
                         field={'explanFig'}
-                        allowedFileTypes={'.png, .svg'}
+                        allowedFileTypes={'.pngg'}
                         capField={'explanFigCaption'}
                     />
                     <TwoField

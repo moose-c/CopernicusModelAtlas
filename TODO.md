@@ -3,10 +3,7 @@ File types:
  - Vector: .geojson WGS84 (EPSG: 4326). Up to 2 variables (such as ‘time’ or ‘variable’)
 
 Over praten:
-    - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
     - Zoeken & Keyword selection!
-    - footer at the bottom.
-    - cursor bij de clickableFigures
 
 Grote zaken:
 - Geojson ook
@@ -23,8 +20,6 @@ FB Kaj:
 a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
 
 Kaj over praten:
-- SVG icon doesn't work (Eigenlijk gedoe om ook te fixen, is alleen png ok?)
-    - Moet PNG. 
 - Text homepage grey
     - Geen idee ja
 - Keywords doorheen lopen (kan ook met oreane en stefanie)
@@ -38,8 +33,7 @@ Kaj over praten:
 - Are plot colours random?
     - Geshuffelde lijst (index) als pagina laden, daarna deze statisch.
 - Een viewport groter 
-- WH: als precies 1 deze variabele niet weergeven.
-- WH: SEO: voor elke pagina een description in de meta title, description, keywords
+
 - Download Data removes both input variables.
 - pas de a's aan. 
 
@@ -48,3 +42,6 @@ WH:
 - improve connection for extended period to keep alive during file streaming
 - specify number of input variables
 - List of papers might be huge
+- ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
+- als precies 1 deze variabele niet weergeven.
+- SEO: voor elke pagina een description in de meta title, description, keywords
