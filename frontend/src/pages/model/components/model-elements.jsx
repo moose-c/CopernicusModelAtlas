@@ -66,7 +66,7 @@ export const Theory = () => {
                 </div>
                 {modelData.theoryFig && (
                     <div className="items-center flex flex-col gap-[10px]">
-                        <img src={`data:image/png;base64,${modelData.theoryFig}`} alt="Model Icon" className="w-full max-w-[500px] h-auto object-contain" />
+                        <ClickableFigure fileBin={modelData.theoryFig} />
                         <p className="caption">{modelData.theoryFigDesc}</p>
                     </div>
                 )}
@@ -87,7 +87,8 @@ export const Results = () => {
                     </div>
                     {modelData.resFig && (
                         <div className="items-center flex flex-col gap-[10px]">
-                            <img src={`data:image/png;base64,${modelData.resFig}`} alt="Model Icon" className="w-full max-w-[500px] h-auto object-contain" />
+                            <ClickableFigure fileBin={modelData.resFig} />
+
                             <p className="caption">{modelData.resFigDesc}</p>
                         </div>
                     )}
