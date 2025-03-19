@@ -4,7 +4,6 @@ File types:
 
 
 Over praten:
-    - Bij mijn output zou er een lijn zonder stippen mooier uitzien. Misschien ook een user keuze waar je kan aanvinken of je stippen in een line plot wilt of niet? (kleinere stippen) 
     - Hetzelfde over de kleur: mag de user de kleur kiezen voor de plot? Of wordt het te moeilijk als er meerdere variabelen zijn? (Zeg dit in de form)
     - Meer boxen (hoeveel dan? dit staat hardcoded in db, maximaal 8. WH in de sidebar)
     - How to Cite: gaat dus over hoe ze de pagina moeten citeren en niet referenties? Als dat inderdaad zo is dan zouden we misschien een standaard formuleren moeten maken voor alle modellen. Of we kunnen we ook voor kiezen om in plaats daarvan wel hier te refereren naar papers. Dan zou ik de titel veranderen naar “References”. Kunnen we volgende week ook even bespreken.    (How to cite -> Reference. How should people cite this model? -> Do you want to add references? niet verplicth)
@@ -14,6 +13,9 @@ Over praten:
     - check file size
     - result en method boxen ook clickable
     - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen
+    - Zoeken & Keyword selection!
+    - footer at the bottom.
+    - don't allow plotting together if the unit's differ
 
 Grote zaken:
 - Geojson ook
@@ -41,11 +43,6 @@ Kaj over praten:
 - Home/overview button not clear now. It's just "Atlas", which can mean many things. Maybe like "Return to model overview" or something similar
 - Can someone take over the edit rights of a page, if someone leaves the university?
 - Are plot colours random?
-
-MH:
-- Zoeken!
-- footer at the bottom.
-- don't allow plotting together if the unit's differ
 
 WH:
 - Sorting of models based on id & approval

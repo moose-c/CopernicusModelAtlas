@@ -55,11 +55,11 @@ export const Timeseries = ({ fileBin, isBar }) => {
             x: {
                 type: 'time',
                 time: {
-                    tooltipFormat: 'yyyy-MM-dd', // Format for tooltips
+                    tooltipFormat: 'yyyy-MM-dd',
                 },
                 title: {
                     display: true,
-                    text: 'Time', // Label for the x-axis
+                    text: 'Time',
                 },
                 ticks: {
                     source: 'data',
@@ -70,6 +70,15 @@ export const Timeseries = ({ fileBin, isBar }) => {
                     display: true,
                     text: '',
                 },
+            },
+        },
+        elements: {
+            point: {
+                radius: 2, // Default point size (smaller dots)
+                hoverRadius: 4, // Slightly larger when hovering
+            },
+            line: {
+                borderWidth: 1, // Thinner line
             },
         },
     });
