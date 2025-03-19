@@ -28,7 +28,6 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name4 = model[6];
     const desc = parse(DOMPurify.sanitize(model[7]).replaceAll('<p>', '<p className="text-gray-500">'));
     const icon = model[8];
-    console.log(icon);
     const approved = model[9];
 
     const [accessToken, setAccesToken] = useState('');

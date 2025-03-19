@@ -86,10 +86,8 @@ export const Timeseries = ({ fileBin, isBar }) => {
     useEffect(() => {
         const reader = new FileReader();
         reader.onload = (e) => {
-            const data = e.target.result;
-
-            // Parse the Excel file using SheetJS (XLSX)
-            const workbook = XLSX.read(data, { type: 'binary' });
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
 
             // Assuming you're reading the first sheet:
             const firstSheetName = workbook.SheetNames[0];
@@ -98,6 +96,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             // Convert the worksheet to JSON (array of objects)
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
             allDataRef.current = jsonData;
+            console.log(worksheet);
 
             if (worksheet?.B1) {
                 setInpVar2Name(worksheet.B1.v);
@@ -175,7 +174,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             }
             setOutVarVal(startingOutputValues);
         };
-        reader.readAsBinaryString(fileBin);
+        reader.readAsArrayBuffer(fileBin);
     }, []);
 
     useEffect(() => {
@@ -287,6 +286,11 @@ export const Timeseries = ({ fileBin, isBar }) => {
             const chartData = {
                 datasets: datasets,
             };
+            let yLabel = allDataRef.current?.[0]?.[outVarVal?.[0]] ?? '';
+
+            // manually replace incorrect promile unicode with the correct one..
+            yLabel = yLabel.replace(/\u0089/g, '\u2030');
+
             setPlotOptions((prevOptions) => ({
                 ...prevOptions,
                 scales: {
@@ -298,7 +302,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                         ...prevOptions.scales.y,
                         title: {
                             ...prevOptions.scales.y.title,
-                            text: allDataRef.current?.[0]?.[outVarVal?.[0]] ?? '',
+                            text: yLabel,
                         },
                     },
                 },
