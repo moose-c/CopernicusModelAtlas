@@ -4,7 +4,6 @@ File types:
 
 
 Over praten:
-    - don't allow plotting together if the unit's differ
     - check file size
     - result en method boxen ook clickable
     - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen

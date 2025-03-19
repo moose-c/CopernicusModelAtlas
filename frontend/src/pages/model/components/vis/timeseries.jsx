@@ -291,6 +291,14 @@ export const Timeseries = ({ fileBin, isBar }) => {
             // manually replace incorrect promile unicode with the correct one..
             yLabel = yLabel.replace(/\u0089/g, '\u2030');
 
+            for (const outVar of outVarVal) {
+                let newLabel = allDataRef.current[0][outVar];
+                newLabel = newLabel.replace(/\u0089/g, '\u2030');
+                if (newLabel != yLabel) {
+                    alert('only variables with the same unit should be in 1 plot!');
+                }
+            }
+
             setPlotOptions((prevOptions) => ({
                 ...prevOptions,
                 scales: {
