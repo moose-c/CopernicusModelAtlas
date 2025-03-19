@@ -143,18 +143,20 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                 // Shift boxTitle, boxFigTitle, boxfig, and boxDescr for all indices j > i up to 8
                 for (let j = i + 1; j < 8; j++) {
                     updatedState[`boxTitle${j - 1}`] = prevState[`boxTitle${j}`] || '';
-                    updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || 0;
                     updatedState[`boxFileTitle${j - 1}`] = prevState[`boxFileTitle${j}`] || '';
-                    updatedState[`boxType${j - 1}`] = prevState[`boxType${j}`] || '';
                     updatedState[`boxDescr${j - 1}`] = prevState[`boxDescr${j}`] || '';
+                    updatedState[`boxFile${j - 1}`] = prevState[`boxFile${j}`] || 0;
+                    updatedState[`boxFile${j - 1}Name`] = prevState[`boxFile${j}Name`] || '';
+                    updatedState[`boxFile${j - 1}Bar`] = prevState[`boxFile${j}Bar`] || false;
                 }
 
                 // Clear the last boxTitle, boxFigTitle, boxfig, and boxDescr after the shift
-                updatedState[`boxTitle8`] = '';
-                updatedState[`boxFileTitle8`] = '';
-                updatedState[`boxFile8`] = 0;
-                updatedState[`boxFileType8`] = '';
-                updatedState[`boxDescr8`] = '';
+                updatedState[`boxTitle7`] = '';
+                updatedState[`boxFileTitle7`] = '';
+                updatedState[`boxDescr7`] = '';
+                updatedState[`boxFile7`] = 0;
+                updatedState[`boxFile7Name`] = '';
+                updatedState[`boxFile7Bar`] = false;
 
                 updatedState[`nbBoxes`] = prevState[`nbBoxes`] - 1;
 
