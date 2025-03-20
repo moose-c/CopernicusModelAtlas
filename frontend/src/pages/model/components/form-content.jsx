@@ -201,7 +201,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <FileField
                         label={'Upload an explanatory or output figure for your model*'}
                         field={'explanFig'}
-                        allowedFileTypes={'.pngg'}
+                        allowedFileTypes={'.png'}
                         capField={'explanFigCaption'}
                     />
                     <TwoField

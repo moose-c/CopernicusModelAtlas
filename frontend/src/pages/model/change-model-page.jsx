@@ -80,15 +80,27 @@ export const ChangeModelPage = ({ edit = false }) => {
             if (check) {
                 console.log('checks passed');
                 const accessToken = await getAccessToken(user, setUser);
-                if (edit) {
-                    await editModel(formData, modelSlug, accessToken);
-                } else {
-                    await postModel(formData, accessToken);
+                try {
+                    if (edit) {
+                        // Attempt to edit the model
+                        await editModel(formData, modelSlug, accessToken);
+                        navigate('/profile');
+                        alert('Succesfully edited your model!');
+                    } else {
+                        // Attempt to create a new model
+                        await postModel(formData, accessToken);
+                        navigate('/profile');
+                        alert(
+                            'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
+                        );
+                    }
+                } catch (error) {
+                    // Catch any errors and handle them
+                    console.error('Error occurred while processing the model:', error);
+
+                    // Optionally show a user-friendly error message
+                    alert('An error occurred. Please try again later.');
                 }
-                navigate('/profile');
-                alert(
-                    'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
-                );
             }
         };
         doPost(formData);
