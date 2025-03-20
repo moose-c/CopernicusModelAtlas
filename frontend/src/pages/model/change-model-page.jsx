@@ -99,7 +99,7 @@ export const ChangeModelPage = ({ edit = false }) => {
                     console.error('Error occurred while processing the model:', error);
 
                     // Optionally show a user-friendly error message
-                    alert('An error occurred. Please try again later.');
+                    alert(`An error occurred: ${error}.`);
                 }
             }
         };
