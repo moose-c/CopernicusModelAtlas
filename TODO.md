@@ -3,8 +3,6 @@ TODO:
     - When submitted: no feedback
     - Formatted text for theory etc is great, but urls are still black and invisible. For everything in the content, I would remove the:
         a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
-- /model/id/ Url suggestie?
-    - Don't allow models with the same name! On Add none, on Edit exactly 1
 - Can someone take over the edit rights of a page, if someone leaves the university?
     - Kan, maar is wel gedoe. Of gewoon een protocol schrijven.
 - Download Data removes both input variables.
