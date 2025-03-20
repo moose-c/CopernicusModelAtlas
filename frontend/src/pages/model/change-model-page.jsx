@@ -96,10 +96,10 @@ export const ChangeModelPage = ({ edit = false }) => {
                     }
                 } catch (error) {
                     // Catch any errors and handle them
-                    console.error('Error occurred while processing the model:', error);
+                    console.error('Error occurred while processing the model', error);
 
                     // Optionally show a user-friendly error message
-                    alert(`An error occurred: ${error}.`);
+                    alert(`An error occurred, is the Model Name unique?`);
                 }
             }
         };

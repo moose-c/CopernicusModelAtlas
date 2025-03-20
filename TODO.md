@@ -1,6 +1,5 @@
 TODO:
     - Zoeken & Keyword selection!
-    - When submitted: no feedback
     - Formatted text for theory etc is great, but urls are still black and invisible. For everything in the content, I would remove the:
         a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
 - Can someone take over the edit rights of a page, if someone leaves the university?
