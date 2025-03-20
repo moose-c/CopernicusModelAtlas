@@ -256,27 +256,58 @@ def approve_model(model_id):
         conn.close()
 
 
-def post_model():
+def post_model(edit=False):
     print("post model called")
     formData = copy.deepcopy(blank_form_template)
-    try:
-        # add non files to formData
-        for key in list(request.form.keys()):
-            if key == "keywords":
-                formData[key] = json.loads(request.form.get(key))
-            # if you edit a model and resubmit it images are already in binary string format and not as file.
-            elif key in bytea_fields:
-                formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
-            else:
-                formData[key] = request.form.get(key)
 
+    # add non files to formData
+    for key in list(request.form.keys()):
+        if key == "keywords":
+            formData[key] = json.loads(request.form.get(key))
+        # if you edit a model and resubmit it images are already in binary string format and not as file.
+        elif key in bytea_fields:
+            formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
+        else:
+            formData[key] = request.form.get(key)
+
+    try:
+        # check if a unique model name
+        model_name = formData["modelName"]
+        print(model_name)
+        conn = db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+            "SELECT id FROM models WHERE modelname = %s",
+            (model_name,),
+        )
+
+        result = cur.fetchall()
+
+        if not edit:
+            if len(result) != 0:
+                raise Exception("There is already a model with this name!")
+        else:
+            if len(result) != 1:
+                raise Exception(
+                    "There is already a model (beside the one currently editing) with this name!"
+                )
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    except Exception as e:
+        print(f"Model Name uniqueness string failed! Reason: {str(e)}")
+        raise
+
+    try:
+        # Upload large file objects directly to the database
         # Setup db connection
         conn = db_connection()
         cur = conn.cursor()
 
-        # Upload large file objects directly to the database
         # can be further improved by using asynchronous uploading (e.g. Celery) or external storage Services (S3)
-
         for key in list(request.files.keys()):
             if key in lo_fields:
                 file = request.files.get(key)
@@ -293,11 +324,18 @@ def post_model():
                 # Save the LO OID for later reference
                 formData[key] = lo_oid
 
-        # create query
+    except Exception as e:
+        print(f"Failed to add lo's to db. Reason: {str(e)}")
+        raise
+
+    try:
+        # upload to models table
         columns = list(formData.keys())
         values = tuple(formData.values())
         placeholders = ", ".join(["%s"] * len(columns))
+
         if "id" in columns:
+            # this means that we are editing an existing model
             cur.execute("SELECT nextval('models_id_seq');")
             next_id = cur.fetchone()[0]
             values = values[:-1] + (next_id,)
@@ -311,20 +349,20 @@ def post_model():
         cur.close()
         conn.close()
 
-        print(f"Succesfully posted {formData['modelName']} to db")
-        return (
-            jsonify(
-                {
-                    "message": "Model added successfully",
-                    "modelName": request.form.get("modelName"),
-                }
-            ),
-            201,
-        )
-
     except Exception as e:
-        print(f"Failed to add model. Reason: {str(e)}")
+        print(f"Failed to add entry to models. Reason: {str(e)}")
         raise
+
+    print(f"Succesfully posted {formData['modelName']} to db")
+    return (
+        jsonify(
+            {
+                "message": "Model added successfully",
+                "modelName": request.form.get("modelName"),
+            }
+        ),
+        201,
+    )
 
 
 def edit_model(model_slug):
