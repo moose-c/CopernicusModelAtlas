@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import { useState, useEffect, useRef } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 import IconWithTooltip from 'icon-with-tooltip';
+import { Parser } from '@json2csv/plainjs';
 
 import {
     Chart,
@@ -102,7 +103,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             if (worksheet?.B1) {
                 setInpVar2Name(worksheet.B1.v);
                 const constVar2 = [];
-                for (let i = 3; i < jsonData.length; i++) {
+                for (let i = 4; i < jsonData.length; i++) {
                     const newVal = worksheet?.[`B${i}`]?.v;
                     if (newVal && !constVar2.includes(newVal)) {
                         constVar2.push(newVal);
@@ -128,7 +129,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             if (worksheet?.C1) {
                 setInpVar3Name(worksheet.C1.v);
                 const constVar3 = [];
-                for (let i = 3; i < jsonData.length; i++) {
+                for (let i = 4; i < jsonData.length; i++) {
                     const newVal = worksheet?.[`C${i}`]?.v;
                     if (newVal && !constVar3.includes(newVal)) {
                         constVar3.push(newVal);
@@ -326,45 +327,28 @@ export const Timeseries = ({ fileBin, isBar }) => {
             console.warn('No data available to download.');
             return;
         }
+        console.log(allDataRef.current);
 
-        // Extract headers (first row) and units (second row) from the worksheet
-        const firstRow = allDataRef.current[0]; // Headers & units
+        // Convert JSON to CSV
+        const parser = new Parser({});
+        const csv = parser.parse(allDataRef.current);
 
-        // Ensure time is the first column and correctly formatted
-        let headers = ['time'];
-        let units = ['']; // Assuming time unit is seconds
-
-        Object.entries(firstRow).forEach(([key, value]) => {
-            headers.push(key);
-            units.push(value);
+        // flip csv
+        let rows = csv.split('\n');
+        rows = rows.map((row, index) => {
+            let columns = row.split(',');
+            columns = columns.reverse();
+            if (index > 2) {
+                columns[0] = getExportDate(parseInt(columns[0]));
+            }
+            return columns.join(',');
         });
+        const flippedCsv = rows.join('\n');
 
-        // Convert data to CSV format
-        const csvRows = [
-            headers.join(','), // First row: Headers
-            units.join(','), // Second row: Units
-            allDataRef.current
-                .slice(1)
-                .map((row) => {
-                    // Map each row to a CSV line
-                    return headers
-                        .map((header) => {
-                            if (header == 'time') {
-                                try {
-                                    return getDate(row[header]).toISOString();
-                                } catch {
-                                    return row[header];
-                                }
-                            }
-                            return row[header] || '';
-                        })
-                        .join(',');
-                })
-                .join('\n'), // Join the rows with a new line character to separate them
-        ];
+        console.log(flippedCsv);
 
-        const csvContent = 'data:text/csv;charset=utf-8,' + csvRows.join('\n');
-        const encodedUri = encodeURI(csvContent);
+        // You can now create a downloadable link as before
+        const encodedUri = encodeURI('data:text/csv;charset=utf-8,' + flippedCsv);
 
         // Create a download link and trigger click
         const link = document.createElement('a');
@@ -432,5 +416,13 @@ function getDate(date) {
         return getJsDateFromExcel(date);
     } else {
         return Date.parse(date);
+    }
+}
+
+function getExportDate(date) {
+    if (typeof date == 'number' && date.toString().length != 4) {
+        return getJsDateFromExcel(date).toISOString();
+    } else {
+        return date;
     }
 }

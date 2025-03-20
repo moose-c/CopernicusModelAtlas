@@ -4,7 +4,7 @@ TODO:
         a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
 - Can someone take over the edit rights of a page, if someone leaves the university?
     - Kan, maar is wel gedoe. Of gewoon een protocol schrijven.
-- Download Data removes both input variables.
+- Temp sign is not interpreted correctly with kaj..
 
 Grote Zaken:
 - Geojson ook
