@@ -176,7 +176,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </p>
                         {examplePopups[1] && <ExamplePopup nb={1} togglePopup={togglePopup} />}
                     </div>
-                    <ShortTextField label={'Enter the name of your model*'} placeholder={'Enter Model Name'} field={'modelName'} />
+                    <ShortTextField label={"Enter the name of your model.* Don't use _, /, & or #."} placeholder={'Enter Model Name'} field={'modelName'} />
                     <KeyWordsField />
                     <TwoField
                         lgen={'Contact person(s)'}

@@ -18,6 +18,9 @@ export const performChecks = async (formData, performAll = true) => {
             }
         }
         if (check) {
+            check = checkName(formData)
+        }
+        if (check) {
             check = checkLength(formData)
         }
         if (check) {
@@ -27,6 +30,16 @@ export const performChecks = async (formData, performAll = true) => {
     }
     return check;
 };
+
+const checkName = (formData) => {
+    // _, /, & or #
+    const modelName = formData["modelName"]
+    if (modelName.includes("_") || modelName.includes("/") || modelName.includes("&") || modelName.includes("#")) {
+        alert('Model Name includes invalid Characters!')
+        return false
+    }
+    return true
+}
 
 const checkLength = (formData) => {
     let check = true
