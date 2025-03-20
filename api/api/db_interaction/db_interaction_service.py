@@ -182,11 +182,11 @@ def get_user_models(user_id):
     return jsonify(modelList)
 
 
-def get_single_model(model_id):
-
+def get_single_model(model_slug):
+    model_name = model_slug.replace("_", " ")
     conn = db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("SELECT * FROM models WHERE id = %s", [model_id])
+    cur.execute("SELECT * FROM models WHERE modelname = %s", [model_name])
     model = dict(cur.fetchone())  # Fetch a single row
 
     # Get images
@@ -327,8 +327,31 @@ def post_model():
         raise
 
 
-def edit_model(model_id):
+def edit_model(model_slug):
     print("edit model called")
+
+    model_name = model_slug.replace("_", " ")
+
+    # get id of previous entry
+    try:
+        conn = db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+            "SELECT id FROM models WHERE modelname = %s",
+            (model_name,),
+        )
+
+        result = cur.fetchone()
+        old_id = int(result[0])
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    except Exception as e:
+        print("getting the id of the old model failed", e)
+        return
 
     try:
         post_model()
@@ -355,7 +378,7 @@ def edit_model(model_id):
 
         cur.execute(
             "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3, boxfile4, boxfile5, boxfile6, boxfile7 FROM models WHERE id = %s",
-            [model_id],
+            [old_id],
         )
         oldValues = list(cur.fetchone())  # Fetch a single row
 
@@ -367,7 +390,7 @@ def edit_model(model_id):
             if oldValue not in newValues:
                 los_to_delete.append(oldValue)
 
-        delete_model(model_id, los_to_delete=los_to_delete)
+        delete_model(old_id, los_to_delete=los_to_delete)
         print("deleting went succesfully")
         return (
             jsonify(

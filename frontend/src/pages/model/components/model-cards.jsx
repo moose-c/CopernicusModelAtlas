@@ -21,6 +21,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const { user, setUser } = useContext(AuthContext);
     // Extracting the values from the model array
     const modelName = model[1];
+    const modelUrl = urlIfy(modelName);
     const name0 = model[2];
     const name1 = model[3];
     const name2 = model[4];
@@ -43,7 +44,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
 
     return (
         <Link
-            to={`/model/${model[0]}`}
+            to={`/model/${modelUrl}`}
             className="w-full rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
         >
             <div className="p-6 flex justify-between">
@@ -66,7 +67,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                             return (
                                 <>
                                     <div>
-                                        <Button text="Edit" to={`/model/edit/${model[0]}`} />
+                                        <Button text="Edit" to={`/model/edit/${modelUrl}`} />
                                     </div>
                                     <div>
                                         <Button
@@ -97,4 +98,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
             </div>
         </Link>
     );
+};
+
+const urlIfy = (name) => {
+    return name.split(' ').join('_');
 };

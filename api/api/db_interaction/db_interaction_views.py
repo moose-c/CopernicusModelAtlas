@@ -28,9 +28,9 @@ def get_user(user_id):
     return get_user_models(user_id)
 
 
-@bp.route("/get_single/<model_id>")
-def get_single(model_id):
-    return get_single_model(model_id)
+@bp.route("/get_single/<model_slug>")
+def get_single(model_slug):
+    return get_single_model(model_slug)
 
 
 @bp.route("/get_file/<file_id>")
@@ -38,13 +38,13 @@ def get_data(file_id):
     return retrieve_data(file_id)
 
 
-@bp.route("/edit/<model_id>", methods=["DELETE", "POST"])
-def edit(model_id):
+@bp.route("/edit/<model_slug>", methods=["DELETE", "POST"])
+def edit(model_slug):
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
         introspect_token(token)
-        return edit_model(model_id)
+        return edit_model(model_slug)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 401

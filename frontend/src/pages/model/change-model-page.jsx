@@ -23,22 +23,25 @@ export const ChangeModelPage = ({ edit = false }) => {
     const [examplePopups, setExamplePopups] = useState(Array(10).fill(false));
     const [formData, setFormData] = useState(blankForm);
 
-    let modelId;
+    let modelSlug;
     if (edit) {
-        modelId = useParams().modelId; // Get modelId from URL params
+        modelSlug = useParams().modelSlug; // Get modelId from URL params
+        console.log(modelSlug);
     }
 
     console.log(formData);
 
     useEffect(() => {
+        // window.addEventListener('beforeunload', alertUser)
+        // https://plainenglish.io/blog/how-to-alert-a-user-before-leaving-a-page-in-react
+
         setFormData({ ...formData, uuUser: user['profile']['sub'] });
 
         if (edit) {
-            console.log(modelId);
             let isMounted = true;
 
             const getMessage = async () => {
-                const { data, error } = await getSingleModel(modelId);
+                const { data, error } = await getSingleModel(modelSlug);
 
                 if (!isMounted) {
                     return;
@@ -78,11 +81,14 @@ export const ChangeModelPage = ({ edit = false }) => {
                 console.log('checks passed');
                 const accessToken = await getAccessToken(user, setUser);
                 if (edit) {
-                    await editModel(formData, modelId, accessToken);
+                    await editModel(formData, modelSlug, accessToken);
                 } else {
                     await postModel(formData, accessToken);
                 }
                 navigate('/profile');
+                alert(
+                    'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
+                );
             }
         };
         doPost(formData);

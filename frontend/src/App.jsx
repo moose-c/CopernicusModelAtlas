@@ -31,10 +31,10 @@ export const App = () => {
             <Route path="/" element={<OverviewPage />} />
             <Route path="/callback" element={<CallbackPage />} />
 
-            <Route path="/model/:modelId" element={<ModelPage />} />
+            <Route path="/model/:modelSlug" element={<ModelPage />} />
 
             <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
-            <Route path="/model/edit/:modelId" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
+            <Route path="/model/edit/:modelSlug" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
             <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
 
             <Route path="/model/admin" element={<ProtectedRoute element={<OverviewPage editAble={true} />} adminOnly={true} />} />

@@ -11,13 +11,13 @@ const ModelContext = createContext();
 export const useModel = () => useContext(ModelContext);
 
 export const ModelPage = () => {
-    const { modelId } = useParams(); // Get modelId from URL params
+    const { modelSlug } = useParams();
     const [modelData, setModelData] = useState({});
 
     useEffect(() => {
         let isMounted = true;
         const getMessage = async () => {
-            const { data, error } = await getSingleModel(modelId);
+            const { data, error } = await getSingleModel(modelSlug);
 
             if (!isMounted) {
                 return;

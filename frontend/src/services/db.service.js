@@ -26,7 +26,7 @@ export const postModel = async (modelData, accessToken) => {
     })
 }
 
-export const editModel = async (modelData, model_id, accessToken) => {
+export const editModel = async (modelData, modelSlug, accessToken) => {
     // create suitable formData type (necessary to handle file uploads)
     const formData = new FormData();
     Object.keys(modelData).forEach((key) => {
@@ -41,7 +41,7 @@ export const editModel = async (modelData, model_id, accessToken) => {
     });
 
     // Construct URL with model_id
-    const url = `${apiServerUrl}/api/models/edit/${model_id}`;
+    const url = `${apiServerUrl}/api/models/edit/${modelSlug}`;
 
     try {
         // Send the formData with a POST request
@@ -97,8 +97,8 @@ export const getUserModels = async (user_id) => {
     };
 };
 
-export const getSingleModel = async (model_id) => {
-    const url = `${apiServerUrl}/api/models/get_single/${model_id}`
+export const getSingleModel = async (modelSlug) => {
+    const url = `${apiServerUrl}/api/models/get_single/${modelSlug}`
     const config = {
         url: url,
         method: "GET",
