@@ -149,7 +149,7 @@ def get_all_models():
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
+        "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
     )
     modelList = cur.fetchall()
 

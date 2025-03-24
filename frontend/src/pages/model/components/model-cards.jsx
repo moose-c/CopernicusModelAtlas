@@ -22,14 +22,15 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     // Extracting the values from the model array
     const modelName = model[1];
     const modelUrl = urlIfy(modelName);
-    const name0 = model[2];
-    const name1 = model[3];
-    const name2 = model[4];
-    const name3 = model[5];
-    const name4 = model[6];
-    const desc = parse(DOMPurify.sanitize(model[7]).replaceAll('<p>', '<p className="text-gray-500">'));
-    const icon = model[8];
-    const approved = model[9];
+    const keywords = model[2];
+    const name0 = model[3];
+    const name1 = model[4];
+    const name2 = model[5];
+    const name3 = model[6];
+    const name4 = model[7];
+    const desc = parse(DOMPurify.sanitize(model[8]).replaceAll('<p>', '<p className="text-gray-500">'));
+    const icon = model[9];
+    const approved = model[10];
 
     const [accessToken, setAccesToken] = useState('');
 
@@ -50,13 +51,15 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
             <div className="p-6 flex justify-between">
                 <div className="flex flex-col justify-between">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">{modelName}</h2>
-                    <h3 className="text-xl font-medium text-gray-600 mb-2">
+                    <h3 className="pb-2">{keywords}</h3>
+                    <h3 className="text-s font-light text-gray-600 mb-2">
                         {name0 && name0}
                         {name1 && ', ' + name1}
                         {name2 && ', ' + name2}
                         {name3 && ', ' + name3}
                         {name4 && ', ' + name4}
                     </h3>
+
                     {desc}
                 </div>
 
