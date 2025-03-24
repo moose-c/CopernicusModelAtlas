@@ -61,7 +61,7 @@ export const DataElement = ({ loid, name, isBar }) => {
         <div className="min-w-[500px] max-w-[700px]">
             {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} isBar={isBar} />}
-            {['geojson', 'json'].includes(fileTypeState) && <VectorMap geojson={decodedFile} />}
+            {decodedFile && ['geojson', 'json'].includes(fileTypeState) && <VectorMap geojson={decodedFile} />}
         </div>
     );
 };
