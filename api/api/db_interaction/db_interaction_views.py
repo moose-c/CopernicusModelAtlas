@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 
 from api.db_interaction.db_interaction_service import (
     get_all_models,
+    get_search_models,
     get_user_models,
     get_single_model,
     post_model,
@@ -21,6 +22,19 @@ bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 @bp.route("/get_all")
 def get_all():
     return get_all_models()
+
+
+@bp.route("/api/models/search", methods=["GET"])
+def search_models():
+    search_text = request.args.get("text")  # Get 'text' from query params
+    if search_text:
+        return get_search_models("searchBar", search_text)
+
+    keywords = request.args.get("keywords").split(",")
+    if keywords:
+        return get_search_models("keywords", keywords)
+
+    return jsonify({"error": "query failed"}), 400
 
 
 @bp.route("/get_user/<user_id>")

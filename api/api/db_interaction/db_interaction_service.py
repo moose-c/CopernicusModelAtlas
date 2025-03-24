@@ -165,6 +165,47 @@ def get_all_models():
     return jsonify(modelList)
 
 
+def get_search_models(searchType, searchValue):
+    conn = db_connection()
+    cur = conn.cursor()
+
+    if searchType == "searchBar":
+        cur.execute(
+            """
+            SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
+            FROM models 
+            WHERE modelname LIKE %s;
+            """,
+            ("%" + searchValue + "%",),
+        )
+
+    elif searchType == "keywords":
+        formatted_keywords = (
+            "{" + ",".join([f"'{keyword}'" for keyword in searchValue]) + "}"
+        )
+        cur.execute(
+            """
+            SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
+            FROM models
+            WHERE keywords && %s; 
+            """,
+            (formatted_keywords),
+        )
+
+    modelList = cur.fetchall()
+
+    # modify the obtained icons
+    for i, row in enumerate(modelList):
+        modelList[i] = list(modelList[i])
+
+        # decode the icon
+        modelList[i][9] = base64.b64encode(row[9]).decode("utf-8")
+
+    cur.close()
+    conn.close()
+    return jsonify(modelList)
+
+
 def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
