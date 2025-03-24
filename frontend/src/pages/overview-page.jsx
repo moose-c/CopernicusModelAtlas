@@ -37,6 +37,15 @@ export const OverviewPage = ({ editAble }) => {
         <PageLayout>
             <div className="content-layout flex gap-5">
                 <h1>Model atlas</h1>
+                <div>
+                    <p className="reg w-[100%]">
+                        <strong>Explore the Model Atlas</strong> – a comprehensive online collection of models developed and utilized by the Copernicus
+                        Institute of Sustainable Development. Each model has a dedicated page detailing its purpose, underlying theory, and real-world
+                        applications. Many model pages also offer interactive features, allowing you to view and download output data. Browse through the Atlas
+                        to explore the diverse modeling efforts within our institute and the available datasets!
+                    </p>
+                </div>
+
                 <Searchbar />
                 <Multiselect
                     isObject={false}

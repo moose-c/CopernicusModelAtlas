@@ -46,7 +46,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     return (
         <Link
             to={`/model/${modelUrl}`}
-            className="w-full rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
+            className="w-fill rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
         >
             <div className="p-6 flex justify-between">
                 <div className="flex flex-col justify-between">
