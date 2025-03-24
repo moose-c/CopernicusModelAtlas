@@ -21,7 +21,8 @@ bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
 
 @bp.route("/get_all")
 def get_all():
-    return get_all_models()
+    bool = request.args.get("approved")
+    return get_all_models(bool)
 
 
 @bp.route("/search", methods=["GET"])

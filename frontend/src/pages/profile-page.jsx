@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { CodeSnippet } from '../components/code-snippet';
 import { PageLayout } from '../components/page-layout';
 import { Button } from '../components/button';
 import { AuthContext } from '..';
@@ -21,7 +20,7 @@ export const ProfilePage = () => {
             const getModels = async () => {
                 let data, error;
                 if (isAdmin) {
-                    ({ data, error } = await getAllModels());
+                    ({ data, error } = await getAllModels(true));
                 } else {
                     ({ data, error } = await getUserModels(user['profile']['sub']));
                 }

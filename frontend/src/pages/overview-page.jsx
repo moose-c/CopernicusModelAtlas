@@ -15,7 +15,7 @@ export const OverviewPage = ({ editAble }) => {
 
     useEffect(() => {
         const getModels = async () => {
-            ({ data, error } = await getAllModels());
+            ({ data, error } = await getAllModels(false));
 
             if (data) {
                 setModels(new Array(data)[0]);

@@ -63,9 +63,9 @@ export const editModel = async (modelData, modelSlug, accessToken) => {
 };
 
 
-export const getAllModels = async () => {
+export const getAllModels = async (bool) => {
     const config = {
-        url: `${apiServerUrl}/api/models/get_all`,
+        url: `${apiServerUrl}/api/models/get_all?approved=${bool}`,
         method: "GET",
         headers: {
             "content-type": "application/json",

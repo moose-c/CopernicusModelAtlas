@@ -145,11 +145,11 @@ def db_connection():
     return conn
 
 
-def get_all_models():
+def get_all_models(bool):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
+        f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = {bool};"
     )
     modelList = cur.fetchall()
 
@@ -172,14 +172,14 @@ def get_search_models(searchType, searchValue):
     try:
         if searchValue in ["", [""]]:
             cur.execute(
-                "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
+                "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon FROM models WHERE isapproved = false;"
             )
         elif searchType == "searchBar":
             cur.execute(
                 """
-                SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
+                SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon
                 FROM models 
-                WHERE modelname ILIKE %s;
+                WHERE modelname ILIKE %s AND isapproved = false;
                 """,
                 ("%" + searchValue + "%",),
             )
@@ -192,7 +192,7 @@ def get_search_models(searchType, searchValue):
                 """
                 SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
                 FROM models
-                WHERE keywords && %s; 
+                WHERE keywords && %s AND isapproved = false;  
                 """,
                 (formatted_keywords,),
             )
@@ -221,7 +221,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s",
+        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon FROM models WHERE uuUser = %s AND isapproved = false;",
         [user_id],
     )
     modelList = cur.fetchall()
