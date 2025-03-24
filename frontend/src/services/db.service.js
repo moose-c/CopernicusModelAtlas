@@ -80,6 +80,43 @@ export const getAllModels = async () => {
     };
 };
 
+export const getKeywordModels = async (userSelectedKeywords) => {
+    const parsedKeywords = userSelectedKeywords.map(keyword => encodeURIComponent(keyword)).join(',')
+    console.log(`${apiServerUrl}/api/models/search?keywords=${parsedKeywords}`)
+    // TODO parse keywords
+    const config = {
+        url: `${apiServerUrl}/api/models/search?keywords=${parsedKeywords}`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
+export const getSearchModels = async (searchText) => {
+    const config = {
+        url: `${apiServerUrl}/api/models/search?text=${searchText}`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const getUserModels = async (user_id) => {
     const config = {
         url: `${apiServerUrl}/api/models/get_user/${user_id}`,

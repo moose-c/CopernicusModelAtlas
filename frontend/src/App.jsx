@@ -37,8 +37,6 @@ export const App = () => {
             <Route path="/model/edit/:modelSlug" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
             <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
 
-            <Route path="/model/admin" element={<ProtectedRoute element={<OverviewPage editAble={true} />} adminOnly={true} />} />
-
             <Route path="/callback" element={<CallbackPage />} />
             <Route path="*" element={<NotFoundPage />} />
         </Routes>

@@ -1,25 +1,21 @@
 import { PageLayout } from '../components/page-layout';
 import { useState, useEffect, useContext } from 'react';
 import { ModelCards } from './model/components/model-cards';
-import { getAllModels, getUserModels } from '../services/db.service';
+import { getAllModels, getKeywordModels, getSearchModels } from '../services/db.service';
 import Multiselect from 'multiselect-react-dropdown';
 import { Searchbar } from '../components/searchbar';
 import { keywords } from '../util/globalVars';
-import { AuthContext } from '..';
 
 export const OverviewPage = ({ editAble }) => {
     const [models, setModels] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-    const { user } = useContext(AuthContext);
+    const [searchText, setSearchText] = useState('');
+    const [userSelectedKeywords, setUserSelectedKeywords] = useState([]);
+    let data, error;
 
     useEffect(() => {
-        const getMessage = async () => {
-            let data, error;
-            if (!editAble) {
-                ({ data, error } = await getAllModels());
-            } else {
-                ({ data, error } = await getUserModels(user['profile']['sub']));
-            }
+        const getModels = async () => {
+            ({ data, error } = await getAllModels());
 
             if (data) {
                 setModels(new Array(data)[0]);
@@ -30,8 +26,46 @@ export const OverviewPage = ({ editAble }) => {
             }
         };
 
-        getMessage();
+        getModels();
     }, []);
+
+    useEffect(() => {
+        // get models with keywords
+        console.log(userSelectedKeywords);
+
+        const getModels = async () => {
+            ({ data, error } = await getKeywordModels(userSelectedKeywords));
+
+            if (data) {
+                setModels(new Array(data)[0]);
+            }
+
+            if (error) {
+                setErrorMessage(JSON.stringify(error, null, 2));
+            }
+        };
+
+        getModels();
+    }, [userSelectedKeywords]);
+
+    useEffect(() => {
+        // get models with searchtext
+        console.log(searchText);
+
+        const getModels = async () => {
+            ({ data, error } = await getSearchModels(searchText));
+
+            if (data) {
+                setModels(new Array(data)[0]);
+            }
+
+            if (error) {
+                setErrorMessage(JSON.stringify(error, null, 2));
+            }
+        };
+
+        getModels();
+    }, [searchText]);
 
     return (
         <PageLayout>
@@ -46,14 +80,13 @@ export const OverviewPage = ({ editAble }) => {
                     </p>
                 </div>
 
-                <Searchbar />
+                <Searchbar searchText={searchText} setSearchText={setSearchText} />
                 <Multiselect
                     isObject={false}
-                    onKeyPressFn={function noRefCheck() {}}
-                    onRemove={function noRefCheck() {}}
-                    onSearch={function noRefCheck() {}}
-                    onSelect={function noRefCheck() {}}
+                    onRemove={(e) => setUserSelectedKeywords(e)}
+                    onSelect={(e) => setUserSelectedKeywords(e)}
                     options={keywords}
+                    selectedValues={userSelectedKeywords}
                     placeholder="Select Keywords"
                     className="dd w-fit"
                 />
