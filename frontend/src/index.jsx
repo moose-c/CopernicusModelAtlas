@@ -4,8 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { userManager } from './util/authConfig';
 import { App } from './App';
 import './styles/index.css';
-
-const logoutUri = import.meta.env.VITE_APP_AUTH_LOGOUT_URL;
+import 'leaflet/dist/leaflet.css';
 
 // Create AuthContext
 export const AuthContext = createContext(null);

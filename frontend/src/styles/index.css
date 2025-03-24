@@ -1,4 +1,5 @@
 @import "content-layout.css";
+@import "leaflet/dist/leaflet.css";
 /* code-snippet is not being applied to tailwind components maybe? */
 
 @tailwind base;

@@ -19,6 +19,7 @@
     "html-react-parser": "^5.2.2",
     "icon-with-tooltip": "^3.1.1",
     "json2csv": "^6.0.0-alpha.2",
+    "leaflet": "^1.9.4",
     "multiselect-react-dropdown": "^2.0.25",
     "oidc-client-ts": "^3.1.0",
     "react": "^18.2.0",
