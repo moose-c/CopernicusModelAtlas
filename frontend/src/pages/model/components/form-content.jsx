@@ -45,7 +45,6 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     return updatedState;
                 });
             } else {
-                console.log(q);
                 const file = e.target.files[0];
                 setFormData((prevState) => {
                     const updatedState = {
