@@ -271,7 +271,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         <FileField
                             label={'Upload methods data here'}
                             field={'methodsFile'}
-                            allowedFileTypes={'.png, .csv, .xlsx'}
+                            allowedFileTypes={'.png, .csv, .xlsx, .json, .geojson'}
                             capField={'methodsFileCaption'}
                             capText={'Enter a title for this data field'}
                         />

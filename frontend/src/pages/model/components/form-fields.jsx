@@ -4,6 +4,7 @@ import { useForm } from './form-content';
 import { keywords } from '../../../util/globalVars';
 import { ExamplePopup } from './examplePopup';
 import { CSVFormatExplanation } from './vis/csvFormatExplanation';
+import { GeoJsonFormatExplanation } from './vis/geojsonFormatExplanation';
 import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -186,7 +187,11 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                         <div className="flex flex-col gap-4">
                             <ShortTextField label={`Title of the output box${i === 0 ? '*' : ''}`} placeholder={'Box Title'} field={`boxTitle${i}`} />
                             <ShortTextField label={`Title for output data${i === 0 ? '*' : ''}`} placeholder={'Output Title'} field={`boxFileTitle${i}`} />
-                            <FileField label={`Upload output data here${i === 0 ? '*' : ''}`} field={`boxFile${i}`} allowedFileTypes={'.png, .csv, .xlsx'} />
+                            <FileField
+                                label={`Upload output data here${i === 0 ? '*' : ''}`}
+                                field={`boxFile${i}`}
+                                allowedFileTypes={'.png, .csv, .xlsx, .json, .geojson'}
+                            />
 
                             <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                         </div>
@@ -228,14 +233,14 @@ export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
                     Timeseries (.csv, .xlsx)
                 </li>
                 {examplePopups[6] && <ExamplePopup nb={6} togglePopup={togglePopup} content={<CSVFormatExplanation />} width="w-[600px]" />}
+                <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
+                    Vector map (.geojson, .json)
+                </li>
+                {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} content={<GeoJsonFormatExplanation />} />}
                 {/* <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
                     Raster map (.tif, .tiff)
                 </li>
-                {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} />}
-                <li key={3} className="cursor-pointer hover:underline" onClick={() => togglePopup(8)}>
-                    Vector map (.geojson)
-                </li> */}
-                {/* {examplePopups[8] && <ExamplePopup nb={8} togglePopup={togglePopup} />} */}
+                {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} />} */}
             </ul>
         </>
     );
