@@ -24,8 +24,10 @@ def get_all():
     return get_all_models()
 
 
-@bp.route("/api/models/search", methods=["GET"])
+@bp.route("/search", methods=["GET"])
 def search_models():
+    print("inside search")
+    print(request)
     search_text = request.args.get("text")  # Get 'text' from query params
     if search_text:
         return get_search_models("searchBar", search_text)
