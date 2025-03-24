@@ -98,12 +98,63 @@ const checkUploadedFile = async (file, name) => {
         result = await checkSheet(file)
     } else if (['png'].includes(type)) {
         result = true
+    } else if (['geojson', 'json'].includes(type)) {
+        return await checkGeojson(file)
     }
     if (!result) {
         alert('Uploaded file not correct!')
     }
     return result
 }
+
+function isValidGeoJSON(json) {
+    if (typeof json !== "object" || json === null) return false;
+
+    const validGeometryTypes = [
+        "Point", "MultiPoint", "LineString", "MultiLineString",
+        "Polygon", "MultiPolygon", "GeometryCollection"
+    ];
+
+    if (json.type === "FeatureCollection") {
+        return Array.isArray(json.features) && json.features.every(isValidFeature);
+    }
+    if (json.type === "Feature") {
+        return isValidFeature(json);
+    }
+    if (validGeometryTypes.includes(json.type)) {
+        return isValidGeometry(json);
+    }
+
+    return false;
+}
+
+function isValidFeature(feature) {
+    return feature.type === "Feature" &&
+        typeof feature.properties === "object" &&
+        isValidGeometry(feature.geometry);
+}
+
+function isValidGeometry(geometry) {
+    const validGeometryTypes = [
+        "Point", "MultiPoint", "LineString", "MultiLineString",
+        "Polygon", "MultiPolygon", "GeometryCollection"
+    ];
+    return geometry && validGeometryTypes.includes(geometry.type) &&
+        Array.isArray(geometry.coordinates);
+}
+
+// Function to read file and validate GeoJSON
+async function checkGeojson(file) {
+    try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        return isValidGeoJSON(json);
+    } catch (error) {
+        console.error("Invalid JSON:", error);
+        return false;
+    }
+}
+
 
 const checkSheet = async (file) => {
     return new Promise((resolve, reject) => {

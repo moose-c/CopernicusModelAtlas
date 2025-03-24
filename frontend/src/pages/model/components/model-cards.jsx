@@ -22,7 +22,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     // Extracting the values from the model array
     const modelName = model[1];
     const modelUrl = urlIfy(modelName);
-    const keywords = model[2];
+    const keywords = model[2].join(', ');
     const name0 = model[3];
     const name1 = model[4];
     const name2 = model[5];

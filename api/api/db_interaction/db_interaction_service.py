@@ -156,7 +156,9 @@ def get_all_models():
     # modify the obtained icons
     for i, row in enumerate(modelList):
         modelList[i] = list(modelList[i])
-        modelList[i][8] = base64.b64encode(row[8]).decode("utf-8")
+
+        # decode the icon
+        modelList[i][9] = base64.b64encode(row[9]).decode("utf-8")
 
     cur.close()
     conn.close()
