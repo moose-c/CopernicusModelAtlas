@@ -1,6 +1,4 @@
 TODO:
-    - Zoeken & Keyword selection!
-        - api calls handle
 - Can someone take over the edit rights of a page, if someone leaves the university?
     - Kan, maar is wel gedoe. Of gewoon een protocol schrijven.
 - Temp sign is not interpreted correctly with kaj..
