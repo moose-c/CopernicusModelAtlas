@@ -20,12 +20,11 @@ export const ProfilePage = () => {
             const getModels = async () => {
                 let data, error;
                 if (isAdmin) {
-                    ({ data, error } = await getAllModels(true));
+                    ({ data, error } = await getAllModels(false));
                 } else {
                     ({ data, error } = await getUserModels(user['profile']['sub']));
                 }
                 if (data) {
-                    console.log(data);
                     setModels(new Array(data)[0]);
                 }
             };

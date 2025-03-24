@@ -148,9 +148,16 @@ def db_connection():
 def get_all_models(bool):
     conn = db_connection()
     cur = conn.cursor()
-    cur.execute(
-        f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = {bool};"
-    )
+    print(bool)
+    if bool == "true":
+        cur.execute(
+            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = true;"
+        )
+    else:
+        print("geting all")
+        cur.execute(
+            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
+        )
     modelList = cur.fetchall()
 
     # modify the obtained icons
@@ -221,7 +228,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon FROM models WHERE uuUser = %s AND isapproved = false;",
+        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s AND isapproved = false;",
         [user_id],
     )
     modelList = cur.fetchall()
