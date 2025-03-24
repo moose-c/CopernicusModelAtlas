@@ -180,6 +180,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         label={"Enter the name of your model.* Use less then 75 characters and don't use _, /, & or #."}
                         placeholder={'Enter Model Name'}
                         field={'modelName'}
+                        maxChar={75}
                     />
                     <KeyWordsField />
                     <TwoField

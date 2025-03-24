@@ -21,8 +21,8 @@ export const ShortTextField = ({ label, placeholder, field, maxChar }) => {
                     value={formData[field]}
                     onChange={(e) => handleChange(e.target.value, field)}
                 />
-                {maxChar > 0 && formData[field].split('').length / maxWords <= 1 && <p>{`Currently: ${formData[field].split('').length}/${maxChar}`}</p>}
-                {maxChar > 0 && formData[field].split('').length / maxWords > 1 && (
+                {maxChar > 0 && formData[field].split('').length / maxChar <= 1 && <p>{`Currently: ${formData[field].split('').length}/${maxChar}`}</p>}
+                {maxChar > 0 && formData[field].split('').length / maxChar > 1 && (
                     <p className="text-red-500 font-bold">{`Currently: ${formData[field].split('').length}/${maxChar}`}</p>
                 )}
             </div>

@@ -1,10 +1,15 @@
-/* @import "theme.css"; */
 @import "content-layout.css";
 /* code-snippet is not being applied to tailwind components maybe? */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  p a {
+    @apply text-blue-600 underline !important;
+  }
+}
 
 .ql-editor li {
   font-size: 18px;
@@ -15,6 +20,7 @@
   ul, ol {
     list-style: revert;
     padding-left: 30px;
+    @apply reg;
   }
 }
 
