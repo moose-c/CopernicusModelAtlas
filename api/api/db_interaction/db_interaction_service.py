@@ -166,6 +166,7 @@ def get_all_models():
 
 
 def get_search_models(searchType, searchValue):
+    print(searchValue)
     conn = db_connection()
     cur = conn.cursor()
 
@@ -179,7 +180,7 @@ def get_search_models(searchType, searchValue):
                 """,
                 ("%" + searchValue + "%",),
             )
-
+            print("succesfully exectued searchbar querry")
         elif searchType == "keywords":
             formatted_keywords = (
                 "{" + ",".join([f"'{keyword}'" for keyword in searchValue]) + "}"
@@ -192,6 +193,7 @@ def get_search_models(searchType, searchValue):
                 """,
                 (formatted_keywords),
             )
+            print("succesfully exectued keywords querry")
 
         modelList = cur.fetchall()
 
@@ -203,6 +205,7 @@ def get_search_models(searchType, searchValue):
         cur.close()
         conn.close()
 
+    print("outside of try except")
     # modify the obtained icons
     for i, row in enumerate(modelList):
         modelList[i] = list(modelList[i])
@@ -210,6 +213,7 @@ def get_search_models(searchType, searchValue):
         # decode the icon
         modelList[i][9] = base64.b64encode(row[9]).decode("utf-8")
 
+    print("after processing images")
     return jsonify(modelList)
 
 
