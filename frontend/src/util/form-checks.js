@@ -43,14 +43,22 @@ const checkName = (formData) => {
 
 const checkLength = (formData) => {
     let check = true
-    const fieldLengthDict = {
+    const wordsLengthDict = {
         shortDescr: 65
     }
-    for (const [key, value] of Object.entries(fieldLengthDict)) {
+    const charLengthDict = {
+        modelName: 75
+    }
+    for (const [key, value] of Object.entries(wordsLengthDict)) {
         if (formData[key].split(' ').length > value) {
             alert(`${fieldNameMapping[key]} field is too long!`);
-            check = false;
-            return check
+            return false;
+        }
+    }
+    for (const [key, value] of Object.entries(charLengthDict)) {
+        if (formData[key].split('').length > value) {
+            alert(`${fieldNameMapping[key]} field is too long!`);
+            return false
         }
     }
     return check

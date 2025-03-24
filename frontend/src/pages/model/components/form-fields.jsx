@@ -8,7 +8,7 @@ import { Checkbox, FormGroup, FormControlLabel } from '@mui/material';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-export const ShortTextField = ({ label, placeholder, field }) => {
+export const ShortTextField = ({ label, placeholder, field, maxChar }) => {
     const { formData, handleChange } = useForm(); // Automatically gets values
     return (
         <>
@@ -21,6 +21,10 @@ export const ShortTextField = ({ label, placeholder, field }) => {
                     value={formData[field]}
                     onChange={(e) => handleChange(e.target.value, field)}
                 />
+                {maxChar > 0 && formData[field].split('').length / maxWords <= 1 && <p>{`Currently: ${formData[field].split('').length}/${maxChar}`}</p>}
+                {maxChar > 0 && formData[field].split('').length / maxWords > 1 && (
+                    <p className="text-red-500 font-bold">{`Currently: ${formData[field].split('').length}/${maxChar}`}</p>
+                )}
             </div>
         </>
     );

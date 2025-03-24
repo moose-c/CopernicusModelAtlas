@@ -1,5 +1,4 @@
 TODO:
-    - title <= 75 char
     - Zoeken & Keyword selection!
     - Formatted text for theory etc is great, but urls are still black and invisible. For everything in the content, I would remove the:
         a { color: inherit; text-decoration: inherit; } (or only apply this to the header and footer of the page, probably easier)
