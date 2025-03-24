@@ -7,8 +7,6 @@ TODO:
 
 
 Grote Zaken:
-- Geojson ook
-    - Enter Explan information
 - Strestest
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
     - max value tot helft 
