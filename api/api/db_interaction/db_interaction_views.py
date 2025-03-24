@@ -26,14 +26,11 @@ def get_all():
 
 @bp.route("/search", methods=["GET"])
 def search_models():
-    print("inside search")
-    print(request)
-    search_text = request.args.get("text")  # Get 'text' from query params
-    if search_text:
-        return get_search_models("searchBar", search_text)
+    if "text" in request.args:
+        return get_search_models("searchBar", request.args.get("text"))
 
-    keywords = request.args.get("keywords").split(",")
-    if keywords:
+    if "keywords" in request.args:
+        keywords = request.args.get("keywords").split(",")
         return get_search_models("keywords", keywords)
 
     return jsonify({"error": "query failed"}), 400

@@ -26,3 +26,4 @@ WH:
 - SEO: voor elke pagina een description in de meta title, description, keywords
 - Text homepage grey
 - Order on homepage
+- isApproved get only

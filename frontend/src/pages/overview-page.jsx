@@ -9,8 +9,8 @@ import { keywords } from '../util/globalVars';
 export const OverviewPage = ({ editAble }) => {
     const [models, setModels] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-    const [searchText, setSearchText] = useState('');
-    const [userSelectedKeywords, setUserSelectedKeywords] = useState([]);
+    const [searchText, setSearchText] = useState(null);
+    const [userSelectedKeywords, setUserSelectedKeywords] = useState(null);
     let data, error;
 
     useEffect(() => {
@@ -41,11 +41,13 @@ export const OverviewPage = ({ editAble }) => {
             }
 
             if (error) {
+                console.log(error);
                 setErrorMessage(JSON.stringify(error, null, 2));
             }
         };
-
-        getModels();
+        if (userSelectedKeywords != null) {
+            getModels();
+        }
     }, [userSelectedKeywords]);
 
     useEffect(() => {
@@ -64,7 +66,9 @@ export const OverviewPage = ({ editAble }) => {
             }
         };
 
-        getModels();
+        if (searchText != null) {
+            getModels();
+        }
     }, [searchText]);
 
     return (
