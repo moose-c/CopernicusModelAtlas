@@ -453,7 +453,7 @@ def edit_model(model_slug):
         return
 
     try:
-        post_model()
+        post_model(True)
         print("adding went succesfully")
 
     except Exception as e:

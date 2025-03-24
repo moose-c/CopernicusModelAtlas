@@ -3,6 +3,7 @@ TODO:
     - Kan, maar is wel gedoe. Of gewoon een protocol schrijven.
 - Temp sign is not interpreted correctly with kaj..
 - Charlotte notified on new model..
+- padding on icons
 
 
 Grote Zaken:

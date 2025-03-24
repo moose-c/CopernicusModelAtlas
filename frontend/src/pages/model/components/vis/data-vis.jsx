@@ -1,6 +1,7 @@
 import { getLargeFile } from '../../../../services/db.service';
 import { useState, useEffect } from 'react';
 import { Timeseries } from './timeseries';
+import { VectorMap } from './vectormap';
 import { ClickableFigure } from './image';
 
 export const DataElement = ({ loid, name, isBar }) => {
@@ -46,6 +47,13 @@ export const DataElement = ({ loid, name, isBar }) => {
                 });
             };
             convertBlobToBase64(fileBin).then((base64) => setDecodedFile(base64));
+        } else if (fileTypeState == 'json' || fileTypeState == 'geojson') {
+            const convertBlobToJson = async (blob) => {
+                const text = await blob.text(); // Read the Blob as text
+                const geojsonFile = JSON.parse(text); // Parse the JSON
+                setDecodedFile(geojsonFile);
+            };
+            convertBlobToJson(fileBin);
         }
     }, [fileTypeState]);
 
@@ -53,6 +61,7 @@ export const DataElement = ({ loid, name, isBar }) => {
         <div className="min-w-[500px] max-w-[700px]">
             {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} isBar={isBar} />}
+            {['geojson', 'json'].includes(fileTypeState) && <VectorMap geojson={decodedFile} />}
         </div>
     );
 };
