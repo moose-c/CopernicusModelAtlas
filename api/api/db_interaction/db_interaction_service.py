@@ -6,6 +6,7 @@ import copy
 import json
 import os
 from dotenv import load_dotenv
+from api.send_email.send_email import send_email
 
 # Load environment variables from .env file
 load_dotenv()
@@ -319,6 +320,7 @@ def approve_model(model_id):
 
 def post_model(edit=False):
     print("post model called")
+    send_email()
     formData = copy.deepcopy(blank_form_template)
 
     # add non files to formData

@@ -8,11 +8,12 @@ load_dotenv()
 resend.api_key = os.getenv("RESEND_API_KEY")
 
 
-r = resend.Emails.send(
-    {
-        "from": "onboarding@resend.dev",
-        "to": "mooscastelijn@gmail.com",
-        "subject": "New Model ready for review",
-        "html": "<p>Hi Charlotte, A new model is added to the Copernicus Model Atlas waiting for your review!</p>",
-    }
-)
+def send_email():
+    resend.Emails.send(
+        {
+            "from": "onboarding@resend.dev",
+            "to": "mooscastelijn@gmail.com",
+            "subject": "New Model ready for review",
+            "html": "<p>Hi Charlotte, A new model is added to the Copernicus Model Atlas and waits for your review!</p>",
+        }
+    )
