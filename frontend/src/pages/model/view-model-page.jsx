@@ -43,6 +43,16 @@ export const ModelPage = () => {
         };
     }, []);
 
+    const handleRequestEditRights = () => {
+        if (
+            confirm(
+                'Are you sure you want to request edit access? Only one person can have this at a given time so this will revoke the edit access for the other user.'
+            ) == true
+        ) {
+            requestEditRights(user, setUser, modelData['modelName']);
+            alert('Edit rights requested, wait for the Moderator to grant these.');
+        }
+    };
     return (
         <>
             <ModelContext.Provider value={{ modelData }}>
@@ -55,7 +65,7 @@ export const ModelPage = () => {
                         <Colofon />
                         {user && (
                             <div>
-                                <Button text="Request page edit rights" call={() => requestEditRights(user, setUser, modelData['modelName'])} />
+                                <Button text="Request page edit rights" call={() => handleRequestEditRights()} />
                             </div>
                         )}
                     </div>

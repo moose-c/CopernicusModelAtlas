@@ -296,7 +296,7 @@ def delete_model(model_id, los_to_delete=[]):
 
 
 def request_model_access(model_name, user_id):
-    print("attemtping to request access")
+    print("attempting to request access")
     send_email_request_access(model_name, user_id)
 
 
