@@ -320,7 +320,6 @@ def approve_model(model_id):
 
 def post_model(edit=False):
     print("post model called")
-    send_email()
     formData = copy.deepcopy(blank_form_template)
 
     # add non files to formData
@@ -350,6 +349,7 @@ def post_model(edit=False):
         if not edit:
             if len(result) != 0:
                 raise Exception("There is already a model with this name!")
+            send_email()
         else:
             if len(result) not in [0, 1]:
                 # either changed or equal.
