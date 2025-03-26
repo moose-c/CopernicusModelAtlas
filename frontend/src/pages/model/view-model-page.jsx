@@ -6,6 +6,9 @@ import { unpackModel } from '../../util/helpFunctions';
 import { PageLayout } from '../../components/page-layout';
 import { Introduction, Theory, Results, Methods, Colofon } from './components/model-elements';
 import { SideBarModelContent } from '../../components/side-bar';
+import { Button } from '../../components/button';
+import { AuthContext } from '../..';
+import { requestEditRights } from '../../services/db.service';
 
 const ModelContext = createContext();
 export const useModel = () => useContext(ModelContext);
@@ -13,6 +16,7 @@ export const useModel = () => useContext(ModelContext);
 export const ModelPage = () => {
     const { modelSlug } = useParams();
     const [modelData, setModelData] = useState({});
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         let isMounted = true;
@@ -49,6 +53,9 @@ export const ModelPage = () => {
                         <Results />
                         {modelData['methodsDesc'] && <Methods />}
                         <Colofon />
+                        <div>
+                            <Button text="Request page edit rights" call={() => requestEditRights(user['profile']['sub'])} />
+                        </div>
                     </div>
                 </PageLayout>
             </ModelContext.Provider>

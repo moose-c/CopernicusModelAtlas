@@ -3,6 +3,24 @@ import axios from "axios";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
+export const requestEditRights = async (user_id, accessToken) => {
+    const url = `${apiServerUrl}/api/models/approve/${user_id}`;
+    const config = {
+        url: url,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const postModel = async (modelData, accessToken) => {
     // create suitable formData type (necessesary to handle file uploads)
     const formData = new FormData();
