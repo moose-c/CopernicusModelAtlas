@@ -8,7 +8,6 @@ import { blankForm } from '../../util/globalVars';
 import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
 import { getAccessToken } from '../../util/getAccessToken';
-import { sendEmailToCharlotte } from '../../services/email.service';
 
 import { editModel, getSingleModel, postModel } from '../../services/db.service';
 import { AuthContext } from '../..';
@@ -89,7 +88,6 @@ export const ChangeModelPage = ({ edit = false }) => {
                     } else {
                         // Attempt to create a new model
                         await postModel(formData, accessToken);
-                        sendEmailToCharlotte();
                         navigate('/profile');
                         alert(
                             'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
