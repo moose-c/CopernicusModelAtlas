@@ -1,6 +1,4 @@
 TODO:
-- Can someone take over the edit rights of a page, if someone leaves the university?
-    - Kan, maar is wel gedoe. Of gewoon een protocol schrijven.
 - Temp sign is not interpreted correctly with kaj..
 
 Grote Zaken:
@@ -11,6 +9,7 @@ Grote Zaken:
 Overleggen:
 - Keywords doorheen lopen (kan ook met oreane en stefanie)!!!!
     - Laat wel zien op in de Model Cards, maximum aantal.
+- check change access
 
 WH:
 - Sorting of models based on id & approval
