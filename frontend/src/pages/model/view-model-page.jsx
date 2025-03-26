@@ -16,7 +16,7 @@ export const useModel = () => useContext(ModelContext);
 export const ModelPage = () => {
     const { modelSlug } = useParams();
     const [modelData, setModelData] = useState({});
-    const { user } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
 
     useEffect(() => {
         let isMounted = true;
@@ -53,9 +53,11 @@ export const ModelPage = () => {
                         <Results />
                         {modelData['methodsDesc'] && <Methods />}
                         <Colofon />
-                        <div>
-                            <Button text="Request page edit rights" call={() => requestEditRights(user['profile']['sub'])} />
-                        </div>
+                        {user && (
+                            <div>
+                                <Button text="Request page edit rights" call={() => requestEditRights(user, setUser, modelData['modelName'])} />
+                            </div>
+                        )}
                     </div>
                 </PageLayout>
             </ModelContext.Provider>

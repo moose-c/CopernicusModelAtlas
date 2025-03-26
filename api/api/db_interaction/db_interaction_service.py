@@ -6,7 +6,7 @@ import copy
 import json
 import os
 from dotenv import load_dotenv
-from api.send_email.send_email import send_email
+from api.send_email.send_email import send_email_approval, send_email_request_access
 
 # Load environment variables from .env file
 load_dotenv()
@@ -295,6 +295,11 @@ def delete_model(model_id, los_to_delete=[]):
         conn.close()
 
 
+def request_model_access(model_name, user_id):
+    print("attemtping to request access")
+    send_email_request_access(model_name, user_id)
+
+
 def approve_model(model_id):
     print("attempting to approve")
     conn = db_connection()
@@ -349,7 +354,7 @@ def post_model(edit=False):
         if not edit:
             if len(result) != 0:
                 raise Exception("There is already a model with this name!")
-            send_email()
+            send_email_approval()
         else:
             if len(result) not in [0, 1]:
                 # either changed or equal.

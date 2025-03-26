@@ -1,10 +1,13 @@
 import { callExternalApi } from "./external-api.service";
 import axios from "axios";
+import { getAccessToken } from "../util/getAccessToken";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
-export const requestEditRights = async (user_id, accessToken) => {
-    const url = `${apiServerUrl}/api/models/approve/${user_id}`;
+export const requestEditRights = async (user, setUser, model_name) => {
+    const accessToken = await getAccessToken(user, setUser);
+    const user_id = user['profile']['sub']
+    const url = `${apiServerUrl}/api/models/request_access/${model_name}/${user_id}`;
     const config = {
         url: url,
         headers: {
