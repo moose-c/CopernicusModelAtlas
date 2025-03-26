@@ -24,6 +24,25 @@ export const requestEditRights = async (user, setUser, model_name) => {
     };
 };
 
+export const giveEditRights = async (accessToken, userId, modelName) => {
+    const accessToken = await getAccessToken(user, setUser);
+    const url = `${apiServerUrl}/api/models/give_access/${modelName}/${userId}`;
+    const config = {
+        url: url,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const postModel = async (modelData, accessToken) => {
     // create suitable formData type (necessesary to handle file uploads)
     const formData = new FormData();

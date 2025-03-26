@@ -43,6 +43,11 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
         }
     }, []);
 
+    const handleChangeOwner = () => {
+        const userId = prompt('Enter the user id of the new owner perfectly!');
+        giveEditRights(accessToken, userId, modelName);
+    };
+
     return (
         <Link
             to={`/model/${modelUrl}`}
@@ -84,15 +89,20 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                     {!approved && <p className="text-red-500 font-bold">Not yet approved</p>}
 
                                     {isAdmin && (
-                                        <div>
-                                            <Button
-                                                text="Toggle Approval"
-                                                call={async () => {
-                                                    await approveModel(model[0], accessToken);
-                                                    setToggle((prevValue) => !prevValue);
-                                                }}
-                                            />
-                                        </div>
+                                        <>
+                                            <div>
+                                                <Button
+                                                    text="Toggle Approval"
+                                                    call={async () => {
+                                                        await approveModel(model[0], accessToken);
+                                                        setToggle((prevValue) => !prevValue);
+                                                    }}
+                                                />
+                                            </div>
+                                            <div>
+                                                <Button text="Change Owner" call={() => handleChangeOwner()} />
+                                            </div>
+                                        </>
                                     )}
                                 </>
                             );

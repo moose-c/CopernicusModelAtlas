@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 
 from api.db_interaction.db_interaction_service import (
     request_model_access,
+    give_model_access,
     get_all_models,
     get_search_models,
     get_user_models,
@@ -41,6 +42,11 @@ def search_models():
 @bp.route("request_access/<model_name>/<user_id>")
 def request_access(model_name, user_id):
     return request_model_access(model_name, user_id)
+
+
+@bp.route("give_access/<model_name>/<user_id>")
+def give_access(model_name, user_id):
+    return give_model_access(model_name, user_id)
 
 
 @bp.route("/get_user/<user_id>")

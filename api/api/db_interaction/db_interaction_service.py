@@ -300,6 +300,21 @@ def request_model_access(model_name, user_id):
     send_email_request_access(model_name, user_id)
 
 
+def give_model_access(model_name, user_id):
+    print("attempting to give model access")
+    conn = db_connection()
+    cur = conn.cursor()
+
+    cur.execute(
+        "UPDATE models SET uuUser = %s WHERE modelname = %s",
+        (user_id, model_name),
+    )
+
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
 def approve_model(model_id):
     print("attempting to approve")
     conn = db_connection()
