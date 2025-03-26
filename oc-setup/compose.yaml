@@ -14,6 +14,7 @@ services:
       - ../api/api/:/api/
       - ../api/api/db_interaction/:/api/db_interaction/
       - ../api/api/auth/:/api/auth/
+      - ../api/api/send_email/:/api/send_email/
 
       - ../api/requirements.txt:/requirements.txt
       - ../api/gunicorn.conf.py:/gunicorn.conf.py
