@@ -8,6 +8,7 @@ import { blankForm } from '../../util/globalVars';
 import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
 import { getAccessToken } from '../../util/getAccessToken';
+import { sendEmailToCharlotte } from '../../services/email.service';
 
 import { editModel, getSingleModel, postModel } from '../../services/db.service';
 import { AuthContext } from '../..';
@@ -75,10 +76,10 @@ export const ChangeModelPage = ({ edit = false }) => {
         // change false -> true to actually perform
 
         const doPost = async (formData) => {
-            let check = await performChecks(formData, true);
+            let check = await performChecks(formData, false);
             if (check) {
                 console.log('checks passed');
-                const accessToken = await getAccessToken(user, setUser);
+                // const accessToken = await getAccessToken(user, setUser);
                 try {
                     if (edit) {
                         // Attempt to edit the model
@@ -87,11 +88,12 @@ export const ChangeModelPage = ({ edit = false }) => {
                         alert('Succesfully edited your model!');
                     } else {
                         // Attempt to create a new model
-                        await postModel(formData, accessToken);
-                        navigate('/profile');
-                        alert(
-                            'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
-                        );
+                        // await postModel(formData, accessToken);
+                        sendEmailToCharlotte();
+                        // navigate('/profile');
+                        // alert(
+                        //     'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
+                        // );
                     }
                 } catch (error) {
                     // Catch any errors and handle them
