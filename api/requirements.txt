@@ -8,3 +8,4 @@ dotenv==0.9.9
 requests==2.32.3
 Authlib==1.4.1
 cryptography==44.0.1
+resend==2.7.0

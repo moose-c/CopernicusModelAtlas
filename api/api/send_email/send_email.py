@@ -10,7 +10,7 @@ recipient = os.getenv("RECIPIENT_EMAIL")
 
 
 def send_email():
-    resend.Emails.send(
+    return resend.Emails.send(
         {
             "from": "onboarding@resend.dev",
             "to": recipient,

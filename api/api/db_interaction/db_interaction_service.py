@@ -351,7 +351,8 @@ def post_model(edit=False):
             if len(result) != 0:
                 raise Exception("There is already a model with this name!")
         else:
-            if len(result) != 1:
+            if len(result) not in [0, 1]:
+                # either changed or equal.
                 raise Exception(
                     "There is already a model (beside the one currently editing) with this name!"
                 )
