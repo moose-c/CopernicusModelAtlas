@@ -5,7 +5,6 @@ TODO:
 - Charlotte notified on new model..
 - padding on icons
 
-
 Grote Zaken:
 - Strestest
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
