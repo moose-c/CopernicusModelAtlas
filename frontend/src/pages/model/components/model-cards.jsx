@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/button';
-import { deleteModel, approveModel } from '../../../services/db.service';
+import { deleteModel, approveModel, giveEditRights } from '../../../services/db.service';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../..';
 import { getAccessToken } from '../../../util/getAccessToken';
@@ -45,6 +45,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
 
     const handleChangeOwner = () => {
         const userId = prompt('Enter the user id of the new owner perfectly!');
+        console.log('trying to call give edit rights');
         giveEditRights(accessToken, userId, modelName);
     };
 
