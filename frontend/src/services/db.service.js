@@ -25,7 +25,6 @@ export const requestEditRights = async (user, setUser, model_name) => {
 };
 
 export const giveEditRights = async (accessToken, userId, modelName) => {
-    console.log('within give edit rights')
     const url = `${apiServerUrl}/api/models/give_access/${modelName}/${userId}`;
     const config = {
         url: url,

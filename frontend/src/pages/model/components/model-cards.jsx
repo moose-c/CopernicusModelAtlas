@@ -45,7 +45,6 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
 
     const handleChangeOwner = () => {
         const userId = prompt('Enter the user id of the new owner perfectly!');
-        console.log('trying to call give edit rights');
         giveEditRights(accessToken, userId, modelName);
     };
 
