@@ -1,7 +1,5 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-- Empty keywords
-- Searching has isEnabled False
 - Caption is not written as manditory
 - methods, staat daar ook iets van geojson bla bla
 - clicking on urls from modelcards dosn't work.
