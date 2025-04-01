@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { adminInfo } from '../App';
 
 export const PageFooter = () => {
     return (
         <>
-            <div id="footer" className="bg-black w-full h-[56px] flex flex-row px-[27px] py-[11px] z-50">
-                <div className="flex flex-1 gap-4">
+            <div id="footer" className="bg-black w-full h-[56px] flex gap-4 justify-between flex-row px-[27px] py-[11px] z-50">
+                <div className="flex flex-row gap-4">
                     <div className="text-white font-sans text-[16px] leading-[34px]">
                         <Link className="hover:underline" to="/">
                             Overview
@@ -16,6 +17,8 @@ export const PageFooter = () => {
                         </Link>
                     </div>
                 </div>
+
+                {adminInfo && <div className="text-white font-sans text-[16px] leading-[34px]">For questions or comments, please contact {adminInfo[1]}</div>}
             </div>
         </>
     );

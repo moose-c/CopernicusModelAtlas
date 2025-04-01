@@ -337,8 +337,20 @@ def change_page_moderators():
         cur = conn.cursor()
         # check
         cur.execute("SELECT moderator_ids FROM moderators")
-        moderatorIds = cur.fetchall()
+        moderatorIds = cur.fetchall()[0][0]
         print(moderatorIds)
+        if moderatorId in moderatorIds:
+            moderatorIds.remove(moderatorId)
+        else:
+            moderatorIds.append(moderatorId)
+        print(moderatorIds)
+        cur.execute(
+            """
+            UPDATE moderators 
+            SET moderator_ids = %s;
+        """,
+            (moderatorIds,),
+        )
         conn.commit()
         cur.close()
         conn.close()

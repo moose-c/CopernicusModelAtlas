@@ -133,7 +133,7 @@ def change_moderators():
 
 
 @bp.route("/change_moderator_email", methods=["POST"])
-def change_moderators():
+def change_moderator_email():
     try:
         # Verify the JWT
         token = request.headers.get("Authorization", None).split(" ")[1]
