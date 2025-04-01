@@ -229,7 +229,7 @@ def get_user_models(user_id):
     conn = db_connection()
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, modelname, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s AND isapproved = false;",
+        "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s;",
         [user_id],
     )
     modelList = cur.fetchall()
@@ -301,18 +301,22 @@ def request_model_access(model_name, user_id):
 
 
 def give_model_access(model_name, user_id):
-    print("attempting to give model access")
-    conn = db_connection()
-    cur = conn.cursor()
+    try:
+        print("attempting to give model access")
+        conn = db_connection()
+        cur = conn.cursor()
 
-    cur.execute(
-        "UPDATE models SET uuUser = %s WHERE modelname = %s",
-        (user_id, model_name),
-    )
+        cur.execute(
+            "UPDATE models SET uuUser = %s WHERE modelname = %s",
+            (user_id, model_name),
+        )
 
-    conn.commit()
-    cur.close()
-    conn.close()
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify(f"Model succesfully changed owner.")
+    except Exception as e:
+        print("error changing owner")
 
 
 def approve_model(model_id):

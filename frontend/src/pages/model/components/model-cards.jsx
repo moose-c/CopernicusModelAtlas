@@ -45,7 +45,11 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
 
     const handleChangeOwner = () => {
         const userId = prompt('Enter the user id of the new owner perfectly!');
-        giveEditRights(accessToken, userId, modelName);
+        if (userId.length == 32) {
+            giveEditRights(accessToken, userId, modelName);
+        } else {
+            alert('A user id needs to be 32 characters, please enter a valid id');
+        }
     };
 
     return (

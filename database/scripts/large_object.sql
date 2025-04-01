@@ -1,1 +1,1 @@
-SELECT id, modelname FROM models WHERE modelname ILIKE '';
+SELECT modelname, uuUser FROM models;

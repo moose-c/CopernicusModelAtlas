@@ -13,6 +13,7 @@ export const Introduction = () => {
                 <div className="flex gap-[10px] pr-[30px]">
                     <div className="flex flex-col gap-[10px] w-full ">
                         <h1>{modelData.modelName}</h1>
+                        <h2>{modelData.uuUser}</h2>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
                         {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replaceAll('<p>', '<p class="top">'))}
                         {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
