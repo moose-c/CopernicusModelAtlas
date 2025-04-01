@@ -5,10 +5,8 @@ TODO:
 - Caption is not written as manditory
 - methods, staat daar ook iets van geojson bla bla
 - clicking on urls from modelcards dosn't work.
-- admin edit transfers owner rights.
 - add model name to new model email. 
-- Empty keywords gaat mis? Keywords editen gaat mis?
-- get_models_user gaat mis.
+- Enter from model page gaat mis
 
 Grote Zaken:
 - Strestest

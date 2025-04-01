@@ -226,22 +226,25 @@ def get_search_models(searchType, searchValue):
 
 
 def get_user_models(user_id):
-    conn = db_connection()
-    cur = conn.cursor()
-    cur.execute(
-        "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s;",
-        [user_id],
-    )
-    modelList = cur.fetchall()
+    try:
+        conn = db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s;",
+            [user_id],
+        )
+        modelList = cur.fetchall()
 
-    # modify the obtained icons
-    for i, row in enumerate(modelList):
-        modelList[i] = list(modelList[i])
-        modelList[i][8] = base64.b64encode(row[8]).decode("utf-8")
+        # modify the obtained icons
+        for i, row in enumerate(modelList):
+            modelList[i] = list(modelList[i])
+            modelList[i][9] = base64.b64encode(row[9]).decode("utf-8")
 
-    cur.close()
-    conn.close()
-    return jsonify(modelList)
+        cur.close()
+        conn.close()
+        return jsonify(modelList)
+    except Exception as e:
+        print("getting user models not succeeded: ", e)
 
 
 def get_single_model(model_slug):
