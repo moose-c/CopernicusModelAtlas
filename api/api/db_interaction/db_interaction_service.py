@@ -330,6 +330,45 @@ def send_new_email():
         print("couldn't send email", e)
 
 
+def change_page_moderators():
+    try:
+        moderatorId = request.form.get("moderatorId")
+        conn = db_connection()
+        cur = conn.cursor()
+        # check
+        cur.execute("SELECT moderator_ids FROM moderators")
+        moderatorIds = cur.fetchall()
+        print(moderatorIds)
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify(f"Model succesfully changed owner.")
+
+    except Exception as e:
+        print("couldn't send email", e)
+
+
+def change_page_moderator_email():
+    try:
+        moderatorEmail = request.form.get("moderatorEmail")
+        conn = db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            UPDATE moderators 
+            SET moderator_email = %s;
+        """,
+            (moderatorEmail,),
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify(f"Model succesfully changed owner.")
+
+    except Exception as e:
+        print("couldn't send email", e)
+
+
 def give_model_access(model_name, user_id):
     try:
         print("attempting to give model access")

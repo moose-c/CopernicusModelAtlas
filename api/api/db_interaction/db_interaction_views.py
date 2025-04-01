@@ -13,6 +13,8 @@ from api.db_interaction.db_interaction_service import (
     approve_model,
     retrieve_data,
     send_new_email,
+    change_page_moderators,
+    change_page_moderator_email,
 )
 
 from api.auth.token_validation import introspect_token
@@ -113,6 +115,30 @@ def post():
         token = request.headers.get("Authorization", None).split(" ")[1]
         introspect_token(token)
         return post_model()
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
+
+
+@bp.route("/change_moderators", methods=["POST"])
+def change_moderators():
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        introspect_token(token)
+        return change_page_moderators()
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 401
+
+
+@bp.route("/change_moderator_email", methods=["POST"])
+def change_moderators():
+    try:
+        # Verify the JWT
+        token = request.headers.get("Authorization", None).split(" ")[1]
+        introspect_token(token)
+        return change_page_moderator_email()
 
     except Exception as e:
         return jsonify({"error": str(e)}), 401

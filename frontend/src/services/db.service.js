@@ -1,6 +1,5 @@
 import { callExternalApi } from "./external-api.service";
 import axios from "axios";
-import { getAccessToken } from "../util/getAccessToken";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
@@ -10,6 +9,32 @@ export const sendEmail = async (emailData, accessToken) => {
     formData.append('html', emailData['html'])
 
     const url = `${apiServerUrl}/api/models/send_email`
+    axios.post(url, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+}
+
+export const changeModerators = async (accessToken, moderatorId) => {
+    const formData = new FormData();
+    formData.append('moderatorId', moderatorId)
+
+    const url = `${apiServerUrl}/api/models/change_moderators`
+    axios.post(url, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
+}
+
+export const changeModeratorEmail = async (accessToken, moderatorEmail) => {
+    const formData = new FormData();
+    formData.append('moderatorEmail', moderatorEmail)
+
+    const url = `${apiServerUrl}/api/models/change_moderator_email`
     axios.post(url, formData, {
         headers: {
             "Content-Type": "multipart/form-data",

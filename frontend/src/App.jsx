@@ -27,7 +27,8 @@ export var adminInfo;
 export const App = () => {
     useEffect(() => {
         const obtainAdminInfo = async () => {
-            adminInfo = await getAdminInfo();
+            const intermValue = await getAdminInfo();
+            adminInfo = intermValue['data'][0];
         };
         obtainAdminInfo();
     }, []);

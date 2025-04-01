@@ -2,20 +2,37 @@ import React, { useEffect, useContext, useState } from 'react';
 import { PageLayout } from '../components/page-layout';
 import { Button } from '../components/button';
 import { AuthContext } from '..';
-import { getAllModels, getUserModels } from '../services/db.service';
+import { getAllModels, getUserModels, changeModerators, changeModeratorEmail } from '../services/db.service';
 import { ModelCards } from './model/components/model-cards';
 import { useLocation } from 'react-router-dom';
 import { adminInfo } from '../App';
-
-const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
+import { getAccessToken } from '../util/getAccessToken';
 
 export const ProfilePage = () => {
-    console.log(adminInfo);
     const location = useLocation();
     const [toggle, setToggle] = useState(true);
     const [models, setModels] = useState([]);
-    const { user } = useContext(AuthContext);
-    const isAdmin = user?.profile?.sub == adminUser;
+    const { user, setUser } = useContext(AuthContext);
+    const isAdmin = adminInfo[0].includes(user?.profile?.sub);
+
+    const handleEditModerators = async () => {
+        const accessToken = await getAccessToken(user, setUser);
+        const moderatorId = prompt(
+            `
+            Add/remove a moderator.
+            Enter the user id of a new or existing moderator.
+            If the id already belongs to a moderator, this moderator will be removed. 
+            If the id doesnt belong to a moderator, this moderator will be added`
+        );
+        console.log('TD handle edit');
+        changeModerators(accessToken, moderatorId);
+    };
+
+    const handleEditModeratorEmail = async () => {
+        const accessToken = await getAccessToken(user, setUser);
+        const moderatorEmail = prompt('Enter the email adress of the new main moderator');
+        changeModeratorEmail(accessToken, moderatorEmail);
+    };
 
     useEffect(() => {
         if (user && typeof user === 'object') {
@@ -41,7 +58,19 @@ export const ProfilePage = () => {
                         <h1>Your Models</h1>
                         <Button text="Add Model" to="/model/add" />
                     </div>
-                    {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} setToggle={setToggle} />}
+                    <div className="flex">
+                        {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} setToggle={setToggle} />}
+                        {isAdmin && (
+                            <div className="flex flex-col gap-2 items-end ">
+                                <div>
+                                    <Button text="Add/Remove moderators" call={() => handleEditModerators()} />
+                                </div>
+                                <div>
+                                    <Button text="Change moderator email" call={() => handleEditModeratorEmail()} />
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
                 {/* <div>
                     <h1>User Information</h1>
