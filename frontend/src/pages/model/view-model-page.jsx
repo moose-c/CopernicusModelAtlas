@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'; // for dynamic routing
 import { getSingleModel } from '../../services/db.service';
 import { unpackModel } from '../../util/helpFunctions';
 import { PageLayout } from '../../components/page-layout';
-import { Introduction, Theory, Results, Methods, Colofon } from './components/model-elements';
+import { Introduction, Background, Results, Methods, Colofon } from './components/model-elements';
 import { SideBarModelContent } from '../../components/side-bar';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
@@ -69,7 +69,7 @@ Send this information to the moderator at: "${modEmail}"`
                 <PageLayout sideBarContent={<SideBarModelContent />}>
                     <div className="content-layout flex gap-5 pb-[20px]">
                         <Introduction />
-                        <Theory />
+                        <Background />
                         <Results />
                         {modelData['methodsDesc'] && <Methods />}
                         <Colofon />
