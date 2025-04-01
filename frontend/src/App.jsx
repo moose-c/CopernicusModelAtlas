@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { AuthContext } from '.';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { CallbackPage } from './pages/callback-page';
 import { OverviewPage } from './pages/overview-page';
@@ -10,22 +10,28 @@ import { ProfilePage } from './pages/profile-page';
 
 import { ChangeModelPage } from './pages/model/change-model-page';
 import { ModelPage } from './pages/model/view-model-page';
+import { getAdminInfo } from './services/db.service';
 
-const ProtectedRoute = ({ element, adminOnly = false }) => {
+const ProtectedRoute = ({ element }) => {
     const { user } = useContext(AuthContext);
 
     if (!user) {
         return <Navigate to="/" />;
     }
 
-    if (adminOnly && user.profile['https://namespace.com/roles'][0] !== 'admin') {
-        return <Navigate to="/" />; // Redirect to an "Unauthorized" page
-    }
-
     return element;
 };
 
+export var adminInfo;
+
 export const App = () => {
+    useEffect(() => {
+        const obtainAdminInfo = async () => {
+            adminInfo = await getAdminInfo();
+        };
+        obtainAdminInfo();
+    }, []);
+
     return (
         <Routes>
             <Route path="/" element={<OverviewPage />} />

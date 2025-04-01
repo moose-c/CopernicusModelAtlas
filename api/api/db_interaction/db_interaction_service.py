@@ -148,6 +148,20 @@ def db_connection():
     return conn
 
 
+def get_admin_info():
+    try:
+        conn = db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT moderator_ids, moderator_email FROM moderators;")
+        moderatorInfo = cur.fetchall()
+
+        cur.close()
+        conn.close()
+        return jsonify(moderatorInfo)
+    except Exception as e:
+        print("getting moderator info not succeeded: ", e)
+
+
 def get_all_models(bool):
     conn = db_connection()
     cur = conn.cursor()

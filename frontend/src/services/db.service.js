@@ -18,6 +18,23 @@ export const sendEmail = async (emailData, accessToken) => {
     })
 }
 
+export const getAdminInfo = async () => {
+    const config = {
+        url: `${apiServerUrl}/api/models/get_admin_info`,
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+}
+
 export const giveEditRights = async (accessToken, userId, modelName) => {
     const url = `${apiServerUrl}/api/models/give_access/${modelName}/${userId}`;
     const config = {

@@ -1,7 +1,7 @@
-import { useNavigate, Link, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // useNavigate seems to allow redirection within this site only, a problem for 0Auth?
-export const Button = ({ text = 'Contribute', to = '/admin', call = '' }) => {
+export const Button = ({ text = 'Contribute', to = '/', call = '' }) => {
     const navigate = useNavigate();
 
     const handleClick = (e) => {

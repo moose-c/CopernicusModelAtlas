@@ -5,10 +5,12 @@ import { AuthContext } from '..';
 import { getAllModels, getUserModels } from '../services/db.service';
 import { ModelCards } from './model/components/model-cards';
 import { useLocation } from 'react-router-dom';
+import { adminInfo } from '../App';
 
 const adminUser = import.meta.env.VITE_APP_ADMIN_USER;
 
 export const ProfilePage = () => {
+    console.log(adminInfo);
     const location = useLocation();
     const [toggle, setToggle] = useState(true);
     const [models, setModels] = useState([]);

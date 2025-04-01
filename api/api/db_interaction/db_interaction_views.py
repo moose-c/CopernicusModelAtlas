@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify
 
 from api.db_interaction.db_interaction_service import (
-    request_model_access,
     give_model_access,
     get_all_models,
     get_search_models,
     get_user_models,
     get_single_model,
+    get_admin_info,
     post_model,
     edit_model,
     delete_model,
@@ -20,6 +20,11 @@ from api.auth.token_validation import introspect_token
 bp_name = "api-models"
 bp_url_prefix = "/api/models"
 bp = Blueprint(bp_name, __name__, url_prefix=bp_url_prefix)
+
+
+@bp.route("/get_admin_info")
+def get_admin():
+    return get_admin_info()
 
 
 @bp.route("/get_all")
