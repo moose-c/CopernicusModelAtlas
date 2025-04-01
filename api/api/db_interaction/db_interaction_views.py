@@ -12,6 +12,7 @@ from api.db_interaction.db_interaction_service import (
     delete_model,
     approve_model,
     retrieve_data,
+    send_new_email,
 )
 
 from api.auth.token_validation import introspect_token
@@ -47,6 +48,11 @@ def request_access(model_name, user_id):
 @bp.route("give_access/<model_name>/<user_id>")
 def give_access(model_name, user_id):
     return give_model_access(model_name, user_id)
+
+
+@bp.route("send_email")
+def send_email():
+    return send_new_email()
 
 
 @bp.route("/get_user/<user_id>")

@@ -29,3 +29,14 @@ def send_email_request_access(model_name, user_id):
             "html": f"<p>Hi Charlotte, the user with id {user_id} requested edit access to {model_name}.</p>",
         }
     )
+
+
+def send_email(subject, html):
+    return resend.Emails.send(
+        {
+            "from": "onboarding@resend.dev",
+            "to": recipient,
+            "subject": subject,
+            "html": html,
+        }
+    )

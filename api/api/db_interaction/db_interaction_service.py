@@ -6,7 +6,11 @@ import copy
 import json
 import os
 from dotenv import load_dotenv
-from api.send_email.send_email import send_email_approval, send_email_request_access
+from api.send_email.send_email import (
+    send_email_approval,
+    send_email_request_access,
+    send_email,
+)
 
 # Load environment variables from .env file
 load_dotenv()
@@ -305,6 +309,13 @@ def delete_model(model_id, los_to_delete=[]):
 def request_model_access(model_name, user_id):
     print("attempting to request access")
     send_email_request_access(model_name, user_id)
+
+
+def send_new_email():
+    print("attempting to send email")
+    subject = request.form.get("subject")
+    html = request.form.get("html")
+    send_email(subject, html)
 
 
 def give_model_access(model_name, user_id):
