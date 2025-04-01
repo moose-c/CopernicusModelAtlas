@@ -3,8 +3,17 @@ TODO:
 - Caption is not written as manditory
 - methods, staat daar ook iets van geojson bla bla
 - clicking on urls from modelcards dosn't work.
-- add model name to new model email. 
 - Enter from model page gaat mis
+    Yellow Copernicus clickable, Copernicus gone.
+    Contact at the bottom (Charlotte)
+    Overview -> Home
+    Give data credit from box description.
+    Introduction to ‘top’ font.
+    Authors font?
+    Multiple moderators.
+    Colofon -> More Information.
+    References Bold, rest not and lilsted.
+
 
 Grote Zaken:
 - Strestest
@@ -12,14 +21,12 @@ Grote Zaken:
     - max value tot helft 
 
 FB jan&martijn:
-- theory -> background. (maybe not manditory)
 - method(s) is not manditory
 - 3 -> Results => examplory results
 - mailen naar de board.
 Charlotte:
 - Half year email to maintain (Charlotte! or automated).
 - If someone leaves add this to the onboarding procedure.
-Kaj mailen over de kaarten.
 
 Overleggen:
 - Keywords doorheen lopen (kan ook met oreane en stefanie)!!!!
@@ -44,3 +51,5 @@ WH:
 - Text homepage grey
 - Order on homepage
 - isApproved get only
+-	And/OR
+-	Buttons to the right.

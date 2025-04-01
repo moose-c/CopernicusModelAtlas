@@ -55,7 +55,7 @@ export const Introduction = () => {
     );
 };
 
-export const Theory = () => {
+export const Background = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>

@@ -9,6 +9,7 @@ import { SideBarModelContent } from '../../components/side-bar';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
 import { sendEmail } from '../../services/db.service';
+const modEmail = import.meta.env.VITE_APP_MODERATOR_EMAIL;
 
 const ModelContext = createContext();
 export const useModel = () => useContext(ModelContext);
@@ -54,7 +55,12 @@ export const ModelPage = () => {
                 html: `<p>Hi Charlotte, the user with id ${user['profile']['sub']} requested edit access to ${modelData['modelName']}.</p>
                 <p>They have been instructed to email you also with their id, and the model they want access to.</p>`,
             });
-            alert('Edit rights requested, wait for the Moderator to grant these.');
+            alert(
+                `Edit rights requested. To verify your identity with the moderator, please email the following details:
+Model Name: "${modelData['modelName']}"
+Your ID: "${user['profile']['sub']}"
+Send this information to the moderator at: "${modEmail}"`
+            );
         }
     };
     return (

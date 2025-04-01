@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 resend.api_key = os.getenv("RESEND_API_KEY")
-recipient = os.getenv("RECIPIENT_EMAIL")
+recipient = os.getenv("MODERATOR_EMAIL")
 
 
 def send_email(subject, html):
