@@ -4,25 +4,19 @@ import { getAccessToken } from "../util/getAccessToken";
 
 const apiServerUrl = import.meta.env.VITE_APP_API_SERVER_URL;
 
-export const requestEditRights = async (user, setUser, model_name) => {
-    const accessToken = await getAccessToken(user, setUser);
-    const user_id = user['profile']['sub']
-    const url = `${apiServerUrl}/api/models/request_access/${model_name}/${user_id}`;
-    const config = {
-        url: url,
+export const sendEmail = async (emailData, accessToken) => {
+    const formData = new FormData();
+    formData.append('subject', emailData['subject'])
+    formData.append('html', emailData['html'])
+
+    const url = `${apiServerUrl}/api/models/send_email`
+    axios.post(url, formData, {
         headers: {
-            "content-type": "application/json",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${accessToken}`,
         },
-    };
-
-    const { data, error } = await callExternalApi({ config });
-
-    return {
-        data: data || null,
-        error,
-    };
-};
+    })
+}
 
 export const giveEditRights = async (accessToken, userId, modelName) => {
     const url = `${apiServerUrl}/api/models/give_access/${modelName}/${userId}`;

@@ -9,7 +9,7 @@ import { unpackModel } from '../../util/helpFunctions';
 import { performChecks } from '../../util/form-checks';
 import { getAccessToken } from '../../util/getAccessToken';
 
-import { editModel, getSingleModel, postModel } from '../../services/db.service';
+import { editModel, getSingleModel, postModel, sendEmail } from '../../services/db.service';
 import { AuthContext } from '../..';
 import { SideBarChangeContent } from '../../components/side-bar';
 
@@ -83,11 +83,19 @@ export const ChangeModelPage = ({ edit = false }) => {
                     if (edit) {
                         // Attempt to edit the model
                         await editModel(formData, modelSlug, accessToken);
+                        sendEmail({
+                            subject: `Someone edited a model`,
+                            html: `<p>Hi Charlotte, someone edited a new model named ${formData['modelName']}, </p>`,
+                        });
                         navigate('/profile');
                         alert('Succesfully edited your model!');
                     } else {
                         // Attempt to create a new model
                         await postModel(formData, accessToken);
+                        sendEmail({
+                            subject: `Someone posted a new model`,
+                            html: `<p>Hi Charlotte, someone posted a new model named ${formData['modelName']}, </p>`,
+                        });
                         navigate('/profile');
                         alert(
                             'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'

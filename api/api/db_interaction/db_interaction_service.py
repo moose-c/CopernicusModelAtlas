@@ -7,8 +7,6 @@ import json
 import os
 from dotenv import load_dotenv
 from api.send_email.send_email import (
-    send_email_approval,
-    send_email_request_access,
     send_email,
 )
 
@@ -306,16 +304,16 @@ def delete_model(model_id, los_to_delete=[]):
         conn.close()
 
 
-def request_model_access(model_name, user_id):
-    print("attempting to request access")
-    send_email_request_access(model_name, user_id)
-
-
 def send_new_email():
-    print("attempting to send email")
-    subject = request.form.get("subject")
-    html = request.form.get("html")
-    send_email(subject, html)
+    try:
+        print("attempting to send email")
+        subject = request.form.get("subject")
+        html = request.form.get("html")
+        email = send_email(subject, html)
+        return jsonify("succesfully send the following email", email)
+
+    except Exception as e:
+        print("couldn't send email", e)
 
 
 def give_model_access(model_name, user_id):
@@ -334,7 +332,7 @@ def give_model_access(model_name, user_id):
         conn.close()
         return jsonify(f"Model succesfully changed owner.")
     except Exception as e:
-        print("error changing owner")
+        print("error changing owner", e)
 
 
 def approve_model(model_id):
@@ -391,7 +389,6 @@ def post_model(edit=False):
         if not edit:
             if len(result) != 0:
                 raise Exception("There is already a model with this name!")
-            send_email_approval()
         else:
             if len(result) not in [0, 1]:
                 # either changed or equal.

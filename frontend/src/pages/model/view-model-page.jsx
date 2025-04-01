@@ -8,7 +8,7 @@ import { Introduction, Theory, Results, Methods, Colofon } from './components/mo
 import { SideBarModelContent } from '../../components/side-bar';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
-import { requestEditRights } from '../../services/db.service';
+import { sendEmail } from '../../services/db.service';
 
 const ModelContext = createContext();
 export const useModel = () => useContext(ModelContext);
@@ -49,7 +49,11 @@ export const ModelPage = () => {
                 'Are you sure you want to request edit access? Only one person can have this at a given time so this will revoke the edit access for the other user.'
             ) == true
         ) {
-            requestEditRights(user, setUser, modelData['modelName']);
+            sendEmail({
+                subject: `Someone requested edit access to ${modelData['modelName']}`,
+                html: `<p>Hi Charlotte, the user with id ${user['profile']['sub']} requested edit access to ${modelData['modelName']}.</p>
+                <p>They have been instructed to email you also with their id, and the model they want access to.</p>`,
+            });
             alert('Edit rights requested, wait for the Moderator to grant these.');
         }
     };
@@ -65,7 +69,12 @@ export const ModelPage = () => {
                         <Colofon />
                         {user && (
                             <div>
-                                <Button text="Request page edit rights" call={() => handleRequestEditRights()} />
+                                <Button
+                                    text="Request page edit rights"
+                                    call={() => {
+                                        handleRequestEditRights();
+                                    }}
+                                />
                             </div>
                         )}
                     </div>

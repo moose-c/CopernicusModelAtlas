@@ -40,17 +40,12 @@ def search_models():
     return jsonify({"error": "query failed"}), 400
 
 
-@bp.route("request_access/<model_name>/<user_id>")
-def request_access(model_name, user_id):
-    return request_model_access(model_name, user_id)
-
-
 @bp.route("give_access/<model_name>/<user_id>")
 def give_access(model_name, user_id):
     return give_model_access(model_name, user_id)
 
 
-@bp.route("send_email")
+@bp.route("/send_email", methods=["POST"])
 def send_email():
     return send_new_email()
 
