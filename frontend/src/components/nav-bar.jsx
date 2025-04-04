@@ -9,18 +9,15 @@ export const NavBar = () => {
     return (
         <div id="navbar">
             <div className="bg-copernicusYellow w-full px-[42px] py-[18px]">
-                <p className="font-sans text-[40px] font-thin leading-[34px] text-black">Copernicus Institute of Sustainable Development</p>
+                <Link to="https://www.uu.nl/en/research/copernicus-institute-of-sustainable-development">
+                    <p className="font-sans text-[40px] font-thin leading-[34px] text-black">Copernicus Institute of Sustainable Development</p>
+                </Link>
             </div>
             <div className="bg-black w-full h-[56px] flex flex-row px-[27px] py-[11px]">
                 <div className="flex flex-1 gap-4">
                     <div className="text-white font-sans text-[16px] leading-[34px]">
                         <Link className="hover:underline" to="/">
-                            Overview
-                        </Link>
-                    </div>
-                    <div className="text-white font-sans text-[16px] leading-[34px]">
-                        <Link className="hover:underline" to="https://www.uu.nl/en/research/copernicus-institute-of-sustainable-development">
-                            Copernicus
+                            Home
                         </Link>
                     </div>
                 </div>

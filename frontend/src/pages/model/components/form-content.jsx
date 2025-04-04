@@ -278,7 +278,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     </div>
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">
-                            <h2 id="colofon">Section 5: Colofon</h2>
+                            <h2 id="colofon">Section 5: More Information</h2>
                             <p className="underline cursor-pointer select-none" onClick={() => togglePopup(5)}>
                                 Show Example
                             </p>
@@ -286,7 +286,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </div>
                         <ShortTextField label={'Do you want to add references?'} placeholder={'How to cite'} field={'colofonCite'} />
                         <ShortTextField label={'Do want to add a model licence?'} placeholder={'Enter licence'} field={'colofonLicence'} />
-                        <LongTextField field={'colofonAddition'}>Do you want to include additional information in the Colofon? </LongTextField>
+                        <LongTextField field={'colofonAddition'}>Do you want to include more information not mentioned elsewhere? </LongTextField>
                     </div>
                 </div>
             </FormContext.Provider>

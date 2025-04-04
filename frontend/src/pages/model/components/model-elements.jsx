@@ -180,13 +180,13 @@ export const Methods = () => {
     );
 };
 
-export const Colofon = () => {
+export const MoreInformation = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
             <div id="colofon" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
-                    <h2>Colofon</h2>
+                    <h2>More Information</h2>
                     <p className="reg font-bold">References: {modelData.colofonCite}</p>
                     <p className="reg">Model Licence: {modelData.colofonLicence}</p>
                     {parse(DOMPurify.sanitize(modelData.colofonAddition).replaceAll('<p>', '<p class="reg">'))}
