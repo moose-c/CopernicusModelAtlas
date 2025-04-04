@@ -19,7 +19,7 @@ export const Button = ({ text = 'Contribute', to = '/', call = '' }) => {
     };
 
     return (
-        <button onClick={(e) => handleClick(e)} className="flex gap-[11px] bg-copernicusYellow pl-[20px] h-[34px] items-center group">
+        <button type="button" onClick={(e) => handleClick(e)} className="flex gap-[11px] bg-copernicusYellow pl-[20px] h-[34px] items-center group">
             <span className="buttonText uppercase">{text}</span>
             <div className="w-[42px] h-[34px] flex justify-center items-center group-hover:bg-black">
                 <img src="/assets/images/buttonArrowBlack.svg" alt="a" className="group-hover:opacity-0" />

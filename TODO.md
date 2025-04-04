@@ -1,7 +1,5 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-- Enter from model page gaat mis
-    Yellow Copernicus clickable, Copernicus gone.
     Email always to moderator.
     Give data credit from box description.
     Introduction to ‘top’ font.
