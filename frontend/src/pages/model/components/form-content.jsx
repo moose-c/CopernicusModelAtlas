@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
 import { ExamplePopup } from './examplePopup';
-import { ShortTextField, LongTextField, FileField, TwoField, BoxesField, KeyWordsField, BoxesExplanation } from './form-fields';
+import { ShortTextField, LongTextField, FileField, TwoField, BoxesField, KeyWordsField, DataExplanation } from './form-fields';
 
 const FormContext = createContext();
 export const useForm = () => useContext(FormContext);
@@ -255,7 +255,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     />
                     <div className="flex flex-col gap-[25px]">
                         <h3>Output boxes</h3>
-                        <BoxesExplanation examplePopups={examplePopups} togglePopup={togglePopup} />
+                        <DataExplanation boxes={true} examplePopups={examplePopups} togglePopup={togglePopup} />
                         <BoxesField nbBoxes={formData['nbBoxes']} handleChangeNbBoxes={handleChangeNbBoxes} />
                     </div>
                     <div className="flex flex-col gap-[25px]">
@@ -267,6 +267,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             {examplePopups[4] && <ExamplePopup nb={4} togglePopup={togglePopup} />}
                         </div>
                         <LongTextField field={'methodsDesc'}>Description of the model itself</LongTextField>
+                        <DataExplanation boxes={false} examplePopups={examplePopups} togglePopup={togglePopup} />
                         <FileField
                             label={'Upload methods data here'}
                             field={'methodsFile'}

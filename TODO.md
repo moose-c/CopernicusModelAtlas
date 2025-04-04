@@ -1,6 +1,5 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-- methods, staat daar ook iets van geojson bla bla
 - clicking on urls from modelcards doesn't work.
 - Enter from model page gaat mis
     Yellow Copernicus clickable, Copernicus gone.

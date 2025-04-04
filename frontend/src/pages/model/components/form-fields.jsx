@@ -143,7 +143,7 @@ export const FileField = ({ label, field, allowedFileTypes, capField, capText })
                 )}
                 {capField && (
                     <ShortTextField
-                        label={capText || 'Do you want the figure uploaded above to have a caption?' + (capField == 'explanFigCaption' ? '*' : '')}
+                        label={capText || 'Do you want the figure uploaded above to have a caption?' + (capField == 'explanFigCaption' ? ' *' : '')}
                         placeholder={'Caption'}
                         field={capField}
                     />
@@ -224,12 +224,13 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
     );
 };
 
-export const BoxesExplanation = ({ examplePopups, togglePopup }) => {
+export const DataExplanation = ({ boxes, examplePopups, togglePopup }) => {
     return (
         <>
             <p>
-                This section gathers information for the boxes showcasing model output. Output data can be shown in the following file types, please click on
-                each type to learn the exact format required for that type.
+                {boxes && 'This section gathers information for the boxes showcasing model output. '}
+                {!boxes && 'This section gathers information for showcasing inner working of the model. '}
+                Output data can be shown in the following file types, please click on each type to learn the exact format required for that type.
             </p>
             <ul className="reg relative">
                 <li key={0}>Figure (.png)</li>
