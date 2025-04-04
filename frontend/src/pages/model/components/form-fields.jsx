@@ -14,7 +14,7 @@ export const ShortTextField = ({ label, placeholder, field, maxChar }) => {
     return (
         <>
             <div>
-                <p>{label}</p>
+                <p className="">{label}</p>
                 <input
                     className="formQAs"
                     type="text"
@@ -142,7 +142,11 @@ export const FileField = ({ label, field, allowedFileTypes, capField, capText })
                     </FormGroup>
                 )}
                 {capField && (
-                    <ShortTextField label={capText || 'Do you want the figure uploaded above to have a caption?'} placeholder={'Caption'} field={capField} />
+                    <ShortTextField
+                        label={capText || 'Do you want the figure uploaded above to have a caption?' + (capField == 'explanFigCaption' ? '*' : '')}
+                        placeholder={'Caption'}
+                        field={capField}
+                    />
                 )}
             </div>
         </>

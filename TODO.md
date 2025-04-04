@@ -1,8 +1,7 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-- Caption is not written as manditory
 - methods, staat daar ook iets van geojson bla bla
-- clicking on urls from modelcards dosn't work.
+- clicking on urls from modelcards doesn't work.
 - Enter from model page gaat mis
     Yellow Copernicus clickable, Copernicus gone.
     Contact at the bottom (Charlotte)
@@ -23,8 +22,7 @@ Grote Zaken:
 
 FB jan&martijn:
 - method(s) is not manditory
-- 3 -> Results => examplory results
-- mailen naar de board.
+- 3 -> Results => examplory result.
 Charlotte:
 - Half year email to maintain (Charlotte! or automated).
 - If someone leaves add this to the onboarding procedure.
@@ -33,12 +31,6 @@ Overleggen:
 - Keywords doorheen lopen (kan ook met oreane en stefanie)!!!!
     - Laat wel zien op in de Model Cards, maximum aantal.
     - 10 gaat Oreane zoeken
-- check change access
-    - Je hebt haar ID, zeggen als gelukt.
-    - Model name not clear in receieved email.
-- Volgende week de mail eruit.
-
-
 
 WH:
 - SEO: voor elke pagina een description in de meta title, description, keywords
@@ -54,3 +46,4 @@ WH:
 - isApproved get only
 -	And/OR
 -	Buttons to the right.
+- multiple editors
