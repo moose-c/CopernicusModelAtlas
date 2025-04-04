@@ -1,6 +1,5 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-- clicking on urls from modelcards doesn't work.
 - Enter from model page gaat mis
     Yellow Copernicus clickable, Copernicus gone.
     Contact at the bottom (Charlotte)

@@ -28,7 +28,9 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name2 = model[5];
     const name3 = model[6];
     const name4 = model[7];
-    const desc = parse(DOMPurify.sanitize(model[8]).replaceAll('<p>', '<p className="text-gray-500">'));
+    const desc = parse(
+        DOMPurify.sanitize(model[8]).replaceAll('<p>', '<p className="text-gray-500">').replaceAll('<a', '<a onclick="event.stopPropagation();"')
+    );
     const icon = model[9];
     const approved = model[10];
 
