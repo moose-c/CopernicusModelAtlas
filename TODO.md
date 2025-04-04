@@ -7,6 +7,10 @@ TODO:
     Multiple moderators.
     References Bold, rest not and lilsted.
     Geojson chloropleth: Alleen zou het voor het nut ervan wel fijner zijn als het een choropleth map zou zijn, dus dat elke shape een kleur krijgt afhankelijk van een waarde. Als dat lastig is, zou je ook een kleurveld kunnen vragen in de geojson, en dat wij het dan in het preprocessen een kleur per regio geven (gewoon hex-kleur).
+    - Keywords doorheen lopen (kan ook met oreane en stefanie)!!!!
+        - Laat wel zien op in de Model Cards, maximum aantal.
+        - 10 gaat Oreane zoeken
+- write about page
 
 
 Grote Zaken:
@@ -20,11 +24,6 @@ FB jan&martijn:
 Charlotte:
 - Half year email to maintain (Charlotte! or automated).
 - If someone leaves add this to the onboarding procedure.
-
-Overleggen:
-- Keywords doorheen lopen (kan ook met oreane en stefanie)!!!!
-    - Laat wel zien op in de Model Cards, maximum aantal.
-    - 10 gaat Oreane zoeken
 
 WH:
 - SEO: voor elke pagina een description in de meta title, description, keywords

@@ -224,13 +224,13 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
 
                 <div className="flex flex-col gap-[25px]">
                     <div className="relative">
-                        <h2 id="theory">Section 2: Theory behind the model</h2>
+                        <h2 id="theory">Section 2: Background of this model</h2>
                         <p className="underline cursor-pointer select-none" onClick={() => togglePopup(2)}>
                             Show Example
                         </p>
                         {examplePopups[2] && <ExamplePopup nb={2} togglePopup={togglePopup} />}
                     </div>
-                    <LongTextField field={'theoryText'}>Enter some theory or applications of your model* </LongTextField>
+                    <LongTextField field={'theoryText'}>Enter background information of your model* </LongTextField>
                     <FileField
                         label={'Do you want to show a supporting figure for this section?'}
                         field={'theoryFig'}

@@ -230,7 +230,8 @@ export const DataExplanation = ({ boxes, examplePopups, togglePopup }) => {
             <p>
                 {boxes && 'This section gathers information for the boxes showcasing model output. '}
                 {!boxes && 'This section gathers information for showcasing inner working of the model. '}
-                Output data can be shown in the following file types, please click on each type to learn the exact format required for that type.
+                Output data can be shown in the following file types, please click on each type to learn the exact format required for that type. If you need to
+                give credits for the data, please do so in the accompanying text field.
             </p>
             <ul className="reg relative">
                 <li key={0}>Figure (.png)</li>

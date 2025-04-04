@@ -61,7 +61,7 @@ export const Background = () => {
         <>
             <div id="theory" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
-                    <h2>Theory</h2>
+                    <h2>Background</h2>
                     {parse(DOMPurify.sanitize(modelData.theoryText).replaceAll('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.theoryFig && (
