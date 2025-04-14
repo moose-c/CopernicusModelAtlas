@@ -1,7 +1,8 @@
 TODO:
-    References Bold, rest not and lilsted.
+- Notify when about fixed
+- resubmit each model to fix references
     Geojson chloropleth: Alleen zou het voor het nut ervan wel fijner zijn als het een choropleth map zou zijn, dus dat elke shape een kleur krijgt afhankelijk van een waarde. Als dat lastig is, zou je ook een kleurveld kunnen vragen in de geojson, en dat wij het dan in het preprocessen een kleur per regio geven (gewoon hex-kleur).
-- write about page
+
 
 Gaiaflux:
 - Het lukte mij niet om de hoofdfiguur op de pagina te vervangen, en het lukte me ook niet om data te plotten, hoop dat je daarbij kunt helpen. Ik ben ook benieuwd of ik deze data later makkelijk kan vervangen?
@@ -12,8 +13,8 @@ Grote Zaken:
     - max value tot helft 
 
 FB jan&martijn:
-- method(s) is not manditory
 - 3 -> Results => examplory result.
+
 Charlotte:
 - Half year email to maintain (Charlotte! or automated).
 - If someone leaves add this to the onboarding procedure.

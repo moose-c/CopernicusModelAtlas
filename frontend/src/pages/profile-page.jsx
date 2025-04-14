@@ -62,12 +62,8 @@ export const ProfilePage = () => {
                         {models && <ModelCards models={models} editAble={true} isAdmin={isAdmin} setToggle={setToggle} />}
                         {isAdmin && (
                             <div className="flex flex-col gap-2 items-center">
-                                <h2>Moderator fuctionality</h2>
                                 <div>
                                     <Button text="Add/Remove moderators" call={() => handleEditModerators()} />
-                                </div>
-                                <div>
-                                    <Button text="Change moderator email" call={() => handleEditModeratorEmail()} />
                                 </div>
                             </div>
                         )}

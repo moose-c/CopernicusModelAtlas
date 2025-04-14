@@ -7,6 +7,7 @@ import { OverviewPage } from './pages/overview-page';
 import { NotFoundPage } from './pages/not-found-page';
 
 import { ProfilePage } from './pages/profile-page';
+import { AboutPage } from './pages/about-page';
 
 import { ChangeModelPage } from './pages/model/change-model-page';
 import { ModelPage } from './pages/model/view-model-page';
@@ -36,6 +37,7 @@ export const App = () => {
     return (
         <Routes>
             <Route path="/" element={<OverviewPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/callback" element={<CallbackPage />} />
 
             <Route path="/model/:modelSlug" element={<ModelPage />} />

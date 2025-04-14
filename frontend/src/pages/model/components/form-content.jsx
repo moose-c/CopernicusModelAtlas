@@ -261,6 +261,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">
                             <h2 id="methods">Section 4: Methods behind this model</h2>
+                            <p className="italic">Not manditory</p>
                             <p className="underline cursor-pointer select-none" onClick={() => togglePopup(4)}>
                                 Show Example
                             </p>
@@ -279,12 +280,13 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">
                             <h2 id="colofon">Section 5: More Information</h2>
+                            <p className="italic">Not manditory</p>
                             <p className="underline cursor-pointer select-none" onClick={() => togglePopup(5)}>
                                 Show Example
                             </p>
                             {examplePopups[5] && <ExamplePopup nb={5} togglePopup={togglePopup} />}
                         </div>
-                        <ShortTextField label={'Do you want to add references?'} placeholder={'How to cite'} field={'colofonCite'} />
+                        <LongTextField field={'colofonCite'}>Do you want to add references?</LongTextField>
                         <ShortTextField label={'Do want to add a model licence?'} placeholder={'Enter licence'} field={'colofonLicence'} />
                         <LongTextField field={'colofonAddition'}>Do you want to include more information not mentioned elsewhere? </LongTextField>
                     </div>

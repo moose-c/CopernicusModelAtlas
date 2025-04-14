@@ -20,6 +20,11 @@ export const NavBar = () => {
                             Home
                         </Link>
                     </div>
+                    <div className="text-white font-sans text-[16px] leading-[34px]">
+                        <Link className="hover:underline" to="/about">
+                            About
+                        </Link>
+                    </div>
                 </div>
                 <div className="flex flex-row items-center gap-4 text-white">
                     {!user && (
