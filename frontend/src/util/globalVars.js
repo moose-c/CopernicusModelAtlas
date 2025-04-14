@@ -1,25 +1,39 @@
-// keywords.js
-
-// Sustainability-related keywords
 export const keywords = [
-    'Renewable Energy',
-    'Climate Change',
-    'Sustainable Development',
-    'Carbon Footprint',
-    'Green Energy',
-    'Recycling',
-    'Energy Efficiency',
-    'Eco-Friendly',
-    'Solar Power',
-    'Wind Energy',
-    'Water Conservation',
-    'Sustainable Agriculture',
-    'Circular Economy',
-    'Zero Waste',
-    'Green Building',
-    'Carbon Neutral',
-    'Sustainable Transportation',
-    'Sustainable Cities',
+    // Environmental and Natural Systems
+    "Climate Change",
+    "Energy",
+    "Renewable Energy",
+    "Air Quality",
+    "Water Resources",
+    "Land use change",
+    "Biodiversity",
+    "Ecosystems",
+    "Ecosystem services",
+    "Waste Management",
+    "Conservation",
+
+    // Agriculture and Food
+    "Agriculture",
+    "Food&Health",
+
+    // Economy and Resources
+    "Circular Economy",
+    "Supply risks",
+    "Sustainable Consumption",
+
+    // Society and Behaviour
+    "Social change",
+    "Behaviour",
+    "Well being",
+
+    // Governance and Policy
+    "Policy Analysis",
+    "Governance",
+    "Transitions",
+    "Technological change",
+
+    // Global Goals
+    "SDGs",
 ];
 
 export const blankForm = {
