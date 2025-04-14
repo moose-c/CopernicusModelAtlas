@@ -104,7 +104,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                 setInpVar2Name(worksheet.B1.v);
                 const constVar2 = [];
                 for (let i = 4; i < jsonData.length; i++) {
-                    const newVal = worksheet?.[`B${i}`]?.v;
+                    const newVal = worksheet?.[`B${i}`]?.v.replace('Â°C', '°C');
                     if (newVal && !constVar2.includes(newVal)) {
                         constVar2.push(newVal);
                     }
@@ -113,11 +113,12 @@ export const Timeseries = ({ fileBin, isBar }) => {
 
                 try {
                     const defVals = worksheet.B3.v.split('&');
-                    for (const val of defVals) {
-                        if (!constVar2.includes(val)) {
-                            throw 'incorrect default value';
+                    defVals.forEach((val, i) => {
+                        defVals[i] = val.replace('Â°C', '°C');
+                        if (!constVar2.includes(defVals[i])) {
+                            throw `incorrect default value at index ${i}: ${defVals[i]}`;
                         }
-                    }
+                    });
                     setInpVar2Val(defVals);
                 } catch {
                     console.error('Error processing default values:', err);
@@ -130,20 +131,22 @@ export const Timeseries = ({ fileBin, isBar }) => {
                 setInpVar3Name(worksheet.C1.v);
                 const constVar3 = [];
                 for (let i = 4; i < jsonData.length; i++) {
-                    const newVal = worksheet?.[`C${i}`]?.v;
+                    const newVal = worksheet?.[`C${i}`]?.v.replace('Â°C', '°C');
                     if (newVal && !constVar3.includes(newVal)) {
                         constVar3.push(newVal);
+                        console.log(newVal);
                     }
                 }
 
                 setInpVar3Options(constVar3);
                 try {
                     const defVals = worksheet.C3.v.split('&');
-                    for (const val of defVals) {
-                        if (!constVar3.includes(val)) {
-                            throw 'incorrect default value';
+                    defVals.forEach((val, i) => {
+                        defVals[i] = val.replace('Â°C', '°C');
+                        if (!constVar3.includes(defVals[i])) {
+                            throw `incorrect default value at index ${i}: ${defVals[i]}`;
                         }
-                    }
+                    });
                     setInpVar3Val(defVals);
                 } catch (err) {
                     console.error('Error processing default values:', err);
@@ -156,7 +159,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
             for (let cellNB of Object.keys(worksheet)) {
                 if (cellNB.slice(1) === '1') {
                     if (!['A', 'B', 'C'].includes(cellNB[0])) {
-                        const outVar = worksheet[cellNB].v;
+                        const outVar = worksheet[cellNB].v.replace('Â°C', '°C');
                         constOutNames.push(outVar);
                     }
                 } else {
@@ -171,7 +174,9 @@ export const Timeseries = ({ fileBin, isBar }) => {
             for (const key of filteredKeys) {
                 if (!['A3', 'B3', 'C3'].includes(key) && eval(worksheet[key].v)) {
                     const variableKey = key.slice(0, -1) + '1';
-                    startingOutputValues.push(worksheet[variableKey].v);
+                    const newVal = worksheet[variableKey].v.replace('Â°C', '°C');
+                    startingOutputValues.push(newVal);
+                    console.log('starting val', newVal);
                 }
             }
             setOutVarVal(startingOutputValues);
@@ -292,10 +297,12 @@ export const Timeseries = ({ fileBin, isBar }) => {
 
             // manually replace incorrect promile unicode with the correct one..
             yLabel = yLabel.replace(/\u0089/g, '\u2030');
+            yLabel = yLabel.replace('Â°C', '°C');
 
             for (const outVar of outVarVal) {
                 let newLabel = allDataRef.current[0][outVar];
                 newLabel = newLabel.replace(/\u0089/g, '\u2030');
+                newLabel = newLabel.replace('Â°C', '°C');
                 if (newLabel != yLabel) {
                     alert('only variables with the same unit should be in 1 plot!');
                 }

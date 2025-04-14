@@ -1,5 +1,4 @@
 TODO:
-- Temp sign is not interpreted correctly with kaj..
     Email always to moderator. (ask from api)
     Give data credit from box description.
     Introduction to ‘top’ font.
