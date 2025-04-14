@@ -6,14 +6,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 resend.api_key = os.getenv("RESEND_API_KEY")
-recipient = os.getenv("MODERATOR_EMAIL")
 
 
 def send_email(subject, html):
     return resend.Emails.send(
         {
             "from": "onboarding@resend.dev",
-            "to": recipient,
+            "to": "copernicus.model.atlas@gmail.com",
             "subject": subject,
             "html": html,
         }

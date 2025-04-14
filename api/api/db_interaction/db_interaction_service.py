@@ -323,6 +323,7 @@ def send_new_email():
         print("attempting to send email")
         subject = request.form.get("subject")
         html = request.form.get("html")
+
         email = send_email(subject, html)
         return jsonify("succesfully send the following email", email)
 

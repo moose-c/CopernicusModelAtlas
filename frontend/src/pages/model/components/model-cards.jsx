@@ -28,9 +28,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
     const name2 = model[5];
     const name3 = model[6];
     const name4 = model[7];
-    const desc = parse(
-        DOMPurify.sanitize(model[8]).replaceAll('<p>', '<p className="text-gray-500">').replaceAll('<a', '<a onclick="event.stopPropagation();"')
-    );
+    const desc = parse(DOMPurify.sanitize(model[8]).replaceAll('<p>', '<p className="top">').replaceAll('<a', '<a onclick="event.stopPropagation();"'));
     const icon = model[9];
     const approved = model[10];
 
@@ -63,13 +61,13 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                 <div className="flex flex-col justify-between">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">{modelName}</h2>
                     <h3 className="pb-2">{keywords}</h3>
-                    <h3 className="text-s font-light text-gray-600 mb-2">
+                    <p className="reg mb-2">
                         {name0 && name0}
                         {name1 && ', ' + name1}
                         {name2 && ', ' + name2}
                         {name3 && ', ' + name3}
                         {name4 && ', ' + name4}
-                    </h3>
+                    </p>
 
                     {desc}
                 </div>

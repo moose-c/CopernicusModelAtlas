@@ -8,7 +8,7 @@ export const PageFooter = () => {
                 <div className="flex flex-row gap-4">
                     <div className="text-white font-sans text-[16px] leading-[34px]">
                         <Link className="hover:underline" to="/">
-                            Overview
+                            Home
                         </Link>
                     </div>
                     <div className="text-white font-sans text-[16px] leading-[34px]">
@@ -21,8 +21,8 @@ export const PageFooter = () => {
                 {adminInfo && (
                     <div className="text-white font-sans text-[16px] leading-[34px]">
                         For questions or comments, please contact{' '}
-                        <a className="underline" href={adminInfo[1]}>
-                            {adminInfo[1]}
+                        <a className="underline" href={'copernicus.model.atlas@gmail.com'}>
+                            copernicus.model.atlas@gmail.com
                         </a>
                     </div>
                 )}
