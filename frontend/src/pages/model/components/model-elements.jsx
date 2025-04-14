@@ -82,7 +82,7 @@ export const Results = () => {
             <div id="results" className="flex flex-col gap-[30px]">
                 <div className="flex gap-[10px]">
                     <div className="w-[80%] flex flex-col gap-[10px]">
-                        <h2>Results</h2>
+                        <h2>Explanatory Results</h2>
                         {parse(DOMPurify.sanitize(modelData.resText).replaceAll('<p>', '<p class="reg">'))}
                     </div>
                     {modelData.resFig && (

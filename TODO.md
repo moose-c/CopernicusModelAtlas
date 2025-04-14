@@ -12,9 +12,6 @@ Grote Zaken:
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
     - max value tot helft 
 
-FB jan&martijn:
-- 3 -> Results => examplory result.
-
 Charlotte:
 - Half year email to maintain (Charlotte! or automated).
 - If someone leaves add this to the onboarding procedure.
