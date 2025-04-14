@@ -1,6 +1,6 @@
 TODO:
 - Temp sign is not interpreted correctly with kaj..
-    Email always to moderator.
+    Email always to moderator. (ask from api)
     Give data credit from box description.
     Introduction to ‘top’ font.
     Authors font?
@@ -11,6 +11,17 @@ TODO:
         - Laat wel zien op in de Model Cards, maximum aantal.
         - 10 gaat Oreane zoeken
 - write about page
+Hoi Moos,
+
+Ik dacht dat we nu een meeting hadden, zit nu in 8.59 van het VMA-gebouw, of doen we de meeting online?
+
+Ik ben begonnen met invoeren van gegevens voor mijn model GAIAFLUX, ik denk dat je daar een berichtje over gehad hebt omdat je die nog moet goedkeuren voordat het online komt.
+
+Het lukte mij niet om de hoofdfiguur op de pagina te vervangen, en het lukte me ook niet om data te plotten, hoop dat je daarbij kunt helpen. Ik ben ook benieuwd of ik deze data later makkelijk kan vervangen?
+
+Groeten,
+
+Gerbrand
 
 
 Grote Zaken:

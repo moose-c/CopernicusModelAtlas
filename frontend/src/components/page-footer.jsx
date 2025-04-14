@@ -18,7 +18,14 @@ export const PageFooter = () => {
                     </div>
                 </div>
 
-                {adminInfo && <div className="text-white font-sans text-[16px] leading-[34px]">For questions or comments, please contact {adminInfo[1]}</div>}
+                {adminInfo && (
+                    <div className="text-white font-sans text-[16px] leading-[34px]">
+                        For questions or comments, please contact{' '}
+                        <a className="underline" href={adminInfo[1]}>
+                            {adminInfo[1]}
+                        </a>
+                    </div>
+                )}
             </div>
         </>
     );

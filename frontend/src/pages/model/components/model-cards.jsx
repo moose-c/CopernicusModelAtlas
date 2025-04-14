@@ -74,7 +74,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     {desc}
                 </div>
 
-                {icon && <img src={`data:image/png;base64,${icon}`} className="max-w-[20%] pl-2 h-auto object-contain" />}
+                {icon && <img src={`data:image/png;base64,${icon}`} className="max-w-[20%] max-h-[250px] pl-2 object-contain" />}
                 <div className="flex flex-col gap-3">
                     {editAble &&
                         (() => {
