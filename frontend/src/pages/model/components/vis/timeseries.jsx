@@ -97,7 +97,23 @@ export const Timeseries = ({ fileBin, isBar }) => {
 
             // Convert the worksheet to JSON (array of objects)
             const jsonData = XLSX.utils.sheet_to_json(worksheet);
-            allDataRef.current = jsonData;
+            allDataRef.current = jsonData.map((row) => {
+                const updatedRow = {};
+
+                for (const key in row) {
+                    const val = row[key];
+
+                    // Replace in string values
+                    if (typeof val === 'string') {
+                        updatedRow[key] = val.replace(/Â°C/g, '°C');
+                    } else {
+                        updatedRow[key] = val;
+                    }
+                }
+
+                return updatedRow;
+            });
+
             console.log(worksheet);
 
             if (worksheet?.B1) {
