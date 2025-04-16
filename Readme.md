@@ -9,7 +9,8 @@ Ask & setup push functionality (Contact repo owner)
 
 ## Connecting to Openshift
 You need to have access to the geo-acc-modelatlas namespace, act GeoICT for this
-After this, navigate to the oc-setup folder
+After this, navigate to the oc-setup folder.
+Here, place the oc CLI in this folder (https://docs.redhat.com/en/documentation/openshift_container_platform/4.8/html/cli_tools/openshift-cli-oc#cli-about-cli_cli-developer-commands)
 
 
 
