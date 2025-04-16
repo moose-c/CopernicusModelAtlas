@@ -28,13 +28,23 @@ export const VectorMap = ({ geojson }) => {
         return L.circleMarker(latlng);
     };
 
+    const styleFeature = (feature) => {
+        let color = feature.properties?.['color'] || feature.properties?.['Color'];
+        if (!color) {
+            color = '#3388ff';
+        }
+        return {
+            color: color,
+        };
+    };
+
     return (
         <MapContainer className="w-[600px] h-[400px]" center={[51.505, -0.09]} zoom={10} scrollWheelZoom={false}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <GeoJSON data={geojson} onEachFeature={onEachFeature} pointToLayer={pointToLayer} />
+            <GeoJSON data={geojson} onEachFeature={onEachFeature} pointToLayer={pointToLayer} style={styleFeature} />
             <FitBounds geojson={geojson} />
         </MapContainer>
     );

@@ -76,6 +76,10 @@ export const GeoJsonFormatExplanation = () => {
                     <div className="max-h-[60vh] overflow-auto">
                         <p>Any valid geojson file will be displayed as an interactible map. </p>
                         <p>To allow users to click on features, information needs to be included in the "popupInformation" property.</p>
+                        <p>
+                            It is also possible to provide a color for each feature. For this, a hex color (such as "#3388ff") can be included in the "color"
+                            property.
+                        </p>
                     </div>
                 )}
 

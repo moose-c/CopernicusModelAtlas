@@ -74,7 +74,7 @@ export const OverviewPage = ({ editAble }) => {
     return (
         <PageLayout>
             <div className="content-layout flex gap-5">
-                <h1>Model atlas</h1>
+                <h1>Model Atlas</h1>
                 <div>
                     <p className="reg w-[100%]">
                         <strong>Explore the Model Atlas</strong> – a comprehensive online collection of models developed and utilized by the Copernicus

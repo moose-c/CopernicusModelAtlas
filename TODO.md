@@ -1,7 +1,5 @@
 TODO:
 - Notify when about fixed
-- resubmit each model to fix references
-    Geojson chloropleth: Alleen zou het voor het nut ervan wel fijner zijn als het een choropleth map zou zijn, dus dat elke shape een kleur krijgt afhankelijk van een waarde. Als dat lastig is, zou je ook een kleurveld kunnen vragen in de geojson, en dat wij het dan in het preprocessen een kleur per regio geven (gewoon hex-kleur).
 
 
 Gaiaflux:
@@ -31,3 +29,10 @@ WH:
 -	And/OR
 -	Buttons to the right.
 - multiple editors
+- <p>
+                            It is also possible to provide a color for each feature. This is possible in two ways:
+                            <ul>
+                                <li>A hex color (such as "#3388ff") can be included in the "color" property.</li>
+                                <li>A value can be included in the "value" property, and a color ranging from light to dark blue is automatically assigned.</li>
+                            </ul>
+                        </p>

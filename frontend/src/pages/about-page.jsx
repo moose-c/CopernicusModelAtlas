@@ -8,8 +8,11 @@ export const AboutPage = () => {
                     About the Model Atlas
                 </h1>
                 <p>
-                    The Model Atlas is a collection of models developed and used at the Copernicus Institute of Sustainable Development at Utrecht University.
-                    It showcases our modeling research, the insights these models provide, and relevant output data.
+                    <br />
+                    <span className="font-bold">
+                        The Model Atlas is a collection of models developed and used at the Copernicus Institute of Sustainable Development at Utrecht
+                        University. It showcases our modeling research, the insights these models provide, and relevant output data.
+                    </span>
                     <br />
                     <br />
                     Our goal is to make our models and their data more accessible—and to foster collaboration within and beyond academia.
