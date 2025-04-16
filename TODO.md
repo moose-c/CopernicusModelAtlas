@@ -1,7 +1,6 @@
 TODO:
 - Notify when about fixed
 
-
 Gaiaflux:
 - Het lukte mij niet om de hoofdfiguur op de pagina te vervangen, en het lukte me ook niet om data te plotten, hoop dat je daarbij kunt helpen. Ik ben ook benieuwd of ik deze data later makkelijk kan vervangen?
 
