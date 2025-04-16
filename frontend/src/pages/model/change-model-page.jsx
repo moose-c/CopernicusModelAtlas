@@ -88,7 +88,16 @@ export const ChangeModelPage = ({ edit = false }) => {
                             html: `<p>Hi Charlotte, someone edited a new model named ${formData['modelName']}, </p>`,
                         });
                         navigate('/profile');
-                        alert('Succesfully edited your model!');
+                        if (
+                            confirm(
+                                'Succesfully edited your model! Do you want to notify the moderator to review to page? Only after they have checked the page can it become visible by others.'
+                            )
+                        ) {
+                            sendEmail({
+                                subject: `Someone requests approval`,
+                                html: `<p>Hi Charlotte, the model "${formData['modelName']}" requests approval. </p>`,
+                            });
+                        }
                     } else {
                         // Attempt to create a new model
                         await postModel(formData, accessToken);
@@ -97,9 +106,16 @@ export const ChangeModelPage = ({ edit = false }) => {
                             html: `<p>Hi Charlotte, someone posted a new model named ${formData['modelName']}, </p>`,
                         });
                         navigate('/profile');
-                        alert(
-                            'Succesfully added model to the Overview! The moderator is notified and will approve this model, after which everyone can view the model. But feel free to continue editing in the meantime!'
-                        );
+                        if (
+                            confirm(
+                                'Succesfully posted your model! Do you want to notify the moderator to review to page? Only after they have checked the page can it become visible by others.'
+                            )
+                        ) {
+                            sendEmail({
+                                subject: `Someone requests approval`,
+                                html: `<p>Hi Charlotte, the model "${formData['modelName']}" requests approval. </p>`,
+                            });
+                        }
                     }
                 } catch (error) {
                     // Catch any errors and handle them

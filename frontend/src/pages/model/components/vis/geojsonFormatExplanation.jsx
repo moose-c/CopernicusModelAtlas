@@ -4,7 +4,7 @@ export const GeoJsonFormatExplanation = () => {
     const geojsonExample = {
         type: 'FeatureCollection',
         features: [
-            { type: 'Feature', geometry: { type: 'Point', coordinates: [102.0, 0.5] }, properties: { popupInformation: 'A name' } },
+            { type: 'Feature', geometry: { type: 'Point', coordinates: [102.0, 0.5] }, properties: { color: '#3388ff', popupInformation: 'A name' } },
             {
                 type: 'Feature',
                 geometry: {
@@ -18,6 +18,7 @@ export const GeoJsonFormatExplanation = () => {
                 },
                 properties: {
                     popupInformation: 'A name',
+                    color: '#3388ff',
                 },
             },
             {
@@ -36,6 +37,7 @@ export const GeoJsonFormatExplanation = () => {
                 },
                 properties: {
                     popupInformation: 'A name',
+                    color: '#3388ff',
                 },
             },
         ],

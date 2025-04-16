@@ -164,12 +164,12 @@ export const KeyWordsField = () => {
                     onKeyPressFn={function noRefCheck() {}}
                     onRemove={(e) => {
                         function noRefCheck() {}
-                        handleChange(e.target.value, 'keywords');
+                        handleChange(e, 'keywords');
                     }}
                     onSearch={function noRefCheck() {}}
                     onSelect={(e) => {
                         function noRefCheck() {}
-                        handleChange(e.target.value, 'keywords');
+                        handleChange(e, 'keywords');
                     }}
                     options={keywords}
                     selectedValues={formData['keywords']}
@@ -230,16 +230,17 @@ export const DataExplanation = ({ boxes, examplePopups, togglePopup }) => {
             <p>
                 {boxes && 'This section gathers information for the boxes showcasing model output. '}
                 {!boxes && 'This section gathers information for showcasing inner working of the model. '}
-                Output data can be shown in the following file types, please click on each type to learn the exact format required for that type. If you need to
-                give credits for the data, please do so in the accompanying text field.
+                Output data can be shown in the following file types,{' '}
+                <span className="font-bold">please click on each type to learn the exact format required for that type</span>. If you need to give credits for
+                the data, please do so in the accompanying text field.
             </p>
             <ul className="reg relative">
                 <li key={0}>Figure (.png)</li>
-                <li key={1} className="cursor-pointer hover:underline" onClick={() => togglePopup(6)}>
+                <li key={1} className="cursor-pointer underline" onClick={() => togglePopup(6)}>
                     Timeseries (.csv, .xlsx)
                 </li>
                 {examplePopups[6] && <ExamplePopup nb={6} togglePopup={togglePopup} content={<CSVFormatExplanation />} width="w-[600px]" />}
-                <li key={2} className="cursor-pointer hover:underline" onClick={() => togglePopup(7)}>
+                <li key={2} className="cursor-pointer underline" onClick={() => togglePopup(7)}>
                     Vector map (.geojson, .json)
                 </li>
                 {examplePopups[7] && <ExamplePopup nb={7} togglePopup={togglePopup} content={<GeoJsonFormatExplanation />} />}

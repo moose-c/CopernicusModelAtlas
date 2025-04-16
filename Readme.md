@@ -10,7 +10,22 @@ Ask & setup push functionality (Contact repo owner)
 ## Connecting to Openshift
 You need to have access to the geo-acc-modelatlas namespace, act GeoICT for this
 After this, navigate to the oc-setup folder.
-Here, place the oc CLI in this folder (https://docs.redhat.com/en/documentation/openshift_container_platform/4.8/html/cli_tools/openshift-cli-oc#cli-about-cli_cli-developer-commands)
+from the openshift console, click the question mark -> command line tools, download the correct CLI and place in the oc-setup foler.
+From command line tools, click 'copy login command' and execute from oc-setup. 
+Perform 2fac auth
+
+## Inspecting api
+execute 'oc logs.bat api' from oc-setup
+Now, any requests made to the api can be seen in real time
+
+## Inspecting database
+execute 'oc exec.bat pg' from oc-setup
+execute 'psql'
+You are now in the database, execute '\d models' or 'select modelname from models;'' or whatever is of interest 
+
+## pushing changes
+execute 'renew-fe.bat', 'renew-backend.bat' or 'renew-all.bat' from oc-setup
+
 
 
 

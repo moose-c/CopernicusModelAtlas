@@ -30,14 +30,14 @@ export const AboutPage = () => {
                             copernicus.model.atlas@gmail.com
                         </a>
                     </p>
-                    <figure className="w-[35%] rounded-lg">
+                    <figure className="w-[35%] rounded-lg px-2">
                         <img
                             src={`/assets/images/ac469be0 Vening_Meineszgebouw_A_UU_Gebouw_Dick_Boetekees_20231128_40Banner website.jpg`}
                             loading="lazy"
-                            alt="Vening Meineszgebouw A - Universiteit Utrecht"
+                            alt="Vening Meineszgebouw A - Utrecht University"
                             className="w-full h-full rounded-lg"
                         />
-                        <figcaption className="mt-2 caption text-center">Copernicus Institute of Sustainable Development – Universiteit Utrecht</figcaption>
+                        <figcaption className="mt-2 caption text-center">Copernicus Institute of Sustainable Development – Utrecht University</figcaption>
                     </figure>
                 </div>
             </div>

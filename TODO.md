@@ -1,25 +1,14 @@
-About:
-    a la email
-    misschien met een plaatje (via de uu database (vraag aan charlotte) of stockfoto)
-
 Documtatie e.d. op de SD schijf.
-
-maak clickable even bold! of underline
-vector map give color in example.
-
-
-
-Gaiaflux:
-- Het lukte mij niet om de hoofdfiguur op de pagina te vervangen, en het lukte me ook niet om data te plotten, hoop dat je daarbij kunt helpen. Ik ben ook benieuwd of ik deze data later makkelijk kan vervangen?
 
 Grote Zaken:
 - Strestest
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
     - max value tot helft 
 
--button to email when done.
+
 
 WH:
+- mag je pictures in de longtext?
 - SEO: voor elke pagina een description in de meta title, description, keywords
 - Sorting of models based on id & approval
 - improve connection for extended period to keep alive during file streaming
@@ -34,6 +23,7 @@ WH:
 -	And/OR
 -	Buttons to the right.
 - multiple editors
+- kun je niet de selectieknoppen in de grafieken (van bijvoorbeeld Region, Scenario, etc) UU-geel maken in plaats van blauw?
 - <p>
                             It is also possible to provide a color for each feature. This is possible in two ways:
                             <ul>
