@@ -1,0 +1,35 @@
+services:
+  pg:
+    image: bitnami/postgresql:latest
+    env_file: ../database/.env
+    volumes:
+      - ../database/scripts:/scripts
+    ports:
+      - "5433:5432"
+    command: ["sleep", "infinity"]
+
+  api:
+    image: python:3.9.2-slim-buster
+    volumes:
+      - ../api/api/:/api/
+      - ../api/api/db_interaction/:/api/db_interaction/
+      - ../api/api/auth/:/api/auth/
+      - ../api/api/send_email/:/api/send_email/
+
+      - ../api/requirements.txt:/requirements.txt
+      - ../api/gunicorn.conf.py:/gunicorn.conf.py
+      - ../api/entrypoint.sh:/entrypoint.sh
+    env_file: ../api/.env
+    ports:
+      - "8080:8080"
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80 # HTTP port
+      - 443:443 # HTTPS port
+      
+    volumes:
+      - ./certificates:/etc/nginx/certificates:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro

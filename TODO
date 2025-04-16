@@ -1,5 +1,0 @@
-Technisch:
-- Database in the cloud.
-
-API werkend: 
-- azp (party to which the token is issued) is the same, which is weird. But indeed, not worth to fix.

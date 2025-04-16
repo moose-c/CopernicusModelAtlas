@@ -1,10 +1,29 @@
-@import "theme.css";
-@import "general.css";
-@import "components/index.css";
+@import "content-layout.css";
+@import "leaflet/dist/leaflet.css";
+/* code-snippet is not being applied to tailwind components maybe? */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  p a {
+    @apply text-blue-600 underline !important;
+  }
+}
+
+.ql-editor li {
+  font-size: 18px;
+  @apply text-CopernicusText font-merr
+}
+
+@layer base {
+  ul, ol {
+    list-style: revert;
+    padding-left: 30px;
+    @apply reg;
+  }
+}
 
 @font-face {
     font-family: "Merriweather";
@@ -16,14 +35,15 @@
     src: url("/assets/fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
   }
   
-  .h1 {
+  h1, .h1 {
     font-size: 34px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 47.6px;
-    @apply text-CopernicusText font-sans
+    color: black;
+    @apply font-sans
   }
   
-  .reg {
+  p, .reg {
     font-size: 18px;
     line-height: 34px;
     @apply text-CopernicusText font-merr
@@ -42,13 +62,13 @@
     @apply text-CopernicusText font-sans
   }
   
-  .h2 {
+  h2 {
     font-size: 28px;
     line-height: 120%;
     @apply text-CopernicusText font-sans
   }
   
-  .h3 {
+  h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 120%; 
