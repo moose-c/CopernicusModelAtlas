@@ -1,5 +1,13 @@
-TODO:
-- Notify when about fixed
+About:
+    a la email
+    misschien met een plaatje (via de uu database (vraag aan charlotte) of stockfoto)
+
+Documtatie e.d. op de SD schijf.
+
+maak clickable even bold! of underline
+vector map give color in example.
+
+
 
 Gaiaflux:
 - Het lukte mij niet om de hoofdfiguur op de pagina te vervangen, en het lukte me ook niet om data te plotten, hoop dat je daarbij kunt helpen. Ik ben ook benieuwd of ik deze data later makkelijk kan vervangen?
@@ -9,9 +17,7 @@ Grote Zaken:
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
     - max value tot helft 
 
-Charlotte:
-- Half year email to maintain (Charlotte! or automated).
-- If someone leaves add this to the onboarding procedure.
+-button to email when done.
 
 WH:
 - SEO: voor elke pagina een description in de meta title, description, keywords
