@@ -5,3 +5,11 @@ https://github.com/auth0-developer-hub/api_flask_python_hello-world.git, checkou
 https://developer.auth0.com/resources/code-samples/api/flask/basic-role-based-access-control
 
 start with `flask run`
+docker build -t api .
+docker run --env-file=.env --name api_container api
+
+curl http://127.0.0.1:4000/api/messages/public
+curl https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/protected
+curl -I https://api-geo-acc-modelatlas.apps.cl01.cp.its.uu.nl/api/messages/public
+
+check if chngd

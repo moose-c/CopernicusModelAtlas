@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: copernicus-model-atlas-ingress
+  namespace: geo-acc-modelatlas
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt  # Use Sectigo or letsencrypt
+spec:
+  ingressClassName: openshift-default
+  rules:
+    - host: www.copernicus-model-atlas.uu.nl  # Replace with your hostname
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fe  # The service this ingress should forward traffic to
+                port:
+                  number: 8080  # The service port to which traffic will be routed
+  tls:
+    - hosts:
+        - www.copernicus-model-atlas.uu.nl  # Same as the host in your rules
+      secretName: copernicus-tls-secret  # This will be the secret where the certificate is stored

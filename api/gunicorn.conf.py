@@ -1,15 +1,13 @@
 import os
 import gunicorn.http.wsgi
 from functools import wraps
-from common.utils import safe_get_env_var
 
 
 # WSGI application
 wsgi_app = "api.wsgi:app"
 
 # Server binding
-PORT = safe_get_env_var("PORT")  # Default to 8080 if PORT is not set
-bind = f"0.0.0.0:{PORT}"
+bind = f"0.0.0.0:8080"
 
 
 # Security: Remove 'Server' header from responses

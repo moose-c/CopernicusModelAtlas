@@ -1,32 +1,27 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { userManager } from "../util/authConfig";
+import { AuthContext } from "..";
 
-import { NavBar } from "../components/navigation/nav-bar";
 import { PageLayout } from "../components/page-layout";
 
 export const CallbackPage = () => {
-  const { error } = useAuth0();
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  if (error) {
-    return (
-      <PageLayout>
-        <div className="content-layout">
-          <h1 id="page-title" className="content__title">
-            Error
-          </h1>
-          <div className="content__body">
-            <p id="page-description">
-              <span>{error.message}</span>
-            </p>
-          </div>
-        </div>
-      </PageLayout>
-    );
-  }
+  useEffect(() => {
+    // Handle the authentication response
+    userManager.signinRedirectCallback().then(() => {
+      userManager.getUser().then((loggedInUser) => {
+        setUser(loggedInUser);
+      });
+      navigate("/profile"); // Redirect to the protected page
+    });
+  }, [navigate]);
 
   return (
-    <div className="page-layout">
-      <NavBar />
-      <div className="page-layout__content" />
-    </div>
+    <PageLayout>
+      <p>Logging in...</p>
+    </PageLayout>
   );
 };

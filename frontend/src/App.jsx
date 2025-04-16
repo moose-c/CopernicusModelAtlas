@@ -1,47 +1,53 @@
-import { useAuth0 } from "@auth0/auth0-react";
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { AuthContext } from '.';
+import { useContext, useEffect } from 'react';
 
-import { Route, Routes } from "react-router-dom";
-import { PageLoader } from "./components/page-loader";
-import { AuthenticationGuard } from "./components/authentication-guard";
-import { AdminPage } from "./pages/admin-page";
-import { CallbackPage } from "./pages/callback-page";
-import { HomePage } from "./pages/home-page";
-import { NotFoundPage } from "./pages/not-found-page";
-import { ProfilePage } from "./pages/profile-page";
-import { ProtectedPage } from "./pages/protected-page";
-import { PublicPage } from "./pages/public-page";
-import { AddModelPage } from "./pages/add-model-page";
+import { CallbackPage } from './pages/callback-page';
+import { OverviewPage } from './pages/overview-page';
+import { NotFoundPage } from './pages/not-found-page';
+
+import { ProfilePage } from './pages/profile-page';
+import { AboutPage } from './pages/about-page';
+
+import { ChangeModelPage } from './pages/model/change-model-page';
+import { ModelPage } from './pages/model/view-model-page';
+import { getAdminInfo } from './services/db.service';
+
+const ProtectedRoute = ({ element }) => {
+    const { user } = useContext(AuthContext);
+
+    if (!user) {
+        return <Navigate to="/" />;
+    }
+
+    return element;
+};
+
+export var adminInfo;
 
 export const App = () => {
-  const { isLoading } = useAuth0();
+    useEffect(() => {
+        const obtainAdminInfo = async () => {
+            const intermValue = await getAdminInfo();
+            adminInfo = intermValue['data'][0];
+        };
+        obtainAdminInfo();
+    }, []);
 
-  if (isLoading) {
     return (
-      <div className="page-layout">
-        <PageLoader />
-      </div>
-    );
-  }
+        <Routes>
+            <Route path="/" element={<OverviewPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/callback" element={<CallbackPage />} />
 
-  return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/add-model" element={<AddModelPage />} />
-      <Route
-        path="/profile"
-        element={<AuthenticationGuard component={ProfilePage} />}
-      />
-      <Route path="/public" element={<PublicPage />} />
-      <Route
-        path="/protected"
-        element={<AuthenticationGuard component={ProtectedPage} />}
-      />
-      <Route
-        path="/admin"
-        element={<AuthenticationGuard component={AdminPage} />}
-      />
-      <Route path="/callback" element={<CallbackPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-    </Routes>
-  );
+            <Route path="/model/:modelSlug" element={<ModelPage />} />
+
+            <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
+            <Route path="/model/edit/:modelSlug" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
+            <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
+
+            <Route path="/callback" element={<CallbackPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+    );
 };

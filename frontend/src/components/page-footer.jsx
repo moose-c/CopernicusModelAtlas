@@ -1,7 +1,30 @@
+import { Link } from 'react-router-dom';
+import { adminInfo } from '../App';
+
 export const PageFooter = () => {
-  return (
-    <>
-      <p className="h2">enter footer information</p>
-    </>
-  );
+    return (
+        <>
+            <div id="footer" className="bg-black w-full h-[56px] flex gap-4 justify-between flex-row px-[27px] py-[11px] z-50">
+                <div className="flex flex-row gap-4">
+                    <div className="text-white font-sans text-[16px] leading-[34px]">
+                        <Link className="hover:underline" to="/">
+                            Home
+                        </Link>
+                    </div>
+                    <div className="text-white font-sans text-[16px] leading-[34px]">
+                        <Link className="hover:underline" to="/about">
+                            About
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="text-white font-sans text-[16px] leading-[34px]">
+                    For questions or comments, please contact{' '}
+                    <a className="underline" href={'copernicus.model.atlas@gmail.com'}>
+                        copernicus.model.atlas@gmail.com
+                    </a>
+                </div>
+            </div>
+        </>
+    );
 };
