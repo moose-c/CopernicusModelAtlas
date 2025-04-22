@@ -1,13 +1,11 @@
-Documtatie e.d. op de SD schijf.
-
 TODO:
-Notify charlotte for the screens
 Instruct for shared mailbox.
-Setup this email for contact etc.
 Making changes to logged in functionality requires login with auth0 credentials.
 
+Questions:
 Tot wanneer blijft mijn solis id actief? Durfte Stefan me niet te vertellen.
-
+Documtatie e.d. op de SD schijf?
+Notify charlotte for the screens
 
 Grote Zaken:
 - Strestest
