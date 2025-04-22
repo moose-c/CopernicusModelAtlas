@@ -16,13 +16,11 @@ Grote Zaken:
     - max value tot helft 
 
 WH:
-- SEO: voor elke pagina een description in de meta title, description, keywords
 - Sorting of models based on id & approval
 
 
 - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen.
 - als precies 1 deze variabele niet weergeven.
-- SEO: voor elke pagina een description in de meta title, description, keywords
 - Text homepage grey
 - Order on homepage
 - isApproved get only
