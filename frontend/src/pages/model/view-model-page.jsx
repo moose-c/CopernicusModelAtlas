@@ -67,37 +67,36 @@ Send this information to the moderator at: "${modEmail}"`
     };
     return (
         <>
-            {modelData['isApproved'] ||
-                (user && (
-                    <>
-                        <Helmet>
-                            <title>{modelData.modelName || 'Model Page'}</title>
-                            <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
-                            <meta name="keywords" content={modelData.keywords || ''} />
-                        </Helmet>
-                        <ModelContext.Provider value={{ modelData }}>
-                            <PageLayout sideBarContent={<SideBarModelContent />}>
-                                <div className="content-layout flex gap-5 pb-[20px]">
-                                    <Introduction />
-                                    <Background />
-                                    <Results />
-                                    {modelData['methodsDesc'] && <Methods />}
-                                    <MoreInformation />
-                                    {user && (
-                                        <div>
-                                            <Button
-                                                text="Request page edit rights"
-                                                call={() => {
-                                                    handleRequestEditRights();
-                                                }}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            </PageLayout>
-                        </ModelContext.Provider>
-                    </>
-                ))}
+            {(modelData['isApproved'] || user) && (
+                <>
+                    <Helmet>
+                        <title>{modelData.modelName || 'Model Page'}</title>
+                        <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
+                        <meta name="keywords" content={modelData.keywords || ''} />
+                    </Helmet>
+                    <ModelContext.Provider value={{ modelData }}>
+                        <PageLayout sideBarContent={<SideBarModelContent />}>
+                            <div className="content-layout flex gap-5 pb-[20px]">
+                                <Introduction />
+                                <Background />
+                                <Results />
+                                {modelData['methodsDesc'] && <Methods />}
+                                <MoreInformation />
+                                {user && (
+                                    <div>
+                                        <Button
+                                            text="Request page edit rights"
+                                            call={() => {
+                                                handleRequestEditRights();
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </PageLayout>
+                    </ModelContext.Provider>
+                </>
+            )}
         </>
     );
 };
