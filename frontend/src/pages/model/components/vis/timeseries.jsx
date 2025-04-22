@@ -58,6 +58,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                 type: 'time',
                 time: {
                     tooltipFormat: 'yyyy-MM-dd',
+                    parsing: false,
                 },
                 title: {
                     display: true,
@@ -221,9 +222,9 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                         .map((item) => {
                                             let date;
                                             try {
-                                                date = getDate(item.time);
+                                                date = getDate(item.time ?? item.Time);
                                             } catch (error) {
-                                                console.log('decoding dates failed', item.time);
+                                                console.log('decoding dates failed', item);
                                             }
                                             return {
                                                 x: date,
@@ -244,9 +245,9 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                     .map((item) => {
                                         let date;
                                         try {
-                                            date = getDate(item.time);
+                                            date = getDate(item.time ?? item.Time);
                                         } catch (error) {
-                                            console.log('decoding dates failed', item.time);
+                                            console.log('decoding dates failed', item);
                                         }
                                         return {
                                             x: date,
@@ -269,7 +270,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                 .map((item) => {
                                     let date;
                                     try {
-                                        date = getDate(item.time);
+                                        date = getDate(item.time ?? item.Time);
                                     } catch (error) {
                                         console.log('decoding dates failed', item.time);
                                     }
@@ -290,9 +291,9 @@ export const Timeseries = ({ fileBin, isBar }) => {
                         data: allDataRef.current.map((item) => {
                             let date;
                             try {
-                                date = getDate(item.time);
+                                date = getDate(item.time ?? item.Time);
                             } catch (error) {
-                                console.log('decoding dates failed', item.time);
+                                console.log('decoding dates failed', item);
                             }
                             return {
                                 x: date,
@@ -435,8 +436,15 @@ export const Timeseries = ({ fileBin, isBar }) => {
 };
 
 function getDate(date) {
-    if (typeof date == 'number' && date.toString().length != 4) {
+    console.log(date);
+    if (typeof date == 'number' && date > 10000) {
+        console.log('hi from excel');
         return getJsDateFromExcel(date);
+    }
+    if (date.toString().startsWith('-')) {
+        const JSDate = new Date(date, 1, 1);
+        console.log('hi from bc', JSDate);
+        return JSDate;
     } else {
         return Date.parse(date);
     }
