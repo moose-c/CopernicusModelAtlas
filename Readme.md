@@ -1,18 +1,20 @@
-# Start application
-
 # Fix issues
 ## Write new code
 Pull this repository
-Request 4 .env files: for the api, database, frontend & oc-setup/secrets folder
+Request 4 .env files from me (mooscastelijn@gmail.com): for the api, database, frontend & oc-setup/secrets folder
 Website can be run locally by executing start-frontend.bat
 Ask & setup push functionality (Contact repo owner)
 
 ## Connecting to Openshift
+https://docs.cp.its.uu.nl/content/basics/login/#option-2-socks5-proxy
+I only got option 2, Socks 5 proxy to work.
+ssh -D localhost:6443 -N steppingstone
 You need to have access to the geo-acc-modelatlas namespace, act GeoICT for this
 After this, navigate to the oc-setup folder.
 from the openshift console, click the question mark -> command line tools, download the correct CLI and place in the oc-setup foler.
 From command line tools, click 'copy login command' and execute from oc-setup. 
 Perform 2fac auth
+
 
 ## Inspecting api
 execute 'oc logs.bat api' from oc-setup

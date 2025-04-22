@@ -1,6 +1,7 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { AuthContext } from '.';
 import { useContext, useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { CallbackPage } from './pages/callback-page';
 import { OverviewPage } from './pages/overview-page';
@@ -35,19 +36,21 @@ export const App = () => {
     }, []);
 
     return (
-        <Routes>
-            <Route path="/" element={<OverviewPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/callback" element={<CallbackPage />} />
+        <HelmetProvider>
+            <Routes>
+                <Route path="/" element={<OverviewPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/callback" element={<CallbackPage />} />
 
-            <Route path="/model/:modelSlug" element={<ModelPage />} />
+                <Route path="/model/:modelSlug" element={<ModelPage />} />
 
-            <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
-            <Route path="/model/edit/:modelSlug" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
-            <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
+                <Route path="/model/add" element={<ProtectedRoute element={<ChangeModelPage />} />} />
+                <Route path="/model/edit/:modelSlug" element={<ProtectedRoute element={<ChangeModelPage edit={true} />} />} />
+                <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
 
-            <Route path="/callback" element={<CallbackPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+                <Route path="/callback" element={<CallbackPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </HelmetProvider>
     );
 };

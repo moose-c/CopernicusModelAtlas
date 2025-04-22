@@ -9,6 +9,8 @@ import { SideBarModelContent } from '../../components/side-bar';
 import { Button } from '../../components/button';
 import { AuthContext } from '../..';
 import { sendEmail } from '../../services/db.service';
+import { Helmet } from 'react-helmet-async';
+
 const modEmail = import.meta.env.VITE_APP_MODERATOR_EMAIL;
 
 const ModelContext = createContext();
@@ -65,6 +67,11 @@ Send this information to the moderator at: "${modEmail}"`
     };
     return (
         <>
+            <Helmet>
+                <title>{modelData.modelName || 'Model Page'}</title>
+                <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
+                <meta name="keywords" content={modelData.keywords || ''} />
+            </Helmet>
             <ModelContext.Provider value={{ modelData }}>
                 <PageLayout sideBarContent={<SideBarModelContent />}>
                     <div className="content-layout flex gap-5 pb-[20px]">
