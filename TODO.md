@@ -1,8 +1,13 @@
 Documtatie e.d. op de SD schijf.
 
 TODO:
-Why doesn´t Kees's excel work?
 Notify charlotte for the screens
+Instruct for shared mailbox.
+Setup this email for contact etc.
+Making changes to logged in functionality requires login with auth0 credentials.
+
+Tot wanneer blijft mijn solis id actief? Durfte Stefan me niet te vertellen.
+
 
 Grote Zaken:
 - Strestest
@@ -43,3 +48,5 @@ WH:
                                 <li>A value can be included in the "value" property, and a color ranging from light to dark blue is automatically assigned.</li>
                             </ul>
                         </p>
+
+- Navigation wise, if more models are to be added later it might be good to somehow group them on functionality/focus area (e.g. groups based on the keywords) instead of having one long list. However, with the amount of models in the atlas now, this set-up seems good to me.

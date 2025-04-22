@@ -20,8 +20,8 @@ export const PageFooter = () => {
 
                 <div className="text-white font-sans text-[16px] leading-[34px]">
                     For questions or comments, please contact{' '}
-                    <a className="underline" href={'copernicus.model.atlas@gmail.com'}>
-                        copernicus.model.atlas@gmail.com
+                    <a className="underline" href={'copernicus-model-atlas@uu.nl'}>
+                        copernicus-model-atlas@uu.nl
                     </a>
                 </div>
             </div>

@@ -26,8 +26,8 @@ export const AboutPage = () => {
                         <br />
                         <br />
                         For more information, contact us at{' '}
-                        <a className="underline" href={'copernicus.model.atlas@gmail.com'}>
-                            copernicus.model.atlas@gmail.com
+                        <a className="underline" href={'copernicus-model-atlas@uu.nl'}>
+                            copernicus-model-atlas@uu.nl
                         </a>
                     </p>
                     <figure className="w-[35%] rounded-lg px-2">

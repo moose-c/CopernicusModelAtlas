@@ -12,7 +12,7 @@ def send_email(subject, html):
     return resend.Emails.send(
         {
             "from": "onboarding@resend.dev",
-            "to": "copernicus.model.atlas@gmail.com",
+            "to": "copernicus-model-atlas@uu.nl",
             "subject": subject,
             "html": html,
         }
