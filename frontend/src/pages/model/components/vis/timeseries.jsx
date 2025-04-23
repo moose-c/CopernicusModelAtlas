@@ -400,6 +400,13 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                     selectedValues={inpVar2Val}
                                     placeholder={`Select ${inpVar2Name}`}
                                     className="dd list-decimal"
+                                    closeIcon="cancel"
+                                    style={{
+                                        chips: {
+                                            backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                            color: '#333',
+                                        },
+                                    }}
                                 />
                             )}
                             {inpVar3Name && (
@@ -411,6 +418,13 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                     selectedValues={inpVar3Val}
                                     placeholder={`Select ${inpVar3Name}`}
                                     className="dd "
+                                    closeIcon="cancel"
+                                    style={{
+                                        chips: {
+                                            backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                            color: '#333',
+                                        },
+                                    }}
                                 />
                             )}
                         </div>
@@ -423,6 +437,13 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                 selectedValues={outVarVal}
                                 placeholder={`Select output variables`}
                                 className="dd "
+                                closeIcon="cancel"
+                                style={{
+                                    chips: {
+                                        backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                        color: '#333',
+                                    },
+                                }}
                             />
                             <div className="cursor-pointer p-0" onClick={handleDownloadCsv}>
                                 <IconWithTooltip Icon={DownloadIcon} text="Download file" placement="top" />

@@ -99,6 +99,13 @@ export const OverviewPage = ({ editAble }) => {
                         selectedValues={userSelectedKeywords}
                         placeholder="Select Keywords"
                         className="dd w-fit"
+                        closeIcon="cancel"
+                        style={{
+                            chips: {
+                                backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                color: '#333',
+                            },
+                        }}
                     />
                     {models && <ModelCards models={models} editAble={editAble} />}
                     {errorMessage && <div> {errorMessage}</div>}

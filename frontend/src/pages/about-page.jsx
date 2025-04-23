@@ -41,7 +41,7 @@ export const AboutPage = () => {
                                 src={`/assets/images/ac469be0 Vening_Meineszgebouw_A_UU_Gebouw_Dick_Boetekees_20231128_40Banner website.jpg`}
                                 loading="lazy"
                                 alt="Vening Meineszgebouw A - Utrecht University"
-                                className="w-full h-full rounded-lg"
+                                className="w-full rounded-lg"
                             />
                             <figcaption className="mt-2 caption text-center">Copernicus Institute of Sustainable Development – Utrecht University</figcaption>
                         </figure>

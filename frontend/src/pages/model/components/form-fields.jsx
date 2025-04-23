@@ -175,6 +175,13 @@ export const KeyWordsField = () => {
                     selectedValues={formData['keywords']}
                     placeholder="Select Keywords"
                     className="formQAs bg-white m-0 p-0 border-0"
+                    closeIcon="cancel"
+                    style={{
+                        chips: {
+                            backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                            color: '#333',
+                        },
+                    }}
                 />
             </div>
         </>
