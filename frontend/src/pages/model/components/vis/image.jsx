@@ -10,7 +10,7 @@ export const ClickableFigure = ({ fileBin }) => {
         <>
             <img
                 src={`data:image/png;base64,${fileBin}`}
-                className="max-w-[700px] max-h-[400px] cursor-pointer" // Maximum width and height
+                className="max-w-[25%] max-h-[30%] cursor-pointer" // Maximum width and height
                 onClick={handleOpen}
             />
             <Modal open={open} onClose={handleClose} className="w-full h-full flex justify-center items-center">

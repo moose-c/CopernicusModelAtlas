@@ -78,7 +78,7 @@ Send this information to the moderator at: "${modEmail}"`
                     </Helmet>
                     <ModelContext.Provider value={{ modelData }}>
                         <PageLayout sideBarContent={<SideBarModelContent />}>
-                            <div className="content-layout flex gap-5 pb-[20px]">
+                            <div className="content-layout gap-5 pb-[20px]">
                                 <Introduction />
                                 <Background />
                                 <Results />

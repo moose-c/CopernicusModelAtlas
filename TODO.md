@@ -1,8 +1,11 @@
 TODO:
 Fully try the flow for someone who wants to make changes with another machine. 
+- multiple editors
+- pages on upload order.
+
 - Smaller beeldscherm/telefoon dan worden (Should have, maar later)
     - max value tot helft 
-- multiple editors
+
 
 Oreane todo:
 hoelang solis id
@@ -12,10 +15,10 @@ Final email:
 - Notify model owners that keywords was not setup correctly.
     - Stuur mail: bedankt voor invullen! Ik ben nu klaar, verdere vragen naar: ..., Laatste punt over keywords. Deadline van wanneer af zijn: [volgende week besluiten]. Realiseer je wel dat hij live is. Ook de laatste aanpassingen (zoals multiple editors) sturen.
 
-SH:
+LH:
+- Formatting of text in longtext is also coppied.
 - Navigation wise, if more models are to be added later it might be good to somehow group them on functionality/focus area (e.g. groups based on the keywords) instead of having one long list. However, with the amount of models in the atlas now, this set-up seems good to me.
 - als precies 1 deze variabele niet weergeven in naam van plot.
-- Sorting of models based on id & approval
 - specify number of input variables
 - List of papers might be huge
 -	And/OR

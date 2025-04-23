@@ -10,14 +10,14 @@ export const Introduction = () => {
     return (
         <>
             <div id="introduction" className="flex flex-col gap-[20px]">
-                <div className="flex gap-[10px] pr-[30px]">
-                    <div className="flex flex-col gap-[10px] w-full ">
+                <div className="flex justify-between pr-[30px]">
+                    <div className="flex flex-col gap-[10px] max-w-[79%] ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
                         {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replaceAll('<p>', '<p class="top">'))}
                         {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
                     </div>
-                    <div className="w-[270px] flex flex-col gap-[5px] items-center">
+                    <div className="max-w-[19%] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" />
                         <h3>Contact Person(s)</h3>
                         {[...Array(modelData.nbModellers)].map((_, i) => {

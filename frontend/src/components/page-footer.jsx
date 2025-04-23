@@ -4,7 +4,7 @@ import { adminInfo } from '../App';
 export const PageFooter = () => {
     return (
         <>
-            <div id="footer" className="bg-black w-full h-[56px] flex gap-4 justify-between flex-row px-[27px] py-[11px] z-50">
+            <div id="footer" className="bg-black w-full flex gap-4 justify-between flex-row px-[27px] py-[11px] z-50">
                 <div className="flex flex-row gap-4">
                     <div className="text-white font-sans text-[16px] leading-[34px]">
                         <Link className="hover:underline" to="/">
