@@ -72,31 +72,40 @@ export const OverviewPage = ({ editAble }) => {
     }, [searchText]);
 
     return (
-        <PageLayout>
-            <div className="content-layout flex gap-5">
-                <h1>Model Atlas</h1>
-                <div>
-                    <p className="reg w-[100%]">
-                        <strong>Explore the Model Atlas</strong> – a comprehensive online collection of models developed and utilized by the Copernicus
-                        Institute of Sustainable Development. Each model has a dedicated page detailing its purpose, underlying theory, and real-world
-                        applications. Many model pages also offer interactive features, allowing you to view and download output data. Browse through the Atlas
-                        to explore the diverse modeling efforts within our institute and the available datasets!
-                    </p>
-                </div>
+        <>
+            <Helmet>
+                <title>
+                    {`${modelData.modelName} Copernicus Model Atlas UU Utrecht University` || 'Model Page Copernicus Model Atlas UU Utrecht University'}
+                </title>
+                <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
+                <meta name="keywords" content={modelData.keywords || ''} />
+            </Helmet>
+            <PageLayout>
+                <div className="content-layout flex gap-5">
+                    <h1>Model Atlas</h1>
+                    <div>
+                        <p className="reg w-[100%]">
+                            <strong>Explore the Model Atlas</strong> – a comprehensive online collection of models developed and utilized by the Copernicus
+                            Institute of Sustainable Development. Each model has a dedicated page detailing its purpose, underlying theory, and real-world
+                            applications. Many model pages also offer interactive features, allowing you to view and download output data. Browse through the
+                            Atlas to explore the diverse modeling efforts within our institute and the available datasets!
+                        </p>
+                    </div>
 
-                <Searchbar searchText={searchText} setSearchText={setSearchText} />
-                <Multiselect
-                    isObject={false}
-                    onRemove={(e) => setUserSelectedKeywords(e)}
-                    onSelect={(e) => setUserSelectedKeywords(e)}
-                    options={keywords}
-                    selectedValues={userSelectedKeywords}
-                    placeholder="Select Keywords"
-                    className="dd w-fit"
-                />
-                {models && <ModelCards models={models} editAble={editAble} />}
-                {errorMessage && <div> {errorMessage}</div>}
-            </div>
-        </PageLayout>
+                    <Searchbar searchText={searchText} setSearchText={setSearchText} />
+                    <Multiselect
+                        isObject={false}
+                        onRemove={(e) => setUserSelectedKeywords(e)}
+                        onSelect={(e) => setUserSelectedKeywords(e)}
+                        options={keywords}
+                        selectedValues={userSelectedKeywords}
+                        placeholder="Select Keywords"
+                        className="dd w-fit"
+                    />
+                    {models && <ModelCards models={models} editAble={editAble} />}
+                    {errorMessage && <div> {errorMessage}</div>}
+                </div>
+            </PageLayout>
+        </>
     );
 };
