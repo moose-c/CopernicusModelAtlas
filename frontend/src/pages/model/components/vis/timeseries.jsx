@@ -45,6 +45,7 @@ export const Timeseries = ({ fileBin, isBar }) => {
 
     const [plotOptions, setPlotOptions] = useState({
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'top',
@@ -387,10 +388,13 @@ export const Timeseries = ({ fileBin, isBar }) => {
         <>
             {decodedFile && (
                 <>
-                    {!isBar && <Line options={plotOptions} data={decodedFile} />}
-                    {isBar && <Bar options={plotOptions} data={decodedFile} />}
+                    <div className="min-h-[200px]">
+                        {!isBar && <Line options={plotOptions} data={decodedFile} />}
+                        {isBar && <Bar options={plotOptions} data={decodedFile} />}
+                    </div>
+
                     <div className="flex flex-col gap-2">
-                        <div className="flex gap-5">
+                        <div className="hidden md:flex gap-5">
                             {inpVar2Name && (
                                 <Multiselect
                                     isObject={false}
@@ -428,6 +432,46 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                 />
                             )}
                         </div>
+                        <div className="md:hidden flex gap-5">
+                            {inpVar2Name && (
+                                <Multiselect
+                                    isObject={false}
+                                    onRemove={(e) => setInpVar2Val(e)}
+                                    onSelect={(e) => setInpVar2Val(e)}
+                                    options={inpVar2Options}
+                                    selectedValues={inpVar2Val}
+                                    placeholder={`Select ${inpVar2Name}`}
+                                    className="dd list-decimal"
+                                    closeIcon="cancel"
+                                    style={{
+                                        chips: {
+                                            backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                            color: '#333',
+                                        },
+                                    }}
+                                />
+                            )}
+                        </div>
+                        <div className="md:hidden flex gap-5">
+                            {inpVar3Name && (
+                                <Multiselect
+                                    isObject={false}
+                                    onRemove={(e) => setInpVar3Val(e)}
+                                    onSelect={(e) => setInpVar3Val(e)}
+                                    options={inpVar3Options}
+                                    selectedValues={inpVar3Val}
+                                    placeholder={`Select ${inpVar3Name}`}
+                                    className="dd "
+                                    closeIcon="cancel"
+                                    style={{
+                                        chips: {
+                                            backgroundColor: 'rgb(255 205 0 / var(--tw-bg-opacity, 1))',
+                                            color: '#333',
+                                        },
+                                    }}
+                                />
+                            )}
+                        </div>
                         <div className="flex items-center justify-between pr-4">
                             <Multiselect
                                 isObject={false}
@@ -445,9 +489,12 @@ export const Timeseries = ({ fileBin, isBar }) => {
                                     },
                                 }}
                             />
-                            <div className="cursor-pointer p-0" onClick={handleDownloadCsv}>
+                            <div className="hidden md:block cursor-pointer p-0" onClick={handleDownloadCsv}>
                                 <IconWithTooltip Icon={DownloadIcon} text="Download file" placement="top" />
                             </div>
+                        </div>
+                        <div className="md:hidden block cursor-pointer p-0" onClick={handleDownloadCsv}>
+                            <IconWithTooltip Icon={DownloadIcon} text="Download file" placement="top" />
                         </div>
                     </div>
                 </>

@@ -3,9 +3,6 @@ Fully try the flow for someone who wants to make changes with another machine.
 - multiple editors
 - pages on upload order.
 
-- Smaller beeldscherm/telefoon dan worden (Should have, maar later)
-    - max value tot helft 
-
 
 Oreane todo:
 hoelang solis id

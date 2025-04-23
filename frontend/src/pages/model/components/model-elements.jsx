@@ -10,7 +10,7 @@ export const Introduction = () => {
     return (
         <>
             <div id="introduction" className="flex flex-col gap-[20px]">
-                <div className="flex justify-between pr-[30px]">
+                <div className="flex justify-between">
                     <div className="flex flex-col gap-[10px] max-w-[79%] ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
@@ -18,7 +18,7 @@ export const Introduction = () => {
                         {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
                     </div>
                     <div className="max-w-[19%] flex flex-col gap-[5px] items-center">
-                        <img src={`data:image/png;base64,${modelData.icon}`} alt="Model Icon" />
+                        <img src={`data:image/png;base64,${modelData.icon}`} alt="" />
                         <h3>Contact Person(s)</h3>
                         {[...Array(modelData.nbModellers)].map((_, i) => {
                             const nameKey = `modellerName${i}`;
@@ -40,14 +40,17 @@ export const Introduction = () => {
                 </div>
                 <div className="items-center flex flex-col gap-[10px]">
                     <ClickableFigure fileBin={modelData.explanFig} />
-                    {/* <img src={`data:image/png;base64,${modelData.explanFig}`} alt="Model Icon" className="w-full max-w-[400px] h-auto object-contain" /> */}
                     <p className="caption">{modelData.explanFigCaption}</p>
                 </div>
-                <div className="flex gap-[80px] justify-center">
+                <div className="flex flex-col gap-[20px] justify-center items-center">
                     {[...Array(modelData.nbLinks)].map(
                         (_, i) =>
                             modelData[`linkName${i}`] &&
-                            modelData[`linkUrl${i}`] && <Button key={i} text={modelData[`linkName${i}`]} to={modelData[`linkUrl${i}`]} />
+                            modelData[`linkUrl${i}`] && (
+                                <div>
+                                    <Button key={i} text={modelData[`linkName${i}`]} to={modelData[`linkUrl${i}`]} />
+                                </div>
+                            )
                     )}
                 </div>
             </div>
@@ -63,9 +66,15 @@ export const Background = () => {
                 <div className="w-[80%] flex flex-col gap-[10px]">
                     <h2>Background</h2>
                     {parse(DOMPurify.sanitize(modelData.theoryText).replaceAll('<p>', '<p class="reg">'))}
+                    {modelData.theoryFig && (
+                        <div className="md:hidden flex items-center flex-col gap-[10px]">
+                            <ClickableFigure fileBin={modelData.theoryFig} />
+                            <p className="caption">{modelData.theoryFigDesc}</p>
+                        </div>
+                    )}
                 </div>
                 {modelData.theoryFig && (
-                    <div className="items-center flex flex-col gap-[10px]">
+                    <div className="hidden md:flex items-center flex-col gap-[10px]">
                         <ClickableFigure fileBin={modelData.theoryFig} />
                         <p className="caption">{modelData.theoryFigDesc}</p>
                     </div>
@@ -84,9 +93,16 @@ export const Results = () => {
                     <div className="w-[80%] flex flex-col gap-[10px]">
                         <h2>Explanatory Results</h2>
                         {parse(DOMPurify.sanitize(modelData.resText).replaceAll('<p>', '<p class="reg">'))}
+                        {modelData.resFig && (
+                            <div className="md:hidden items-center flex flex-col gap-[10px]">
+                                <ClickableFigure fileBin={modelData.resFig} />
+
+                                <p className="caption">{modelData.resFigDesc}</p>
+                            </div>
+                        )}
                     </div>
                     {modelData.resFig && (
-                        <div className="items-center flex flex-col gap-[10px]">
+                        <div className="hidden items-center md:flex flex-col gap-[10px]">
                             <ClickableFigure fileBin={modelData.resFig} />
 
                             <p className="caption">{modelData.resFigDesc}</p>
@@ -98,7 +114,7 @@ export const Results = () => {
                         if (i % 2 == 0) {
                             return (
                                 <div key={i} className="border-2 border-copernicusGrey">
-                                    <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
+                                    <div className="w-full bg-copernicusGrey px-[30px] py-[10px]">
                                         <p className="ddHeading">{modelData[`boxTitle${i}`]}</p>
                                     </div>
                                     <div className=" flex gap-[20px] p-5 w-full">
@@ -165,13 +181,15 @@ export const Methods = () => {
                     {parse(DOMPurify.sanitize(modelData.methodsDesc).replaceAll('<p>', '<p class="reg">'))}
                 </div>
                 {modelData.methodsFile != 0 && (
-                    <div className="border-2 border-copernicusGrey pb-10">
-                        <div className="flex w-full bg-copernicusGrey px-[30px] py-[10px]">
-                            <p className="ddHeading">{modelData.methodsFileCaption}</p>
-                        </div>
-                        <div className="items-center flex flex-col gap-[10px]">
-                            <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} isBar={modelData.methodsFileBar} />
-                            <p className="caption">{modelData.methodsFileCaption}</p>
+                    <div className="w-full flex flex-col items-center">
+                        <div className="border-2 flex flex-col w-fit border-copernicusGrey pb-10">
+                            <div className="flex bg-copernicusGrey px-[30px] py-[10px] min-h-[30px]">
+                                <p className="ddHeading">{modelData.methodsFileCaption}</p>
+                            </div>
+                            <div className="items-center flex flex-col gap-[10px]">
+                                <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} isBar={modelData.methodsFileBar} />
+                                <p className="caption">{modelData.methodsFileCaption}</p>
+                            </div>
                         </div>
                     </div>
                 )}

@@ -26,7 +26,7 @@ export const SideBarChangeContent = () => {
                     4. Methods
                 </li>
                 <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
-                    5. Colofon
+                    5. More Information
                 </li>
                 <li className="cursor-pointer p-2 reg list-none" onClick={() => handleScroll('footer')}>
                     Bottom
@@ -64,14 +64,14 @@ export const SideBarModelContent = () => {
                             4. Methods
                         </li>
                         <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
-                            5. Colofon
+                            5. More Information
                         </li>
                     </>
                 )}
                 {!document.getElementById('methods') && (
                     <>
                         <li className="cursor-pointer p-2 reg" onClick={() => handleScroll('colofon')}>
-                            4. Colofon
+                            4. More Information
                         </li>
                     </>
                 )}
@@ -90,7 +90,7 @@ export const SideBar = ({ sideBarContent }) => {
     return (
         <>
             {/* Sidebar wrapper */}
-            <div className="relative">
+            <div className="relative hidden md:block">
                 {/* Hamburger icon, always visible, sticky at the top of the page */}
                 <div className="sticky top-0 left-2 z-50 cursor-pointer" onClick={() => setSidebarOpen(!sidebarOpen)}>
                     <div className="bg-copernicusGrey hover:bg-gray-300 p-3">

@@ -73,11 +73,12 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                         {name3 && ', ' + name3}
                         {name4 && ', ' + name4}
                     </p>
+                    {icon && <img src={`data:image/png;base64,${icon}`} className="block md:hidden max-w-[80%] max-h-[250px] py-2 object-contain" />}
 
                     {desc}
                 </div>
 
-                {icon && <img src={`data:image/png;base64,${icon}`} className="max-w-[20%] max-h-[250px] pl-2 object-contain" />}
+                {icon && <img src={`data:image/png;base64,${icon}`} className="hidden md:block max-w-[20%] max-h-[250px] pl-2 object-contain" />}
                 <div className="flex flex-col gap-3">
                     {editAble &&
                         (() => {
