@@ -5,6 +5,7 @@ import { getAllModels, getKeywordModels, getSearchModels } from '../services/db.
 import Multiselect from 'multiselect-react-dropdown';
 import { Searchbar } from '../components/searchbar';
 import { keywords } from '../util/globalVars';
+import { Helmet } from 'react-helmet-async';
 
 export const OverviewPage = ({ editAble }) => {
     const [models, setModels] = useState([]);
@@ -74,11 +75,8 @@ export const OverviewPage = ({ editAble }) => {
     return (
         <>
             <Helmet>
-                <title>
-                    {`${modelData.modelName} Copernicus Model Atlas UU Utrecht University` || 'Model Page Copernicus Model Atlas UU Utrecht University'}
-                </title>
-                <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
-                <meta name="keywords" content={modelData.keywords || ''} />
+                <title>{`Copernicus Model Atlas UU Utrecht University Overview`}</title>
+                <meta name="description" content={'Copernicus Model Atlas UU Utrecht University Overview'} />
             </Helmet>
             <PageLayout>
                 <div className="content-layout flex gap-5">
