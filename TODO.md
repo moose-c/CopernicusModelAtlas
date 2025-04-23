@@ -3,6 +3,7 @@ Fully try the flow for someone who wants to make changes with another machine.
 Verify SEO.
 
 Questions:
+Wat vond je van mijn overdracht documentatie?
 Tot wanneer blijft mijn solis id actief? Durfte Stefan me niet te vertellen.
 Documtatie e.d. op de SD schijf?
 Notify charlotte for the screens
@@ -18,8 +19,6 @@ Grote Zaken:
 
 WH:
 - Sorting of models based on id & approval
-
-
 - ik heb per ongeluk op de touchpad van mijn laptop naar links geswiped en toen was alles weg - misschien kan je dit voorkomen om user eerst te laten weten dat hij/zij nu op een andere site belandt en dan de hele input gaat verdwijnen.
 - als precies 1 deze variabele niet weergeven in naam van plot.
 - Text homepage grey

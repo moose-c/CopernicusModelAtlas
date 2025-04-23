@@ -70,7 +70,9 @@ Send this information to the moderator at: "${modEmail}"`
             {(modelData['isApproved'] || user) && (
                 <>
                     <Helmet>
-                        <title>{modelData.modelName || 'Model Page'}</title>
+                        <title>
+                            {`${modelData.modelName} Copernicus Model Atlas UU Utrecht University` || 'Model Page Copernicus Model Atlas UU Utrecht University'}
+                        </title>
                         <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
                         <meta name="keywords" content={modelData.keywords || ''} />
                     </Helmet>
