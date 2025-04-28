@@ -1,7 +1,10 @@
 TODO:
 Fully try the flow for someone who wants to make changes with another machine. 
 - multiple editors
-
+    - db column changed
+    - retrieve now a list instead of string
+    - post now list instead of string
+    - revoke own edit access
 
 Oreane todo:
 hoelang solis id

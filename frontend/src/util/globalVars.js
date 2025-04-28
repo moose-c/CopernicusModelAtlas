@@ -104,7 +104,7 @@ export const blankForm = {
     boxFile3Name: "",
     methodsFile: 0,
     methodsFileName: "",
-    uuUser: "",
+    uuUser: [],
     isApproved: false,
     boxFile0Bar: false,
     boxFile1Bar: false,

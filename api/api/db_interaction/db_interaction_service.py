@@ -82,7 +82,7 @@ blank_form_template = {
     "boxFile3Name": "",
     "methodsFile": 0,
     "methodsFileName": "",
-    "uuUser": "",
+    "uuUser": [],
     "isApproved": False,
     "boxFile0Bar": False,
     "boxFile1Bar": False,
@@ -252,7 +252,7 @@ def get_user_models(user_id):
         conn = db_connection()
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s ORDER BY created_at ASC;",
+            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE JSON_CONTAINS(uuUser, %s) ORDER BY created_at ASC;",
             [user_id],
         )
         modelList = cur.fetchall()
@@ -390,9 +390,19 @@ def give_model_access(model_name, user_id):
         conn = db_connection()
         cur = conn.cursor()
 
+        cur.execute("SELECT uuUser FROM models WHERE modelname = %s", (model_name,))
+        row = cur.fetchone()
+
+        if row and row[0]:
+            uu_user_list = json.loads(row[0])  # Parse JSON
+        else:
+            uu_user_list = []
+
+        uu_user_list.append(str(user_id))  # Add the new user_id
+
         cur.execute(
             "UPDATE models SET uuUser = %s WHERE modelname = %s",
-            (user_id, model_name),
+            (json.dumps(uu_user_list), model_name),
         )
 
         conn.commit()

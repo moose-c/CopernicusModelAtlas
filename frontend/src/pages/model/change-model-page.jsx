@@ -35,9 +35,9 @@ export const ChangeModelPage = ({ edit = false }) => {
         // window.addEventListener('beforeunload', alertUser)
         // https://plainenglish.io/blog/how-to-alert-a-user-before-leaving-a-page-in-react
 
-        setFormData({ ...formData, uuUser: user['profile']['sub'] });
-
-        if (edit) {
+        if (!edit) {
+            setFormData({ ...formData, uuUser: [user['profile']['sub']] });
+        } else {
             let isMounted = true;
 
             const getMessage = async () => {
