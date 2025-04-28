@@ -1,7 +1,7 @@
 TODO:
 Fully try the flow for someone who wants to make changes with another machine. 
 - multiple editors
-- pages on upload order.
+- no enable/disable screen after enabled.
 
 
 Oreane todo:

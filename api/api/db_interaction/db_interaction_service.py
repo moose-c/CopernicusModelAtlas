@@ -168,12 +168,12 @@ def get_all_models(bool):
     print(bool)
     if bool == "true":
         cur.execute(
-            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = true;"
+            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = true ORDER BY created_at ASC;"
         )
     else:
         print("geting all")
         cur.execute(
-            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models;"
+            f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models ORDER BY created_at ASC;"
         )
     modelList = cur.fetchall()
 
@@ -196,7 +196,7 @@ def get_search_models(searchType, searchValue):
     try:
         if searchValue in ["", [""]]:
             cur.execute(
-                "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon FROM models WHERE isapproved = true;"
+                "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon FROM models WHERE isapproved = true ORDER BY created_at ASC;"
             )
         elif searchType == "searchBar":
             cur.execute(
@@ -204,7 +204,8 @@ def get_search_models(searchType, searchValue):
                 SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon
                 FROM models 
                 WHERE (modelname ILIKE %s OR shortdescr ILIKE %s) 
-                AND isapproved = true;
+                AND isapproved = true
+                ORDER BY created_at ASC;
                 """,
                 (
                     "%" + searchValue + "%",
@@ -220,7 +221,8 @@ def get_search_models(searchType, searchValue):
                 """
                 SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
                 FROM models
-                WHERE keywords && %s AND isapproved = true;  
+                WHERE keywords && %s AND isapproved = true
+                ORDER BY created_at ASC;  
                 """,
                 (formatted_keywords,),
             )
@@ -250,7 +252,7 @@ def get_user_models(user_id):
         conn = db_connection()
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s;",
+            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser = %s ORDER BY created_at ASC;",
             [user_id],
         )
         modelList = cur.fetchall()
