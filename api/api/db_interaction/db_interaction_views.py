@@ -53,9 +53,9 @@ def give_access(model_name, user_id):
     return give_model_access(model_name, user_id)
 
 
-@bp.route("revoke/<model_name>/<user_id>")
-def revoke(model_name, user_id):
-    return revoke_model_access(model_name, user_id)
+@bp.route("revoke/<model_id>/<user_id>")
+def revoke(model_id, user_id):
+    return revoke_model_access(model_id, user_id)
 
 
 @bp.route("/send_email", methods=["POST"])

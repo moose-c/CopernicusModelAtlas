@@ -165,7 +165,6 @@ def get_admin_info():
 def get_all_models(bool):
     conn = db_connection()
     cur = conn.cursor()
-    print(bool)
     if bool == "true":
         cur.execute(
             f"SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE isapproved = true ORDER BY created_at ASC;"
@@ -216,7 +215,6 @@ def get_search_models(searchType, searchValue):
             formatted_keywords = (
                 "{" + ",".join([f'"{keyword}"' for keyword in searchValue]) + "}"
             )
-            print(formatted_keywords)
             cur.execute(
                 """
                 SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved 
@@ -249,7 +247,6 @@ def get_search_models(searchType, searchValue):
 
 def get_user_models(user_id):
     try:
-        print(json.dumps(str(user_id)))
         conn = db_connection()
         cur = conn.cursor()
         cur.execute(
@@ -342,12 +339,10 @@ def change_page_moderators():
         # check
         cur.execute("SELECT moderator_ids FROM moderators")
         moderatorIds = cur.fetchall()[0][0]
-        print(moderatorIds)
         if moderatorId in moderatorIds:
             moderatorIds.remove(moderatorId)
         else:
             moderatorIds.append(moderatorId)
-        print(moderatorIds)
         cur.execute(
             """
             UPDATE moderators 
@@ -394,7 +389,6 @@ def give_model_access(model_name, user_id):
         cur.execute("SELECT uuUser FROM models WHERE modelname = %s", (model_name,))
         row = cur.fetchone()
 
-        print(row)
         if row and row[0]:
             uu_user_list = row[0]  # Parse JSON
         else:
@@ -415,16 +409,15 @@ def give_model_access(model_name, user_id):
         print("error changing owner", e)
 
 
-def revoke_model_access(model_name, user_id):
+def revoke_model_access(model_id, user_id):
     try:
         print("attempting to revoke model access")
         conn = db_connection()
         cur = conn.cursor()
 
-        cur.execute("SELECT uuUser FROM models WHERE modelname = %s", (model_name,))
+        cur.execute("SELECT uuUser FROM models WHERE id = %s", (model_id,))
         row = cur.fetchone()
 
-        print(row)
         if row and row[0]:
             uu_user_list = row[0]  # Parse JSON
         else:
@@ -434,8 +427,8 @@ def revoke_model_access(model_name, user_id):
             uu_user_list.remove(str(user_id))  # Removes the user_id from the list
 
         cur.execute(
-            "UPDATE models SET uuUser = %s WHERE modelname = %s",
-            (uu_user_list, model_name),
+            "UPDATE models SET uuUser = %s WHERE id = %s",
+            (uu_user_list, model_id),
         )
 
         conn.commit()
@@ -486,7 +479,6 @@ def post_model(edit=False):
     try:
         # check if a unique model name
         model_name = formData["modelName"]
-        print(model_name)
         conn = db_connection()
         cur = conn.cursor()
 
