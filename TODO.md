@@ -1,5 +1,5 @@
 TODO:
-Fully try the flow for someone who wants to make changes with another machine. 
+Fully try the flow for someone who wants to make changes with another machine.
 
 Oreane todo:
 hoelang solis id
