@@ -82,6 +82,7 @@ export const ChangeModelPage = ({ edit = false }) => {
                 try {
                     if (edit) {
                         // Attempt to edit the model
+                        formData['created_at'] = new Date().toUTCString();
                         await editModel(formData, modelSlug, accessToken);
                         sendEmail({
                             subject: `Someone edited a model`,

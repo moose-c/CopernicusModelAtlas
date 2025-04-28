@@ -475,6 +475,7 @@ def post_model(edit=False):
             formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
         else:
             formData[key] = request.form.get(key)
+    print(formData)
 
     try:
         # check if a unique model name

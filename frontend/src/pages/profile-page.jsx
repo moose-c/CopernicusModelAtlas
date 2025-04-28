@@ -28,12 +28,6 @@ export const ProfilePage = () => {
         changeModerators(accessToken, moderatorId);
     };
 
-    const handleEditModeratorEmail = async () => {
-        const accessToken = await getAccessToken(user, setUser);
-        const moderatorEmail = prompt('Enter the email adress of the new main moderator');
-        changeModeratorEmail(accessToken, moderatorEmail);
-    };
-
     useEffect(() => {
         if (user && typeof user === 'object') {
             const getModels = async () => {

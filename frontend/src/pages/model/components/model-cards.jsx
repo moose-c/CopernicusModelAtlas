@@ -48,10 +48,12 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
         }
     }, []);
 
-    const handleChangeOwner = () => {
+    const handleChangeOwner = async () => {
+        const retrievedAccessToken = await getAccessToken(user, setUser);
+        setAccesToken(retrievedAccessToken);
         const userId = prompt('Enter the user id of the new owner perfectly!');
         if (userId.length == 32) {
-            giveEditRights(accessToken, userId, modelName);
+            giveEditRights(retrievedAccessToken, userId, modelName);
         } else {
             alert('A user id needs to be 32 characters, please enter a valid id');
         }
@@ -91,7 +93,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                         <Button
                                             text="Delete"
                                             call={async () => {
-                                                await deleteModel(model[0], accessToken);
+                                                const retrievedAccessToken = await getAccessToken(user, setUser);
+                                                await deleteModel(model[0], retrievedAccessToken);
                                                 setToggle((prevValue) => !prevValue);
                                             }}
                                         />
@@ -101,7 +104,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                             <Button
                                                 text="Revoke edit rights"
                                                 call={async () => {
-                                                    await revokeEditRights(model[0], user['profile']['sub'], accessToken);
+                                                    const retrievedAccessToken = await getAccessToken(user, setUser);
+                                                    await revokeEditRights(model[0], user['profile']['sub'], retrievedAccessToken);
                                                     setToggle((prevValue) => !prevValue);
                                                 }}
                                             />
@@ -116,7 +120,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                                 <Button
                                                     text="Toggle Approval"
                                                     call={async () => {
-                                                        await approveModel(model[0], accessToken);
+                                                        const retrievedAccessToken = await getAccessToken(user, setUser);
+                                                        await approveModel(model[0], retrievedAccessToken);
                                                         setToggle((prevValue) => !prevValue);
                                                     }}
                                                 />
