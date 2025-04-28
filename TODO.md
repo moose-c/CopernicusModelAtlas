@@ -1,7 +1,5 @@
 TODO:
 Fully try the flow for someone who wants to make changes with another machine. 
-- multiple editors
-    - revoke own edit access
 - access token sometimes obtained before used causing it to be outdated when actually using?
 - created at -> edited at.
 

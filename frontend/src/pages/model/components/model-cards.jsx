@@ -96,8 +96,8 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                             }}
                                         />
                                     </div>
-                                    {!isAdmin && (
-                                        <div>
+                                    {isAdmin && (
+                                        <div className="w-[160px]">
                                             <Button
                                                 text="Revoke edit rights"
                                                 call={async () => {
