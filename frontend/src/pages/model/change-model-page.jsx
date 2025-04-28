@@ -88,15 +88,17 @@ export const ChangeModelPage = ({ edit = false }) => {
                             html: `<p>Hi Charlotte, someone edited a new model named ${formData['modelName']}, </p>`,
                         });
                         navigate('/profile');
-                        if (
-                            confirm(
-                                'Succesfully edited your model! Do you want to notify the moderator to review to page? Only after they have checked the page can it become visible by others.'
-                            )
-                        ) {
-                            sendEmail({
-                                subject: `Someone requests approval`,
-                                html: `<p>Hi Charlotte, the model "${formData['modelName']}" requests approval. </p>`,
-                            });
+                        if (!formData['isApproved']) {
+                            if (
+                                confirm(
+                                    'Succesfully edited your model! Do you want to notify the moderator to review to page? Only after they have checked the page can it become visible by others.'
+                                )
+                            ) {
+                                sendEmail({
+                                    subject: `Someone requests approval`,
+                                    html: `<p>Hi Charlotte, the model "${formData['modelName']}" requests approval. </p>`,
+                                });
+                            }
                         }
                     } else {
                         // Attempt to create a new model
