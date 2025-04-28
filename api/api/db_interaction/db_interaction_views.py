@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 
 from api.db_interaction.db_interaction_service import (
     give_model_access,
+    revoke_model_access,
     get_all_models,
     get_search_models,
     get_user_models,
@@ -50,6 +51,11 @@ def search_models():
 @bp.route("give_access/<model_name>/<user_id>")
 def give_access(model_name, user_id):
     return give_model_access(model_name, user_id)
+
+
+@bp.route("revoke/<model_name>/<user_id>")
+def revoke(model_name, user_id):
+    return revoke_model_access(model_name, user_id)
 
 
 @bp.route("/send_email", methods=["POST"])

@@ -78,6 +78,24 @@ export const giveEditRights = async (accessToken, userId, modelName) => {
     };
 };
 
+export const revokeEditRights = async (model_id, user_id, accessToken) => {
+    const url = `${apiServerUrl}/api/models/revoke/${model_id}/${user_id}`;
+    const config = {
+        url: url,
+        headers: {
+            "content-type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    const { data, error } = await callExternalApi({ config });
+
+    return {
+        data: data || null,
+        error,
+    };
+};
+
 export const postModel = async (modelData, accessToken) => {
     // create suitable formData type (necessesary to handle file uploads)
     const formData = new FormData();

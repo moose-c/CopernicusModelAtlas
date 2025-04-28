@@ -1,10 +1,9 @@
 TODO:
 Fully try the flow for someone who wants to make changes with another machine. 
 - multiple editors
-    - db column changed
-    - retrieve now a list instead of string
-    - post now list instead of string
     - revoke own edit access
+- access token sometimes obtained before used causing it to be outdated when actually using?
+- created at -> edited at.
 
 Oreane todo:
 hoelang solis id

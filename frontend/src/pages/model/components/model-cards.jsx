@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/button';
-import { deleteModel, approveModel, giveEditRights } from '../../../services/db.service';
+import { deleteModel, approveModel, giveEditRights, revokeEditRights } from '../../../services/db.service';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../..';
 import { getAccessToken } from '../../../util/getAccessToken';
@@ -96,6 +96,18 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                             }}
                                         />
                                     </div>
+                                    {!isAdmin && (
+                                        <div>
+                                            <Button
+                                                text="Revoke edit rights"
+                                                call={async () => {
+                                                    await revokeEditRights(model[0], user['profile']['sub'], accessToken);
+                                                    setToggle((prevValue) => !prevValue);
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+
                                     {!approved && <p className="text-red-500 font-bold">Not yet approved</p>}
 
                                     {isAdmin && (
@@ -110,7 +122,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                                 />
                                             </div>
                                             <div>
-                                                <Button text="Change Owner" call={() => handleChangeOwner()} />
+                                                <Button text="Add Owner" call={() => handleChangeOwner()} />
                                             </div>
                                         </>
                                     )}

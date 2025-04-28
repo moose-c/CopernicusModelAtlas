@@ -249,11 +249,12 @@ def get_search_models(searchType, searchValue):
 
 def get_user_models(user_id):
     try:
+        print(json.dumps(str(user_id)))
         conn = db_connection()
         cur = conn.cursor()
         cur.execute(
-            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE JSON_CONTAINS(uuUser, %s) ORDER BY created_at ASC;",
-            [user_id],
+            "SELECT id, modelname, keywords, modellername0, modellername1, modellername2, modellername3, modellername4, shortdescr, icon, isapproved FROM models WHERE uuUser && %s ORDER BY created_at ASC;",
+            [[user_id]],
         )
         modelList = cur.fetchall()
 
@@ -393,8 +394,9 @@ def give_model_access(model_name, user_id):
         cur.execute("SELECT uuUser FROM models WHERE modelname = %s", (model_name,))
         row = cur.fetchone()
 
+        print(row)
         if row and row[0]:
-            uu_user_list = json.loads(row[0])  # Parse JSON
+            uu_user_list = row[0]  # Parse JSON
         else:
             uu_user_list = []
 
@@ -402,7 +404,38 @@ def give_model_access(model_name, user_id):
 
         cur.execute(
             "UPDATE models SET uuUser = %s WHERE modelname = %s",
-            (json.dumps(uu_user_list), model_name),
+            (uu_user_list, model_name),
+        )
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return jsonify(f"Model succesfully changed owner.")
+    except Exception as e:
+        print("error changing owner", e)
+
+
+def revoke_model_access(model_name, user_id):
+    try:
+        print("attempting to revoke model access")
+        conn = db_connection()
+        cur = conn.cursor()
+
+        cur.execute("SELECT uuUser FROM models WHERE modelname = %s", (model_name,))
+        row = cur.fetchone()
+
+        print(row)
+        if row and row[0]:
+            uu_user_list = row[0]  # Parse JSON
+        else:
+            uu_user_list = []
+
+        if str(user_id) in uu_user_list:
+            uu_user_list.remove(str(user_id))  # Removes the user_id from the list
+
+        cur.execute(
+            "UPDATE models SET uuUser = %s WHERE modelname = %s",
+            (uu_user_list, model_name),
         )
 
         conn.commit()
@@ -442,7 +475,7 @@ def post_model(edit=False):
 
     # add non files to formData
     for key in list(request.form.keys()):
-        if key == "keywords":
+        if key in ["keywords", "uuUser"]:
             formData[key] = json.loads(request.form.get(key))
         # if you edit a model and resubmit it images are already in binary string format and not as file.
         elif key in bytea_fields:
