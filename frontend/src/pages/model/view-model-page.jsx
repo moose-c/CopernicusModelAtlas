@@ -49,7 +49,7 @@ export const ModelPage = () => {
     const handleRequestEditRights = () => {
         if (
             confirm(
-                'Are you sure you want to request edit access? Only one person can have this at a given time so this will revoke the edit access for the other user.'
+                'Are you sure you want to request edit access? Multiple people can have edit rights, you can revoke your own edit rights in profile -> "Revoke edit rights".'
             ) == true
         ) {
             sendEmail({

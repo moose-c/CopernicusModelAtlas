@@ -65,7 +65,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
             className="w-fill rounded-lg overflow-hidden shadow-lg bg-white m-4 transform transition-transform hover:scale-105 hover:shadow-xl"
         >
             <div className="p-6 flex justify-between">
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-col">
                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">{modelName}</h2>
                     <h3 className="pb-2">{keywords}</h3>
                     <p className="reg mb-2">
@@ -80,7 +80,7 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                     {desc}
                 </div>
 
-                {icon && <img src={`data:image/png;base64,${icon}`} className="hidden md:block max-w-[20%] max-h-[250px] pl-2 object-contain" />}
+                {icon && <img src={`data:image/png;base64,${icon}`} className="hidden md:block max-w-[20%] max-h-[200px] pl-2 object-contain" />}
                 <div className="flex flex-col gap-3">
                     {editAble &&
                         (() => {
@@ -93,9 +93,11 @@ const ModelCard = ({ model, editAble, isAdmin, setToggle }) => {
                                         <Button
                                             text="Delete"
                                             call={async () => {
-                                                const retrievedAccessToken = await getAccessToken(user, setUser);
-                                                await deleteModel(model[0], retrievedAccessToken);
-                                                setToggle((prevValue) => !prevValue);
+                                                if (confirm('Are you sure you want to delete this model? This is irreversible.') == true) {
+                                                    const retrievedAccessToken = await getAccessToken(user, setUser);
+                                                    await deleteModel(model[0], retrievedAccessToken);
+                                                    setToggle((prevValue) => !prevValue);
+                                                }
                                             }}
                                         />
                                     </div>
