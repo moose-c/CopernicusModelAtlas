@@ -541,7 +541,7 @@ def post_model(edit=False):
         values = tuple(formData.values())
         placeholders = ", ".join(["%s"] * len(columns))
 
-        if "id" in columns:
+        if edit:
             # this means that we are editing an existing model
             cur.execute("SELECT nextval('models_id_seq');")
             next_id = cur.fetchone()[0]
@@ -647,8 +647,8 @@ def edit_model(model_slug):
             201,
         )
     except Exception as e:
-        print(f"Failed to add model. Reason: {str(e)}")
-        return jsonify({"error": "Failed to add model", "details": str(e)}), 400
+        print(f"Failed to delete old model. Reason: {str(e)}")
+        return jsonify({"error": "Failed to delete old model", "details": str(e)}), 400
 
 
 def generate_large_object(data_loid, chunk_size=1024 * 1024):
