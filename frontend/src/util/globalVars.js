@@ -170,6 +170,11 @@ export const fieldNameMapping = {
     boxDescr0: "Box Description",
     colofonCite: "Colophon Citation",
     colofonLicence: "Colophon License",
+    linkName0: "Button text 1",
+    linkName1: "Button text 2",
+    linkName2: "Button text 3",
+    linkName3: "Button text 4",
+    linkName4: "Button text 5"
 };
 
 export const colorPalette = [

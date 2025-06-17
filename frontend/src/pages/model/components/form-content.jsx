@@ -209,10 +209,10 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         capField={'explanFigCaption'}
                     />
                     <TwoField
-                        lgen={'Do you want to link to other sites or files? (eg. github, dataverse, own page'}
+                        lgen={'Do you want to link to other sites or files? (eg. github, dataverse, own page)'}
                         nb={formData['nbLinks']}
                         ch={handleChangeNbButtons}
-                        l1={'Button text: '}
+                        l1={'Button text: (<= 25 characters)'}
                         f1={'linkName'}
                         p1={'eg. Github'}
                         l2={'URL'}

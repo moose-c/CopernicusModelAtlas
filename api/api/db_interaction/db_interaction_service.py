@@ -542,7 +542,6 @@ def post_model(edit=False):
         placeholders = ", ".join(["%s"] * len(columns))
 
         if edit:
-            # this means that we are editing an existing model
             cur.execute("SELECT nextval('models_id_seq');")
             next_id = cur.fetchone()[0]
             values = values[:-1] + (next_id,)

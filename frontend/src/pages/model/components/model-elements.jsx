@@ -36,22 +36,22 @@ export const Introduction = () => {
                                 )
                             );
                         })}
+                        <div className="flex flex-col gap-[20px]  pt-4">
+                            {[...Array(modelData.nbLinks)].map(
+                                (_, i) =>
+                                    modelData[`linkName${i}`] &&
+                                    modelData[`linkUrl${i}`] && (
+                                        <div>
+                                            <Button key={i} text={modelData[`linkName${i}`]} to={modelData[`linkUrl${i}`]} />
+                                        </div>
+                                    )
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="items-center flex flex-col gap-[10px]">
                     <ClickableFigure fileBin={modelData.explanFig} />
                     <p className="caption">{modelData.explanFigCaption}</p>
-                </div>
-                <div className="flex flex-col gap-[20px] justify-center items-center">
-                    {[...Array(modelData.nbLinks)].map(
-                        (_, i) =>
-                            modelData[`linkName${i}`] &&
-                            modelData[`linkUrl${i}`] && (
-                                <div>
-                                    <Button key={i} text={modelData[`linkName${i}`]} to={modelData[`linkUrl${i}`]} />
-                                </div>
-                            )
-                    )}
                 </div>
             </div>
         </>

@@ -10,6 +10,9 @@ import { Button } from '../../components/button';
 import { AuthContext } from '../..';
 import { sendEmail } from '../../services/db.service';
 import { Helmet } from 'react-helmet-async';
+import { Dialog } from '@mui/material';
+import { DialogTitle } from '@mui/material';
+import { DialogActions } from '@mui/material';
 
 const modEmail = import.meta.env.VITE_APP_MODERATOR_EMAIL;
 
@@ -19,6 +22,8 @@ export const useModel = () => useContext(ModelContext);
 export const ModelPage = () => {
     const { modelSlug } = useParams();
     const [modelData, setModelData] = useState({});
+    const [editModal1, setEditModal1] = useState(false);
+    const [editModal2, setEditModal2] = useState(false);
     const { user, setUser } = useContext(AuthContext);
 
     useEffect(() => {
@@ -46,25 +51,6 @@ export const ModelPage = () => {
         };
     }, []);
 
-    const handleRequestEditRights = () => {
-        if (
-            confirm(
-                'Are you sure you want to request edit access? Multiple people can have edit rights, you can revoke your own edit rights in profile -> "Revoke edit rights".'
-            ) == true
-        ) {
-            sendEmail({
-                subject: `Someone requested edit access to ${modelData['modelName']}`,
-                html: `<p>Hi Charlotte, the user with id ${user['profile']['sub']} requested edit access to ${modelData['modelName']}.</p>
-                <p>They have been instructed to email you also with their id, and the model they want access to.</p>`,
-            });
-            alert(
-                `Edit rights requested. To verify your identity with the moderator, please email the following details:
-Model Name: "${modelData['modelName']}"
-Your ID: "${user['profile']['sub']}"
-Send this information to the moderator at: "${modEmail}"`
-            );
-        }
-    };
     return (
         <>
             {(modelData['isApproved'] || user) && (
@@ -76,6 +62,42 @@ Send this information to the moderator at: "${modEmail}"`
                         <meta name="description" content={modelData.shortDescr || 'Details about this model.'} />
                         <meta name="keywords" content={modelData.keywords || ''} />
                     </Helmet>
+                    <Dialog open={editModal1} call={() => setEditModal1(false)}>
+                        <p className="px-4 pt-4">
+                            <span className="font-bold">Are you sure you want to request edit access?</span> <br /> Multiple people can have edit rights, you
+                            can revoke your own edit rights in profile {'->'}
+                            "Revoke edit rights".
+                        </p>
+                        <DialogActions>
+                            <Button call={() => setEditModal1(false)} text="No" />
+                            <Button
+                                call={() => {
+                                    setEditModal1(false);
+                                    sendEmail({
+                                        subject: `Someone requested edit access to ${modelData['modelName']}`,
+                                        html: `<p>Hi Charlotte, the user with id ${user['profile']['sub']} requested edit access to ${modelData['modelName']}.</p>
+                                        <p>They have been instructed to email you also with their id, and the model they want access to.</p>`,
+                                    });
+                                    setEditModal2(true);
+                                }}
+                                text="Yes"
+                            />
+                        </DialogActions>
+                    </Dialog>
+                    <Dialog open={editModal2} call={() => setEditModal2(false)}>
+                        <p className="px-4 pt-4">
+                            <span className="font-bold">Edit rights requested</span> <br />
+                            To verify your identity with the moderator, please email the following details: <br />
+                            Model Name: {modelData['modelName']} <br />
+                            Your ID: {user['profile']['sub']}. <br />
+                            Send this information to the moderator at: {modEmail}
+                        </p>
+                        <DialogActions>
+                            <Button call={() => setEditModal2(false)} text="Close">
+                                Close{' '}
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                     <ModelContext.Provider value={{ modelData }}>
                         <PageLayout sideBarContent={<SideBarModelContent />}>
                             <div className="content-layout gap-5 pb-[20px]">
@@ -86,12 +108,7 @@ Send this information to the moderator at: "${modEmail}"`
                                 <MoreInformation />
                                 {user && (
                                     <div>
-                                        <Button
-                                            text="Request page edit rights"
-                                            call={() => {
-                                                handleRequestEditRights();
-                                            }}
-                                        />
+                                        <Button text="Request page edit rights" call={() => setEditModal1(true)} />
                                     </div>
                                 )}
                             </div>

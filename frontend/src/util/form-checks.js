@@ -47,8 +47,15 @@ const checkLength = (formData) => {
         shortDescr: 65
     }
     const charLengthDict = {
-        modelName: 75
+        modelName: 75,
+        linkName0: 25,
+        linkName1: 25,
+        linkName2: 25,
+        linkName3: 25,
+        linkName4: 25,
     }
+
+
     for (const [key, value] of Object.entries(wordsLengthDict)) {
         if (formData[key].split(' ').length > value) {
             alert(`${fieldNameMapping[key]} field is too long!`);
