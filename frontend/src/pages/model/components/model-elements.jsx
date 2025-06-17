@@ -49,9 +49,8 @@ export const Introduction = () => {
                         </div>
                     </div>
                 </div>
-                <div className="items-center flex flex-col gap-[10px]">
-                    <ClickableFigure fileBin={modelData.explanFig} />
-                    <p className="caption">{modelData.explanFigCaption}</p>
+                <div className="flex flex-col items-center">
+                    <ClickableFigure fileBin={modelData.explanFig} loc="large" caption={modelData.explanFigCaption} />
                 </div>
             </div>
         </>
@@ -68,15 +67,13 @@ export const Background = () => {
                     {parse(DOMPurify.sanitize(modelData.theoryText).replaceAll('<p>', '<p class="reg">'))}
                     {modelData.theoryFig && (
                         <div className="md:hidden flex items-center flex-col gap-[10px]">
-                            <ClickableFigure fileBin={modelData.theoryFig} />
-                            <p className="caption">{modelData.theoryFigDesc}</p>
+                            <ClickableFigure fileBin={modelData.theoryFig} caption={modelData.theoryFigDesc} />
                         </div>
                     )}
                 </div>
                 {modelData.theoryFig && (
                     <div className="hidden md:flex items-center flex-col gap-[10px]">
-                        <ClickableFigure fileBin={modelData.theoryFig} />
-                        <p className="caption">{modelData.theoryFigDesc}</p>
+                        <ClickableFigure fileBin={modelData.theoryFig} caption={modelData.theoryFigDesc} />
                     </div>
                 )}
             </div>
@@ -95,17 +92,13 @@ export const Results = () => {
                         {parse(DOMPurify.sanitize(modelData.resText).replaceAll('<p>', '<p class="reg">'))}
                         {modelData.resFig && (
                             <div className="md:hidden items-center flex flex-col gap-[10px]">
-                                <ClickableFigure fileBin={modelData.resFig} />
-
-                                <p className="caption">{modelData.resFigDesc}</p>
+                                <ClickableFigure fileBin={modelData.resFig} caption={modelData.resFigDesc} />
                             </div>
                         )}
                     </div>
                     {modelData.resFig && (
                         <div className="hidden items-center md:flex flex-col gap-[10px]">
-                            <ClickableFigure fileBin={modelData.resFig} />
-
-                            <p className="caption">{modelData.resFigDesc}</p>
+                            <ClickableFigure fileBin={modelData.resFig} caption={modelData.resFigDesc} />
                         </div>
                     )}
                 </div>

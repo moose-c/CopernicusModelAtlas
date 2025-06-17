@@ -59,7 +59,7 @@ export const DataElement = ({ loid, name, isBar }) => {
 
     return (
         <div className="max-w-[90%] md:max-w-[700px]">
-            {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} isExplanData={true} />}
+            {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} loc={'box'} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} isBar={isBar} />}
             {decodedFile && ['geojson', 'json'].includes(fileTypeState) && <VectorMap geojson={decodedFile} />}
         </div>
