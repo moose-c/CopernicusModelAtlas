@@ -14,8 +14,10 @@ export const Introduction = () => {
                     <div className="flex flex-col gap-[10px] max-w-[79%] ">
                         <h1>{modelData.modelName}</h1>
                         <p>{modelData.keywords && modelData.keywords.join(', ')}</p>
-                        {modelData.longDescr && parse(DOMPurify.sanitize(modelData.longDescr).replaceAll('<p>', '<p class="top">'))}
-                        {!modelData.longDescr && parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
+                        {parse(DOMPurify.sanitize(modelData.shortDescr).replaceAll('<p>', '<p class="top">'))}
+                        <div className="flex flex-col items-center">
+                            <ClickableFigure fileBin={modelData.explanFig} loc="large" caption={modelData.explanFigCaption} />
+                        </div>
                     </div>
                     <div className="max-w-[19%] flex flex-col gap-[5px] items-center">
                         <img src={`data:image/png;base64,${modelData.icon}`} alt="" />
@@ -49,9 +51,6 @@ export const Introduction = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-center">
-                    <ClickableFigure fileBin={modelData.explanFig} loc="large" caption={modelData.explanFigCaption} />
-                </div>
             </div>
         </>
     );
@@ -61,9 +60,9 @@ export const Background = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
+            <h2>Background</h2>
             <div id="theory" className="flex gap-[10px]">
                 <div className="w-[80%] flex flex-col gap-[10px]">
-                    <h2>Background</h2>
                     {parse(DOMPurify.sanitize(modelData.theoryText).replaceAll('<p>', '<p class="reg">'))}
                     {modelData.theoryFig && (
                         <div className="md:hidden flex items-center flex-col gap-[10px]">
@@ -85,10 +84,10 @@ export const Results = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
+            <h2>Explanatory Results</h2>
             <div id="results" className="flex flex-col gap-[30px]">
                 <div className="flex gap-[10px]">
                     <div className="w-[80%] flex flex-col gap-[10px]">
-                        <h2>Explanatory Results</h2>
                         {parse(DOMPurify.sanitize(modelData.resText).replaceAll('<p>', '<p class="reg">'))}
                         {modelData.resFig && (
                             <div className="md:hidden items-center flex flex-col gap-[10px]">
@@ -168,25 +167,26 @@ export const Methods = () => {
     const { modelData } = useModel();
     return (
         <>
-            <div id="methods" className="flex flex-col gap-[10px]">
-                <div className="w-[80%] flex flex-col gap-[10px]">
+            {modelData.methodsDesc && (
+                <>
                     <h2>Methods</h2>
-                    {parse(DOMPurify.sanitize(modelData.methodsDesc).replaceAll('<p>', '<p class="reg">'))}
-                </div>
-                {modelData.methodsFile != 0 && (
-                    <div className="w-full flex flex-col items-center">
-                        <div className="border-2 flex flex-col w-fit border-copernicusGrey pb-10">
-                            <div className="flex bg-copernicusGrey px-[30px] py-[10px] min-h-[30px]">
-                                <p className="ddHeading">{modelData.methodsFileCaption}</p>
-                            </div>
-                            <div className="items-center flex flex-col gap-[10px]">
-                                <DataElement loid={modelData.methodsFile} name={modelData.methodsFileName} isBar={modelData.methodsFileBar} />
-                                <p className="caption">{modelData.methodsFileCaption}</p>
-                            </div>
+                    <div id="methods" className="flex flex-col gap-[10px]">
+                        <div className="w-[80%] flex flex-col gap-[10px]">
+                            {parse(DOMPurify.sanitize(modelData.methodsDesc).replaceAll('<p>', '<p class="reg">'))}
                         </div>
+                        {modelData.methodsFile != 0 && (
+                            <div className="flex flex-col items-center">
+                                <DataElement
+                                    loid={modelData.methodsFile}
+                                    name={modelData.methodsFileName}
+                                    isBar={modelData.methodsFileBar}
+                                    caption={modelData.methodsFileCaption}
+                                />
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
+                </>
+            )}
         </>
     );
 };
@@ -195,15 +195,19 @@ export const MoreInformation = () => {
     const { modelData } = useModel(); // Automatically gets values
     return (
         <>
-            <div id="colofon" className="flex gap-[10px]">
-                <div className="w-[80%] flex flex-col gap-[10px]">
-                    <h2>More Information</h2>
-                    <p className="reg font-bold">References: </p>{' '}
-                    {parse(DOMPurify.sanitize(modelData.colofonCite).replaceAll('<p>', '<p class="reg font-bold">'))}
-                    <p className="reg">Model Licence: {modelData.colofonLicence}</p>
-                    {parse(DOMPurify.sanitize(modelData.colofonAddition).replaceAll('<p>', '<p class="reg">'))}
-                </div>
-            </div>
+            {(modelData.colofonCite || modelData.colofonAddition || modelData.colofonLicence) && (
+                <>
+                    <div id="colofon" className="flex gap-[10px]">
+                        <div className="w-[80%] flex flex-col gap-[10px]">
+                            <h2>More Information</h2>
+                            <p className="reg font-bold">References: </p>{' '}
+                            {parse(DOMPurify.sanitize(modelData.colofonCite).replaceAll('<p>', '<p class="reg font-bold">'))}
+                            <p className="reg">Model Licence: {modelData.colofonLicence}</p>
+                            {parse(DOMPurify.sanitize(modelData.colofonAddition).replaceAll('<p>', '<p class="reg">'))}
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 };

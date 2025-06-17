@@ -198,10 +198,6 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         Enter a short description of your model to display on the home page* (max 65 words){' '}
                     </LongTextField>
                     <FileField label={'Do you have a picture/icon for your model?'} field={'icon'} allowedFileTypes={'.png'} />
-                    <LongTextField field={'longDescr'}>
-                        {' '}
-                        Enter a longer description of your model. (If left empty defaults to the short description entered above)
-                    </LongTextField>
                     <FileField
                         label={'Upload an explanatory or output figure for your model*'}
                         field={'explanFig'}
@@ -269,13 +265,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                         </div>
                         <LongTextField field={'methodsDesc'}>Description of the model itself</LongTextField>
                         <DataExplanation boxes={false} examplePopups={examplePopups} togglePopup={togglePopup} />
-                        <FileField
-                            label={'Upload methods data here'}
-                            field={'methodsFile'}
-                            allowedFileTypes={'.png, .csv, .xlsx, .json, .geojson'}
-                            capField={'methodsFileCaption'}
-                            capText={'Enter a title for this data field'}
-                        />
+                        <FileField label={'Upload methods file here'} field={'methodsFile'} allowedFileTypes={'.png'} capField={'methodsFileCaption'} />
                     </div>
                     <div className="flex flex-col gap-[25px]">
                         <div className="relative">

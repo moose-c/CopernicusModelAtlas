@@ -4,7 +4,7 @@ import { Timeseries } from './timeseries';
 import { VectorMap } from './vectormap';
 import { ClickableFigure } from './image';
 
-export const DataElement = ({ loid, name, isBar }) => {
+export const DataElement = ({ loid, name, isBar, caption }) => {
     const [fileTypeState, setFileTypeState] = useState('');
     const [fileBin, setFileBin] = useState(null);
     const [decodedFile, setDecodedFile] = useState(null);
@@ -59,7 +59,7 @@ export const DataElement = ({ loid, name, isBar }) => {
 
     return (
         <div className="max-w-[90%] md:max-w-[700px]">
-            {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} loc={'box'} />}
+            {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} loc={'box'} caption={caption} />}
             {['csv', 'xlsx'].includes(fileTypeState) && <Timeseries fileBin={fileBin} isBar={isBar} />}
             {decodedFile && ['geojson', 'json'].includes(fileTypeState) && <VectorMap geojson={decodedFile} />}
         </div>
