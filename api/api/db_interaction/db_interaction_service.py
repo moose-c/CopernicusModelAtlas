@@ -480,9 +480,12 @@ def post_model(edit=False):
             formData[key] = json.loads(request.form.get(key))
         # if you edit a model and resubmit it images are already in binary string format and not as file.
         elif key in bytea_fields:
+            print(key)
             formData[key] = psycopg2.Binary(base64.b64decode(request.form.get(key)))
         else:
             formData[key] = request.form.get(key)
+
+    # Here already the methodsFile is empty
     print(formData)
 
     try:

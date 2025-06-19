@@ -109,7 +109,7 @@ export const postModel = async (modelData, accessToken) => {
             formData.append(key, value)
         }
     })
-
+    console.log(formData)
     const url = `${apiServerUrl}/api/models/post`
     axios.post(url, formData, {
         headers: {
