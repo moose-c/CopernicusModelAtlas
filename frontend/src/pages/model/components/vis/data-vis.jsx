@@ -56,7 +56,6 @@ export const DataElement = ({ loid, name, isBar, caption }) => {
             convertBlobToJson(fileBin);
         }
     }, [fileTypeState]);
-
     return (
         <div className="max-w-[90%] md:max-w-[700px]">
             {fileTypeState == 'png' && <ClickableFigure fileBin={decodedFile} loc={'box'} caption={caption} />}

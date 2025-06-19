@@ -117,6 +117,7 @@ export const Results = () => {
                                                     loid={modelData[`boxFile${i}`]}
                                                     name={modelData[`boxFile${i}Name`]}
                                                     isBar={modelData[`boxFile${i}Bar`]}
+                                                    caption={modelData[`boxFile${i}Caption`]}
                                                 />
                                             </div>
                                         </div>
