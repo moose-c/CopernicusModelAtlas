@@ -34,7 +34,7 @@ export const ClickableFigure = ({ fileBin, loc, caption }) => {
                 </>
             )}
             {loc !== 'box' && loc !== 'large' && (
-                <>
+                <div className="pl-4">
                     <img
                         ref={imgRef}
                         src={`data:image/png;base64,${fileBin}`}
@@ -44,7 +44,7 @@ export const ClickableFigure = ({ fileBin, loc, caption }) => {
                     <p className="caption text-center" style={{ width: imgWidth ? `${imgWidth}px` : 'auto' }}>
                         {caption}
                     </p>
-                </>
+                </div>
             )}
 
             <Modal open={open} onClose={handleClose} className="w-full h-full flex justify-center items-center">

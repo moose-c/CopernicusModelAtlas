@@ -141,15 +141,8 @@ export const ChangeModelPage = ({ edit = false }) => {
             <div className="content-layout px-[100px] mx-auto max-w-[1000px]">
                 <h1>Form to create or edit your model page</h1>
                 <p>
-                    Fill out this form to create add a new model to the overview. To see an example of what the model page will look like, click{' '}
-                    <span className="cursor-pointer underline select-none" onClick={() => togglePopup(0)}>
-                        here
-                    </span>
-                    {examplePopups[0] && <ExamplePopup nb={0} topPos={300} togglePopup={togglePopup} />}.
-                </p>
-                <p>
                     {' '}
-                    <span className="font-bold">Fields with an asterix (*) are manditory!</span> Other fields should be left empty (no X e.d.) if not desired
+                    <span className="font-bold">Fields with an asterix (*) are manditory!</span> Other fields should be left empty (no X e.d.) if not desired.
                 </p>
                 <form onSubmit={handleSubmit} className="p-[20px] bg-gray-100 rounded shadow-md w-full flex flex-col gap-[20px] ">
                     <FormContent formData={formData} setFormData={setFormData} examplePopups={examplePopups} togglePopup={togglePopup} />
