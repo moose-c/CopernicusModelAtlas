@@ -474,6 +474,7 @@ def post_model(edit=False):
     print("post model called")
     formData = copy.deepcopy(blank_form_template)
 
+    print(list(request.form.keys()))
     # add non files to formData
     for key in list(request.form.keys()):
         if key in ["keywords", "uuUser"]:

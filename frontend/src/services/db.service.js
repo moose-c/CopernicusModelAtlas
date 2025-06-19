@@ -109,7 +109,7 @@ export const postModel = async (modelData, accessToken) => {
             formData.append(key, value)
         }
     })
-    console.log(formData)
+
     const url = `${apiServerUrl}/api/models/post`
     axios.post(url, formData, {
         headers: {
@@ -132,6 +132,8 @@ export const editModel = async (modelData, modelSlug, accessToken) => {
             formData.append(key, value);  // Append other values (strings, numbers, etc.)
         }
     });
+
+    console.log('fromEdit', formData)
 
     // Construct URL with model_id
     const url = `${apiServerUrl}/api/models/edit/${modelSlug}`;
