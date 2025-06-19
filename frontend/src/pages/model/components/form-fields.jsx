@@ -208,7 +208,7 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                     <ShortTextField
                                         label={`Do you want to give the uploaded figure a caption?`}
                                         placeholder={'Caption'}
-                                        field={`boxTitle${i}Caption`}
+                                        field={`boxFile${i}Caption`}
                                     />
                                 </>
                             )}
