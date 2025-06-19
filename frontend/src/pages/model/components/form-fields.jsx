@@ -97,7 +97,7 @@ export const TwoField = ({ lgen, nb, ch, l1, f1, p1, l2, f2, p2, ladd }) => {
 
 export const FileField = ({ label, field, allowedFileTypes, capField, capText }) => {
     let emptyField;
-    if (['methodsFile'].includes(field) || field.slice(0, -1) === 'boxFile') {
+    if (field.slice(0, -1) === 'boxFile') {
         emptyField = 0;
     } else {
         emptyField = '';

@@ -8,7 +8,7 @@ export const useForm = () => useContext(FormContext);
 
 export const FormContent = ({ formData, setFormData, examplePopups, togglePopup }) => {
     const handleChange = (e, q) => {
-        if (['icon', 'explanFig', 'theoryFig', 'resFig'].includes(q)) {
+        if (['methodsFile', 'icon', 'explanFig', 'theoryFig', 'resFig'].includes(q)) {
             if (e == '') {
                 setFormData((prevState) => {
                     const updatedState = {
@@ -33,7 +33,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                     }));
                 };
             }
-        } else if (['methodsFile'].includes(q) || q.slice(0, -1) === 'boxFile') {
+        } else if (q.slice(0, -1) === 'boxFile') {
             if (['', 0].includes(e)) {
                 setFormData((prevState) => {
                     const updatedState = {
