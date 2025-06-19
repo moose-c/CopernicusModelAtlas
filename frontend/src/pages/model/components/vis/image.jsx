@@ -27,7 +27,7 @@ export const ClickableFigure = ({ fileBin, loc, caption }) => {
             )}
             {loc === 'large' && (
                 <>
-                    <img ref={imgRef} src={`data:image/png;base64,${fileBin}`} className="cursor-pointer max-w-[70vw] max-h-[60vh]" onClick={handleOpen} />
+                    <img ref={imgRef} src={`data:image/png;base64,${fileBin}`} className="cursor-pointer max-w-[70vw] max-h-[80vh]" onClick={handleOpen} />
                     <p className="caption text-center" style={{ width: imgWidth ? `${imgWidth}px` : 'auto' }}>
                         {caption}
                     </p>

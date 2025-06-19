@@ -176,12 +176,7 @@ export const Methods = () => {
                         </div>
                         {modelData.methodsFile != 0 && (
                             <div className="flex flex-col items-center">
-                                <DataElement
-                                    loid={modelData.methodsFile}
-                                    name={modelData.methodsFileName}
-                                    isBar={modelData.methodsFileBar}
-                                    caption={modelData.methodsFileCaption}
-                                />
+                                <ClickableFigure fileBin={modelData.methodsFile} loc="large" caption={modelData.methodsFileCaption} />
                             </div>
                         )}
                     </div>

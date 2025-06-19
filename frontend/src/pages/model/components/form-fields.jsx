@@ -203,12 +203,20 @@ export const BoxesField = ({ nbBoxes, handleChangeNbBoxes }) => {
                                 field={`boxFile${i}`}
                                 allowedFileTypes={'.png, .csv, .xlsx, .json, .geojson'}
                             />
-
+                            {formData[`boxFile${i}Name`].split('.')[1] == 'png' && (
+                                <>
+                                    <ShortTextField
+                                        label={`Do you want to give the uploaded figure a caption?`}
+                                        placeholder={'Caption'}
+                                        field={`boxTitle${i}Caption`}
+                                    />
+                                </>
+                            )}
                             <p className="font-bold">n.b. Data needs to match the requirements stated above!</p>
                         </div>
 
                         <LongTextField width="w-[400px]" field={`boxDescr${i}`}>
-                            Description accompanying the figure{i === 0 ? '*' : ''}.{' '}
+                            Description accompanying the data{i === 0 ? '*' : ''}. <p>It is reccomended to discuss key insights given by the data shown.</p>
                             <p>The color of the lines/bars are chosen randomly so please refer to the variables instead of the colors. </p>
                         </LongTextField>
                         {i !== 0 && (

@@ -264,7 +264,7 @@ export const FormContent = ({ formData, setFormData, examplePopups, togglePopup 
                             {examplePopups[4] && <ExamplePopup nb={4} togglePopup={togglePopup} />}
                         </div>
                         <LongTextField field={'methodsDesc'}>Description of the model itself</LongTextField>
-                        <DataExplanation boxes={false} examplePopups={examplePopups} togglePopup={togglePopup} />
+
                         <FileField label={'Upload methods file here'} field={'methodsFile'} allowedFileTypes={'.png'} capField={'methodsFileCaption'} />
                     </div>
                     <div className="flex flex-col gap-[25px]">

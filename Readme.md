@@ -16,11 +16,11 @@ Perform 2fac auth.
 Now Openshift can be inspected and local changes can be pushed to the platform
 
 ## Inspecting api
-execute 'oc logs.bat api' from oc-setup
+execute 'logs.bat api' from oc-setup
 Now, any requests made to the api can be seen in real time
 
 ## Inspecting database
-execute 'oc exec.bat pg' from oc-setup
+execute 'exec.bat pg' from oc-setup
 execute 'psql'
 You are now in the database, execute '\d models' or 'select modelname from models;' or whatever is of interest 
 

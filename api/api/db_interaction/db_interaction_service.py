@@ -113,11 +113,18 @@ blank_form_template = {
     "boxFile7": 0,
     "boxFile7Name": "",
     "boxFile7Bar": False,
+    "boxFile0Caption": "",
+    "boxFile1Caption": "",
+    "boxFile2Caption": "",
+    "boxFile3Caption": "",
+    "boxFile4Caption": "",
+    "boxFile5Caption": "",
+    "boxFile6Caption": "",
+    "boxFile7Caption": "",
 }
 
 
 lo_fields = [
-    "methodsFile",
     "boxFile0",
     "boxFile1",
     "boxFile2",
@@ -129,6 +136,7 @@ lo_fields = [
 ]
 
 bytea_fields = [
+    "methodsFile",
     "icon",
     "explanFig",
     "theoryFig",
