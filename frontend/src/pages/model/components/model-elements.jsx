@@ -196,7 +196,7 @@ export const MoreInformation = () => {
                         <div className="w-[80%] flex flex-col gap-[10px]">
                             <h2>More Information</h2>
                             <p className="reg font-bold">References: </p>{' '}
-                            {parse(DOMPurify.sanitize(modelData.colofonCite).replaceAll('<p>', '<p class="reg font-bold">'))}
+                            {parse(DOMPurify.sanitize(modelData.colofonCite).replaceAll('<p>', '<p class="reg">'))}
                             <p className="reg">Model Licence: {modelData.colofonLicence}</p>
                             {parse(DOMPurify.sanitize(modelData.colofonAddition).replaceAll('<p>', '<p class="reg">'))}
                         </div>
