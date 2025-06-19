@@ -102,7 +102,7 @@ export const blankForm = {
     boxFile2Name: "",
     boxFile3: 0,
     boxFile3Name: "",
-    methodsFile: 0,
+    methodsFile: "",
     methodsFileName: "",
     uuUser: [],
     isApproved: false,

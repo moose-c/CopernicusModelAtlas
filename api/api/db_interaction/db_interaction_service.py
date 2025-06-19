@@ -80,7 +80,7 @@ blank_form_template = {
     "boxFile2Name": "",
     "boxFile3": 0,
     "boxFile3Name": "",
-    "methodsFile": 0,
+    "methodsFile": "",
     "methodsFileName": "",
     "uuUser": [],
     "isApproved": False,
