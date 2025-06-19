@@ -629,7 +629,7 @@ def edit_model(model_slug):
         cur = conn.cursor()
 
         cur.execute(
-            "SELECT methodsfile, boxfile0, boxfile1, boxfile2, boxfile3, boxfile4, boxfile5, boxfile6, boxfile7 FROM models WHERE id = %s",
+            "SELECT boxfile0, boxfile1, boxfile2, boxfile3, boxfile4, boxfile5, boxfile6, boxfile7 FROM models WHERE id = %s",
             [old_id],
         )
         oldValues = list(cur.fetchone())  # Fetch a single row

@@ -147,7 +147,10 @@ export const ChangeModelPage = ({ edit = false }) => {
                     </span>
                     {examplePopups[0] && <ExamplePopup nb={0} topPos={300} togglePopup={togglePopup} />}.
                 </p>
-                <p className="font-bold">Fields with an asterix (*) are manditory!</p>
+                <p>
+                    {' '}
+                    <span className="font-bold">Fields with an asterix (*) are manditory!</span> Other fields should be left empty (no X e.d.) if not desired
+                </p>
                 <form onSubmit={handleSubmit} className="p-[20px] bg-gray-100 rounded shadow-md w-full flex flex-col gap-[20px] ">
                     <FormContent formData={formData} setFormData={setFormData} examplePopups={examplePopups} togglePopup={togglePopup} />
                     <div className="flex gap-4 items-center">
